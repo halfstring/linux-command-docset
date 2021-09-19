@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-history" class="anchor" href="#history" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>history</h1>
+<p>显示或操作历史列表。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">history</span> [-c] [-d offset] [n]
+<span class="pl-c1">history</span> -anrw [filename]
+<span class="pl-c1">history</span> -ps arg [arg...]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>
+<p>显示历史列表。</p>
+</li>
+<li>
+<p>操作历史列表。</p>
+</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-c           清空历史列表。
+-d offset    根据offset删除记录。如果是正数则表示offset位置的记录，如果为负数则表示从结尾向前offset位置的记录。
+-a           将当前终端的历史记录行添加到历史记录文件。
+-n           将尚未从历史文件中读取的历史行追加到当前历史列表中。
+-r           读取历史文件，并将其内容附加到历史列表中。
+-w           将当前历史记录列表附加到历史记录文件中并且附加它们到历史列表中。
+-p           在每个arg上执行历史记录扩展并在标准输出上显示结果，而不将结果存储在历史记录列表中。
+-s           将每个arg作为单个条目附加到历史记录列表。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>n：可选，只列出最近的n条记录。</p>
+<p>filename：可选，表示历史文件；默认调用顺序为<code>filename</code>、环境变量<code>HISTFILE</code>、<code>~/.bash_history</code>。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回成功，除非提供了非法选项或出现了错误。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<p>使用history命令显示最近使用的10条历史命令</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> history 10</span>
+   92  ls
+   93  <span class="pl-c1">cd</span> ..
+   94  ls
+   95  <span class="pl-c1">exit</span>
+   96  ls -a
+   97  <span class="pl-c1">cd</span> .ssh/
+   98  ls
+   99  cat known_hosts
+  100  <span class="pl-c1">exit</span>
+  101  <span class="pl-c1">history</span> 10</pre></div>
+<p>清空历史记录</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> history -c</span></pre></div>
+<p>更多实例:</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 执行第 n 条历史命令</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> !n</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 执行最后一条 xxx 开头的命令</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> !xxx</span></pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>在命令行中，可以使用符号<code>!</code>执行指定序号的历史命令。例如，要执行第2个历史命令，则输入<code>!2</code>。</li>
+<li>关闭终端后，历史列表将被写入历史文件<code>~/.bash_history</code>。</li>
+<li>环境变量<code>HISTSIZE</code>决定了历史文件中命令的存储数量，默认存储1000条。</li>
+<li>环境变量<code>HISTTIMEFORMAT</code>如果是非空值，则使用其值作为<code>strftime(3)</code>打印相关时间戳的格式字符串添加在每个显示的历史记录之前；否则不会打印时间戳。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+
+
+</body>
+</html>

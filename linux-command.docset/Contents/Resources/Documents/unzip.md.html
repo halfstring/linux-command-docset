@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-unzip" class="anchor" href="#unzip" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>unzip</h1>
+<p>用于解压缩由zip命令压缩的压缩包</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>unzip命令</strong> 用于解压缩由zip命令压缩的“.zip”压缩包。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>unzip(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c：将解压缩的结果显示到屏幕上，并对字符做适当的转换；
+-f：更新现有的文件；
+-l：显示压缩文件内所包含的文件；
+-p：与-c参数类似，会将解压缩的结果显示到屏幕上，但不会执行任何的转换；
+-t：检查压缩文件是否正确；
+-u：与-f参数类似，但是除了更新现有的文件外，也会将压缩文件中的其他文件解压缩到目录中；
+-v：执行时显示详细的信息；
+-z：仅显示压缩文件的备注文字；
+-a：对文本文件进行必要的字符转换；
+-b：不要对文本文件进行字符转换；
+-C：压缩文件中的文件名称区分大小写；
+-j：不处理压缩文件中原有的目录路径；
+-L：将压缩文件中的全部文件名改为小写；
+-M：将输出结果送到more程序处理；
+-n：解压缩时不要覆盖原有的文件；
+-o：不必先询问用户，unzip执行后覆盖原有的文件；
+-P<span class="pl-k">&lt;</span>密码<span class="pl-k">&gt;</span>：使用zip的密码选项；
+-q：执行时不显示任何信息；
+-s：将文件名中的空白字符转换为底线字符；
+-V：保留VMS的文件版本信息；
+-X：解压缩时同时回存文件原来的UID/GID；
+-d<span class="pl-k">&lt;</span>目录<span class="pl-k">&gt;</span>：指定文件解压缩后所要存储的目录；
+-x<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>：指定不要处理.zip压缩文件中的哪些文件；
+-Z：unzip-Z等于执行zipinfo指令。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>压缩包：指定要解压的“.zip”压缩包。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将压缩文件text.zip在当前目录下解压缩。</p>
+<div class="highlight highlight-source-shell"><pre>unzip test.zip</pre></div>
+<p>将压缩文件text.zip在指定目录<code>/tmp</code>下解压缩，如果已有相同的文件存在，要求unzip命令不覆盖原先的文件。</p>
+<div class="highlight highlight-source-shell"><pre>unzip -n test.zip -d /tmp</pre></div>
+<p>查看压缩文件目录，但不解压。</p>
+<div class="highlight highlight-source-shell"><pre>unzip -v test.zip</pre></div>
+<p>将压缩文件test.zip在指定目录<code>/tmp</code>下解压缩，如果已有相同的文件存在，要求unzip命令覆盖原先的文件。</p>
+<div class="highlight highlight-source-shell"><pre>unzip -o test.zip -d tmp/</pre></div>
+<p>解压指定文件，* 用作通配符。</p>
+<div class="highlight highlight-source-shell"><pre>unzip test.zip <span class="pl-s"><span class="pl-pds">"</span>*.jpg<span class="pl-pds">"</span></span></pre></div>
+
+
+</body>
+</html>

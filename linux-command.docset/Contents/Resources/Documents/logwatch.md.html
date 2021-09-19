@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-logwatch" class="anchor" href="#logwatch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>logwatch</h1>
+<p>可定制和可插入式的日志监视系统</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>logwatch命令</strong> 是一个可定制和可插入式的日志监视系统，它通过遍历给定时间范围内的系统日志文件而产生日志报告。logwatch默认每天执行一次，可以从<code>/etc/cron.daily</code>里看到。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>logwatch(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>--detail<span class="pl-k">&lt;</span>报告详细程度<span class="pl-k">&gt;</span>：指定日志报告的详细程度；
+--logfile<span class="pl-k">&lt;</span>日志文件<span class="pl-k">&gt;</span>：仅处理指定的日志文件；
+--service<span class="pl-k">&lt;</span>服务名<span class="pl-k">&gt;</span>：仅处理指定服务的日志文件；
+--print：打印结果到标准输出；
+--mailto<span class="pl-k">&lt;</span>邮件地址<span class="pl-k">&gt;</span>：将结果发送到指定邮箱；
+--range<span class="pl-k">&lt;</span>日期范围<span class="pl-k">&gt;</span>：指定处理日志的日期范围；
+--archives：处理归档日志文件；
+--debug<span class="pl-k">&lt;</span>调试等级<span class="pl-k">&gt;</span>：调试模式；
+--save<span class="pl-k">&lt;</span>文件名<span class="pl-k">&gt;</span>：将结果保存到指定文件中，而不显示或者发送到指定邮箱；
+--logdir<span class="pl-k">&lt;</span>目录<span class="pl-k">&gt;</span>：指定查找日志文件的目录，而不使用默认的日志目录；
+--hostname<span class="pl-k">&lt;</span>主机名<span class="pl-k">&gt;</span>：指定在日志报告中使用的主机名，不使用系统默认的主机名；
+--numeric：在报告中显示ip地址而不是主机名；
+--help：显示指令的帮助信息。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>检查你的主机上是否已经存在Logwatch（Redhat默认已经安装了Logwatch，不过版本比较旧）：</p>
+<div class="highlight highlight-source-shell"><pre>rpm -qa logwatch</pre></div>
+<p>如果主机上没有logwatch，则执行：</p>
+<div class="highlight highlight-source-shell"><pre>rpm -Ivh logwatch<span class="pl-k">***</span>.rpm</pre></div>
+<p>如果有老版本的logwatch，则执行：</p>
+<div class="highlight highlight-source-shell"><pre>rpm -Uvh logwatch<span class="pl-k">***</span>.rpm</pre></div>
+<p>安装完毕后，开始配置：</p>
+<p>可以修改和添加它的logfiles、services和其他配置，但默认已经有很多脚本了，只要在1）里设置<code>Detail = High</code>就可以了。</p>
+<ul>
+<li>可以添加新的配置到<code>/etc/logwatch/conf/logwatch.conf</code>
+</li>
+<li>也可以修改<code>/usr/share/logwatch/default.conf/logwatch.conf</code>
+</li>
+</ul>
+<p><code>/etc/logwatch/conf/</code>会自动覆盖<code>/usr/share/logwatch/default.conf/</code>下的同名文件。</p>
+<p>如果没有设置logwatch.conf也没关系，可以直接在命令行下设置。</p>
+<div class="highlight highlight-source-shell"><pre>logwatch --detail High --Service All --range All --print    基本就可以显示出所有日志的情况了
+logwatch --service sshd --detail High                       只看sshd的日志情况</pre></div>
+
+
+</body>
+</html>

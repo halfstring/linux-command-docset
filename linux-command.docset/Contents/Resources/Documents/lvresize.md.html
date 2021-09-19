@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-lvresize" class="anchor" href="#lvresize" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lvresize</h1>
+<p>调整逻辑卷空间大小</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>lvresize命令</strong> 用于调整LVM逻辑卷的空间大小，可以增大空间和缩小空间。使用lvresize命令调整逻辑卷空间大小和缩小空间时需要谨慎，因为它有可能导致数据丢失。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>lvresize(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-L：指定逻辑卷的大小，单位为“kKmMgGtT”字节；
+-l：指定逻辑卷的大小（LE数）。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>逻辑卷：指定要删除的逻辑卷。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>使用lvresize命令调整最大的逻辑卷大小。在命令行中输入下面的命令：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> lvresize -L +200M /dev/vg1000/lvol0     #将逻辑卷空间增加200M</span></pre></div>
+<p>输出信息如下：</p>
+<div class="highlight highlight-source-shell"><pre>Extending logical volume lvol0 to 280.00 MB
+Logical volume lvol0 successfully resized</pre></div>
+
+
+</body>
+</html>

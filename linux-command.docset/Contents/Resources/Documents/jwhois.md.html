@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-jwhois" class="anchor" href="#jwhois" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jwhois</h1>
+<p>whois 客户端服务</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>jwhois</strong>  searches Whois servers for the object on the command line.The host to query is taken from a global configuration file, a configuration file specified on the command line, or selected directly on the command line.</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>jwhois [选项]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>--version                  display version number and patch level
+--help                     display this <span class="pl-c1">help</span>
+-v, --verbose              verbose debug output
+-c FILE, --config=FILE     use FILE as configuration file
+-h HOST, --host=HOST       explicitly query HOST
+-n, --no-redirect          disable content redirection
+-s, --no-whoisservers      disable whois-servers.net service support
+-a, --raw                  disable reformatting of the query
+-i, --display-redirections display all redirects instead of hiding them
+-p PORT, --port=PORT       use port number PORT (in conjunction with HOST)
+-r, --rwhois               force an rwhois query to be made
+--rwhois-display=DISPLAY   sets the display option <span class="pl-k">in</span> rwhois queries
+--rwhois-limit=LIMIT       sets the maximum number of matches to <span class="pl-k">return</span></pre></div>
+<blockquote>
+<p>注：以上英文部分寻求网友协助翻译，翻译结果可发送至 sa(at)linuxde.net，谢谢！</p>
+</blockquote>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>显示指定用户信息：</p>
+<div class="highlight highlight-source-shell"><pre> jwhois root
+
+<span class="pl-c"><span class="pl-c">#</span> 查找root用户信息</span></pre></div>
+<p>查询域名信息：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>] jwhois linuxde.net
+[Querying whois.verisign-grs.com]
+[Redirected to whois.west263.com]
+[Querying whois.west263.com]
+[whois.west263.com]
+Domain Name: linuxde.net                   
+Registry Domain id: whois protect
+Registrar WHOIS Server: whois.west263.com
+
+...省略部分内容</pre></div>
+
+
+</body>
+</html>

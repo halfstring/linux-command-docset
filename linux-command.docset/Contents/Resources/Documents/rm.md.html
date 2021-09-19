@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-rm" class="anchor" href="#rm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rm</h1>
+<p>用于删除给定的文件和目录</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>rm</strong>  <strong>命令</strong> 可以删除一个目录中的一个或多个文件或目录，也可以将某个目录及其下属的所有文件及其子目录均删除掉。对于链接文件，只是删除整个链接文件，而原有文件保持不变。</p>
+<p>注意：使用rm命令要格外小心。因为一旦删除了一个文件，就无法再恢复它。所以，在删除文件之前，最好再看一下文件的内容，确定是否真要删除。rm命令可以用-i选项，这个选项在使用文件扩展名字符删除多个文件时特别有用。使用这个选项，系统会要求你逐一确定是否要删除。这时，必须输入y并按Enter键，才能删除文件。如果仅按Enter键或其他字符，文件不会被删除。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>rm (选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-d：直接把欲删除的目录的硬连接数据删除成0，删除该目录；
+-f：强制删除文件或目录；
+-i：删除已有文件或目录之前先询问用户；
+-r或-R：递归处理，将指定目录下的所有文件与子目录一并处理；
+--preserve-root：不对根目录进行递归操作；
+-v：显示指令的详细执行过程。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：指定被删除的文件列表，如果参数中含有目录，则必须加上<code>-r</code>或者<code>-R</code>选项。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>交互式删除当前目录下的文件test和example</p>
+<div class="highlight highlight-source-shell"><pre>rm -i <span class="pl-c1">test</span> example
+Remove <span class="pl-c1">test</span> <span class="pl-k">?</span>n（不删除文件test)
+Remove example <span class="pl-k">?</span>y（删除文件example)</pre></div>
+<p>删除当前目录下除隐含文件外的所有文件和子目录</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> rm -r *</span></pre></div>
+<p>应注意，这样做是非常危险的!</p>
+<p><strong>rm 命令删除当前目录下的 package-lock.json 文件</strong></p>
+<div class="highlight highlight-source-shell"><pre>find <span class="pl-c1">.</span>  -name <span class="pl-s"><span class="pl-pds">"</span>package-lock.json<span class="pl-pds">"</span></span> -exec rm -rf {} <span class="pl-cce">\;</span></pre></div>
+<p><strong>rm 命令删除当前目录下的 node_modules 目录</strong></p>
+<div class="highlight highlight-source-shell"><pre>find <span class="pl-c1">.</span> -name <span class="pl-s"><span class="pl-pds">'</span>node_modules<span class="pl-pds">'</span></span> -type d -prune -exec rm -rf <span class="pl-s"><span class="pl-pds">'</span>{}<span class="pl-pds">'</span></span> +</pre></div>
+<p><strong>rm 命令删除文件</strong></p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> rm 文件1 文件2 ...</span>
+rm testfile.txt</pre></div>
+<p><strong>rm 命令删除目录</strong></p>
+<blockquote>
+<p>rm -r [目录名称]
+-r 表示递归地删除目录下的所有文件和目录。
+-f 表示强制删除</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre>rm -rf testdir
+rm -r testdir</pre></div>
+<p><strong>删除操作前有确认提示</strong></p>
+<blockquote>
+<p>rm -i [文件/目录]</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre>rm -r -i testdir</pre></div>
+<p><strong>rm 忽略不存在的文件或目录</strong></p>
+<blockquote>
+<p>-f 选项（LCTT 译注：即 “force”）让此次操作强制执行，忽略错误提示</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre>rm -f [文件...]</pre></div>
+<p><strong>仅在某些场景下确认删除</strong></p>
+<blockquote>
+<p>选项 -I，可保证在删除超过 3 个文件时或递归删除时（LCTT 译注： 如删除目录）仅提示一次确认。</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre>rm -I file1 file2 file3</pre></div>
+<p><strong>删除根目录</strong></p>
+<blockquote>
+<p>当然，删除根目录（/）是 Linux 用户最不想要的操作，这也就是为什么默认 rm 命令不支持在根目录上执行递归删除操作。
+然而，如果你非得完成这个操作，你需要使用 --no-preserve-root 选项。当提供此选项，rm 就不会特殊处理根目录（/）了。</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre>不给实例了，操作系统都被你删除了，你太坏了😆</pre></div>
+<p><strong>rm 显示当前删除操作的详情</strong></p>
+<div class="highlight highlight-source-shell"><pre>rm -v [文件/目录]</pre></div>
+
+
+</body>
+</html>

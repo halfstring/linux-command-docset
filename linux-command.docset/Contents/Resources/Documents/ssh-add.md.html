@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ssh-add" class="anchor" href="#ssh-add" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ssh-add</h1>
+<p>把专用密钥添加到ssh-agent的高速缓存中</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ssh-add命令</strong> 是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在<code>/usr/bin/ssh-add</code>。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ssh-add [-cDdLlXx] [-t life] [file ...]
+ssh-add -s pkcs11
+ssh-add -e pkcs11</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-D：删除ssh-agent中的所有密钥.
+-d：从ssh-agent中的删除密钥
+-e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙。
+-s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙。
+-L：显示ssh-agent中的公钥
+-l：显示ssh-agent中的密钥
+-t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥
+-X：对ssh-agent进行解锁
+-x：对ssh-agent进行加锁</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>1、把专用密钥添加到 ssh-agent 的高速缓存中：</p>
+<div class="highlight highlight-source-shell"><pre>ssh-add <span class="pl-k">~</span>/.ssh/id_dsa</pre></div>
+<p>2、从ssh-agent中删除密钥：</p>
+<div class="highlight highlight-source-shell"><pre>ssh-add -d <span class="pl-k">~</span>/.ssh/id_xxx.pub</pre></div>
+<p>3、查看ssh-agent中的密钥：</p>
+<div class="highlight highlight-source-shell"><pre>ssh-add -l</pre></div>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-split" class="anchor" href="#split" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>split</h1>
+<p>分割任意大小的文件</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>split命令</strong> 可以将一个大文件分割成很多个小文件，有时需要将文件分割成更小的片段，比如为提高可读性，生成日志等。</p>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-b：值为每一输出档案的大小，单位为 byte。
+-C：每一输出档中，单行的最大 byte 数。
+-d：使用数字作为后缀。
+-l：值为每一输出档的行数大小。
+-a：指定后缀长度(默认为2)。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>生成一个大小为100KB的测试文件：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> dd if=/dev/zero bs=100k count=1 of=date.file</span>
+1+0 records <span class="pl-k">in</span>
+1+0 records out
+102400 bytes (102 kB) copied, 0.00043 seconds, 238 MB/s</pre></div>
+<p>使用split命令将上面创建的date.file文件分割成大小为10KB的小文件：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> split -b 10k date.file </span>
+[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> ls</span>
+date.file  xaa  xab  xac  xad  xae  xaf  xag  xah  xai  xaj</pre></div>
+<p>文件被分割成多个带有字母的后缀文件，如果想用数字后缀可使用-d参数，同时可以使用-a length来指定后缀的长度：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> split -b 10k date.file -d -a 3</span>
+[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> ls</span>
+date.file  x000  x001  x002  x003  x004  x005  x006  x007  x008  x009</pre></div>
+<p>为分割后的文件指定文件名的前缀：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> split -b 10k date.file -d -a 3 split_file</span>
+[root@localhost split]<span class="pl-c"><span class="pl-c">#</span> ls</span>
+date.file  split_file000  split_file001  split_file002  split_file003  split_file004  split_file005  split_file006  split_file007  split_file008  split_file009</pre></div>
+<p>使用-l选项根据文件的行数来分割文件，例如把文件分割成每个包含10行的小文件：</p>
+<div class="highlight highlight-source-shell"><pre>split -l 10 date.file</pre></div>
+
+
+</body>
+</html>

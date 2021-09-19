@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-uname" class="anchor" href="#uname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>uname</h1>
+<p>打印系统信息。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>uname [OPTION]...</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>打印机器和操作系统的信息。</li>
+<li>当没有选项时，默认启用 <code>-s</code> 选项。</li>
+<li>如果给出多个选项或 <code>-a</code> 选项时，输出信息按以下字段排序：内核名称 主机名称 内核release 内核版本
+机器名称 处理器 硬件平台 操作系统。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-a, --all                  按顺序打印全部信息，如果 -p 和 -i 的信息是未知，那么省略。
+-s, --kernel-name          打印内核名称。
+-n, --nodename             打印网络节点主机名称。
+-r, --kernel-release       打印内核release。
+-v, --kernel-version       打印内核版本。
+-m, --machine              打印机器名称。
+-p, --processor            打印处理器名称。
+-i, --hardware-platform    打印硬件平台名称。
+-o, --operating-system     打印操作系统名称。
+--help                     显示帮助信息并退出。
+--version                  显示版本信息并退出。</pre></div>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 单独使用uname命令时相当于uname -s</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname</span>
+Linux</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 查看全部信息</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -a</span>
+Linux localhost 2.6.18-348.6.1.el5 <span class="pl-c"><span class="pl-c">#</span>1 SMP Tue May 21 15:34:22 EDT 2013 i686 i686 i386 GNU/Linux</span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 分别列出信息</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -m</span>
+i686
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -n</span>
+localhost
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -r</span>
+2.6.18-4-686
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -s</span>
+Linux
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -v</span>
+<span class="pl-c"><span class="pl-c">#</span>1 SMP Tue May 21 15:34:22 EDT 2013</span>
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -p</span>
+i686
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -i</span>
+i386
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> uname -o</span>
+GNU/Linux</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 uname</code>，<code>info coreutils 'uname invocation'</code>。</li>
+</ol>
+
+
+</body>
+</html>

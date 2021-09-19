@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-rpm2cpio" class="anchor" href="#rpm2cpio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rpm2cpio</h1>
+<p>将RPM软件包转换为cpio格式的文件</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>rpm2cpio命令</strong> 用于将rpm软件包转换为cpio格式的文件。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>rpm2cpio(参数)</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：指定要转换的rpm包的文件名。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>rpm2cpio ../libstdc++-4.3.0-8.i386.rpm <span class="pl-k">|</span> cpio -idv</pre></div>
+
+
+</body>
+</html>

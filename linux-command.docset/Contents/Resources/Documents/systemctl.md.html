@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-systemctl" class="anchor" href="#systemctl" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>systemctl</h1>
+<p>系统服务管理器指令</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>systemctl命令</strong> 是系统服务管理器指令，它实际上将 service 和 chkconfig 这两个命令组合到一起。</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>旧指令</th>
+<th>新指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使某服务自动启动</td>
+<td>chkconfig --level 3 httpd on</td>
+<td>systemctl enable httpd.service</td>
+</tr>
+<tr>
+<td>使某服务不自动启动</td>
+<td>chkconfig --level 3 httpd off</td>
+<td>systemctl disable httpd.service</td>
+</tr>
+<tr>
+<td>检查服务状态</td>
+<td>service httpd status</td>
+<td>systemctl status httpd.service （服务详细信息） systemctl is-active httpd.service （仅显示是否 Active)</td>
+</tr>
+<tr>
+<td>显示所有已启动的服务</td>
+<td>chkconfig --list</td>
+<td>systemctl list-units --type=service</td>
+</tr>
+<tr>
+<td>启动服务</td>
+<td>service httpd start</td>
+<td>systemctl start httpd.service</td>
+</tr>
+<tr>
+<td>停止服务</td>
+<td>service httpd stop</td>
+<td>systemctl stop httpd.service</td>
+</tr>
+<tr>
+<td>重启服务</td>
+<td>service httpd restart</td>
+<td>systemctl restart httpd.service</td>
+</tr>
+<tr>
+<td>重载服务</td>
+<td>service httpd reload</td>
+<td>systemctl reload httpd.service</td>
+</tr>
+</tbody>
+</table>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>systemctl start nfs-server.service <span class="pl-c1">.</span> <span class="pl-c"><span class="pl-c">#</span> 启动nfs服务</span>
+systemctl enable nfs-server.service <span class="pl-c"><span class="pl-c">#</span> 设置开机自启动</span>
+systemctl disable nfs-server.service <span class="pl-c"><span class="pl-c">#</span> 停止开机自启动</span>
+systemctl status nfs-server.service <span class="pl-c"><span class="pl-c">#</span> 查看服务当前状态</span>
+systemctl restart nfs-server.service <span class="pl-c"><span class="pl-c">#</span> 重新启动某服务</span>
+systemctl list-units --type=service <span class="pl-c"><span class="pl-c">#</span> 查看所有已启动的服务</span></pre></div>
+<p>开启防火墙22端口</p>
+<div class="highlight highlight-source-shell"><pre>iptables -I INPUT -p tcp --dport 22 -j accept</pre></div>
+<p>如果仍然有问题，就可能是SELinux导致的</p>
+<p>关闭SElinux：</p>
+<p>修改<code>/etc/selinux/config</code>文件中的<code>SELINUX=""</code>为disabled，然后重启。</p>
+<p>彻底关闭防火墙：</p>
+<div class="highlight highlight-source-shell"><pre>sudo systemctl status firewalld.service
+sudo systemctl stop firewalld.service          
+sudo systemctl disable firewalld.service</pre></div>
+
+
+</body>
+</html>

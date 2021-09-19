@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-chsh" class="anchor" href="#chsh" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>chsh</h1>
+<p>用来更换登录系统时使用的shell</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>chsh命令</strong> 用来更换登录系统时使用的shell。若不指定任何参数与用户名称，则chsh会以应答的方式进行设置。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>chsh(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-s<span class="pl-k">&lt;</span>shell 名称<span class="pl-k">&gt;</span>或--shell<span class="pl-k">&lt;</span>shell 名称<span class="pl-k">&gt;</span>：更改系统预设的shell环境。；
+-l或--list-shells：列出目前系统可用的shell清单；
+-u或--help：在线帮助；
+-v或-version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>用户名：要改变默认shell的用户。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p><strong>查看系统安装了哪些shell的两种方法：</strong></p>
+<p>第一种：</p>
+<div class="highlight highlight-source-shell"><pre>[rocrocket@localhost <span class="pl-k">~</span>]$ chsh -l
+/bin/sh
+/bin/bash
+/sbin/nologin
+/bin/zsh</pre></div>
+<p>第二种：</p>
+<div class="highlight highlight-source-shell"><pre>[rocrocket@localhost <span class="pl-k">~</span>]$ cat /etc/shells
+/bin/sh
+/bin/bash
+/sbin/nologin
+/bin/zsh</pre></div>
+<p>其实<code>chsh -l</code>也是来查看这个文件。</p>
+<p><strong>查看当前正在使用的shell：</strong></p>
+<div class="highlight highlight-source-shell"><pre>[rocrocket@localhost <span class="pl-k">~</span>]$ <span class="pl-c1">echo</span> <span class="pl-smi">$SHELL</span>
+/bin/bash</pre></div>
+<p>注意SHELL一定要是大写。可以看到，目前使用的shell是<code>/bin/bash</code></p>
+<p><strong>把我的shell改成zsh：</strong></p>
+<div class="highlight highlight-source-shell"><pre>[rocrocket@localhost <span class="pl-k">~</span>]$ chsh -s /bin/zsh
+Changing shell <span class="pl-k">for</span> rocrocket.
+Password:
+Shell changed.
+[rocrocket@localhost <span class="pl-k">~</span>]$</pre></div>
+<p>使用chsh加选项<code>-s</code>就可以修改登录的shell了！你会发现你现在执行<code>echo $SHELL</code>后仍然输出为<code>/bin/bash</code>，这是因为你需要重启你的shell才完全投入到zsh怀抱中去。<code>chsh -s</code>其实修改的就是<code>/etc/passwd</code>文件里和你的用户名相对应的那一行。现在来查看下：</p>
+<div class="highlight highlight-source-shell"><pre>[rocrocket@localhost <span class="pl-k">~</span>]$ cat /etc/passwd<span class="pl-k">|</span>grep ^rocrocket
+rocrocket:x:500:500:rocrocket,China:/rocrocket/PSB/home:/bin/zsh</pre></div>
+<p>你可以发现输出内容的最后部分已经变成了<code>/bin/zsh</code>了，下次重启的时候，linux就会读取这一命令来启动shell了！</p>
+<p><strong>把shell修改回/bin/bash：</strong></p>
+<div class="highlight highlight-source-shell"><pre>[rocrocket@localhost <span class="pl-k">~</span>]$ chsh -s /bin/bash
+Changing shell <span class="pl-k">for</span> rocrocket.
+Password:
+Shell changed.</pre></div>
+
+
+</body>
+</html>

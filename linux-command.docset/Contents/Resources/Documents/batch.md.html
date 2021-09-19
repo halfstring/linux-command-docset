@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-batch" class="anchor" href="#batch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>batch</h1>
+<p>在系统不繁忙的时候执行定时任务</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>batch命令</strong> 用于在指定时间，当系统不繁忙时执行任务，用法与at相似。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>batch(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-f：指定包含具体指令的任务文件；
+-q：指定新任务的队列名称；
+-m：任务执行完后向用户发送E-mail。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>日期时间：指定任务执行的日期时间。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>batch 
+at<span class="pl-k">&gt;</span> <span class="pl-c1">echo</span> 1234
+at<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>EOT<span class="pl-k">&gt;</span>
+job 5 at Sun Apr 28 08:49:00 2013</pre></div>
+
+
+</body>
+</html>

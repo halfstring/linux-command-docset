@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-pwunconv" class="anchor" href="#pwunconv" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>pwunconv</h1>
+<p>用来关闭用户的投影密码</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>pwunconv命令</strong> 与pwconv功能相反，用来关闭用户的投影密码。它会把密码从shadow文件内，重回存到passwd文件里。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>pwunconv</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>pwunconv     <span class="pl-c"><span class="pl-c">#</span> 关闭影子密码</span>
+cat /etc/passwd <span class="pl-k">|</span> grep <span class="pl-c1">test</span>     <span class="pl-c"><span class="pl-c">#</span> 发现密码已经在passwd文件中了</span>
+test:<span class="pl-smi">$6</span><span class="pl-smi">$nYOEWamm$bz07nlv</span>/.RgJufb3FAqJJeULfwybzgxmrWqbk7O4vI0KsT6N.ujrh6dDIUcAJdfjksyuyAFDPIngZeD3cgcf.0:3001:3001::/home/test:/bin/sh
+
+ls /etc/shadow     <span class="pl-c"><span class="pl-c">#</span> 查看影子文件，提示没有这个文件或目录</span>
+ls: cannot access /etc/shadow: No such file or directory</pre></div>
+
+
+</body>
+</html>

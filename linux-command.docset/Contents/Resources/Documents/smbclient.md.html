@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-smbclient" class="anchor" href="#smbclient" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>smbclient</h1>
+<p>交互方式访问samba服务器</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>smbclient命令</strong> 属于samba套件，它提供一种命令行使用交互式方式访问samba服务器的共享资源。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>smbclient(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-B<span class="pl-k">&lt;</span>ip地址<span class="pl-k">&gt;</span>：传送广播数据包时所用的IP地址；
+-d<span class="pl-k">&lt;</span>排错层级<span class="pl-k">&gt;</span>：指定记录文件所记载事件的详细程度；
+-E：将信息送到标准错误输出设备；
+-h：显示帮助；
+-i<span class="pl-k">&lt;</span>范围<span class="pl-k">&gt;</span>：设置NetBIOS名称范围；
+-I<span class="pl-k">&lt;</span>IP地址<span class="pl-k">&gt;</span>：指定服务器的IP地址；
+-l<span class="pl-k">&lt;</span>记录文件<span class="pl-k">&gt;</span>：指定记录文件的名称；
+-L：显示服务器端所分享出来的所有资源；
+-M<span class="pl-k">&lt;</span>NetBIOS名称<span class="pl-k">&gt;</span>：可利用WinPopup协议，将信息送给选项中所指定的主机；
+-n<span class="pl-k">&lt;</span>NetBIOS名称<span class="pl-k">&gt;</span>：指定用户端所要使用的NetBIOS名称；
+-N：不用询问密码；
+-O<span class="pl-k">&lt;</span>连接槽选项<span class="pl-k">&gt;</span>：设置用户端TCP连接槽的选项；
+-p<span class="pl-k">&lt;</span>TCP连接端口<span class="pl-k">&gt;</span>：指定服务器端TCP连接端口编号；
+-R<span class="pl-k">&lt;</span>名称解析顺序<span class="pl-k">&gt;</span>：设置NetBIOS名称解析的顺序；
+-s<span class="pl-k">&lt;</span>目录<span class="pl-k">&gt;</span>：指定smb.conf所在的目录；
+-t<span class="pl-k">&lt;</span>服务器字码<span class="pl-k">&gt;</span>：设置用何种字符码来解析服务器端的文件名称；
+-T<span class="pl-k">&lt;</span>tar选项<span class="pl-k">&gt;</span>：备份服务器端分享的全部文件，并打包成tar格式的文件；
+-U<span class="pl-k">&lt;</span>用户名称<span class="pl-k">&gt;</span>：指定用户名称；
+-w<span class="pl-k">&lt;</span>工作群组<span class="pl-k">&gt;</span>：指定工作群组名称。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>smb服务器：指定要连接的smb服务器。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p><strong>列出某个IP地址所提供的共享文件夹</strong></p>
+<div class="highlight highlight-source-shell"><pre>smbclient -L 198.168.0.1 -U username%password</pre></div>
+<p><strong>像ftp客户端一样使用smbclient</strong></p>
+<div class="highlight highlight-source-shell"><pre>smbclient //192.168.0.1/tmp  -U username%password</pre></div>
+<p>执行smbclient命令成功后，进入smbclient环境，出现提示符：<code>smb:/&gt;</code></p>
+<p>这里有许多命令和ftp命令相似，如cd 、lcd、get、megt、put、mput等。通过这些命令，我们可以访问远程主机的共享资源。</p>
+<p><strong>直接一次性使用smbclient命令</strong></p>
+<div class="highlight highlight-source-shell"><pre>smbclient -c <span class="pl-s"><span class="pl-pds">"</span>ls<span class="pl-pds">"</span></span>  //192.168.0.1/tmp  -U username%password</pre></div>
+<p>和</p>
+<div class="highlight highlight-source-shell"><pre>smbclient //192.168.0.1/tmp  -U username%password
+smb:/<span class="pl-k">&gt;</span>ls</pre></div>
+<p>功能一样的。</p>
+<p><strong>创建一个共享文件夹</strong></p>
+<div class="highlight highlight-source-shell"><pre>smbclient -c <span class="pl-s"><span class="pl-pds">"</span>mkdir share1<span class="pl-pds">"</span></span> //192.168.0.1/tmp -U username%password</pre></div>
+<p>如果用户共享<code>//192.168.0.1/tmp</code>的方式是只读的，会提示<code>NT_STATUS_ACCESS_DENIED making remote directory /share1</code></p>
+
+
+</body>
+</html>

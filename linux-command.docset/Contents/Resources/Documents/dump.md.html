@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dump" class="anchor" href="#dump" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dump</h1>
+<p>用于备份ext2或者ext3文件系统</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dump命令</strong> 用于备份ext2或者ext3文件系统。可将目录或整个文件系统备份至指定的设备，或备份成一个大文件。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dump(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-0123456789：备份的层级；
+-b<span class="pl-k">&lt;</span>区块大小<span class="pl-k">&gt;</span>：指定区块的大小，单位为KB；
+-B<span class="pl-k">&lt;</span>区块数目<span class="pl-k">&gt;</span>：指定备份卷册的区块数目；
+-c：修改备份磁带预设的密度与容量；
+-d<span class="pl-k">&lt;</span>密度<span class="pl-k">&gt;</span>：设置磁带的密度。单位为BPI；
+-f<span class="pl-k">&lt;</span>设备名称<span class="pl-k">&gt;</span>：指定备份设备；
+-h<span class="pl-k">&lt;</span>层级<span class="pl-k">&gt;</span>：当备份层级等于或大于指定的层级时，将不备份用户标示为“nodump”的文件；
+-n：当备份工作需要管理员介入时，向所有“operator”群组中的使用者发出通知；
+-s<span class="pl-k">&lt;</span>磁带长度<span class="pl-k">&gt;</span>：备份磁带的长度，单位为英尺；
+-T<span class="pl-k">&lt;</span>日期<span class="pl-k">&gt;</span>：指定备份的时间与日期；
+-u：备份完毕后，在/etc/dumpdates中记录备份的文件系统、层级、日期与时间等；
+-w：与-W类似，但仅显示需要备份的文件；
+-W：显示需要备份的文件及其最后一次备份的层级、时间与日期。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>备份源：指定要备份的文件、目录或者文件系统。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将<code>/home</code>目录所有内容备份到<code>/tmp/homeback.bak</code>文件中，备份层级为<code>0</code>并在<code>/etc/dumpdates</code>中记录相关信息：</p>
+<div class="highlight highlight-source-shell"><pre>‍dump -0u -f /tmp/homeback.bak /home</pre></div>
+<p>将<code>/home</code>目录所有内容备份到<code>/tmp/homeback.bak</code>文件中，备份层级为<code>1</code>（只备份上次使用层次<code>0</code>备份后发生过改变的数据）并在<code>/etc/dumpdates</code>中记录相关信息：</p>
+<div class="highlight highlight-source-shell"><pre>dump -1u -f /tmp/homeback.bak /home</pre></div>
+<p>通过dump命令的备份层级，可实现完整+增量备份、完整+差异备份，在配合crontab可以实现无人值守备份。</p>
+
+
+</body>
+</html>

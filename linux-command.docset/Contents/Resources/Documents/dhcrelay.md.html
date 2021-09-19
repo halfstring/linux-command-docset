@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dhcrelay" class="anchor" href="#dhcrelay" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dhcrelay</h1>
+<p>使用dhcrelay命令可以提供中继DHCP和BOOTP请求</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dhcrelay命令</strong> 使用dhcrelay命令可以提供中继DHCP和BOOTP请求，从一个没有DHCP服务器的子网直接连接到其它子网内的一个或多个DHCP服务器。该命令在DHCP中继服务器上使用，同时支持DHCPv4/BOOTP和DHCPv6协议。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dhcrelay [选项] [DHCP服务器]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c <span class="pl-k">&lt;</span>跳数<span class="pl-k">&gt;</span> 当转发数据包时，dhcrelay丢弃已经达到一个最大跳数的数据包。默认值是10，最大值是255
+-4 运行dhcrelay命令作为DHCPv4/BOOTP中继代理。这是默认操作模式
+-6 运行dhcrelay命令作为DHCPv6中继代理
+-q 安静模式
+-p <span class="pl-k">&lt;</span>端口<span class="pl-k">&gt;</span> 监听和发送端口。DHCPv4/BOOTP默认端口是67，DHCPv6默认端口是547
+-A <span class="pl-k">&lt;</span>长度<span class="pl-k">&gt;</span> 指定发送到DHCP服务器的最大数据包大小
+-d 强制dhcrelay命令作为前台进程运行</pre></div>
+<h3>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h3>
+<p>指定DHCP服务器的位置。</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> dhcrelay 192.168.0.2</span>
+Internet Systems Consortium DHCP Relay Agent4.1.1-P1
+Copyright 2004-2010 Internet SystemsConsortium.
+All rights reserved.
+For info, please visithttps://www.isc.org/software/dhcp/
+Listening on LPF/eth1/00:0c:29:fc:2f:ef
+Sending on  LPF/eth1/00:0c:29:fc:2f:ef
+Listening on LPF/eth0/00:0c:27:fc:25:ec
+Sending on  LPF/eth0/00:0c:27:fc:25:ec
+Sending on  Socket/fallback</pre></div>
+
+
+</body>
+</html>

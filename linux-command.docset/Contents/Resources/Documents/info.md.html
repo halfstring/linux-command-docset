@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-info" class="anchor" href="#info" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>info</h1>
+<p>Linux下info格式的帮助指令</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>info命令</strong> 是Linux下info格式的帮助指令。</p>
+<p>就内容来说，info页面比man page编写得要更好、更容易理解，也更友好，但man page使用起来确实要更容易得多。一个man page只有一页，而info页面几乎总是将它们的内容组织成多个区段（称为节点），每个区段也可能包含子区段（称为子节点）。理解这个命令的窍门就是不仅要学习如何在单独的Info页面中浏览导航，还要学习如何在节点和子节点之间切换。可能刚开始会一时很难在info页面的节点之间移动和找到你要的东西，真是具有讽刺意味：原本以为对于新手来说，某个东西比man命令会更好些，但实际上学习和使用起来更困难。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>info(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-d：添加包含info格式帮助文档的目录；
+-f：指定要读取的info格式的帮助文档；
+-n：指定首先访问的info帮助文件的节点；
+-o：输出被选择的节点内容到指定文件。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>帮助主题：指定需要获得帮助的主题，可以是指令、函数以及配置文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>在info后面输入命令的名称就可以查看该命令的info帮助文档了：</p>
+<div class="highlight highlight-source-shell"><pre>info info</pre></div>
+<p>面介绍一下它的几个常用快捷键。</p>
+<div class="highlight highlight-source-shell"><pre> <span class="pl-k">**?</span>键：<span class="pl-k">**</span> 它就会显示info的常用快捷键。
+ <span class="pl-k">**</span>N键：<span class="pl-k">**</span> 显示（相对于本节点的）下一节点的文档内容。
+ <span class="pl-k">**</span>P键：<span class="pl-k">**</span> 显示（相对于本节点的）前一节点的文档内容。
+ <span class="pl-k">**</span>U键：<span class="pl-k">**</span> 进入当前命令所在的主题。
+ <span class="pl-k">**</span>M键：<span class="pl-k">**</span> 敲M键后输入命令的名称就可以查看该命令的帮助文档了。
+ <span class="pl-k">**</span>G键：<span class="pl-k">**</span> 敲G键后输入主题名称，进入该主题。
+ <span class="pl-k">**</span>L键：<span class="pl-k">**</span> 回到上一个访问的页面。
+ <span class="pl-k">**</span>SPACE键：<span class="pl-k">**</span> 向前滚动一页。
+ <span class="pl-k">**</span>BACKUP或DEL键：<span class="pl-k">**</span> 向后滚动一页。
+ <span class="pl-k">**</span>Q：<span class="pl-k">**</span> 退出info。</pre></div>
+<p><strong>命令</strong></p>
+<div class="highlight highlight-source-shell"><pre> <span class="pl-k">**</span>？<span class="pl-k">**</span>      显示帮助窗口
+
+在帮助窗口中：
+ <span class="pl-k">**</span>Ctrl-x 0<span class="pl-k">**</span>           关闭帮助窗口
+ <span class="pl-k">**</span>Ctrl-x Ctrl-c<span class="pl-k">**</span>     关闭整个 Info
+
+ <span class="pl-k">**</span>q<span class="pl-k">**</span>       退出 info
+ <span class="pl-k">**</span>n<span class="pl-k">**</span>       打开与本 Node 关联的下一个 Node
+ <span class="pl-k">**</span>p<span class="pl-k">**</span>       打开与本 Node 关联的前一个 Node
+ <span class="pl-k">**</span>u<span class="pl-k">**</span>       打开与本 Node 关联的上一个 Node
+ <span class="pl-k">**</span>l<span class="pl-k">**</span>       回到上一次访问的 Node
+ <span class="pl-k">**</span>m或g<span class="pl-k">**</span>    选择一个菜单项（Node 的名字）
+       输入指定菜单的名字后按回车，打开指定菜单项关联的 Node
+ <span class="pl-k">**</span>空格键<span class="pl-k">**</span>  下一页（PageDown 也可以，下一页从当前页的最后两行开始算起）
+       下一个 Node （若当前页在 Node 文档的末尾）
+ <span class="pl-k">**</span>Del 键<span class="pl-k">**</span>  上一页（PageUp 也可以，上一页从当前页的开始两行开始算起）
+       上一个 Node （若当前页 Node 文档的开始）
+
+ <span class="pl-k">**</span>b 或 t 或 Home<span class="pl-k">**</span>    文档的开始（b 是 begining 的意思）
+ <span class="pl-k">**</span>e 或 End<span class="pl-k">**</span>          文档的末尾（b 是 ending 的意思）
+ <span class="pl-k">**</span>Ctrl-l<span class="pl-k">**</span>     刷新当前页，若当前文档显示情况有问题时
+ <span class="pl-k">**</span>Ctrl-g<span class="pl-k">**</span>     取消所键入的指令</pre></div>
+
+
+</body>
+</html>

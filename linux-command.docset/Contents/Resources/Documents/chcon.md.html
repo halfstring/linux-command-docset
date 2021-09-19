@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-chcon" class="anchor" href="#chcon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>chcon</h1>
+<p>修改对象（文件）的安全上下文</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>chcon命令</strong> 是修改对象（文件）的安全上下文，比如：用户、角色、类型、安全级别。也就是将每个文件的安全环境变更至指定环境。使用<code>--reference</code>选项时，把指定文件的安全环境设置为与参考文件相同。chcon命令位于<code>/usr/bin/chcon</code>。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>chcon [选项]... 环境 文件...
+chcon [选项]... [-u 用户] [-r 角色] [-l 范围] [-t 类型] 文件...
+chcon [选项]... --reference=参考文件 文件...</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-h, --no-dereference：影响符号连接而非引用的文件。
+    --reference=参考文件：使用指定参考文件的安全环境，而非指定值。
+-R, --recursive：递归处理所有的文件及子目录。
+-v, --verbose：为处理的所有文件显示诊断信息。
+-u, --user=用户：设置指定用户的目标安全环境。
+-r, --role=角色：设置指定角色的目标安全环境。
+-t, --type=类型：设置指定类型的目标安全环境。
+-l, --range=范围：设置指定范围的目标安全环境。</pre></div>
+<p>以下选项是在指定了<code>-R</code>选项时被用于设置如何穿越目录结构体系。如果您指定了多于一个选项，那么只有最后一个会生效。</p>
+<div class="highlight highlight-source-shell"><pre>-H：如果命令行参数是一个通到目录的符号链接，则遍历符号链接。
+-L：遍历每一个遇到的通到目录的符号链接。
+-P：不遍历任何符号链接（默认）。
+--help：显示此帮助信息并退出。
+--version：显示版本信息并退出。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>如果你想把这个ftp共享给匿名用户的话，需要开启以下：</p>
+<div class="highlight highlight-source-shell"><pre>chcon -R -t public_content_t /var/ftp</pre></div>
+<p>如果你想让你设置的FTP目录可以上传文件的话，SELINUX需要设置：</p>
+<div class="highlight highlight-source-shell"><pre>chcon -t public_content_rw_t /var/ftp/incoming</pre></div>
+<p>允许用户HHTP访问其家目录，该设定限仅于用户的家目录主页：</p>
+<div class="highlight highlight-source-shell"><pre>setsebool -P httpd_enable_homedirs 1
+chcon -R -t httpd_sys_content_t <span class="pl-k">~</span>user/public_html</pre></div>
+<p>如果你希望将samba目录共享给其他用户，你需要设置：</p>
+<div class="highlight highlight-source-shell"><pre>chcon -t samba_share_t /directory</pre></div>
+<p>共享rsync目录时：</p>
+<div class="highlight highlight-source-shell"><pre>chcon -t public_content_t /directories</pre></div>
+
+
+</body>
+</html>

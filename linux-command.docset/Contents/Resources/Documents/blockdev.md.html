@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-blockdev" class="anchor" href="#blockdev" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>blockdev</h1>
+<p>从命令行调用区块设备控制程序</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>blockdev命令</strong> 在命令调用“ioxtls”函数，以实现对设备的控制。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>blockdev(选项)(参数)</pre></div>
+<p>选项</p>
+<div class="highlight highlight-source-shell"><pre>-V：打印版本号并退出；
+-q：安静模式；
+-v：详细信息模式；
+--setro：只读；
+--setrw：只写；
+--getro：打印只读状态，“1”表示只读，“0”表示非只读；
+--getss：打印扇区大小。通常为521；
+--flushbufs：刷新缓冲区；
+--rereadpt：重新读取分区表。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>设备文件名：指定要操作的磁盘的设备文件名。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>设置设备为只读：</p>
+<div class="highlight highlight-source-shell"><pre>blockdev --setro /dev/hda4</pre></div>
+<p>读取设备是否为只读：</p>
+<div class="highlight highlight-source-shell"><pre>blockdev --getro /dev/hda4</pre></div>
+<p>设置设别为可读写：</p>
+<div class="highlight highlight-source-shell"><pre>blockdev --setrw /dev/hda4</pre></div>
+
+
+</body>
+</html>

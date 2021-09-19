@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-git" class="anchor" href="#git" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>git</h1>
+<p>是目前世界上最先进的分布式版本控制系统</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>git命令</strong> 很多人都知道，Linus在1991年创建了开源的Linux，从此，Linux系统不断发展，已经成为最大的服务器系统软件了。</p>
+<p>Linus虽然创建了Linux，但Linux的壮大是靠全世界热心的志愿者参与的，这么多人在世界各地为Linux编写代码，那Linux的代码是如何管理的呢？</p>
+<p>事实是，在2002年以前，世界各地的志愿者把源代码文件通过diff的方式发给Linus，然后由Linus本人通过手工方式合并代码！</p>
+<p>你也许会想，为什么Linus不把Linux代码放到版本控制系统里呢？不是有CVS、SVN这些免费的版本控制系统吗？因为Linus坚定地反对CVS和SVN，这些集中式的版本控制系统不但速度慢，而且必须联网才能使用。有一些商用的版本控制系统，虽然比CVS、SVN好用，但那是付费的，和Linux的开源精神不符。</p>
+<p>不过，到了2002年，Linux系统已经发展了十年了，代码库之大让Linus很难继续通过手工方式管理了，社区的弟兄们也对这种方式表达了强烈不满，于是Linus选择了一个商业的版本控制系统BitKeeper，BitKeeper的东家BitMover公司出于人道主义精神，授权Linux社区免费使用这个版本控制系统。</p>
+<p>安定团结的大好局面在2005年就被打破了，原因是Linux社区牛人聚集，不免沾染了一些梁山好汉的江湖习气。开发Samba的Andrew试图破解BitKeeper的协议（这么干的其实也不只他一个），被BitMover公司发现了（监控工作做得不错！），于是BitMover公司怒了，要收回Linux社区的免费使用权。</p>
+<p>Linus可以向BitMover公司道个歉，保证以后严格管教弟兄们，嗯，这是不可能的。实际情况是这样的：</p>
+<p>Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！一个月之内，Linux系统的源码已经由Git管理了！牛是怎么定义的呢？大家可以体会一下。</p>
+<p>Git迅速成为最流行的分布式版本控制系统，尤其是2008年，GitHub网站上线了，它为开源项目免费提供Git存储，无数开源项目开始迁移至GitHub，包括jQuery，PHP，Ruby等等。</p>
+<p>历史就是这么偶然，如果不是当年BitMover公司威胁Linux社区，可能现在我们就没有免费而超级好用的Git了。</p>
+<p><a href="https://github.com/jaywcjlove/handbook/blob/master/other/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95.md">Git常用命令清单</a></p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>git [--version] [--help] [-C <span class="pl-k">&lt;</span>path<span class="pl-k">&gt;</span>] [-c name<span class="pl-k">=</span>value]
+   [--exec-path[<span class="pl-k">=&lt;</span>path<span class="pl-k">&gt;</span>]] [--html-path] [--man-path] [--info-path]
+   [-p <span class="pl-k">|</span> --paginate <span class="pl-k">|</span> --no-pager] [--no-replace-objects] [--bare]
+   [--git-dir<span class="pl-k">=&lt;</span>path<span class="pl-k">&gt;</span>] [--work-tree<span class="pl-k">=&lt;</span>path<span class="pl-k">&gt;</span>] [--namespace<span class="pl-k">=&lt;</span>name<span class="pl-k">&gt;</span>]
+   <span class="pl-k">&lt;</span>command<span class="pl-k">&gt;</span> [<span class="pl-k">&lt;</span>args<span class="pl-k">&gt;</span>]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>add              将文件内容添加到索引
+bisect           通过二进制查找引入错误的更改
+branch           列出，创建或删除分支
+checkout         检查分支或路径到工作树
+clone            将存储库克隆到新目录中
+commit           将更改记录到存储库
+diff             显示提交，提交和工作树等之间的更改
+fetch            从另一个存储库下载对象和引用
+grep             打印匹配图案的行
+init             创建一个空的Git仓库或重新初始化一个现有的
+log              显示提交日志
+merge            加入两个或更多的开发历史
+mv               移动或重命名文件，目录或符号链接
+pull             从另一个存储库或本地分支获取并合并
+push             更新远程引用以及相关对象
+rebase           转发端口本地提交到更新的上游头
+reset            将当前HEAD复位到指定状态
+rm               从工作树和索引中删除文件
+show             显示各种类型的对象
+status           显示工作树状态
+tag              创建，列出，删除或验证使用GPG签名的标签对象</pre></div>
+<h3>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h3>
+<p>init</p>
+<p><code>git init</code> #初始化</p>
+<p>status</p>
+<p><code>git status</code> #获取状态</p>
+<p>add</p>
+<p><code>git add file</code> # .或*代表全部添加<br>
+<code>git rm --cached &lt;added_file_to_undo&gt;</code> # 在commit之前撤销git add操作<br>
+<code>git reset head</code> # 好像比上面<code>git rm --cached</code>更方便</p>
+<p>commit</p>
+<p><code>git commit -m "message"</code> #此处注意乱码</p>
+<p>remote</p>
+<p><code>git remote add origin git@github.com:JSLite/test.git</code> #添加源</p>
+<p>push</p>
+<div class="highlight highlight-source-shell"><pre>git push -u origin master <span class="pl-c"><span class="pl-c">#</span> push同事设置默认跟踪分支  </span>
+git push origin master  
+git push -f origin master <span class="pl-c"><span class="pl-c">#</span> 强制推送文件，缩写 -f（全写--force）</span></pre></div>
+<p>clone</p>
+<p><code>git clone git://github.com/JSLite/JSLite.js.git </code><br>
+<code>git clone git://github.com/JSLite/JSLite.js.git mypro</code> #克隆到自定义文件夹<br>
+<code>git clone [user@]example.com:path/to/repo.git/</code> #SSH协议还有另一种写法。</p>
+<p>git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，下面是一些例子。<code>git clone &lt;版本库的网址&gt; &lt;本地目录名&gt;</code></p>
+<div class="highlight highlight-source-shell"><pre>$ git clone http[s]://example.com/path/to/repo.git/
+$ git clone ssh://example.com/path/to/repo.git/
+$ git clone git://example.com/path/to/repo.git/
+$ git clone /opt/git/project.git 
+$ git clone file:///opt/git/project.git
+$ git clone ftp[s]://example.com/path/to/repo.git/
+$ git clone rsync://example.com/path/to/repo.git/</pre></div>
+<h2>
+<a id="user-content-配置" class="anchor" href="#%E9%85%8D%E7%BD%AE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置</h2>
+<p>首先是配置帐号信息 <code>ssh -T git@github.com</code> 测试。</p>
+<h2>
+<a id="user-content-修改项目中的个人信息" class="anchor" href="#%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>修改项目中的个人信息</h2>
+<div class="highlight highlight-source-shell"><pre>git <span class="pl-c1">help</span> config <span class="pl-c"><span class="pl-c">#</span> 获取帮助信息，查看修改个人信息的参数  </span>
+git config --global user.name <span class="pl-s"><span class="pl-pds">"</span>小弟调调<span class="pl-pds">"</span></span>           <span class="pl-c"><span class="pl-c">#</span> 修改全局名字</span>
+git config --global user.email <span class="pl-s"><span class="pl-pds">"</span>wowohoo@qq.com<span class="pl-pds">"</span></span>  <span class="pl-c"><span class="pl-c">#</span> 修改全局邮箱</span>
+git config --list         <span class="pl-c"><span class="pl-c">#</span> 查看配置的信息  </span></pre></div>
+<h3>
+<a id="user-content-配置自动换行" class="anchor" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置自动换行</h3>
+<p>自动转换坑太大，提交到git是自动将换行符转换为lf</p>
+<div class="highlight highlight-source-shell"><pre>git config --global core.autocrlf input</pre></div>
+<h2>
+<a id="user-content-常见使用场景" class="anchor" href="#%E5%B8%B8%E8%A7%81%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>常见使用场景</h2>
+<h3>
+<a id="user-content-创建ssh密钥" class="anchor" href="#%E5%88%9B%E5%BB%BAssh%E5%AF%86%E9%92%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>创建SSH密钥</h3>
+<p>这个密钥用来跟 github 通信，在本地终端里生成然后上传到 github</p>
+<div class="highlight highlight-source-shell"><pre>ssh-keygen -t rsa -C <span class="pl-s"><span class="pl-pds">'</span>wowohoo@qq.com<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span> 生成密钥  </span>
+ssh-keygen -t rsa -C <span class="pl-s"><span class="pl-pds">"</span>wowohoo@qq.com<span class="pl-pds">"</span></span> -f <span class="pl-k">~</span>/.ssh/ww_rsa <span class="pl-c"><span class="pl-c">#</span> 指定生成目录文件名字</span>
+ssh -T git@github.com <span class="pl-c"><span class="pl-c">#</span> 测试是否成功  </span></pre></div>
+<h3>
+<a id="user-content-多账号ssh配置" class="anchor" href="#%E5%A4%9A%E8%B4%A6%E5%8F%B7ssh%E9%85%8D%E7%BD%AE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>多账号ssh配置</h3>
+<p><strong>1.生成指定名字的密钥</strong></p>
+<p><code>ssh-keygen -t rsa -C "邮箱地址" -f ~/.ssh/jslite_rsa</code><br>
+会生成 <code>jslite_rsa</code> 和 <code>jslite_rsa.pub</code> 这两个文件</p>
+<p><strong>2.密钥复制到托管平台上</strong></p>
+<p><code>vim ~/.ssh/jslite_rsa.pub</code><br>
+打开公钥文件 <code>jslite_rsa.pub</code> ，并把内容复制至代码托管平台上</p>
+<p><strong>3.修改config文件</strong></p>
+<p><code>vim ~/.ssh/config</code> #修改config文件，如果没有创建 <code>config</code></p>
+<div class="highlight highlight-source-shell"><pre>Host jslite.github.com
+  HostName github.com
+  User git
+  IdentityFile <span class="pl-k">~</span>/.ssh/jslite_rsa
+
+Host work.github.com
+  HostName github.com
+  <span class="pl-c"><span class="pl-c">#</span> Port 服务器open-ssh端口（默认：22,默认时一般不写此行）</span>
+  <span class="pl-c"><span class="pl-c">#</span> PreferredAuthentications 配置登录时用什么权限认证 </span>
+  <span class="pl-c"><span class="pl-c">#</span>                          publickey|password publickey|keyboard-interactive等</span>
+  User git
+  IdentityFile <span class="pl-k">~</span>/.ssh/work_rsa</pre></div>
+<ul>
+<li>
+<code>Host</code> 这里是个别名可以随便命名</li>
+<li>
+<code>HostName</code> 一般是网站如：<code>git@ss.github.com:username/repo.git</code> 填写 <code>github.com</code>
+</li>
+<li>
+<code>User</code> 通常填写<code>git</code>
+</li>
+<li>
+<code>IdentityFile</code> 使用的公钥文件地址</li>
+</ul>
+<p><strong>4.测试</strong></p>
+<div class="highlight highlight-source-shell"><pre>ssh -T git@jslite.github.com  <span class="pl-c"><span class="pl-c">#</span> `@`后面跟上定义的Host  </span>
+ssh -T work.github.com        <span class="pl-c"><span class="pl-c">#</span> 通过别名测试</span>
+ssh -i <span class="pl-k">~</span>/公钥文件地址 Host别名  <span class="pl-c"><span class="pl-c">#</span> 如 ssh -i ~/.ssh/work_rsa work.github.com</span></pre></div>
+<p><strong>5.使用</strong></p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 原来的写法</span>
+git clone git@github.com:<span class="pl-k">&lt;</span>jslite的用户名<span class="pl-k">&gt;</span>/learngit.git
+<span class="pl-c"><span class="pl-c">#</span> 现在的写法</span>
+git clone git@jslite.github.com:<span class="pl-k">&lt;</span>jslite的用户名<span class="pl-k">&gt;</span>/learngit.git
+git clone git@work.github.com:<span class="pl-k">&lt;</span>work的用户名<span class="pl-k">&gt;</span>/learngit.git</pre></div>
+<p><strong>5.注意</strong></p>
+<p>如果你修改了id_rsa的名字，你需要将ssh key添加到SSH agent中，如：</p>
+<div class="highlight highlight-source-shell"><pre>ssh-add <span class="pl-k">~</span>/.ssh/jslite_rsa
+ssh-add -l  <span class="pl-c"><span class="pl-c">#</span> 查看所有的key</span>
+ssh-add -D  <span class="pl-c"><span class="pl-c">#</span> 删除所有的key</span>
+ssh-add -d  <span class="pl-k">~</span>/.ssh/jslite_rsa <span class="pl-c"><span class="pl-c">#</span> 删除指定的key</span></pre></div>
+<h3>
+<a id="user-content-免密码登录远程服务器" class="anchor" href="#%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>免密码登录远程服务器</h3>
+<div class="highlight highlight-source-shell"><pre>$ ssh-keygen -t rsa -P <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span> -f <span class="pl-k">~</span>/.ssh/aliyunserver.key
+$ ssh-copy-id -i <span class="pl-k">~</span>/.ssh/aliyunserver.key.pub root@192.168.182.112 <span class="pl-c"><span class="pl-c">#</span> 这里需要输入密码一次</span></pre></div>
+<p>编辑 <code>~/.ssh/config</code></p>
+<div class="highlight highlight-source-shell"><pre>Host aliyun1
+  HostName 192.168.182.112
+  User root
+  PreferredAuthentications publickey
+  IdentityFile <span class="pl-k">~</span>/.ssh/aliyunserver.key</pre></div>
+<p>上面配置完了，可以通过命令登录，不需要输入IP地址和密码 <code>ssh aliyun1</code></p>
+<h3>
+<a id="user-content-https协议下提交代码免密码" class="anchor" href="#https%E5%8D%8F%E8%AE%AE%E4%B8%8B%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%85%8D%E5%AF%86%E7%A0%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>https协议下提交代码免密码</h3>
+<div class="highlight highlight-source-shell"><pre>git clone https://github.com/username/rep.git</pre></div>
+<p>通过上面方式克隆可能需要密码，解决办法：进入当前克隆的项目 <code>vi rep/.git/config</code> 编辑 <code>config</code>, 按照下面方式修改，你就可以提交代码不用输入密码了。</p>
+<div class="highlight highlight-source-shell"><pre>[core]
+	repositoryformatversion = 0
+	filemode = <span class="pl-c1">true</span>
+	bare = <span class="pl-c1">false</span>
+	logallrefupdates = <span class="pl-c1">true</span>
+	ignorecase = <span class="pl-c1">true</span>
+	precomposeunicode = <span class="pl-c1">true</span>
+[remote <span class="pl-s"><span class="pl-pds">"</span>origin<span class="pl-pds">"</span></span>]
+-	url = https://github.com/username/rep.git
++	url = https://用户名:密码@github.com/username/rep.git
+	fetch = +refs/heads/<span class="pl-k">*</span>:refs/remotes/origin/<span class="pl-k">*</span>
+[branch <span class="pl-s"><span class="pl-pds">"</span>master<span class="pl-pds">"</span></span>]
+	remote = origin
+	merge = refs/heads/master</pre></div>
+<h3>
+<a id="user-content-文件推向3个git库" class="anchor" href="#%E6%96%87%E4%BB%B6%E6%8E%A8%E5%90%913%E4%B8%AAgit%E5%BA%93" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>文件推向3个git库</h3>
+<p><strong>1. 增加3个远程库地址</strong></p>
+<div class="highlight highlight-source-shell"><pre>git remote add origin https://github.com/JSLite/JSLite.git  
+git remote set-url --add origin https://gitlab.com/wang/JSLite.js.git  
+git remote set-url --add origin https://oschina.net/wang/JSLite.js.git  </pre></div>
+<p><strong>2. 删除其中一个 set-url 地址</strong></p>
+<div class="highlight highlight-source-shell"><pre>usage: git remote set-url [--push] <span class="pl-k">&lt;</span>name<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>newurl<span class="pl-k">&gt;</span> [<span class="pl-k">&lt;</span>oldurl<span class="pl-k">&gt;</span>]
+   or: git remote set-url --add <span class="pl-k">&lt;</span>name<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>newurl<span class="pl-k">&gt;</span>
+   or: git remote set-url --delete <span class="pl-k">&lt;</span>name<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>url<span class="pl-k">&gt;</span></pre></div>
+<p><code>git remote set-url --delete origin https://oschina.net/wang/JSLite.js.git</code></p>
+<p><strong>3.推送代码</strong></p>
+<div class="highlight highlight-source-shell"><pre>git push origin master
+git push -f origin master  <span class="pl-c"><span class="pl-c">#</span> 强制推送  </span></pre></div>
+<p><strong>4.拉代码</strong></p>
+<p>只能拉取 <code>origin</code> 里的一个url地址，这个fetch-url<br>
+默认为你添加的到 <code>origin</code>的第一个地址</p>
+<div class="highlight highlight-source-shell"><pre>git pull origin master   
+git pull --all <span class="pl-c"><span class="pl-c">#</span> 获取远程所有内容包括tag  </span>
+git pull origin next:master <span class="pl-c"><span class="pl-c">#</span> 取回origin主机的next分支，与本地的master分支合并  </span>
+git pull origin next <span class="pl-c"><span class="pl-c">#</span> 远程分支是与当前分支合并  </span>
+
+<span class="pl-c"><span class="pl-c">#</span> 上面一条命令等同于下面两条命令   </span>
+git fetch origin  
+git merge origin/next  </pre></div>
+<p>如果远程主机删除了某个分支，默认情况下，git pull 不会在拉取远程分支的时候，删除对应的本地分支。这是为了防止，由于其他人操作了远程主机，导致git pull不知不觉删除了本地分支。<br>
+但是，你可以改变这个行为，加上参数 -p 就会在本地删除远程已经删除的分支。</p>
+<div class="highlight highlight-source-shell"><pre>$ git pull -p
+<span class="pl-c"><span class="pl-c">#</span> 等同于下面的命令</span>
+$ git fetch --prune origin 
+$ git fetch -p</pre></div>
+<p><strong>5.更改pull</strong></p>
+<p>只需要更改config文件里，那三个url的顺序即可，fetch-url会直接对应排行第一的那个utl连接。</p>
+<h3>
+<a id="user-content-修改远程仓库地址" class="anchor" href="#%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>修改远程仓库地址</h3>
+<div class="highlight highlight-source-shell"><pre>git remote remove origin  <span class="pl-c"><span class="pl-c">#</span> 删除该远程路径  </span>
+git remote add origin git@jslite.github.com:JSLite/JSLite.git  <span class="pl-c"><span class="pl-c">#</span> 添加远程路径 </span></pre></div>
+<h3>
+<a id="user-content-撤销远程记录" class="anchor" href="#%E6%92%A4%E9%94%80%E8%BF%9C%E7%A8%8B%E8%AE%B0%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>撤销远程记录</h3>
+<div class="highlight highlight-source-shell"><pre>git reset --hard HEAD~1 <span class="pl-c"><span class="pl-c">#</span> 撤销一条记录   </span>
+git push -f origin HEAD:master <span class="pl-c"><span class="pl-c">#</span> 同步到远程仓库  </span></pre></div>
+<h3>
+<a id="user-content-放弃本地的文件修改" class="anchor" href="#%E6%94%BE%E5%BC%83%E6%9C%AC%E5%9C%B0%E7%9A%84%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>放弃本地的文件修改</h3>
+<div class="highlight highlight-source-shell"><pre>git reset --hard FETCH_HEAD <span class="pl-c"><span class="pl-c">#</span> FETCH_HEAD表示上一次成功git pull之后形成的commit点。然后git pull</span></pre></div>
+<p><code>git reset --hard FETCH_HEAD</code> 出现错误</p>
+<div class="highlight highlight-source-shell"><pre>git pull
+You are not currently on a branch, so I cannot use any
+<span class="pl-s"><span class="pl-pds">'</span>branch.&lt;branchname&gt;.merge<span class="pl-pds">'</span></span> <span class="pl-k">in</span> your configuration file.
+Please specify which remote branch you want to use on the <span class="pl-c1">command</span>
+line and try again (e.g. <span class="pl-s"><span class="pl-pds">'</span>git pull &lt;repository&gt; &lt;refspec&gt;<span class="pl-pds">'</span></span>).
+See git-pull(1) FOR details.</pre></div>
+<p>解决方法：</p>
+<div class="highlight highlight-source-shell"><pre>git checkout -b temp <span class="pl-c"><span class="pl-c">#</span> 新建+切换到temp分支 </span>
+git checkout master</pre></div>
+<h3>
+<a id="user-content-最简单放弃本地修改内容" class="anchor" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E6%94%BE%E5%BC%83%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9%E5%86%85%E5%AE%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>最简单放弃本地修改内容</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 如果有的修改以及加入暂存区的话</span>
+git reset --hard 
+<span class="pl-c"><span class="pl-c">#</span> 还原所有修改，不会删除新增的文件</span>
+git checkout <span class="pl-c1">.</span> 
+<span class="pl-c"><span class="pl-c">#</span> 下面命令会删除新增的文件</span>
+git clean -xdf</pre></div>
+<p>通过存储暂存区stash，在删除暂存区的方法放弃本地修改。</p>
+<div class="highlight highlight-source-shell"><pre>git stash <span class="pl-k">&amp;&amp;</span> git stash drop </pre></div>
+<h3>
+<a id="user-content-回滚到某个commit提交" class="anchor" href="#%E5%9B%9E%E6%BB%9A%E5%88%B0%E6%9F%90%E4%B8%AAcommit%E6%8F%90%E4%BA%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>回滚到某个commit提交</h3>
+<div class="highlight highlight-source-shell"><pre>git revert HEAD~1 <span class="pl-c"><span class="pl-c">#</span> 撤销一条记录 会弹出 commit 编辑</span>
+git push <span class="pl-c"><span class="pl-c">#</span> 提交回滚</span></pre></div>
+<h3>
+<a id="user-content-回退到某一个版本" class="anchor" href="#%E5%9B%9E%E9%80%80%E5%88%B0%E6%9F%90%E4%B8%80%E4%B8%AA%E7%89%88%E6%9C%AC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>回退到某一个版本</h3>
+<div class="highlight highlight-source-shell"><pre>git reset --hard <span class="pl-k">&lt;</span>hash<span class="pl-k">&gt;</span>
+<span class="pl-c"><span class="pl-c">#</span> 例如 git reset --hard a3hd73r</span>
+<span class="pl-c"><span class="pl-c">#</span> --hard代表丢弃工作区的修改，让工作区与版本代码一模一样，与之对应，</span>
+<span class="pl-c"><span class="pl-c">#</span> --soft参数代表保留工作区的修改。</span></pre></div>
+<h3>
+<a id="user-content-去掉某个commit" class="anchor" href="#%E5%8E%BB%E6%8E%89%E6%9F%90%E4%B8%AAcommit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>去掉某个commit</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 实质是新建了一个与原来完全相反的commit，抵消了原来commit的效果</span>
+git revert <span class="pl-k">&lt;</span>commit-hash<span class="pl-k">&gt;</span> </pre></div>
+<h3>
+<a id="user-content-新建一个空分支" class="anchor" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A9%BA%E5%88%86%E6%94%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>新建一个空分支</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 这种方式新建的分支(gh-pages)是没有 commit 记录的</span>
+git checkout --orphan gh-pages
+<span class="pl-c"><span class="pl-c">#</span> 删除新建的gh-pages分支原本的内容，如果不删除，提交将作为当前分支的第一个commit</span>
+git rm -rf <span class="pl-c1">.</span>
+<span class="pl-c"><span class="pl-c">#</span> 查看一下状态 有可能上面一条命令，没有删除还没有提交的的文件</span>
+git state </pre></div>
+<h3>
+<a id="user-content-合并多个commit" class="anchor" href="#%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AAcommit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>合并多个commit</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 这个命令，将最近4个commit合并为1个，HEAD代表当前版本。</span>
+<span class="pl-c"><span class="pl-c">#</span> 将进入VIM界面，你可以修改提交信息。</span>
+git rebase -i HEAD~4 
+<span class="pl-c"><span class="pl-c">#</span> 可以看到其中分为两个部分，上方未注释的部分是填写要执行的指令，</span>
+<span class="pl-c"><span class="pl-c">#</span> 而下方注释的部分则是指令的提示说明。指令部分中由前方的命令名称、commit hash 和 commit message 组成</span>
+<span class="pl-c"><span class="pl-c">#</span> 当前我们只要知道 pick 和 squash 这两个命令即可。</span>
+<span class="pl-c"><span class="pl-c">#</span> --&gt; pick 的意思是要会执行这个 commit</span>
+<span class="pl-c"><span class="pl-c">#</span> --&gt; squash 的意思是这个 commit 会被合并到前一个commit</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 我们将 需要保留的 这个 commit 前方的命令改成 squash 或 s，然后输入:wq以保存并退出</span>
+<span class="pl-c"><span class="pl-c">#</span> 这是我们会看到 commit message 的编辑界面</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 其中, 非注释部分就是两次的 commit message, 你要做的就是将这两个修改成新的 commit message。</span>
+<span class="pl-c"><span class="pl-c">#</span> </span>
+<span class="pl-c"><span class="pl-c">#</span> 输入wq保存并推出, 再次输入git log查看 commit 历史信息，你会发现这两个 commit 已经合并了。</span>
+<span class="pl-c"><span class="pl-c">#</span> 将修改强制推送到前端</span>
+git push -f origin master</pre></div>
+<h3>
+<a id="user-content-修改远程commit记录" class="anchor" href="#%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8Bcommit%E8%AE%B0%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>修改远程Commit记录</h3>
+<div class="highlight highlight-source-shell"><pre>git commit --amend
+<span class="pl-c"><span class="pl-c">#</span> amend只能修改没有提交到线上的，最后一次commit记录</span>
+git rebase -i HEAD~3
+<span class="pl-c"><span class="pl-c">#</span> 表示要修改当前版本的倒数第三次状态</span>
+<span class="pl-c"><span class="pl-c">#</span> 将要更改的记录行首单词 pick 改为 edit</span>
+pick 96dc3f9 doc: Update quick-start.md
+pick f1cce8a test(Transition):Add transition <span class="pl-c1">test</span> (<span class="pl-c"><span class="pl-c">#</span>47)</span>
+pick 6293516 feat(Divider): Add Divider component.
+<span class="pl-c"><span class="pl-c">#</span> Rebase eeb03a4..6293516 onto eeb03a4 (3 commands)</span>
+<span class="pl-c"><span class="pl-c">#</span></span>
+<span class="pl-c"><span class="pl-c">#</span> Commands:</span>
+<span class="pl-c"><span class="pl-c">#</span> p, pick = use commit</span>
+<span class="pl-c"><span class="pl-c">#</span> r, reword = use commit, but edit the commit message</span>
+<span class="pl-c"><span class="pl-c">#</span> e, edit = use commit, but stop for amending</span>
+<span class="pl-c"><span class="pl-c">#</span> s, squash = use commit, but meld into previous commit</span>
+<span class="pl-c"><span class="pl-c">#</span> f, fixup = like "squash", but discard this commit's log message</span>
+<span class="pl-c"><span class="pl-c">#</span> x, exec = run command (the rest of the line) using shell</span>
+<span class="pl-c"><span class="pl-c">#</span> d, drop = remove commit</span></pre></div>
+<p>保存并退出，会弹出下面提示</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> You can amend the commit now, with</span>
+<span class="pl-c"><span class="pl-c">#</span> </span>
+<span class="pl-c"><span class="pl-c">#</span>   git commit --amend</span>
+<span class="pl-c"><span class="pl-c">#</span> </span>
+<span class="pl-c"><span class="pl-c">#</span> Once you are satisfied with your changes, run</span>
+<span class="pl-c"><span class="pl-c">#</span> </span>
+<span class="pl-c"><span class="pl-c">#</span>   git rebase --continue</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 通过这条命令进入编辑页面更改commit，保存退出</span>
+git commit --amend
+<span class="pl-c"><span class="pl-c">#</span> 保存退出确认修改，继续执行 rebase, </span>
+git rebase --continue
+<span class="pl-c"><span class="pl-c">#</span> 如果修改多条记录反复执行上面两条命令直到完成所有修改</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 最后，确保别人没有提交进行push，最好不要加 -f 强制推送</span>
+git push -f origin master</pre></div>
+<h3>
+<a id="user-content-添加忽略文件" class="anchor" href="#%E6%B7%BB%E5%8A%A0%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>添加忽略文件</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> node_modules/ <span class="pl-k">&gt;&gt;</span> .gitignore</pre></div>
+<h3>
+<a id="user-content-利用commit关闭一个issue" class="anchor" href="#%E5%88%A9%E7%94%A8commit%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AAissue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>利用commit关闭一个issue</h3>
+<p>这个功能在Github上可以玩儿，Gitlab上特别老的版本不能玩儿哦，那么如何跟随着commit关闭一个issue呢? 在confirm merge的时候可以使用一下命令来关闭相关issue:</p>
+<p><code>fixes #xxx</code>、 <code>fixed #xxx</code>、 <code>fix #xxx</code>、 <code>closes #xxx</code>、 <code>close #xxx</code>、 <code>closed #xxx</code>、</p>
+<h3>
+<a id="user-content-同步fork的上游仓库" class="anchor" href="#%E5%90%8C%E6%AD%A5fork%E7%9A%84%E4%B8%8A%E6%B8%B8%E4%BB%93%E5%BA%93" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>同步fork的上游仓库</h3>
+<p><a href="https://help.github.com/articles/syncing-a-fork/">Github教程同步fork教程</a>，<a href="http://www.miss77.net/549.html" rel="nofollow">在Github上同步一个分支(fork)</a></p>
+<p><strong>设置添加多个远程仓库地址。</strong></p>
+<p>在同步之前，需要创建一个远程点指向上游仓库(repo).如果你已经派生了一个原始仓库，可以按照如下方法做。</p>
+<div class="highlight highlight-source-shell"><pre>$ git remote -v
+<span class="pl-c"><span class="pl-c">#</span> List the current remotes （列出当前远程仓库）</span>
+<span class="pl-c"><span class="pl-c">#</span> origin  https://github.com/user/repo.git (fetch)</span>
+<span class="pl-c"><span class="pl-c">#</span> origin  https://github.com/user/repo.git (push)</span>
+$ git remote add upstream https://github.com/otheruser/repo.git
+<span class="pl-c"><span class="pl-c">#</span> Set a new remote (设置一个新的远程仓库)</span>
+$ git remote -v
+<span class="pl-c"><span class="pl-c">#</span> Verify new remote (验证新的原唱仓库)</span>
+<span class="pl-c"><span class="pl-c">#</span> origin    https://github.com/user/repo.git (fetch)</span>
+<span class="pl-c"><span class="pl-c">#</span> origin    https://github.com/user/repo.git (push)</span>
+<span class="pl-c"><span class="pl-c">#</span> upstream  https://github.com/otheruser/repo.git (fetch)</span>
+<span class="pl-c"><span class="pl-c">#</span> upstream  https://github.com/otheruser/repo.git (push)</span></pre></div>
+<p><strong>同步更新仓库内容</strong></p>
+<p>同步上游仓库到你的仓库需要执行两步：首先你需要从远程拉去，之后你需要合并你希望的分支到你的本地副本分支。从上游的存储库中提取分支以及各自的提交内容。 <code>master</code> 将被存储在本地分支机构 <code>upstream/master</code></p>
+<div class="highlight highlight-source-shell"><pre>git fetch upstream
+<span class="pl-c"><span class="pl-c">#</span> remote: Counting objects: 75, done.</span>
+<span class="pl-c"><span class="pl-c">#</span> remote: Compressing objects: 100% (53/53), done.</span>
+<span class="pl-c"><span class="pl-c">#</span> remote: Total 62 (delta 27), reused 44 (delta 9)</span>
+<span class="pl-c"><span class="pl-c">#</span> Unpacking objects: 100% (62/62), done.</span>
+<span class="pl-c"><span class="pl-c">#</span> From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</span>
+<span class="pl-c"><span class="pl-c">#</span>  * [new branch]      master     -&gt; upstream/master</span></pre></div>
+<p>检查你的 fork's 本地 <code>master</code> 分支</p>
+<div class="highlight highlight-source-shell"><pre>git checkout master
+<span class="pl-c"><span class="pl-c">#</span> Switched to branch 'master'</span></pre></div>
+<p>合并来自 <code>upstream/master</code> 的更改到本地 master  分支上。  这使你的前 fork's <code>master</code> 分支与上游资源库同步，而不会丢失你本地修改。</p>
+<div class="highlight highlight-source-shell"><pre>git merge upstream/master
+<span class="pl-c"><span class="pl-c">#</span> Updating a422352..5fdff0f</span>
+<span class="pl-c"><span class="pl-c">#</span> Fast-forward</span>
+<span class="pl-c"><span class="pl-c">#</span>  README                    |    9 -------</span>
+<span class="pl-c"><span class="pl-c">#</span>  README.md                 |    7 ++++++</span>
+<span class="pl-c"><span class="pl-c">#</span>  2 files changed, 7 insertions(+), 9 deletions(-)</span>
+<span class="pl-c"><span class="pl-c">#</span>  delete mode 100644 README</span>
+<span class="pl-c"><span class="pl-c">#</span>  create mode 100644 README.md</span></pre></div>
+<h3>
+<a id="user-content-批量修改历史commit中的名字和邮箱" class="anchor" href="#%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E5%8E%86%E5%8F%B2commit%E4%B8%AD%E7%9A%84%E5%90%8D%E5%AD%97%E5%92%8C%E9%82%AE%E7%AE%B1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>批量修改历史commit中的名字和邮箱</h3>
+<p><strong>1.克隆仓库</strong></p>
+<p>注意参数，这个不是普通的clone，clone下来的仓库并不能参与开发</p>
+<div class="highlight highlight-source-shell"><pre>git clone --bare https://github.com/user/repo.git
+<span class="pl-c1">cd</span> repo.git</pre></div>
+<p><strong>2.命令行中运行代码</strong></p>
+<p>OLD_EMAIL原来的邮箱<br>
+CORRECT_NAME更正的名字<br>
+CORRECT_EMAIL更正的邮箱</p>
+<p>将下面代码复制放到命令行中执行</p>
+<div class="highlight highlight-source-shell"><pre>git filter-branch -f --env-filter <span class="pl-s"><span class="pl-pds">'</span></span>
+<span class="pl-s">OLD_EMAIL="wowohoo@qq.com"</span>
+<span class="pl-s">CORRECT_NAME="小弟调调"</span>
+<span class="pl-s">CORRECT_EMAIL="更正的邮箱@qq.com"</span>
+<span class="pl-s">if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]</span>
+<span class="pl-s">then</span>
+<span class="pl-s">    export GIT_COMMITTER_NAME="$CORRECT_NAME"</span>
+<span class="pl-s">    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"</span>
+<span class="pl-s">fi</span>
+<span class="pl-s">if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]</span>
+<span class="pl-s">then</span>
+<span class="pl-s">    export GIT_AUTHOR_NAME="$CORRECT_NAME"</span>
+<span class="pl-s">    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"</span>
+<span class="pl-s">fi</span>
+<span class="pl-s"><span class="pl-pds">'</span></span> --tag-name-filter cat -- --branches --tags</pre></div>
+<p>执行过程</p>
+<div class="highlight highlight-source-shell"><pre>Rewrite 160d4df2689ff6df3820563bfd13b5f1fb9ba832 (479/508) (16 seconds passed, remaining 0 predicted)
+Ref <span class="pl-s"><span class="pl-pds">'</span>refs/heads/dev<span class="pl-pds">'</span></span> was rewritten
+Ref <span class="pl-s"><span class="pl-pds">'</span>refs/heads/master<span class="pl-pds">'</span></span> was rewritten</pre></div>
+<p><strong>3.同步到远程仓库</strong></p>
+<p>同步到push远程git仓库</p>
+<div class="highlight highlight-source-shell"><pre>git push --force --tags origin <span class="pl-s"><span class="pl-pds">'</span>refs/heads/*<span class="pl-pds">'</span></span></pre></div>
+<p>我还遇到了如下面错误，lab默认给master分支加了保护，不允许强制覆盖。<code>Project(项目)</code>-&gt;<code>Setting</code>-&gt;<code>Repository</code> 菜单下面的<code>Protected branches</code>把master的保护去掉就可以了。修改完之后，建议把master的保护再加回来，毕竟强推不是件好事。</p>
+<div class="highlight highlight-source-shell"><pre>remote: GitLab: You are not allowed to force push code to a protected branch on this project.</pre></div>
+<p>当上面的push 不上去的时候，先 <code>git pull</code> 确保最新代码</p>
+<div class="highlight highlight-source-shell"><pre>git pull  --allow-unrelated-histories
+<span class="pl-c"><span class="pl-c">#</span> 或者指定分枝</span>
+git pull origin master --allow-unrelated-histories</pre></div>
+<h3>
+<a id="user-content-查看某个文件历史" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%8E%86%E5%8F%B2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>查看某个文件历史</h3>
+<div class="highlight highlight-source-shell"><pre>git log --pretty=oneline 文件名  <span class="pl-c"><span class="pl-c">#</span> 列出文件的所有改动历史  </span>
+git show c178bf49   <span class="pl-c"><span class="pl-c">#</span> 某次的改动的修改记录  </span>
+git log -p c178bf49 <span class="pl-c"><span class="pl-c">#</span> 某次的改动的修改记录  </span>
+git blame 文件名     <span class="pl-c"><span class="pl-c">#</span> 显示文件的每一行是在那个版本最后修改。  </span>
+git whatchanged 文件名  <span class="pl-c"><span class="pl-c">#</span> 显示某个文件的每个版本提交信息：提交日期，提交人员，版本号，提交备注（没有修改细节）  </span></pre></div>
+<h3>
+<a id="user-content-打造自己的git命令" class="anchor" href="#%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84git%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>打造自己的git命令</h3>
+<div class="highlight highlight-source-shell"><pre>git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.co checkout
+git config --global alias.ci commit</pre></div>
+<p>配置好后再输入git命令的时候就不用再输入一大段了，例如我们要查看状态，只需：</p>
+<div class="highlight highlight-source-shell"><pre>git st</pre></div>
+<h3>
+<a id="user-content-中文乱码的解决方案" class="anchor" href="#%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>中文乱码的解决方案</h3>
+<div class="highlight highlight-source-shell"><pre>git config --global core.quotepath <span class="pl-c1">false</span></pre></div>
+<h2>
+<a id="user-content-新建仓库" class="anchor" href="#%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>新建仓库</h2>
+<h3>
+<a id="user-content-init" class="anchor" href="#init" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>init</h3>
+<p><code>git init</code> #初始化</p>
+<h3>
+<a id="user-content-status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>status</h3>
+<p><code>git status</code> #获取状态</p>
+<h3>
+<a id="user-content-add" class="anchor" href="#add" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>add</h3>
+<p><code>git add file</code> # .或*代表全部添加<br>
+<code>git rm --cached &lt;added_file_to_undo&gt;</code> # 在commit之前撤销git add操作<br>
+<code>git reset head</code> # 好像比上面<code>git rm --cached</code>更方便</p>
+<h3>
+<a id="user-content-commit" class="anchor" href="#commit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>commit</h3>
+<p><code>git commit -m "message"</code> #此处注意乱码</p>
+<h3>
+<a id="user-content-remote" class="anchor" href="#remote" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>remote</h3>
+<p><code>git remote add origin git@github.com:JSLite/test.git</code> #添加源</p>
+<h3>
+<a id="user-content-push" class="anchor" href="#push" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>push</h3>
+<div class="highlight highlight-source-shell"><pre>git push -u origin master <span class="pl-c"><span class="pl-c">#</span> push同事设置默认跟踪分支  </span>
+git push origin master  
+git push -f origin master <span class="pl-c"><span class="pl-c">#</span> 强制推送文件，缩写 -f（全写--force）</span></pre></div>
+<h2>
+<a id="user-content-clone" class="anchor" href="#clone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>clone</h2>
+<p><code>git clone git://github.com/JSLite/JSLite.js.git </code><br>
+<code>git clone git://github.com/JSLite/JSLite.js.git mypro</code> #克隆到自定义文件夹<br>
+<code>git clone [user@]example.com:path/to/repo.git/</code> #SSH协议还有另一种写法。</p>
+<p>git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，下面是一些例子。<code>git clone &lt;版本库的网址&gt; &lt;本地目录名&gt;</code></p>
+<div class="highlight highlight-source-shell"><pre>$ git clone http[s]://example.com/path/to/repo.git/
+$ git clone ssh://example.com/path/to/repo.git/
+$ git clone git://example.com/path/to/repo.git/
+$ git clone /opt/git/project.git 
+$ git clone file:///opt/git/project.git
+$ git clone ftp[s]://example.com/path/to/repo.git/
+$ git clone rsync://example.com/path/to/repo.git/</pre></div>
+<h2>
+<a id="user-content-本地" class="anchor" href="#%E6%9C%AC%E5%9C%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>本地</h2>
+<h3>
+<a id="user-content-help" class="anchor" href="#help" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>help</h3>
+<div class="highlight highlight-source-shell"><pre>git <span class="pl-c1">help</span> config <span class="pl-c"><span class="pl-c">#</span> 获取帮助信息  </span></pre></div>
+<h3>
+<a id="user-content-add-1" class="anchor" href="#add-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>add</h3>
+<div class="highlight highlight-source-shell"><pre>git add <span class="pl-k">*</span>   <span class="pl-c"><span class="pl-c">#</span> 跟踪新文件   </span>
+git add -u [path]   <span class="pl-c"><span class="pl-c">#</span> 添加[指定路径下]已跟踪文件   </span></pre></div>
+<h3>
+<a id="user-content-rm" class="anchor" href="#rm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rm</h3>
+<div class="highlight highlight-source-shell"><pre>rm <span class="pl-k">*</span><span class="pl-k">&amp;</span>git rm <span class="pl-k">*</span>          <span class="pl-c"><span class="pl-c">#</span> 移除文件  </span>
+git rm -f <span class="pl-k">*</span>            <span class="pl-c"><span class="pl-c">#</span> 移除文件  </span>
+git rm --cached <span class="pl-k">*</span>      <span class="pl-c"><span class="pl-c">#</span> 取消跟踪  </span>
+git mv file_from file_to  <span class="pl-c"><span class="pl-c">#</span> 重命名跟踪文件  </span>
+git log   <span class="pl-c"><span class="pl-c">#</span> 查看提交记录  </span></pre></div>
+<h3>
+<a id="user-content-commit-1" class="anchor" href="#commit-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>commit</h3>
+<div class="highlight highlight-source-shell"><pre>git commit <span class="pl-c"><span class="pl-c">#</span>提交更新   </span>
+git commit -m <span class="pl-s"><span class="pl-pds">'</span>message<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span>提交说明   </span>
+git commit -a <span class="pl-c"><span class="pl-c">#</span>跳过使用暂存区域，把所有已经跟踪过的文件暂存起来一并提交   </span>
+git commit --amend <span class="pl-c"><span class="pl-c">#</span>修改最后一次提交   </span>
+git commit log <span class="pl-c"><span class="pl-c">#</span>查看所有提交，包括没有push的commit    </span>
+git commit -m <span class="pl-s"><span class="pl-pds">"</span>#133<span class="pl-pds">"</span></span> <span class="pl-c"><span class="pl-c">#</span>关联issue 任意位置带上# 符号加上issue号码  </span>
+git commit -m <span class="pl-s"><span class="pl-pds">"</span>fix #133<span class="pl-pds">"</span></span> commit关闭issue  
+git commit -m <span class="pl-s"><span class="pl-pds">'</span>概要描述<span class="pl-pds">'</span></span><span class="pl-s"><span class="pl-pds">$'</span><span class="pl-cce">\n\n</span><span class="pl-pds">'</span></span><span class="pl-s"><span class="pl-pds">'</span>1.详细描述<span class="pl-pds">'</span></span><span class="pl-s"><span class="pl-pds">$'</span><span class="pl-cce">\n</span><span class="pl-pds">'</span></span><span class="pl-s"><span class="pl-pds">'</span>2.详细描述<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span>提交简要描述和详细描述  </span></pre></div>
+<h3>
+<a id="user-content-reset" class="anchor" href="#reset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>reset</h3>
+<div class="highlight highlight-source-shell"><pre>git reset HEAD <span class="pl-k">*</span>  <span class="pl-c"><span class="pl-c">#</span> 取消已经暂存的文件   </span>
+git reset --mixed HEAD <span class="pl-k">*</span> <span class="pl-c"><span class="pl-c">#</span> 同上   </span>
+git reset --soft HEAD <span class="pl-k">*</span>  <span class="pl-c"><span class="pl-c">#</span> 重置到指定状态，不会修改索引区和工作树   </span>
+git reset --hard HEAD <span class="pl-k">*</span>  <span class="pl-c"><span class="pl-c">#</span> 重置到指定状态，会修改索引区和工作树   </span>
+git reset -- files <span class="pl-k">*</span>     <span class="pl-c"><span class="pl-c">#</span> 重置index区文件   </span></pre></div>
+<h3>
+<a id="user-content-revert" class="anchor" href="#revert" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>revert</h3>
+<div class="highlight highlight-source-shell"><pre>git revert HEAD   <span class="pl-c"><span class="pl-c">#</span> 撤销前一次操作   </span>
+git revert HEAD~  <span class="pl-c"><span class="pl-c">#</span> 撤销前前一次操作   </span>
+git revert commit <span class="pl-c"><span class="pl-c">#</span> 撤销指定操作   </span></pre></div>
+<h3>
+<a id="user-content-checkout" class="anchor" href="#checkout" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>checkout</h3>
+<div class="highlight highlight-source-shell"><pre>git checkout -- file  <span class="pl-c"><span class="pl-c">#</span> 取消对文件的修改（从暂存区——覆盖worktree file）  </span>
+git checkout branch<span class="pl-k">|</span>tag<span class="pl-k">|</span>commit -- file_name  <span class="pl-c"><span class="pl-c">#</span> 从仓库取出file覆盖当前分支   </span>
+git checkout HEAD~1 [文件]  <span class="pl-c"><span class="pl-c">#</span> 将会更新 working directory 去匹配某次 commit   </span>
+git checkout -- <span class="pl-c1">.</span>          <span class="pl-c"><span class="pl-c">#</span> 从暂存区取出文件覆盖工作区   </span>
+git checkout -b gh-pages  0c304c9  <span class="pl-c"><span class="pl-c">#</span> 这个表示 从当前分支 commit 哈希值为 0c304c9 的节点，分一个新的分支gh-pages出来，并切换到 gh-pages   </span></pre></div>
+<h3>
+<a id="user-content-diff" class="anchor" href="#diff" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>diff</h3>
+<div class="highlight highlight-source-shell"><pre>git diff file     <span class="pl-c"><span class="pl-c">#</span> 查看指定文件的差异   </span>
+git diff --stat   <span class="pl-c"><span class="pl-c">#</span> 查看简单的diff结果   </span>
+git diff  <span class="pl-c"><span class="pl-c">#</span> 比较Worktree和Index之间的差异   </span>
+git diff --cached   <span class="pl-c"><span class="pl-c">#</span> 比较Index和HEAD之间的差异   </span>
+git diff HEAD       <span class="pl-c"><span class="pl-c">#</span> 比较Worktree和HEAD之间的差异   </span>
+git diff branch     <span class="pl-c"><span class="pl-c">#</span> 比较Worktree和branch之间的差异   </span>
+git diff branch1 branch2  <span class="pl-c"><span class="pl-c">#</span> 比较两次分支之间的差异   </span>
+git diff commit commit    <span class="pl-c"><span class="pl-c">#</span> 比较两次提交之间的差异   </span>
+git diff master..test   <span class="pl-c"><span class="pl-c">#</span> 上面这条命令只显示两个分支间的差异  </span>
+git diff master...test    <span class="pl-c"><span class="pl-c">#</span> 你想找出‘master’,‘test’的共有 父分支和'test'分支之间的差异，你用3个‘.'来取代前面的两个'.'  </span></pre></div>
+<h3>
+<a id="user-content-stash" class="anchor" href="#stash" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>stash</h3>
+<div class="highlight highlight-source-shell"><pre>git stash <span class="pl-c"><span class="pl-c">#</span> 将工作区现场（已跟踪文件）储藏起来，等以后恢复后继续工作。   </span>
+git stash list  <span class="pl-c"><span class="pl-c">#</span> 查看保存的工作现场   </span>
+git stash apply <span class="pl-c"><span class="pl-c">#</span> 恢复工作现场   </span>
+git stash drop  <span class="pl-c"><span class="pl-c">#</span> 删除stash内容   </span>
+git stash pop   <span class="pl-c"><span class="pl-c">#</span> 恢复的同时直接删除stash内容   </span>
+git stash apply stash@{0} <span class="pl-c"><span class="pl-c">#</span> 恢复指定的工作现场，当你保存了不只一份工作现场时。   </span></pre></div>
+<h3>
+<a id="user-content-merge" class="anchor" href="#merge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>merge</h3>
+<div class="highlight highlight-source-shell"><pre>git merge --squash <span class="pl-c1">test</span> <span class="pl-c"><span class="pl-c">#</span> 合并压缩，将test上的commit压缩为一条   </span></pre></div>
+<h3>
+<a id="user-content-cherry-pick" class="anchor" href="#cherry-pick" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>cherry-pick</h3>
+<div class="highlight highlight-source-shell"><pre>git cherry-pick commit    <span class="pl-c"><span class="pl-c">#</span> 拣选合并，将commit合并到当前分支   </span>
+git cherry-pick -n commit <span class="pl-c"><span class="pl-c">#</span> 拣选多个提交，合并完后可以继续拣选下一个提交   </span></pre></div>
+<h3>
+<a id="user-content-rebase" class="anchor" href="#rebase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rebase</h3>
+<div class="highlight highlight-source-shell"><pre>git rebase master   <span class="pl-c"><span class="pl-c">#</span> 将master分之上超前的提交，变基到当前分支  </span>
+git rebase --onto master 169a6  <span class="pl-c"><span class="pl-c">#</span> 限制回滚范围，rebase当前分支从169a6以后的提交  </span>
+git rebase --interactive <span class="pl-c"><span class="pl-c">#</span> 交互模式，修改commit   </span>
+git rebase --continue    <span class="pl-c"><span class="pl-c">#</span> 处理完冲突继续合并   </span>
+git rebase --skip        <span class="pl-c"><span class="pl-c">#</span> 跳过   </span>
+git rebase --abort       <span class="pl-c"><span class="pl-c">#</span> 取消合并    </span></pre></div>
+<h2>
+<a id="user-content-分支branch" class="anchor" href="#%E5%88%86%E6%94%AFbranch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>分支branch</h2>
+<h3>
+<a id="user-content-删除" class="anchor" href="#%E5%88%A0%E9%99%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>删除</h3>
+<div class="highlight highlight-source-shell"><pre>git push origin :branchName  <span class="pl-c"><span class="pl-c">#</span> 删除远程分支  </span>
+git push origin --delete new <span class="pl-c"><span class="pl-c">#</span> 删除远程分支new   </span>
+git branch -d branchName     <span class="pl-c"><span class="pl-c">#</span> 删除本地分支，强制删除用-D  </span>
+git branch -d <span class="pl-c1">test</span>      <span class="pl-c"><span class="pl-c">#</span> 删除本地test分支   </span>
+git branch -D <span class="pl-c1">test</span>      <span class="pl-c"><span class="pl-c">#</span> 强制删除本地test分支   </span>
+git remote prune origin <span class="pl-c"><span class="pl-c">#</span> 远程删除了，本地还能看到远程存在，这条命令删除远程不存在的分支</span></pre></div>
+<h3>
+<a id="user-content-提交" class="anchor" href="#%E6%8F%90%E4%BA%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>提交</h3>
+<div class="highlight highlight-source-shell"><pre>git push -u origin branchName <span class="pl-c"><span class="pl-c">#</span> 提交分支到远程origin主机中  </span></pre></div>
+<h3>
+<a id="user-content-拉取" class="anchor" href="#%E6%8B%89%E5%8F%96" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>拉取</h3>
+<p><code>git fetch -p</code> #拉取远程分支时，自动清理 远程分支已删除，本地还存在的对应同名分支。</p>
+<h3>
+<a id="user-content-分支合并" class="anchor" href="#%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>分支合并</h3>
+<div class="highlight highlight-source-shell"><pre>git merge branchName      <span class="pl-c"><span class="pl-c">#</span> 合并分支 - 将分支branchName和当前所在分支合并   </span>
+git merge origin/master   <span class="pl-c"><span class="pl-c">#</span> 在本地分支上合并远程分支。   </span>
+git rebase origin/master  <span class="pl-c"><span class="pl-c">#</span> 在本地分支上合并远程分支。   </span>
+git merge <span class="pl-c1">test</span>            <span class="pl-c"><span class="pl-c">#</span> 将test分支合并到当前分支   </span></pre></div>
+<h3>
+<a id="user-content-重命名" class="anchor" href="#%E9%87%8D%E5%91%BD%E5%90%8D" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>重命名</h3>
+<p><code>git branch -m old new</code> #重命名分支</p>
+<h3>
+<a id="user-content-查看" class="anchor" href="#%E6%9F%A5%E7%9C%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>查看</h3>
+<div class="highlight highlight-source-shell"><pre>git branch      <span class="pl-c"><span class="pl-c">#</span> 列出本地分支   </span>
+git branch -r   <span class="pl-c"><span class="pl-c">#</span> 列出远端分支   </span>
+git branch -a   <span class="pl-c"><span class="pl-c">#</span> 列出所有分支   </span>
+git branch -v   <span class="pl-c"><span class="pl-c">#</span> 查看各个分支最后一个提交对象的信息   </span>
+git branch --merge      <span class="pl-c"><span class="pl-c">#</span> 查看已经合并到当前分支的分支   </span>
+git branch --no-merge   <span class="pl-c"><span class="pl-c">#</span> 查看为合并到当前分支的分支   </span>
+git remote show origin  <span class="pl-c"><span class="pl-c">#</span> 可以查看remote地址，远程分支</span></pre></div>
+<h3>
+<a id="user-content-新建" class="anchor" href="#%E6%96%B0%E5%BB%BA" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>新建</h3>
+<div class="highlight highlight-source-shell"><pre>git branch <span class="pl-c1">test</span> <span class="pl-c"><span class="pl-c">#</span> 新建test分支  </span>
+git branch newBrach 3defc69 <span class="pl-c"><span class="pl-c">#</span> 指定哈希3defc69，新建分支名字为newBrach</span>
+git checkout -b newBrach origin/master <span class="pl-c"><span class="pl-c">#</span> 取回远程主机的更新以后，在它的基础上创建一个新的分支  </span>
+git checkout -b newBrach 3defc69 <span class="pl-c"><span class="pl-c">#</span> 以哈希值3defc69，新建 newBrach 分支，并切换到该分支</span></pre></div>
+<h3>
+<a id="user-content-连接" class="anchor" href="#%E8%BF%9E%E6%8E%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>连接</h3>
+<div class="highlight highlight-source-shell"><pre>git branch --set-upstream dev origin/dev     <span class="pl-c"><span class="pl-c">#</span> 将本地dev分支与远程dev分支之间建立链接  </span>
+git branch --set-upstream master origin/next <span class="pl-c"><span class="pl-c">#</span> 手动建立追踪关系  </span></pre></div>
+<h3>
+<a id="user-content-分支切换" class="anchor" href="#%E5%88%86%E6%94%AF%E5%88%87%E6%8D%A2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>分支切换</h3>
+<div class="highlight highlight-source-shell"><pre>git checkout <span class="pl-c1">test</span>     <span class="pl-c"><span class="pl-c">#</span> 切换到test分支   </span>
+git checkout -b <span class="pl-c1">test</span>  <span class="pl-c"><span class="pl-c">#</span> 新建+切换到test分支   </span>
+git checkout -b <span class="pl-c1">test</span> dev <span class="pl-c"><span class="pl-c">#</span> 基于dev新建test分支，并切换   </span></pre></div>
+<h2>
+<a id="user-content-远端" class="anchor" href="#%E8%BF%9C%E7%AB%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>远端</h2>
+<div class="highlight highlight-source-shell"><pre>git fetch <span class="pl-k">&lt;</span>远程主机名<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>分支名<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> fetch取回所有分支（branch）的更新  </span>
+git fetch origin remotebranch[:localbranch]   <span class="pl-c"><span class="pl-c">#</span>  从远端拉去分支[到本地指定分支]   </span>
+git merge origin/branch   <span class="pl-c"><span class="pl-c">#</span> 合并远端上指定分支   </span>
+git pull origin remotebranch:localbranch  <span class="pl-c"><span class="pl-c">#</span>  拉去远端分支到本地分支   </span>
+git push origin branch    <span class="pl-c"><span class="pl-c">#</span> 将当前分支，推送到远端上指定分支   </span>
+git push origin localbranch:remotebranch  <span class="pl-c"><span class="pl-c">#</span> 推送本地指定分支，到远端上指定分支   </span>
+git push origin :remotebranch   <span class="pl-c"><span class="pl-c">#</span> 删除远端指定分支   </span>
+git checkout -b [--track] <span class="pl-c1">test</span> origin/dev <span class="pl-c"><span class="pl-c">#</span> 基于远端dev分支，新建本地test分支[同时设置跟踪]  </span></pre></div>
+<h2>
+<a id="user-content-submodule" class="anchor" href="#submodule" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>submodule</h2>
+<p>克隆项目同时克隆submodule</p>
+<div class="highlight highlight-source-shell"><pre>git clone https://github.com/jaywcjlove/handbook.git --depth=1 --recurse-submodules</pre></div>
+<p>克隆项目，之后再手动克隆 submodule 子项目</p>
+<div class="highlight highlight-source-shell"><pre>git submodule add --force <span class="pl-s"><span class="pl-pds">'</span>仓库地址<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>路径<span class="pl-pds">'</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 其中，仓库地址是指子模块仓库地址，路径指将子模块放置在当前工程下的路径。</span>
+<span class="pl-c"><span class="pl-c">#</span> 注意：路径不能以 / 结尾（会造成修改不生效）、不能是现有工程已有的目录（不能順利 Clone）</span>
+git submodule init <span class="pl-c"><span class="pl-c">#</span> 初始化submodule</span>
+git submodule update <span class="pl-c"><span class="pl-c">#</span> 更新submodule(必须在根目录执行命令)</span>
+git submodule update --init --recursive  <span class="pl-c"><span class="pl-c">#</span> 下载的工程带有submodule</span></pre></div>
+<p>当使用<code>git clone</code>下来的工程中带有submodule时，初始的时候，submodule的内容并不会自动下载下来的，此时，只需执行如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>git submodule foreach git pull  <span class="pl-c"><span class="pl-c">#</span> submodule 里有其他的 submodule 一次更新</span>
+git submodule foreach git pull origin master <span class="pl-c"><span class="pl-c">#</span> submodule更新</span>
+
+git submodule foreach --recursive git submodule init
+git submodule foreach --recursive git submodule update</pre></div>
+<h2>
+<a id="user-content-删除文件" class="anchor" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>删除文件</h2>
+<div class="highlight highlight-source-shell"><pre>git rm -rf node_modules/</pre></div>
+<h2>
+<a id="user-content-remote-1" class="anchor" href="#remote-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>remote</h2>
+<p>git是一个分布式代码管理工具，所以可以支持多个仓库，在git里，服务器上的仓库在本地称之为remote。个人开发时，多源用的可能不多，但多源其实非常有用。</p>
+<div class="highlight highlight-source-shell"><pre>git remote add origin1 git@github.com:yanhaijing/data.js.git  
+git remote    <span class="pl-c"><span class="pl-c">#</span> 显示全部源  </span>
+git remote -v <span class="pl-c"><span class="pl-c">#</span> 显示全部源+详细信息  </span>
+git remote rename origin1 origin2 <span class="pl-c"><span class="pl-c">#</span> 重命名  </span>
+git remote rm origin    <span class="pl-c"><span class="pl-c">#</span> 删除  </span>
+git remote show origin  <span class="pl-c"><span class="pl-c">#</span> 查看指定源的全部信息  </span></pre></div>
+<h2>
+<a id="user-content-标签tag" class="anchor" href="#%E6%A0%87%E7%AD%BEtag" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>标签tag</h2>
+<p>当开发到一定阶段时，给程序打标签是非常棒的功能。</p>
+<div class="highlight highlight-source-shell"><pre>git tag -a v0.1 -m <span class="pl-s"><span class="pl-pds">'</span>my version 1.4<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span> 新建带注释标签   </span>
+git push origin --tags              <span class="pl-c"><span class="pl-c">#</span> 一次性推送所有分支 </span>
+git push origin v1.5                <span class="pl-c"><span class="pl-c">#</span> 推送单个tag到orgin源上 </span>
+git tag -v v1.4.2.1                 <span class="pl-c"><span class="pl-c">#</span> 验证标签，验证已经签署的标签</span>
+git show v1.5                       <span class="pl-c"><span class="pl-c">#</span> 看到对应的 GPG 签</span>
+
+git tag        <span class="pl-c"><span class="pl-c">#</span> 列出现有标签   </span>
+git tag v0gi.1 <span class="pl-c"><span class="pl-c">#</span> 新建标签   </span>
+git checkout tagname   <span class="pl-c"><span class="pl-c">#</span> 切换到标签       </span>
+git tag -d v0.1 <span class="pl-c"><span class="pl-c">#</span> 删除标签   </span>
+git push origin :refs/tags/v0.1 <span class="pl-c"><span class="pl-c">#</span> 删除远程标签   </span>
+git pull --all <span class="pl-c"><span class="pl-c">#</span> 获取远程所有内容包括tag  </span>
+git --git-dir=<span class="pl-s"><span class="pl-pds">'</span>&lt;绝对地址&gt;/.git<span class="pl-pds">'</span></span> describe --tags HEAD <span class="pl-c"><span class="pl-c">#</span> 查看本地版本信息  </span></pre></div>
+<h2>
+<a id="user-content-日志log" class="anchor" href="#%E6%97%A5%E5%BF%97log" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>日志log</h2>
+<div class="highlight highlight-source-shell"><pre>git config format.pretty oneline  <span class="pl-c"><span class="pl-c">#</span>显示历史记录时，每个提交的信息只显示一行   </span>
+git config color.ui <span class="pl-c1">true</span> <span class="pl-c"><span class="pl-c">#</span>彩色的 git 输出   </span>
+git log <span class="pl-c"><span class="pl-c">#</span>查看最近的提交日志   </span>
+git log --pretty=oneline <span class="pl-c"><span class="pl-c">#</span>单行显示提交日志   </span>
+git log --graph --pretty=oneline --abbrev-commit   
+git log -num <span class="pl-c"><span class="pl-c">#</span>显示第几条log（倒数）   </span>
+git reflog <span class="pl-c"><span class="pl-c">#</span>查看所有分支的所有操作记录   </span>
+git log --since=1.day <span class="pl-c"><span class="pl-c">#</span>一天内的提交；你可以给出各种时间格式，比如说具体的某一天（“2008-01-15”），或者是多久以前（“2 years 1 day 3 minutes ago”）。   </span>
+git log --pretty=<span class="pl-s"><span class="pl-pds">"</span>%h - %s<span class="pl-pds">"</span></span> --author=自己的名字 <span class="pl-c"><span class="pl-c">#</span>查看自己的日志   </span>
+git log -p -2 <span class="pl-c"><span class="pl-c">#</span>展开两次更新显示每次提交的内容差异   </span>
+git log --stat <span class="pl-c"><span class="pl-c">#</span>要快速浏览其他协作者提交的更新都作了哪些改动   </span>
+git log --pretty=format:<span class="pl-s"><span class="pl-pds">"</span>%h - %an, %ar : %s<span class="pl-pds">"</span></span><span class="pl-c"><span class="pl-c">#</span>定制要显示的记录格式   </span>
+git log --pretty=format:<span class="pl-s"><span class="pl-pds">'</span>%h : %s<span class="pl-pds">'</span></span> --date-order --graph <span class="pl-c"><span class="pl-c">#</span> 拓扑顺序展示   </span>
+git log --pretty=format:<span class="pl-s"><span class="pl-pds">'</span>%h : %s - %ad<span class="pl-pds">'</span></span> --date=short <span class="pl-c"><span class="pl-c">#</span>日期YYYY-MM-DD显示   </span>
+git log <span class="pl-k">&lt;</span>last tag<span class="pl-k">&gt;</span> HEAD --pretty=format:%s <span class="pl-c"><span class="pl-c">#</span> 只显示commit   </span>
+git config --global format.pretty <span class="pl-s"><span class="pl-pds">'</span>%h : %s - %ad<span class="pl-pds">'</span></span> --date=short <span class="pl-c"><span class="pl-c">#</span>日期YYYY-MM-DD显示 写入全局配置</span></pre></div>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%H</td>
+<td>提交对象（commit）的完整哈希字串</td>
+<td>%ad</td>
+<td>作者修订日期（可以用 -date= 选项定制格式）</td>
+</tr>
+<tr>
+<td>%h</td>
+<td>提交对象的简短哈希字串</td>
+<td>%ar</td>
+<td>作者修订日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>树对象（tree）的完整哈希字串</td>
+<td>%cn</td>
+<td>提交者(committer)的名字</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>树对象的简短哈希字串</td>
+<td>%ce</td>
+<td>提交者的电子邮件地址</td>
+</tr>
+<tr>
+<td>%P</td>
+<td>父对象（parent）的完整哈希字串</td>
+<td>%cd</td>
+<td>提交日期</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>父对象的简短哈希字串</td>
+<td>%cr</td>
+<td>提交日期，按多久以前的方式显示</td>
+</tr>
+<tr>
+<td>%an</td>
+<td>作者（author）的名字</td>
+<td>%s</td>
+<td>提交说明</td>
+</tr>
+<tr>
+<td>%ae</td>
+<td>作者的电子邮件地址</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://git-scm.com/docs/git-log#_pretty_formats" rel="nofollow">Pretty Formats</a></p>
+<h2>
+<a id="user-content-重写历史" class="anchor" href="#%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>重写历史</h2>
+<div class="highlight highlight-source-shell"><pre>git commit --amend    <span class="pl-c"><span class="pl-c">#</span> 改变最近一次提交  </span>
+git rebase -i HEAD~3  <span class="pl-c"><span class="pl-c">#</span> 修改最近三次的提交说明，或者其中任意一次  </span>
+git commit --amend    <span class="pl-c"><span class="pl-c">#</span> 保存好了，这些指示很明确地告诉了你该干什么  </span>
+git rebase --continue <span class="pl-c"><span class="pl-c">#</span> 修改提交说明，退出编辑器。  </span></pre></div>
+<div class="highlight highlight-source-shell"><pre>pick f7f3f6d changed my name a bit
+pick 310154e updated README formatting and added blame
+pick a5f4a0d added cat-file</pre></div>
+<p>改成</p>
+<pre><code>pick 310154e updated README formatting and added blame
+pick f7f3f6d changed my name a bit
+</code></pre>
+<h3>
+<a id="user-content-删除仓库" class="anchor" href="#%E5%88%A0%E9%99%A4%E4%BB%93%E5%BA%93" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>删除仓库</h3>
+<pre><code>cd ..
+rm -rf repo.git
+</code></pre>
+<p><a href="https://help.github.com/articles/changing-author-info/">Github官方教程</a></p>
+<h2>
+<a id="user-content-其它" class="anchor" href="#%E5%85%B6%E5%AE%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>其它</h2>
+<div class="highlight highlight-source-shell"><pre>git <span class="pl-c1">help</span> <span class="pl-k">*</span>  <span class="pl-c"><span class="pl-c">#</span> 获取命令的帮助信息  </span>
+git status  <span class="pl-c"><span class="pl-c">#</span> 获取当前的状态，非常有用，因为git会提示接下来的能做的操作  </span></pre></div>
+<h2>
+<a id="user-content-报错问题解决" class="anchor" href="#%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>报错问题解决</h2>
+<p><strong>1. <code>git fatal: protocol error: bad line length character: No s</code></strong></p>
+<p>解决办法：更换remote地址为 <code>http/https</code> 的</p>
+<p><strong>2. <code>The requested URL returned error: 403 Forbidden while accessing</code></strong></p>
+<p>解决github push错误的办法：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span>vim 编辑器打开 当前项目中的config文件</span>
+vim .git/config
+
+<span class="pl-c"><span class="pl-c">#</span>修改</span>
+[remote <span class="pl-s"><span class="pl-pds">"</span>origin<span class="pl-pds">"</span></span>]  
+    url = https://github.com/jaywcjlove/example.git  
+
+<span class="pl-c"><span class="pl-c">#</span>为下面代码</span>
+[remote <span class="pl-s"><span class="pl-pds">"</span>origin<span class="pl-pds">"</span></span>]  
+    url = https://jaywcjlove@github.com/jaywcjlove/example.git  </pre></div>
+<p><strong>3. git status 显示中文问题</strong></p>
+<p>在查看状态的时候 git status 如果是中文就显示下面的情况</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-cce">\3</span>44<span class="pl-cce">\2</span>72<span class="pl-cce">\2</span>47<span class="pl-cce">\3</span>45<span class="pl-cce">\2</span>23<span class="pl-cce">\2</span>01<span class="pl-cce">\3</span>51<span class="pl-cce">\2</span>34<span class="pl-cce">\2</span>00<span class="pl-cce">\3</span>46<span class="pl-cce">\2</span>61<span class="pl-cce">\2</span>02</pre></div>
+<p>解决这个问题方法是：</p>
+<div class="highlight highlight-source-shell"><pre>git config --global core.quotepath <span class="pl-c1">false</span></pre></div>
+<h2>
+<a id="user-content-参考资料" class="anchor" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参考资料</h2>
+<ul>
+<li><a href="http://git-scm.com/" rel="nofollow">Git官网</a></li>
+<li><a href="https://try.github.io" rel="nofollow"><strong>Github 15分钟学习Git</strong></a></li>
+<li><a href="http://gitref.org/zh/index.html" rel="nofollow">Git参考手册</a></li>
+<li><a href="http://www.mceiba.com/tool/git-cheat-sheet.html" rel="nofollow">Git简明手册</a></li>
+<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/" rel="nofollow">Git Magic</a></li>
+<li><a href="http://gitbook.liuhui998.com/index.html" rel="nofollow">Git Community Book 中文版</a></li>
+<li><a href="http://git-scm.com/book/en/v2" rel="nofollow">Pro Git</a></li>
+<li><a href="http://marklodato.github.io/visual-git-guide/index-zh-cn.html" rel="nofollow">图解Git</a></li>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" rel="nofollow">git-简明指南</a></li>
+<li><a href="http://pcottle.github.io/learnGitBranching/" rel="nofollow">learnGitBranching 在线学习工具</a></li>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" rel="nofollow">初级教程</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" rel="nofollow">廖雪峰的Git教程</a></li>
+<li><a href="http://www.worldhello.net/gotgithub/" rel="nofollow">蒋鑫老师将带你入github的大门</a></li>
+<li><a href="http://www.open-open.com/lib/view/open1328069609436.html" rel="nofollow">git详解</a></li>
+<li><a href="http://git.oschina.net/progit/" rel="nofollow">oschina教程</a></li>
+<li><a href="https://github.com/blog/2019-how-to-undo-almost-anything-with-git">How to undo (almost) anything with Git撤销一切，汇总各种回滚撤销的场景，加强学习。</a></li>
+<li><a href="http://www.runoob.com/git/git-tutorial.html" rel="nofollow">Git 教程 | 菜鸟教程runoob.com</a></li>
+<li><a href="https://gold.xitu.io/post/5842f9b861ff4b005889ade6" rel="nofollow">Git 本地仓库和裸仓库</a></li>
+<li><a href="http://www.kancloud.cn/kancloud/igit/46710" rel="nofollow">沉浸式学 Git</a></li>
+<li><a href="http://way.oschina.io/2016/12/15/notes/GitAdvance/?utm_source=gank.io&amp;utm_medium=email" rel="nofollow">Git进阶用法，主要是rebase高级用法</a></li>
+</ul>
+
+
+</body>
+</html>

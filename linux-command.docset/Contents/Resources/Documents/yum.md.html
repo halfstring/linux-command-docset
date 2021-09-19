@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-yum" class="anchor" href="#yum" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>yum</h1>
+<p>基于RPM的软件包管理器</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>yum命令</strong> 是在Fedora和RedHat以及SUSE中基于rpm的软件包管理器，它可以使系统管理人员交互和自动化地更新与管理RPM软件包，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。</p>
+<p>yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>yum(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-h：显示帮助信息；
+-y：对所有的提问都回答“yes”；
+-c：指定配置文件；
+-q：安静模式；
+-v：详细模式；
+-d：设置调试等级（0-10）；
+-e：设置错误等级（0-10）；
+-R：设置yum处理一个命令的最大等待时间；
+-C：完全从缓存中运行，而不去下载或者更新任何头文件。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<div class="highlight highlight-source-shell"><pre>install：安装rpm软件包；
+update：更新rpm软件包；
+check-update：检查是否有可用的更新rpm软件包；
+remove：删除指定的rpm软件包；
+list：显示软件包的信息；
+search：检查软件包的信息；
+info：显示指定的rpm软件包的描述信息和概要信息；
+clean：清理yum过期的缓存；
+shell：进入yum的shell提示符；
+resolvedep：显示rpm软件包的依赖关系；
+localinstall：安装本地的rpm软件包；
+localupdate：显示本地rpm软件包进行更新；
+deplist：显示rpm软件包的所有依赖关系。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>部分常用的命令包括：</p>
+<ul>
+<li>自动搜索最快镜像插件：<code>yum install yum-fastestmirror</code>
+</li>
+<li>安装yum图形窗口插件：<code>yum install yumex</code>
+</li>
+<li>查看可能批量安装的列表：<code>yum grouplist</code>
+</li>
+</ul>
+<p><strong>安装</strong></p>
+<div class="highlight highlight-source-shell"><pre>yum install              <span class="pl-c"><span class="pl-c">#</span>全部安装</span>
+yum install package1     <span class="pl-c"><span class="pl-c">#</span>安装指定的安装包package1</span>
+yum groupinsall group1   <span class="pl-c"><span class="pl-c">#</span>安装程序组group1</span></pre></div>
+<p><strong>更新和升级</strong></p>
+<div class="highlight highlight-source-shell"><pre>yum update               <span class="pl-c"><span class="pl-c">#</span>全部更新</span>
+yum update package1      <span class="pl-c"><span class="pl-c">#</span>更新指定程序包package1</span>
+yum check-update         <span class="pl-c"><span class="pl-c">#</span>检查可更新的程序</span>
+yum upgrade package1     <span class="pl-c"><span class="pl-c">#</span>升级指定程序包package1</span>
+yum groupupdate group1   <span class="pl-c"><span class="pl-c">#</span>升级程序组group1</span></pre></div>
+<p><strong>查找和显示</strong></p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 检查 MySQL 是否已安装</span>
+yum list installed <span class="pl-k">|</span> grep mysql
+yum list installed mysql<span class="pl-k">*</span>
+
+yum info package1      <span class="pl-c"><span class="pl-c">#</span>显示安装包信息package1</span>
+yum list               <span class="pl-c"><span class="pl-c">#</span>显示所有已经安装和可以安装的程序包</span>
+yum list package1      <span class="pl-c"><span class="pl-c">#</span>显示指定程序包安装情况package1</span>
+yum groupinfo group1   <span class="pl-c"><span class="pl-c">#</span>显示程序组group1信息yum search string 根据关键字string查找安装包</span></pre></div>
+<p><strong>删除程序</strong></p>
+<div class="highlight highlight-source-shell"><pre>yum remove <span class="pl-k">&amp;</span><span class="pl-c"><span class="pl-c">#</span>124; erase package1   #删除程序包package1</span>
+yum groupremove group1             <span class="pl-c"><span class="pl-c">#</span>删除程序组group1</span>
+yum deplist package1               <span class="pl-c"><span class="pl-c">#</span>查看程序package1依赖情况</span></pre></div>
+<p><strong>清除缓存</strong></p>
+<div class="highlight highlight-source-shell"><pre>yum clean packages       <span class="pl-c"><span class="pl-c">#</span>清除缓存目录下的软件包</span>
+yum clean headers        <span class="pl-c"><span class="pl-c">#</span>清除缓存目录下的 headers</span>
+yum clean oldheaders     <span class="pl-c"><span class="pl-c">#</span>清除缓存目录下旧的 headers</span></pre></div>
+<p><strong>更多实例</strong></p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> yum</span>
+/etc/yum.repos.d/       yum 源配置文件
+vi /etc/yum.repos.d/nginx.repo <span class="pl-c"><span class="pl-c">#</span> 举个栗子: nginx yum源</span>
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/6/<span class="pl-smi">$basearch</span>/
+gpgcheck=0
+enabled=1
+
+<span class="pl-c"><span class="pl-c">#</span> yum mirror</span>
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+wget https://mirror.tuna.tsinghua.edu.cn/help/centos/
+yum makecache
+
+<span class="pl-c"><span class="pl-c">#</span> 添加中文语言支持</span>
+LANG=C <span class="pl-c"><span class="pl-c">#</span> 原始语言</span>
+LANG=zh_CN.utf8 <span class="pl-c"><span class="pl-c">#</span> 切换到中文</span>
+yum groupinstall <span class="pl-s"><span class="pl-pds">"</span>Chinese Support<span class="pl-pds">"</span></span> <span class="pl-c"><span class="pl-c">#</span> 添加中文语言支持</span></pre></div>
+
+
+</body>
+</html>

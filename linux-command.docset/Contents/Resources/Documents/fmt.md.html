@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-fmt" class="anchor" href="#fmt" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fmt</h1>
+<p>读取文件后优化处理并输出</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>fmt命令</strong> 读取文件的内容，根据选项的设置对文件格式进行简单的优化处理，并将结果送到标准输出设备。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>fmt(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c或--crown-margin：每段前两列缩排；
+-p<span class="pl-k">&lt;</span>列起始字符串<span class="pl-k">&gt;</span>或-prefix=<span class="pl-k">&lt;</span>列起始字符串<span class="pl-k">&gt;</span>：仅合并含有指定字符串的列，通常运用在程序语言的注解方面；
+-s或--split-only：只拆开字数超出每列字符数的列，但不合并字数不足每列字符数的列；
+-t或--tagged-paragraph：每列前两列缩排，但第1列和第2列的缩排格式不同；
+-u或--uniform-spacing：每列字符之间都以一个空格字符间隔，每个句子之间则两个空格字符分隔；
+-w<span class="pl-k">&lt;</span>每列字符数<span class="pl-k">&gt;</span>或--width=<span class="pl-k">&lt;</span>每列字符数<span class="pl-k">&gt;</span>或-<span class="pl-k">&lt;</span>每列字符数<span class="pl-k">&gt;</span>：设置每列的最大字符数。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>指定要优化格式的文件。</p>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-strings" class="anchor" href="#strings" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>strings</h1>
+<p>在对象文件或二进制文件中查找可打印的字符串</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>strings命令</strong> 在对象文件或二进制文件中查找可打印的字符串。字符串是4个或更多可打印字符的任意序列，以换行符或空字符结束。 strings命令对识别随机对象文件很有用。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>strings [ <span class="pl-k">-a</span> ] [ - ] [ <span class="pl-k">-o</span> ] [ <span class="pl-k">-t</span> Format ] [ <span class="pl-k">-n</span> Number ] [ <span class="pl-k">-N</span>umber ]  [file ... ]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a --all：扫描整个文件而不是只扫描目标文件初始化和装载段
+-f –print-file-name：在显示字符串前先显示文件名
+-n –bytes=[number]：找到并且输出所有NUL终止符序列
+- ：设置显示的最少的字符数，默认是4个字符
+-t --radix={o,d,x} ：输出字符的位置，基于八进制，十进制或者十六进制
+-o ：类似--radix=o
+-T --target= ：指定二进制文件格式
+-e --encoding={s,S,b,l,B,L} ：选择字符大小和排列顺序:s = 7-bit, S = 8-bit, {b,l} = 16-bit, {B,L} = 32-bit
+@ ：读取中选项</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>列出ls中所有的ASCII文本：</p>
+<div class="highlight highlight-source-shell"><pre>strings /bin/ls</pre></div>
+<p>列出ls中所有的ASCII文本：</p>
+<div class="highlight highlight-source-shell"><pre>cat /bin/ls strings</pre></div>
+<p>查找ls中包含libc的字符串，不区分大小写：</p>
+<div class="highlight highlight-source-shell"><pre>strings /bin/ls <span class="pl-k">|</span> grep -i libc</pre></div>
+
+
+</body>
+</html>

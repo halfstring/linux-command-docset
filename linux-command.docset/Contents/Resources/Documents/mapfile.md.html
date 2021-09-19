@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-mapfile" class="anchor" href="#mapfile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>mapfile</h1>
+<p>从标准输入读取行并赋值到数组。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>mapfile [-d delim] [-n count] [-O origin] [-s count] [-t] [-u fd] [-C callback] [-c quantum] [array]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>从标准输入或文件描述符读取行并赋值到数组。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-d delim       将delim设为行分隔符，代替默认的换行符。
+-n count       从标准输入中获取最多count行，如果count为零那么获取全部。
+-O origin      从数组下标为origin的位置开始赋值，默认的下标为0。
+-s count       跳过对前count行的读取。
+-t             读取时移除行分隔符delim（默认为换行符）。
+-u fd          从文件描述符fd中读取。
+-C callback    每当读取了quantum行时，调用callback语句。
+-c quantum     设定读取的行数为quantum。
+
+如果使用-C时没有同时使用-c指定quantum的值，那么quantum默认为5000。
+当callback语句执行时，将数组下一个要赋值的下标以及读取的行作为额外的参数传递给callback语句。
+如果使用-O时没有提供起始位置，那么mapfile会在实际赋值之前清空该数组。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>array（可选）：用于输出的数组名称。如果没有指定数组名称，那么会默认写入到变量名为MAPFILE的数组中。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回成功除非使用了非法选项、指定的数组是只读的、指定的数组不是下标数组。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 常见的读取形式。</span>
+mapfile <span class="pl-k">&lt;</span> source_file target_array
+cat source_file <span class="pl-k">|</span>mapfile target_array
+mapfile -u fd target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 只读取前5行。</span>
+mapfile <span class="pl-k">&lt;</span> source_file -n 5 target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 跳过前5行。</span>
+mapfile <span class="pl-k">&lt;</span> source_file -s 5 target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 在数组指定的下标开始赋值。</span>
+<span class="pl-c"><span class="pl-c">#</span> 请注意：这样做不会清空该数组。</span>
+mapfile <span class="pl-k">&lt;</span> source_file -O 2 target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 读取时设定行分隔符为tab。</span>
+<span class="pl-c"><span class="pl-c">#</span> 注意，第二行的tab在终端需要用ctrl+v tab输入；</span>
+mapfile <span class="pl-k">&lt;</span> source_file -d <span class="pl-s"><span class="pl-pds">$'</span><span class="pl-cce">\t</span><span class="pl-pds">'</span></span> target_array
+mapfile <span class="pl-k">&lt;</span> source_file -d <span class="pl-s"><span class="pl-pds">'</span>	<span class="pl-pds">'</span></span> target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 读取时移除行分隔符（tab）。</span>
+mapfile <span class="pl-k">&lt;</span> source_file -d <span class="pl-s"><span class="pl-pds">$'</span><span class="pl-cce">\t</span><span class="pl-pds">'</span></span> -t target_array
+<span class="pl-c"><span class="pl-c">#</span> 读取时移除行分隔符（换行符）。</span>
+mapfile <span class="pl-k">&lt;</span> source_file -t target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 每读取2行，执行一次语句（在这里是echo）。</span>
+mapfile <span class="pl-k">&lt;</span> source_file -C <span class="pl-s"><span class="pl-pds">"</span>echo CALLBACK:<span class="pl-pds">"</span></span> -c 2 target_array
+
+<span class="pl-c"><span class="pl-c">#</span> 遍历下标，依次显示数组的元素。</span>
+<span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-smi">${<span class="pl-k">!</span>target_array[@]}</span><span class="pl-k">;</span> <span class="pl-k">do</span>
+  <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%s<span class="pl-pds">"</span></span> <span class="pl-smi">${target_array[i]}</span>
+<span class="pl-k">done</span></pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+<li>bash内建命令readarray是mapfile的同义词。</li>
+</ol>
+
+
+</body>
+</html>

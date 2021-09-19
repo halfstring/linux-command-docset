@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-declare" class="anchor" href="#declare" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>declare</h1>
+<p>声明变量，设置或显示变量的值和属性。</p>
+<h2>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">declare</span> [-aAfFgilnrtux] [-p] [name[<span class="pl-k">=</span>value] ...]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>显示包含指定属性的全部变量和值</li>
+<li>显示包含指定属性的一到多个变量和值</li>
+<li>显示一到多个变量的属性和值</li>
+<li>显示所有变量的属性和值并显示函数的定义</li>
+<li>显示所有变量的属性和值</li>
+<li>显示所有全局变量的属性和值</li>
+<li>显示全部函数名和函数定义</li>
+<li>只显示全部函数名</li>
+<li>显示一到多个函数名和函数定义</li>
+<li>只显示一到多个函数名</li>
+<li>声明全局变量（可选：赋值）</li>
+<li>声明变量（可选：赋值、属性）</li>
+<li>增加、删除变量的属性（可选：赋值）</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-f 将操作或显示限制为函数名及函数定义。
+-F 只显示函数名（调试时附加行号和源文件）。
+-g 在shell函数中使用时创建全局变量；其他情况下忽略。
+-p 显示每个名称的属性和值。
+
+<span class="pl-k">*</span>设置属性的选项:
+-a 创建数组（如果支持）。
+-A 创建关联数组（如果支持）。
+-i 增加整型属性。
++i 删除整型属性。
+-l 增加小写属性，变量的值将转换为小写。
++l 删除小写属性。
+-n 增加引用属性（如果该选项存在）。
++n 删除引用属性（如果该选项存在）。
+-r 增加只读属性。
+-t 增加追踪属性。
++t 删除追踪属性。
+-u 增加大写属性，变量的值将转换为大写。
++u 删除大写属性。
+-x 增加导出属性。
++x 删除导出属性。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<div class="highlight highlight-source-shell"><pre>name（可选）：变量名或函数名。
+value（可选）：变量的值。</pre></div>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>declare 返回true除非你提供了非法选项或赋值错误。具体导致异常的情况请查看<strong>讨论</strong>章节的<strong>关于异常情况</strong>。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 声明变量，当然也欢迎您在这个网站（感谢本项目发起人 @jaywcjlove）查询linux命令。</span>
+<span class="pl-k">declare</span> reference_website=<span class="pl-s"><span class="pl-pds">'</span>https://wangchujiang.com/linux-command/<span class="pl-pds">'</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> 显示所有包含整型属性的变量和值。</span>
+<span class="pl-k">declare</span> -i
+<span class="pl-c"><span class="pl-c">#</span> 定义变量b并赋值为3，具有整型属性。</span>
+<span class="pl-k">declare</span> -i b=5
+<span class="pl-c"><span class="pl-c">#</span> 显示属性，返回 declare -i b="5"。</span>
+<span class="pl-k">declare</span> -p b
+<span class="pl-c"><span class="pl-c">#</span> 删除整型属性。</span>
+<span class="pl-k">declare</span> +i b
+<span class="pl-c"><span class="pl-c">#</span> 显示属性，返回 declare -- b="5"。</span>
+<span class="pl-k">declare</span> -p b
+<span class="pl-c"><span class="pl-c">#</span> 根据变量属性强制转换值的英文大小写。</span>
+<span class="pl-k">declare</span> -u uc_var=<span class="pl-s"><span class="pl-pds">'</span>abc<span class="pl-pds">'</span></span>
+<span class="pl-k">declare</span> -l lc_var=<span class="pl-s"><span class="pl-pds">'</span>ABC<span class="pl-pds">'</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 显示'ABC abc';</span>
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${uc_var}</span> <span class="pl-smi">${lc_var}</span><span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 定义函数内的全局变量</span>
+<span class="pl-k">function</span> <span class="pl-en">test(){</span>
+  <span class="pl-k">declare</span> -g a=3
+  <span class="pl-c"><span class="pl-c">#</span> 或者</span>
+  <span class="pl-k">local</span> -g b=3
+  <span class="pl-c"><span class="pl-c">#</span> 或者</span>
+  c=3
+  <span class="pl-c"><span class="pl-c">#</span> 让我们查看它们的属性。</span>
+  <span class="pl-k">declare</span> -p a b c
+}
+<span class="pl-c"><span class="pl-c">#</span> 执行函数。</span>
+<span class="pl-c1">test</span>
+<span class="pl-c"><span class="pl-c">#</span> 返回结果。</span>
+<span class="pl-c"><span class="pl-c">#</span> declare -- a="3"</span>
+<span class="pl-c"><span class="pl-c">#</span> declare -- b="3"</span>
+<span class="pl-c"><span class="pl-c">#</span> declare -- c="3"</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 定义函数外的全局变量</span>
+<span class="pl-k">declare</span> a=3
+b=3
+<span class="pl-k">declare</span> –p a b
+<span class="pl-c"><span class="pl-c">#</span> 返回结果如下。</span>
+<span class="pl-c"><span class="pl-c">#</span> declare -- a="3"</span>
+<span class="pl-c"><span class="pl-c">#</span> declare -- b="3"</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 定义局部变量</span>
+<span class="pl-k">function</span> <span class="pl-en">test2(){</span>
+  <span class="pl-k">local</span> -i a=3
+  <span class="pl-k">declare</span> -i b=3
+}
+test2
+<span class="pl-c"><span class="pl-c">#</span> 没有该变量（已经被销毁了）</span>
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${a}</span> <span class="pl-smi">${b}</span><span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 因此，我们日常脚本中最常见的类似于'a=3'实际上是声明并赋值了一个全局变量。</span>
+<span class="pl-c"><span class="pl-c">#</span> 在接下来的 **讨论** 环节会延伸讨论全局和局部变量问题。</span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 注意，不能使用 `+a` 或 `+A` 取消数组，也不能使用 `+r` 取消只读属性。</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 定义只读数组，设置属性的同时定义赋值。</span>
+<span class="pl-k">declare</span> -ar season=(<span class="pl-s"><span class="pl-pds">'</span>Spring<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>Summer<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>Autumn<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>Winter<span class="pl-pds">'</span></span>)
+<span class="pl-c"><span class="pl-c">#</span> 或者这样。</span>
+season=(<span class="pl-s"><span class="pl-pds">'</span>Spring<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>Summer<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>Autumn<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>Winter<span class="pl-pds">'</span></span>)
+<span class="pl-k">declare</span> -ar season
+<span class="pl-c"><span class="pl-c">#</span> 显示所有数组。</span>
+<span class="pl-k">declare</span> -a
+<span class="pl-c"><span class="pl-c">#</span> 定义关联数组。</span>
+
+<span class="pl-k">declare</span> -A fruits=([<span class="pl-s"><span class="pl-pds">'</span>apple<span class="pl-pds">'</span></span>]=<span class="pl-s"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span> [<span class="pl-s"><span class="pl-pds">'</span>banana<span class="pl-pds">'</span></span>]=<span class="pl-s"><span class="pl-pds">'</span>yellow<span class="pl-pds">'</span></span>)
+<span class="pl-c"><span class="pl-c">#</span> 显示所有关联数组。</span>
+<span class="pl-k">declare</span> -A</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 显示所有变量的属性和值并显示函数的定义，输出很长。</span>
+<span class="pl-k">declare</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示所有变量的属性和值。</span>
+<span class="pl-k">declare</span> -p
+<span class="pl-c"><span class="pl-c">#</span> 显示所有全局变量的属性和值。</span>
+<span class="pl-k">declare</span> -g</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 显示全部函数名和函数定义。</span>
+<span class="pl-k">declare</span> -f
+<span class="pl-c"><span class="pl-c">#</span> 只显示全部函数名。</span>
+<span class="pl-k">declare</span> -F
+
+<span class="pl-c"><span class="pl-c">#</span> 定义两个函数。</span>
+<span class="pl-k">function</span> <span class="pl-en">func_a(){</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">$(</span>date +<span class="pl-s"><span class="pl-pds">"</span>%F %T<span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>; }
+<span class="pl-k">function</span> <span class="pl-en">func_b(){</span> <span class="pl-c1">cd</span> /; ls -lh --sort=time<span class="pl-k">;</span> }
+<span class="pl-c"><span class="pl-c">#</span> 显示一到多个函数名和函数定义。</span>
+<span class="pl-k">declare</span> -f func_a func_b
+<span class="pl-c"><span class="pl-c">#</span> 只显示一到多个函数名，验证某个名称是否已经定义为函数时有用。</span>
+<span class="pl-k">declare</span> -F func_a func_b
+<span class="pl-c"><span class="pl-c">#</span> 最好不要让函数名和变量名相同。</span></pre></div>
+<h2>
+<a id="user-content-讨论" class="anchor" href="#%E8%AE%A8%E8%AE%BA" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>讨论</h2>
+<ol>
+<li>
+<p>全局和局部变量</p>
+<p>正如上面<strong>例子</strong>指出的情况，我们在日常编写程序的时候需要了解这些概念，在这里
+做个简要地介绍，当然你也可以很方便的搜索到相关内容。</p>
+<ul>
+<li>全局变量：在整个脚本执行期间，只要没有被删除就<strong>一直存在</strong>。</li>
+<li>局部变量：在函数内定义，函数执行后就被删除。</li>
+</ul>
+<p>建议函数内使用<code>local</code>命令，函数外使用<code>declare</code>命令。</p>
+<blockquote>
+<p><em>不要在脚本中定义过多的全局变量，那样可能会被其他函数调用造成意料之外的后果，并且也不方便检查出来。</em></p>
+<p><em>更不用说缺乏必要的注释了 —— ZhuangZhu-74</em></p>
+</blockquote>
+<p>相关资料：</p>
+<ul>
+<li><a href="https://github.com/google/styleguide">google提供的编码规范</a></li>
+<li><a href="https://unix.stackexchange.com/questions/381761/what-do-declare-name-and-declare-g-do" rel="nofollow">全局变量的讨论</a></li>
+</ul>
+</li>
+<li>
+<p>关于<code>declare</code> <code>typeset</code> <code>export</code> <code>local</code> <code>readonly</code>命令</p>
+<p>为什么<code>declare</code>能做到的事，还需要定义其他这些命令呢？</p>
+<p>因为这样语句含义会更加明确，例如：</p>
+<ul>
+<li>设置导出属性的变量时，<code>export var</code>和<code>declare -x var</code>。</li>
+<li>在函数内声明变量时，使用<code>local</code>。</li>
+<li>声明只读变量，使用<code>readonly</code>。</li>
+</ul>
+<p><code>typeset</code>和<code>declare</code>命令一样。</p>
+</li>
+<li>
+<p>关于异常情况</p>
+<p>有多种原因导致<code>declare</code>失败，关于这些情况可以参考<a href="https://www.gnu.org/software/bash/manual/bash.html#index-declare" rel="nofollow">bash在线文档declare部分(最新版)</a>，或执行 <code>info bash</code>
+查看<code>declare</code>部分最后一大串<code>an attempt is</code>开头的句子。</p>
+</li>
+</ol>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+<li>导出属性的相关介绍请查看'export'命令。</li>
+<li>只读属性的相关介绍请查看'readonly'命令。</li>
+<li>引用属性的相关介绍请查看'unset'命令的例子部分。</li>
+</ol>
+
+
+</body>
+</html>

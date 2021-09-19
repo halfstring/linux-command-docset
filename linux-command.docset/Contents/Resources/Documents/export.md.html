@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-export" class="anchor" href="#export" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>export</h1>
+<p>为shell变量或函数设置导出属性。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<pre><code>export [-fn] [name[=word]]...
+export -p
+</code></pre>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>定义一到多个变量并设置导出属性。</li>
+<li>修改一到多个变量的值并设置导出属性。</li>
+<li>删除一到多个变量的导出属性。</li>
+<li>显示全部拥有导出属性的变量。</li>
+<li>为一到多个已定义函数新增导出属性。</li>
+<li>删除一到多个函数的导出属性。</li>
+<li>显示全部拥有导出属性的函数。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-f：指向函数。
+-n：删除变量的导出属性。
+-p：显示全部拥有导出属性的变量。
+-pf：显示全部拥有导出属性的函数。
+-nf：删除函数的导出属性。
+--：在它之后的选项无效。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>name（可选）：变量名或已定义函数名。</p>
+<p>value（可选）：变量的值。</p>
+<h3>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h3>
+<p>export返回true除非你提供了非法选项或非法名称。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 显示全部拥有导出属性的变量。</span>
+<span class="pl-c"><span class="pl-c">#</span> export -p</span>
+<span class="pl-c"><span class="pl-c">#</span> export</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示全部拥有导出属性的函数。</span>
+<span class="pl-c"><span class="pl-c">#</span> export -pf</span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 首先删除要演示的变量名</span>
+<span class="pl-c"><span class="pl-c">#</span>unset a b</span>
+<span class="pl-c"><span class="pl-c">#</span> 定义变量的同时增加导出属性</span>
+<span class="pl-k">export</span> a b=3
+<span class="pl-c"><span class="pl-c">#</span> 当然也可以先定义后增加导出属性</span>
+b=3
+<span class="pl-k">export</span> b
+
+<span class="pl-c"><span class="pl-c">#</span> 修改拥有导出属性的变量的值</span>
+<span class="pl-k">export</span> a=5 b=7
+<span class="pl-c"><span class="pl-c">#</span> 当然也可以直接赋值修改</span>
+a=5<span class="pl-k">;</span>b=7
+
+<span class="pl-c"><span class="pl-c">#</span> 删除变量的导出属性</span>
+<span class="pl-k">export</span> -n a b</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 首先删除要演示的函数名</span>
+<span class="pl-c1">unset</span> func_1 func_2
+<span class="pl-c"><span class="pl-c">#</span> 创建函数</span>
+<span class="pl-k">function</span> <span class="pl-en">func_1(){</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>123<span class="pl-pds">'</span></span>; }
+<span class="pl-k">function</span> <span class="pl-en">func_2(){</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>890<span class="pl-pds">'</span></span>; }
+
+<span class="pl-c"><span class="pl-c">#</span> 为已定义函数增加导出属性</span>
+<span class="pl-k">export</span> -f func_1 func_2
+
+<span class="pl-c"><span class="pl-c">#</span> 删除函数的导出属性</span>
+<span class="pl-k">export</span> -fn a b</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 添加环境变量（JAVA）到`~/.bashrc`</span>
+PATH=/usr/local/jdk1.7.0/bin:<span class="pl-smi">$PATH</span>
+<span class="pl-c"><span class="pl-c">#</span> 添加当前位置到动态库环境变量</span>
+<span class="pl-k">export</span> LD_LIBRARY_PATH=<span class="pl-s"><span class="pl-pds">$(</span>pwd<span class="pl-pds">)</span></span>:<span class="pl-smi">${LD_LIBRARY_PATH}</span></pre></div>
+<h2>
+<a id="user-content-错误用法" class="anchor" href="#%E9%94%99%E8%AF%AF%E7%94%A8%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>错误用法</h2>
+<ul>
+<li>对未定义的函数添加导出属性。</li>
+<li>对没有导出属性的函数/变量执行删除导出属性操作。</li>
+<li>在 <code>--</code> 后使用选项。</li>
+</ul>
+<h2>
+<a id="user-content-qa" class="anchor" href="#qa" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q&amp;A</h2>
+<h4>
+<a id="user-content-q对变量或函数设置导出属性有什么用" class="anchor" href="#q%E5%AF%B9%E5%8F%98%E9%87%8F%E6%88%96%E5%87%BD%E6%95%B0%E8%AE%BE%E7%BD%AE%E5%AF%BC%E5%87%BA%E5%B1%9E%E6%80%A7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q：对变量或函数设置导出属性有什么用？</h4>
+<p>A：它们会成为环境变量，可以在脚本中访问它们，尤其是脚本中调用的子进程需要时。（ <strong><a href="https://askubuntu.com/questions/26318/environment-variable-vs-shell-variable-whats-the-difference" rel="nofollow">参考链接4</a></strong> ）</p>
+<h4>
+<a id="user-content-q如果我编写的脚本修改了已有的环境变量的值那么执行它会在当前终端生效吗会影响之前以及之后打开的终端吗" class="anchor" href="#q%E5%A6%82%E6%9E%9C%E6%88%91%E7%BC%96%E5%86%99%E7%9A%84%E8%84%9A%E6%9C%AC%E4%BF%AE%E6%94%B9%E4%BA%86%E5%B7%B2%E6%9C%89%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%E9%82%A3%E4%B9%88%E6%89%A7%E8%A1%8C%E5%AE%83%E4%BC%9A%E5%9C%A8%E5%BD%93%E5%89%8D%E7%BB%88%E7%AB%AF%E7%94%9F%E6%95%88%E5%90%97%E4%BC%9A%E5%BD%B1%E5%93%8D%E4%B9%8B%E5%89%8D%E4%BB%A5%E5%8F%8A%E4%B9%8B%E5%90%8E%E6%89%93%E5%BC%80%E7%9A%84%E7%BB%88%E7%AB%AF%E5%90%97" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q：如果我编写的脚本修改了已有的环境变量的值，那么执行它会在当前终端生效吗？会影响之前以及之后打开的终端吗？</h4>
+<p>A：只有通过<code>source</code>方式调用的脚本会生效，您可以查看<code>source</code>命令获得更多信息；其他方式只是在子shell中执行。
+之前的不会影响，之后的除非是修改了<code>~/.bashrc</code>这种启动终端时加载的脚本。（ <strong><a href="https://www.cnblogs.com/hongzg1982/articles/2101792.html" rel="nofollow">参考链接1</a></strong> ）</p>
+<h4>
+<a id="user-content-q我脚本文件中调用bashrc中定义的函数和变量为什么在新打开的终端中通过-sh-方式调用该脚本或直接运行" class="anchor" href="#q%E6%88%91%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6%E4%B8%AD%E8%B0%83%E7%94%A8bashrc%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E6%96%B0%E6%89%93%E5%BC%80%E7%9A%84%E7%BB%88%E7%AB%AF%E4%B8%AD%E9%80%9A%E8%BF%87-sh-%E6%96%B9%E5%BC%8F%E8%B0%83%E7%94%A8%E8%AF%A5%E8%84%9A%E6%9C%AC%E6%88%96%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q：我脚本文件中调用<code>~/.bashrc</code>中定义的函数和变量。为什么在新打开的终端中通过 <code>sh</code> 方式调用该脚本或直接运行</h4>
+<p>这个当前用户有执行权限的脚本却不能使用这些函数和变量？<br>
+A：请在<code>~/.bashrc</code>文件中增加export它们的语句。另请参阅 <strong>知识点</strong> 段落。</p>
+<h4>
+<a id="user-content-q数组和关联数组也可以设置导出属性吗" class="anchor" href="#q%E6%95%B0%E7%BB%84%E5%92%8C%E5%85%B3%E8%81%94%E6%95%B0%E7%BB%84%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%E5%AF%BC%E5%87%BA%E5%B1%9E%E6%80%A7%E5%90%97" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q：数组和关联数组也可以设置导出属性吗？</h4>
+<p>A：是可以的（如果你的bash支持它们），不过有些问题（ <strong><a href="https://stackoverflow.com/questions/5564418/exporting-an-array-in-bash-script" rel="nofollow">参考链接2</a></strong> ）。</p>
+<h4>
+<a id="user-content-q为什么我在查看变量或函数导出属性的时候显示的开头是declare" class="anchor" href="#q%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%9C%A8%E6%9F%A5%E7%9C%8B%E5%8F%98%E9%87%8F%E6%88%96%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA%E5%B1%9E%E6%80%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%98%BE%E7%A4%BA%E7%9A%84%E5%BC%80%E5%A4%B4%E6%98%AFdeclare" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q：为什么我在查看变量或函数导出属性的时候显示的开头是<code>declare</code>？</h4>
+<p>A：因为<code>declare</code>也能够设置变量或函数的导出属性，详见<code>declare</code>命令。</p>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3>
+<a id="user-content-知识点" class="anchor" href="#%E7%9F%A5%E8%AF%86%E7%82%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>知识点</h3>
+<p>在<code>info bash</code>或 <a href="http://www.gnu.org/software/bash/manual/bash.html" rel="nofollow">bash在线文档</a> 的
+<code>3.7.3</code>节提到了shell执行环境，其中涉及变量和函数的内容如下</p>
+<blockquote>
+<ul>
+<li>shell parameters that are set by variable assignment or with set or inherited from the shell’s parent in the environment</li>
+<li>shell functions defined during execution or inherited from the shell’s parent in the environment</li>
+</ul>
+</blockquote>
+<p>那么第一句话中的参数又和变量有什么关系呢？在<code>3.4</code>节第一段中提到：</p>
+<blockquote>
+<p>A variable is a parameter denoted by a name.</p>
+</blockquote>
+<p>变量是有名字的参数。</p>
+<p>那么子shell确实继承了父shell中带有导出属性的变量或函数。</p>
+<p>可参考链接： <a href="https://blog.csdn.net/soaringlee_fighting/article/details/78759448" rel="nofollow">执行脚本方式的区别</a></p>
+<h3>
+<a id="user-content-参考链接" class="anchor" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参考链接</h3>
+<ol>
+<li><a href="https://www.cnblogs.com/hongzg1982/articles/2101792.html" rel="nofollow">关于bashrc profile文件的讨论</a></li>
+<li><a href="https://stackoverflow.com/questions/5564418/exporting-an-array-in-bash-script" rel="nofollow">关于export数组的讨论</a></li>
+<li><a href="https://unix.stackexchange.com/questions/22796/can-i-export-functions-in-bash" rel="nofollow">export -pf用法</a></li>
+<li><a href="https://askubuntu.com/questions/26318/environment-variable-vs-shell-variable-whats-the-difference" rel="nofollow">环境变量和shell变量的区别</a></li>
+</ol>
+<h3>
+<a id="user-content-扩展阅读" class="anchor" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>扩展阅读</h3>
+<p>一般来说，配置交叉编译工具链的时候需要指定编译工具的路径，此时就需要设置环境变量。查看已经存在的环境变量：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> export</span>
+<span class="pl-k">declare</span> -x G_BROKEN_FILENAMES=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x HISTSIZE=<span class="pl-s"><span class="pl-pds">"</span>1000<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x HOME=<span class="pl-s"><span class="pl-pds">"</span>/root<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x hostname=<span class="pl-s"><span class="pl-pds">"</span>localhost<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x INPUTRC=<span class="pl-s"><span class="pl-pds">"</span>/etc/inputrc<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x LANG=<span class="pl-s"><span class="pl-pds">"</span>zh_CN.UTF-8<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x LESSOPEN=<span class="pl-s"><span class="pl-pds">"</span>|/usr/bin/lesspipe.sh %s<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x logname=<span class="pl-s"><span class="pl-pds">"</span>root<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x LS_COLORS=<span class="pl-s"><span class="pl-pds">"</span>no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x mail=<span class="pl-s"><span class="pl-pds">"</span>/var/spool/mail/root<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x OLDPWD
+<span class="pl-k">declare</span> -x PATH=<span class="pl-s"><span class="pl-pds">"</span>/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x pwd=<span class="pl-s"><span class="pl-pds">"</span>/root<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x SHELL=<span class="pl-s"><span class="pl-pds">"</span>/bin/bash<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x SHLVL=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x SSH_CLIENT=<span class="pl-s"><span class="pl-pds">"</span>192.168.2.111 2705 22<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x SSH_CONNECTION=<span class="pl-s"><span class="pl-pds">"</span>192.168.2.111 2705 192.168.2.2 22<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x SSH_TTY=<span class="pl-s"><span class="pl-pds">"</span>/dev/pts/0<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x TERM=<span class="pl-s"><span class="pl-pds">"</span>linux<span class="pl-pds">"</span></span>
+<span class="pl-k">declare</span> -x USER=<span class="pl-s"><span class="pl-pds">"</span>root<span class="pl-pds">"</span></span></pre></div>
+
+
+</body>
+</html>

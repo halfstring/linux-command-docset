@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-jq" class="anchor" href="#jq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jq</h1>
+<p>一个灵活的轻量级命令行JSON处理器</p>
+<h3>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h3>
+<p>jq 是 stedolan 开发的一个轻量级的和灵活的命令行JSON处理器，源码请参考 <a href="https://github.com/stedolan/jq">jq 项目主页</a></p>
+<p>jq 用于处理JSON输入，将给定过滤器应用于其JSON文本输入并在标准输出上将过滤器的结果生成为JSON。</p>
+<p>最简单的过滤器是<code>.</code>，它将jq的输入未经修改地复制到其输出中（格式设置除外）。</p>
+<p>请注意，jq 当前仅支持64位双精度浮点数（IEEE754）。</p>
+<h3>
+<a id="user-content-安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Debian系，如 Ubuntu</span>
+sudo apt-get install jq
+
+<span class="pl-c"><span class="pl-c">#</span> RedHat系, 如 CentOS</span>
+yum install jq</pre></div>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>jq [options] <span class="pl-k">&lt;</span>jq filter<span class="pl-k">&gt;</span> [file...]
+jq [options] --args <span class="pl-k">&lt;</span>jq filter<span class="pl-k">&gt;</span> [strings...]
+jq [options] --jsonargs <span class="pl-k">&lt;</span>jq filter<span class="pl-k">&gt;</span> [JSON_TEXTS...]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c               紧凑而不是漂亮的输出<span class="pl-k">;</span>
+-n               使用<span class="pl-s"><span class="pl-pds">`</span>null<span class="pl-pds">`</span></span>作为单个输入值<span class="pl-k">;</span>
+-e               根据输出设置退出状态代码<span class="pl-k">;</span>
+-s               将所有输入读取（吸取）到数组中；应用过滤器<span class="pl-k">;</span>
+-r               输出原始字符串，而不是JSON文本<span class="pl-k">;</span>
+-R               读取原始字符串，而不是JSON文本<span class="pl-k">;</span>
+-C               为JSON着色<span class="pl-k">;</span>
+-M               单色（不要为JSON着色）<span class="pl-k">;</span>
+-S               在输出上排序对象的键<span class="pl-k">;</span>
+--tab            使用制表符进行缩进<span class="pl-k">;</span>
+--arg a v        将变量<span class="pl-smi">$a</span>设置为value<span class="pl-k">&lt;</span>v<span class="pl-k">&gt;</span><span class="pl-k">;</span>
+--argjson a v    将变量<span class="pl-smi">$a</span>设置为JSON value<span class="pl-k">&lt;</span>v<span class="pl-k">&gt;</span><span class="pl-k">;</span>
+--slurpfile a f  将变量<span class="pl-smi">$a</span>设置为从<span class="pl-k">&lt;</span>f<span class="pl-k">&gt;</span>读取的JSON文本数组<span class="pl-k">;</span>
+--rawfile a f    将变量<span class="pl-smi">$a</span>设置为包含<span class="pl-k">&lt;</span>f<span class="pl-k">&gt;</span>内容的字符串<span class="pl-k">;</span>
+--args           其余参数是字符串参数，而不是文件<span class="pl-k">;</span>
+--jsonargs       其余的参数是JSON参数，而不是文件<span class="pl-k">;</span>
+--               终止参数处理<span class="pl-k">;</span></pre></div>
+<h3>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h3>
+<p><code>.</code>: 以漂亮的方式输出</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>{ "foo": { "bar": { "baz": 123 } } }<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>.<span class="pl-pds">'</span></span>
+{
+  <span class="pl-s"><span class="pl-pds">"</span>foo<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>bar<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>baz<span class="pl-pds">"</span></span>: 123
+    }
+  }
+}
+</pre></div>
+<p><code>.foo, .foo.bar, .foo?</code>: 获取一个键的值</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>{"foo": 42, "bar": "less interesting data"}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>.foo<span class="pl-pds">'</span></span>
+42</pre></div>
+<p><code>.[], .[]?, .[2], .[10:15]</code>: 数组运算</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>[{"name":"JSON", "good":true}, {"name":"XML", "good":false}]<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>.[1]<span class="pl-pds">'</span></span>
+{
+  <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>XML<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>good<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+}
+</pre></div>
+<p><code>[], {}</code>: 构造一个数组/对象</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>{"user":"stedolan","titles":["JQ Primer", "More JQ"]}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>{user, title: .titles[]}<span class="pl-pds">'</span></span>
+
+{
+  <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>stedolan<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>JQ Primer<span class="pl-pds">"</span></span>
+}
+{
+  <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>stedolan<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>More JQ<span class="pl-pds">"</span></span>
+}
+</pre></div>
+<p><code>length</code>: 计算一个值的长度</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>[[1,2], "string", {"a":2}, null]<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>.[] | length<span class="pl-pds">'</span></span>                                  
+2
+6
+1
+0
+</pre></div>
+<p><code>keys</code>: 取出数组中的键</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>{"abc": 1, "abcd": 2, "Foo": 3}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>keys<span class="pl-pds">'</span></span>                                        
+[
+  <span class="pl-s"><span class="pl-pds">"</span>Foo<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>abc<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>abcd<span class="pl-pds">"</span></span>
+]
+</pre></div>
+<p><code>,</code>: 使用多个过滤器</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>{ "foo": 42, "bar": "something else", "baz": true}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>.foo, .bar<span class="pl-pds">'</span></span> 
+42
+<span class="pl-s"><span class="pl-pds">"</span>something else<span class="pl-pds">"</span></span>
+</pre></div>
+<p><code>|</code>: 通过管道将一个过滤器的输出当做下一个过滤器的输入</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>[{"name":"JSON", "good":true}, {"name":"XML", "good":false}]<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>.[] | .name<span class="pl-pds">'</span></span>                                                 
+<span class="pl-s"><span class="pl-pds">"</span>JSON<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>XML<span class="pl-pds">"</span></span>
+</pre></div>
+<p><code>select(foo)</code>: 如果foo返回true，则输入保持不变</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>[1,5,3,0,7]<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>map(select(. &gt;= 2))<span class="pl-pds">'</span></span>                                                    
+[
+  5,
+  3,
+  7
+]
+</pre></div>
+<p><code>map(foo)</code>: 每个输入调用过滤器</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>[1,2,3]<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>map(.+1)<span class="pl-pds">'</span></span>
+[
+  2,
+  3,
+  4
+]
+</pre></div>
+<p><code>if-then-else-end</code>: 条件判断</p>
+<div class="highlight highlight-source-shell"><pre> $ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>2<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>if . == 0 then "zero" elif . == 1 then "one" else "many" end<span class="pl-pds">'</span></span>
+
+<span class="pl-s"><span class="pl-pds">"</span>many<span class="pl-pds">"</span></span>
+</pre></div>
+<p><code>\(foo)</code>: 在字符串中插入值并进行运算</p>
+<div class="highlight highlight-source-shell"><pre>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>42<span class="pl-pds">'</span></span> <span class="pl-k">|</span> jq <span class="pl-s"><span class="pl-pds">'</span>"The input was \(.), which is one less than \(.+1)"<span class="pl-pds">'</span></span>          
+
+<span class="pl-s"><span class="pl-pds">"</span>The input was 42, which is one less than 43<span class="pl-pds">"</span></span>
+</pre></div>
+
+
+</body>
+</html>

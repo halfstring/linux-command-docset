@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-sed" class="anchor" href="#sed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sed</h1>
+<p>功能强大的流式文本编辑器</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>sed</strong> 是一种流编辑器，它是文本处理中非常重要的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
+<h2>
+<a id="user-content-sed的选项命令替换标记" class="anchor" href="#sed%E7%9A%84%E9%80%89%E9%A1%B9%E5%91%BD%E4%BB%A4%E6%9B%BF%E6%8D%A2%E6%A0%87%E8%AE%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sed的选项、命令、替换标记</h2>
+<p><strong>命令格式</strong></p>
+<div class="highlight highlight-source-shell"><pre>sed [options] <span class="pl-s"><span class="pl-pds">'</span>command<span class="pl-pds">'</span></span> file(s)
+sed [options] -f scriptfile file(s)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-e<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>或--expression=<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>：以选项中的指定的script来处理输入的文本文件；
+-f<span class="pl-k">&lt;</span>script文件<span class="pl-k">&gt;</span>或--file=<span class="pl-k">&lt;</span>script文件<span class="pl-k">&gt;</span>：以选项中指定的script文件来处理输入的文本文件；
+-h或--help：显示帮助；
+-n或--quiet或——silent：仅显示script处理后的结果；
+-V或--version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：指定待处理的文本文件列表。</p>
+<h3>
+<a id="user-content-sed命令" class="anchor" href="#sed%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sed命令</h3>
+<div class="highlight highlight-source-shell"><pre>a<span class="pl-cce">\ </span><span class="pl-c"><span class="pl-c">#</span> 在当前行下面插入文本。</span>
+i<span class="pl-cce">\ </span><span class="pl-c"><span class="pl-c">#</span> 在当前行上面插入文本。</span>
+c<span class="pl-cce">\ </span><span class="pl-c"><span class="pl-c">#</span> 把选定的行改为新的文本。</span>
+d <span class="pl-c"><span class="pl-c">#</span> 删除，删除选择的行。</span>
+D <span class="pl-c"><span class="pl-c">#</span> 删除模板块的第一行。</span>
+s <span class="pl-c"><span class="pl-c">#</span> 替换指定字符</span>
+h <span class="pl-c"><span class="pl-c">#</span> 拷贝模板块的内容到内存中的缓冲区。</span>
+H <span class="pl-c"><span class="pl-c">#</span> 追加模板块的内容到内存中的缓冲区。</span>
+g <span class="pl-c"><span class="pl-c">#</span> 获得内存缓冲区的内容，并替代当前模板块中的文本。</span>
+G <span class="pl-c"><span class="pl-c">#</span> 获得内存缓冲区的内容，并追加到当前模板块文本的后面。</span>
+l <span class="pl-c"><span class="pl-c">#</span> 列表不能打印字符的清单。</span>
+n <span class="pl-c"><span class="pl-c">#</span> 读取下一个输入行，用下一个命令处理新的行而不是用第一个命令。</span>
+N <span class="pl-c"><span class="pl-c">#</span> 追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码。</span>
+p <span class="pl-c"><span class="pl-c">#</span> 打印模板块的行。</span>
+P <span class="pl-c"><span class="pl-c">#</span> (大写) 打印模板块的第一行。</span>
+q <span class="pl-c"><span class="pl-c">#</span> 退出Sed。</span>
+b lable <span class="pl-c"><span class="pl-c">#</span> 分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾。</span>
+r file <span class="pl-c"><span class="pl-c">#</span> 从file中读行。</span>
+t label <span class="pl-c"><span class="pl-c">#</span> if分支，从最后一行开始，条件一旦满足或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</span>
+T label <span class="pl-c"><span class="pl-c">#</span> 错误分支，从最后一行开始，一旦发生错误或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</span>
+w file <span class="pl-c"><span class="pl-c">#</span> 写并追加模板块到file末尾。  </span>
+W file <span class="pl-c"><span class="pl-c">#</span> 写并追加模板块的第一行到file末尾。  </span>
+<span class="pl-k">!</span> <span class="pl-c"><span class="pl-c">#</span> 表示后面的命令对所有没有被选定的行发生作用。  </span>
+= <span class="pl-c"><span class="pl-c">#</span> 打印当前行号码。  </span>
+<span class="pl-c"><span class="pl-c">#</span> # 把注释扩展到下一个换行符以前。  </span></pre></div>
+<h3>
+<a id="user-content-sed替换标记" class="anchor" href="#sed%E6%9B%BF%E6%8D%A2%E6%A0%87%E8%AE%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sed替换标记</h3>
+<div class="highlight highlight-source-shell"><pre>g <span class="pl-c"><span class="pl-c">#</span> 表示行内全面替换。  </span>
+p <span class="pl-c"><span class="pl-c">#</span> 表示打印行。  </span>
+w <span class="pl-c"><span class="pl-c">#</span> 表示把行写入一个文件。  </span>
+x <span class="pl-c"><span class="pl-c">#</span> 表示互换模板块中的文本和缓冲区中的文本。  </span>
+y <span class="pl-c"><span class="pl-c">#</span> 表示把一个字符翻译为另外的字符（但是不用于正则表达式）</span>
+<span class="pl-cce">\1</span> <span class="pl-c"><span class="pl-c">#</span> 子串匹配标记</span>
+<span class="pl-k">&amp;</span> <span class="pl-c"><span class="pl-c">#</span> 已匹配字符串标记</span></pre></div>
+<h3>
+<a id="user-content-sed元字符集" class="anchor" href="#sed%E5%85%83%E5%AD%97%E7%AC%A6%E9%9B%86" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sed元字符集</h3>
+<div class="highlight highlight-source-shell"><pre>^ <span class="pl-c"><span class="pl-c">#</span> 匹配行开始，如：/^sed/匹配所有以sed开头的行。</span>
+$ <span class="pl-c"><span class="pl-c">#</span> 匹配行结束，如：/sed$/匹配所有以sed结尾的行。</span>
+<span class="pl-c1">.</span> <span class="pl-c"><span class="pl-c">#</span> 匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。</span>
+<span class="pl-k">*</span> <span class="pl-c"><span class="pl-c">#</span> 匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。</span>
+[] <span class="pl-c"><span class="pl-c">#</span> 匹配一个指定范围内的字符，如/[sS]ed/匹配sed和Sed。  </span>
+[^] <span class="pl-c"><span class="pl-c">#</span> 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。</span>
+<span class="pl-cce">\(</span>..<span class="pl-cce">\)</span> <span class="pl-c"><span class="pl-c">#</span> 匹配子串，保存匹配的字符，如s/\(love\)able/\1rs，loveable被替换成lovers。</span>
+<span class="pl-k">&amp;</span> <span class="pl-c"><span class="pl-c">#</span> 保存搜索字符用来替换其他字符，如s/love/ **&amp;** /，love这成 **love** 。</span>
+<span class="pl-cce">\&lt;</span> <span class="pl-c"><span class="pl-c">#</span> 匹配单词的开始，如:/\&lt;love/匹配包含以love开头的单词的行。</span>
+<span class="pl-cce">\&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 匹配单词的结束，如/love\&gt;/匹配包含以love结尾的单词的行。</span>
+x<span class="pl-cce">\{</span>m<span class="pl-cce">\}</span> <span class="pl-c"><span class="pl-c">#</span> 重复字符x，m次，如：/0\{5\}/匹配包含5个0的行。</span>
+x<span class="pl-cce">\{</span>m,<span class="pl-cce">\}</span> <span class="pl-c"><span class="pl-c">#</span> 重复字符x，至少m次，如：/0\{5,\}/匹配至少有5个0的行。</span>
+x<span class="pl-cce">\{</span>m,n<span class="pl-cce">\}</span> <span class="pl-c"><span class="pl-c">#</span> 重复字符x，至少m次，不多于n次，如：/0\{5,10\}/匹配5~10个0的行。  </span></pre></div>
+<h2>
+<a id="user-content-sed用法实例" class="anchor" href="#sed%E7%94%A8%E6%B3%95%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sed用法实例</h2>
+<h3>
+<a id="user-content-替换操作s命令" class="anchor" href="#%E6%9B%BF%E6%8D%A2%E6%93%8D%E4%BD%9Cs%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>替换操作：s命令</h3>
+<p>替换文本中的字符串：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>s/book/books/<span class="pl-pds">'</span></span> file</pre></div>
+<p><strong>-n选项</strong> 和 <strong>p命令</strong> 一起使用表示只打印那些发生替换的行：</p>
+<p>sed -n 's/test/TEST/p' file</p>
+<p>直接编辑文件 <strong>选项-i</strong> ，会匹配file文件中每一行的所有book替换为books：</p>
+<div class="highlight highlight-source-shell"><pre>sed -i <span class="pl-s"><span class="pl-pds">'</span>s/book/books/g<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-全面替换标记g" class="anchor" href="#%E5%85%A8%E9%9D%A2%E6%9B%BF%E6%8D%A2%E6%A0%87%E8%AE%B0g" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>全面替换标记g</h3>
+<p>使用后缀 /g 标记会替换每一行中的所有匹配：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>s/book/books/g<span class="pl-pds">'</span></span> file</pre></div>
+<p>当需要从第N处匹配开始替换时，可以使用 /Ng：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> sksksksksksk <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/sk/SK/2g<span class="pl-pds">'</span></span>
+skSKSKSKSKSK
+
+<span class="pl-c1">echo</span> sksksksksksk <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/sk/SK/3g<span class="pl-pds">'</span></span>
+skskSKSKSKSK
+
+<span class="pl-c1">echo</span> sksksksksksk <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/sk/SK/4g<span class="pl-pds">'</span></span>
+skskskSKSKSK</pre></div>
+<h3>
+<a id="user-content-定界符" class="anchor" href="#%E5%AE%9A%E7%95%8C%E7%AC%A6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>定界符</h3>
+<p>以上命令中字符 / 在sed中作为定界符使用，也可以使用任意的定界符：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>s:test:TEXT:g<span class="pl-pds">'</span></span>
+sed <span class="pl-s"><span class="pl-pds">'</span>s|test|TEXT|g<span class="pl-pds">'</span></span></pre></div>
+<p>定界符出现在样式内部时，需要进行转义：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>s/\/bin/\/usr\/local\/bin/g<span class="pl-pds">'</span></span></pre></div>
+<h3>
+<a id="user-content-删除操作d命令" class="anchor" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9Cd%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>删除操作：d命令</h3>
+<p>删除空白行：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/^$/d<span class="pl-pds">'</span></span> file</pre></div>
+<p>删除文件的第2行：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>2d<span class="pl-pds">'</span></span> file</pre></div>
+<p>删除文件的第2行到末尾所有行：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>2,$d<span class="pl-pds">'</span></span> file</pre></div>
+<p>删除文件最后一行：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>$d<span class="pl-pds">'</span></span> file</pre></div>
+<p>删除文件中所有开头是test的行：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/^test/<span class="pl-pds">'</span></span>d file</pre></div>
+<h3>
+<a id="user-content-已匹配字符串标记" class="anchor" href="#%E5%B7%B2%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%87%E8%AE%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>已匹配字符串标记&amp;</h3>
+<p>正则表达式 \w+ 匹配每一个单词，使用 [&amp;] 替换它，&amp; 对应于之前所匹配到的单词：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> this is a <span class="pl-c1">test</span> line <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/\w\+/[&amp;]/g<span class="pl-pds">'</span></span>
+[this] [is] [a] [test] [line]</pre></div>
+<p>所有以192.168.0.1开头的行都会被替换成它自已加localhost：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>s/^192.168.0.1/&amp;localhost/<span class="pl-pds">'</span></span> file
+192.168.0.1localhost</pre></div>
+<h3>
+<a id="user-content-子串匹配标记1" class="anchor" href="#%E5%AD%90%E4%B8%B2%E5%8C%B9%E9%85%8D%E6%A0%87%E8%AE%B01" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>子串匹配标记\1</h3>
+<p>匹配给定样式的其中一部分：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> this is digit 7 <span class="pl-k">in</span> a number <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/digit \([0-9]\)/\1/<span class="pl-pds">'</span></span>
+this is 7 <span class="pl-k">in</span> a number</pre></div>
+<p>命令中 digit 7，被替换成了 7。样式匹配到的子串是 7，(..) 用于匹配子串，对于匹配到的第一个子串就标记为  <strong>\1</strong> ，依此类推匹配到的第二个结果就是  <strong>\2</strong> ，例如：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> aaa BBB <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/\([a-z]\+\) \([A-Z]\+\)/\2 \1/<span class="pl-pds">'</span></span>
+BBB aaa</pre></div>
+<p>love被标记为1，所有loveable会被替换成lovers，并打印出来：</p>
+<div class="highlight highlight-source-shell"><pre>sed -n <span class="pl-s"><span class="pl-pds">'</span>s/\(love\)able/\1rs/p<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-组合多个表达式" class="anchor" href="#%E7%BB%84%E5%90%88%E5%A4%9A%E4%B8%AA%E8%A1%A8%E8%BE%BE%E5%BC%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>组合多个表达式</h3>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>表达式<span class="pl-pds">'</span></span> <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>表达式<span class="pl-pds">'</span></span>
+
+等价于：
+
+sed <span class="pl-s"><span class="pl-pds">'</span>表达式; 表达式<span class="pl-pds">'</span></span></pre></div>
+<h3>
+<a id="user-content-引用" class="anchor" href="#%E5%BC%95%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>引用</h3>
+<p>sed表达式可以使用单引号来引用，但是如果表达式内部包含变量字符串，就需要使用双引号。</p>
+<div class="highlight highlight-source-shell"><pre>test=hello
+<span class="pl-c1">echo</span> hello WORLD <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">"</span>s/<span class="pl-smi">$test</span>/HELLO<span class="pl-pds">"</span></span>
+HELLO WORLD</pre></div>
+<h3>
+<a id="user-content-选定行的范围逗号" class="anchor" href="#%E9%80%89%E5%AE%9A%E8%A1%8C%E7%9A%84%E8%8C%83%E5%9B%B4%E9%80%97%E5%8F%B7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选定行的范围：,（逗号）</h3>
+<p>所有在模板test和check所确定的范围内的行都被打印：</p>
+<div class="highlight highlight-source-shell"><pre>sed -n <span class="pl-s"><span class="pl-pds">'</span>/test/,/check/p<span class="pl-pds">'</span></span> file</pre></div>
+<p>打印从第5行开始到第一个包含以test开始的行之间的所有行：</p>
+<div class="highlight highlight-source-shell"><pre>sed -n <span class="pl-s"><span class="pl-pds">'</span>5,/^test/p<span class="pl-pds">'</span></span> file</pre></div>
+<p>对于模板test和west之间的行，每行的末尾用字符串aaa bbb替换：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/test/,/west/s/$/aaa bbb/<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-多点编辑e命令" class="anchor" href="#%E5%A4%9A%E7%82%B9%E7%BC%96%E8%BE%91e%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>多点编辑：e命令</h3>
+<p>-e选项允许在同一行里执行多条命令：</p>
+<div class="highlight highlight-source-shell"><pre>sed -e <span class="pl-s"><span class="pl-pds">'</span>1,5d<span class="pl-pds">'</span></span> -e <span class="pl-s"><span class="pl-pds">'</span>s/test/check/<span class="pl-pds">'</span></span> file</pre></div>
+<p>上面sed表达式的第一条命令删除1至5行，第二条命令用check替换test。命令的执行顺序对结果有影响。如果两个命令都是替换命令，那么第一个替换命令将影响第二个替换命令的结果。</p>
+<p>和 -e 等价的命令是 --expression：</p>
+<div class="highlight highlight-source-shell"><pre>sed --expression=<span class="pl-s"><span class="pl-pds">'</span>s/test/check/<span class="pl-pds">'</span></span> --expression=<span class="pl-s"><span class="pl-pds">'</span>/love/d<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-从文件读入r命令" class="anchor" href="#%E4%BB%8E%E6%96%87%E4%BB%B6%E8%AF%BB%E5%85%A5r%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>从文件读入：r命令</h3>
+<p>file里的内容被读进来，显示在与test匹配的行后面，如果匹配多行，则file的内容将显示在所有匹配行的下面：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/test/r file<span class="pl-pds">'</span></span> filename</pre></div>
+<h3>
+<a id="user-content-写入文件w命令-" class="anchor" href="#%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6w%E5%91%BD%E4%BB%A4-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>写入文件：w命令  </h3>
+<p>在example中所有包含test的行都被写入file里：</p>
+<div class="highlight highlight-source-shell"><pre>sed -n <span class="pl-s"><span class="pl-pds">'</span>/test/w file<span class="pl-pds">'</span></span> example</pre></div>
+<h3>
+<a id="user-content-追加行下a命令" class="anchor" href="#%E8%BF%BD%E5%8A%A0%E8%A1%8C%E4%B8%8Ba%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>追加（行下）：a\命令</h3>
+<p>将 this is a test line 追加到 以test 开头的行后面：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/^test/a\this is a test line<span class="pl-pds">'</span></span> file</pre></div>
+<p>在 test.conf 文件第2行之后插入 this is a test line：</p>
+<div class="highlight highlight-source-shell"><pre>sed -i <span class="pl-s"><span class="pl-pds">'</span>2a\this is a test line<span class="pl-pds">'</span></span> test.conf</pre></div>
+<h3>
+<a id="user-content-插入行上i命令" class="anchor" href="#%E6%8F%92%E5%85%A5%E8%A1%8C%E4%B8%8Ai%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>插入（行上）：i\命令</h3>
+<p>将 this is a test line 追加到以test开头的行前面：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/^test/i\this is a test line<span class="pl-pds">'</span></span> file</pre></div>
+<p>在test.conf文件第5行之前插入this is a test line：</p>
+<div class="highlight highlight-source-shell"><pre>sed -i <span class="pl-s"><span class="pl-pds">'</span>5i\this is a test line<span class="pl-pds">'</span></span> test.conf</pre></div>
+<h3>
+<a id="user-content-下一个n命令" class="anchor" href="#%E4%B8%8B%E4%B8%80%E4%B8%AAn%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>下一个：n命令</h3>
+<p>如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行，然后继续：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>/test/{ n; s/aa/bb/; }<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-变形y命令" class="anchor" href="#%E5%8F%98%E5%BD%A2y%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>变形：y命令</h3>
+<p>把1~10行内所有abcde转变为大写，注意，正则表达式元字符不能使用这个命令：</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>1,10y/abcde/ABCDE/<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-退出q命令" class="anchor" href="#%E9%80%80%E5%87%BAq%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>退出：q命令</h3>
+<p>打印完第10行后，退出sed</p>
+<div class="highlight highlight-source-shell"><pre>sed <span class="pl-s"><span class="pl-pds">'</span>10q<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-保持和获取h命令和g命令" class="anchor" href="#%E4%BF%9D%E6%8C%81%E5%92%8C%E8%8E%B7%E5%8F%96h%E5%91%BD%E4%BB%A4%E5%92%8Cg%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>保持和获取：h命令和G命令</h3>
+<p>在sed处理文件的时候，每一行都被保存在一个叫模式空间的临时缓冲区中，除非行被删除或者输出被取消，否则所有被处理的行都将 打印在屏幕上。接着模式空间被清空，并存入新的一行等待处理。</p>
+<div class="highlight highlight-source-shell"><pre>sed -e <span class="pl-s"><span class="pl-pds">'</span>/test/h<span class="pl-pds">'</span></span> -e <span class="pl-s"><span class="pl-pds">'</span>$G<span class="pl-pds">'</span></span> file</pre></div>
+<p>在这个例子里，匹配test的行被找到后，将存入模式空间，h命令将其复制并存入一个称为保持缓存区的特殊缓冲区内。第二条语句的意思是，当到达最后一行后，G命令取出保持缓冲区的行，然后把它放回模式空间中，且追加到现在已经存在于模式空间中的行的末尾。在这个例子中就是追加到最后一行。简单来说，任何包含test的行都被复制并追加到该文件的末尾。</p>
+<h3>
+<a id="user-content-保持和互换h命令和x命令" class="anchor" href="#%E4%BF%9D%E6%8C%81%E5%92%8C%E4%BA%92%E6%8D%A2h%E5%91%BD%E4%BB%A4%E5%92%8Cx%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>保持和互换：h命令和x命令</h3>
+<p>互换模式空间和保持缓冲区的内容。也就是把包含test与check的行互换：</p>
+<div class="highlight highlight-source-shell"><pre>sed -e <span class="pl-s"><span class="pl-pds">'</span>/test/h<span class="pl-pds">'</span></span> -e <span class="pl-s"><span class="pl-pds">'</span>/check/x<span class="pl-pds">'</span></span> file</pre></div>
+<h3>
+<a id="user-content-脚本scriptfile" class="anchor" href="#%E8%84%9A%E6%9C%ACscriptfile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>脚本scriptfile</h3>
+<p>sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件名。Sed对于脚本中输入的命令非常挑剔，在命令的末尾不能有任何空白或文本，如果在一行中有多个命令，要用分号分隔。以#开头的行为注释行，且不能跨行。</p>
+<div class="highlight highlight-source-shell"><pre>sed [options] -f scriptfile file(s)</pre></div>
+<h3>
+<a id="user-content-打印奇数行或偶数行" class="anchor" href="#%E6%89%93%E5%8D%B0%E5%A5%87%E6%95%B0%E8%A1%8C%E6%88%96%E5%81%B6%E6%95%B0%E8%A1%8C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>打印奇数行或偶数行</h3>
+<p>方法1：</p>
+<div class="highlight highlight-source-shell"><pre>sed -n <span class="pl-s"><span class="pl-pds">'</span>p;n<span class="pl-pds">'</span></span> test.txt  <span class="pl-c"><span class="pl-c">#</span>奇数行</span>
+sed -n <span class="pl-s"><span class="pl-pds">'</span>n;p<span class="pl-pds">'</span></span> test.txt  <span class="pl-c"><span class="pl-c">#</span>偶数行</span></pre></div>
+<p>方法2：</p>
+<div class="highlight highlight-source-shell"><pre>sed -n <span class="pl-s"><span class="pl-pds">'</span>1~2p<span class="pl-pds">'</span></span> test.txt  <span class="pl-c"><span class="pl-c">#</span>奇数行</span>
+sed -n <span class="pl-s"><span class="pl-pds">'</span>2~2p<span class="pl-pds">'</span></span> test.txt  <span class="pl-c"><span class="pl-c">#</span>偶数行</span></pre></div>
+<h3>
+<a id="user-content-打印匹配字符串的下一行" class="anchor" href="#%E6%89%93%E5%8D%B0%E5%8C%B9%E9%85%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%8B%E4%B8%80%E8%A1%8C" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>打印匹配字符串的下一行</h3>
+<div class="highlight highlight-source-shell"><pre>grep -A 1 SCC URFILE
+sed -n <span class="pl-s"><span class="pl-pds">'</span>/SCC/{n;p}<span class="pl-pds">'</span></span> URFILE
+awk <span class="pl-s"><span class="pl-pds">'</span>/SCC/{getline; print}<span class="pl-pds">'</span></span> URFILE</pre></div>
+
+
+</body>
+</html>

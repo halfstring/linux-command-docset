@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-chattr" class="anchor" href="#chattr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>chattr</h1>
+<p>用来改变文件属性</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>chattr命令</strong> 用来改变文件属性。这项指令可改变存放在ext2文件系统上的文件或目录属性，这些属性共有以下8种模式：</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>chattr(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>a：让文件或目录仅供附加用途；
+b：不更新文件或目录的最后存取时间；
+c：将文件或目录压缩后存放；
+d：将文件或目录排除在倾倒操作之外；
+i：不得任意更动文件或目录；
+s：保密性删除文件或目录；
+S：即时更新文件或目录；
+u：预防意外删除。</pre></div>
+<div class="highlight highlight-source-shell"><pre>-R：递归处理，将指令目录下的所有文件及子目录一并处理；
+-v<span class="pl-k">&lt;</span>版本编号<span class="pl-k">&gt;</span>：设置文件或目录版本；
+-V：显示指令执行过程；
++<span class="pl-k">&lt;</span>属性<span class="pl-k">&gt;</span>：开启文件或目录的该项属性；
+-<span class="pl-k">&lt;</span>属性<span class="pl-k">&gt;</span>：关闭文件或目录的该项属性；
+=<span class="pl-k">&lt;</span>属性<span class="pl-k">&gt;</span>：指定文件或目录的该项属性。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>用chattr命令防止系统中某个关键文件被修改：</p>
+<div class="highlight highlight-source-shell"><pre>chattr +i /etc/fstab</pre></div>
+<p>然后试一下rm、mv、rename等命令操作于该文件，都是得到Operation not permitted的结果。</p>
+<p>让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作：</p>
+<div class="highlight highlight-source-shell"><pre>chattr +a /data1/user_act.log</pre></div>
+
+
+</body>
+</html>

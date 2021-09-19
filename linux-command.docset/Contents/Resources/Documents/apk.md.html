@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-apk" class="anchor" href="#apk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>apk</h1>
+<p>Alpine Linux 下的包管理工具</p>
+<h2>
+<a id="user-content-使用实例" class="anchor" href="#%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>使用实例</h2>
+<div class="highlight highlight-source-shell"><pre>apk install xxx
+apk search xxx <span class="pl-c"><span class="pl-c">#</span> 支持正则</span>
+apk info xxx <span class="pl-c"><span class="pl-c">#</span> 查看包的详细信息</span>
+apk show <span class="pl-c"><span class="pl-c">#</span> list local package</span>
+<span class="pl-c"><span class="pl-c">#</span> 卸载并删除 包</span>
+apk del openssh openntp vim</pre></div>
+<h3>
+<a id="user-content-升级" class="anchor" href="#%E5%8D%87%E7%BA%A7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>升级</h3>
+<p>upgrade命令升级系统已安装的所以软件包（一般包括内核），当然也可指定仅升级部分软件包（通过-u或–upgrade选择指定）。</p>
+<div class="highlight highlight-source-shell"><pre>apk update <span class="pl-c"><span class="pl-c">#</span> 更新最新本地镜像源</span>
+apk upgrade <span class="pl-c"><span class="pl-c">#</span> 升级软件</span>
+apk add --upgrade busybox <span class="pl-c"><span class="pl-c">#</span> 指定升级部分软件包</span></pre></div>
+<h3>
+<a id="user-content-搜索" class="anchor" href="#%E6%90%9C%E7%B4%A2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>搜索</h3>
+<div class="highlight highlight-source-shell"><pre>apk search <span class="pl-c"><span class="pl-c">#</span> 查找所以可用软件包</span>
+apk search -v <span class="pl-c"><span class="pl-c">#</span> 查找所以可用软件包及其描述内容</span>
+apk search -v <span class="pl-s"><span class="pl-pds">'</span>acf*<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span> 通过软件包名称查找软件包</span>
+apk search -v -d <span class="pl-s"><span class="pl-pds">'</span>docker<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span> 通过描述文件查找特定的软件包</span></pre></div>
+<h3>
+<a id="user-content-查看包信息" class="anchor" href="#%E6%9F%A5%E7%9C%8B%E5%8C%85%E4%BF%A1%E6%81%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>查看包信息</h3>
+<p>info命令用于显示软件包的信息。</p>
+<div class="highlight highlight-source-shell"><pre>apk info <span class="pl-c"><span class="pl-c">#</span> 列出所有已安装的软件包</span>
+apk info -a zlib <span class="pl-c"><span class="pl-c">#</span> 显示完整的软件包信息</span>
+apk info --who-owns /sbin/lbu <span class="pl-c"><span class="pl-c">#</span> 显示指定文件属于的包</span></pre></div>
+<h2>
+<a id="user-content-笔记" class="anchor" href="#%E7%AC%94%E8%AE%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>笔记</h2>
+<p>还是蛮喜欢 alpine 的，简单纯粹</p>
+<div class="highlight highlight-source-shell"><pre>apk add iproute2 <span class="pl-c"><span class="pl-c">#</span> ss vs netstat</span>
+ss -ptl
+apk add drill <span class="pl-c"><span class="pl-c">#</span> drill vs nslookup&amp;dig</span>
+
+crond <span class="pl-c"><span class="pl-c">#</span> 开启 cron 服务</span>
+crontab -l -e
+
+apk add xxx
+apk search -v xxx
+apk info -a xxx
+apk info
+<span class="pl-c1">echo</span> -e <span class="pl-s"><span class="pl-pds">"</span>http://mirrors.aliyun.com/alpine/v3.6/main\nhttp://mirrors.aliyun.com/alpine/v3.6/community<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> /etc/apk/repositories
+apk update
+
+<span class="pl-c"><span class="pl-c">#</span> storage</span>
+ibu <span class="pl-c"><span class="pl-c">#</span> alpine local backup</span>
+
+<span class="pl-c"><span class="pl-c">#</span> network</span>
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>shortname<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> /etc/hostname
+hostname -F /etc/hostname
+/etc/hosts
+/etc/resolv.conf <span class="pl-c"><span class="pl-c">#</span> conig DNS</span>
+modprobe ipv6 <span class="pl-c"><span class="pl-c">#</span> enable ipv6</span>
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>ipv6<span class="pl-pds">"</span></span> <span class="pl-k">&gt;&gt;</span> /etc/modules
+iface <span class="pl-c"><span class="pl-c">#</span> config interface</span>
+apk add iptables ip6tables iptables-doc
+/etc/init.d/networking restart <span class="pl-c"><span class="pl-c">#</span> activate change</span>
+apke add iputils <span class="pl-c"><span class="pl-c">#</span> IPv6 traceroute</span>
+traceroute6 ipv6.google.com
+awall <span class="pl-c"><span class="pl-c">#</span> alpine wall</span>
+<span class="pl-c"><span class="pl-c">#</span> setup a openvpn server</span>
+
+<span class="pl-c"><span class="pl-c">#</span> post-install</span>
+/etc/apk/repositories
+apk add cherokee --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+apk search -v --description <span class="pl-s"><span class="pl-pds">'</span>NTP<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span> show description and search from description</span>
+apk info -a zlib
+apk info -vv<span class="pl-k">|</span>sort
+apk info -r -R <span class="pl-c"><span class="pl-c">#</span> require / depency</span>
+apk version -v -l <span class="pl-s"><span class="pl-pds">'</span>&lt;<span class="pl-pds">'</span></span> <span class="pl-c"><span class="pl-c">#</span> show available updates</span>
+apk upgrade -U -a
+apk add -u xxx <span class="pl-c"><span class="pl-c">#</span> update xxx</span>
+
+/etc/runlevels <span class="pl-c"><span class="pl-c">#</span> runlevel</span>
+apk add openrc <span class="pl-c"><span class="pl-c">#</span> use openrc for init system</span>
+rc-update add xxx <span class="pl-c"><span class="pl-c">#</span> set to start on</span>
+rc-service xxx start <span class="pl-c"><span class="pl-c">#</span> equal -&gt; /etc/init.d/xxx start</span>
+rc-status
+
+adduser xxx
+passwd xxx
+
+apk add ansible <span class="pl-c"><span class="pl-c">#</span> server</span>
+ssh-keygen
+/etc/ansible/hosts
+apk add python <span class="pl-c"><span class="pl-c">#</span> node</span>
+ssh-copy-id
+
+apk add man man-pages mdocml-apropos less less-doc
+<span class="pl-k">export</span> PAGER=less
+/etc/rc.conf <span class="pl-c"><span class="pl-c">#</span> /etc/rc.conf -&gt; funny character</span>
+apk add bash bash-doc bash-completion <span class="pl-c"><span class="pl-c">#</span> bash</span>
+apk add util-linux pciutils usbutils coreutils binutils findutils grep <span class="pl-c"><span class="pl-c">#</span> grep / awk</span>
+apk add build-base gcc abuild binutils binutils-doc gcc-doc <span class="pl-c"><span class="pl-c">#</span> compile</span>
+apk add cmake cmake-doc extra-cmake-modules extra-cmake-modules-doc
+apk add ccache ccache-doc
+
+apk add docker <span class="pl-c"><span class="pl-c">#</span> docker</span>
+rc-update add docker boot
+rc-service docker start
+apk add py-pip
+pip install docker-compose
+ln -s /usr/bin/docker-compose /usr/bin/doc
+
+<span class="pl-c"><span class="pl-c">#</span> application</span>
+apk add openssh <span class="pl-c"><span class="pl-c">#</span> ssh</span>
+rc-update add sshd
+/etc/init.d/sshd start
+/etc/sshd_config
+apk add dropbear <span class="pl-c"><span class="pl-c">#</span> another openssh implementation</span></pre></div>
+
+</body>
+</html>

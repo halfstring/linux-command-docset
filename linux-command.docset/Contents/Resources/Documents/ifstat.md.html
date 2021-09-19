@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ifstat" class="anchor" href="#ifstat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ifstat</h1>
+<p>统计网络接口流量状态</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ifstat命令</strong> 就像iostat/vmstat描述其它的系统状况一样，是一个统计网络接口活动状态的工具。ifstat工具系统中并不默认安装，需要自己下载源码包，重新编译安装，使用过程相对比较简单。</p>
+<h3>
+<a id="user-content-下载" class="anchor" href="#%E4%B8%8B%E8%BD%BD" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>下载</h3>
+<div class="highlight highlight-source-shell"><pre>http://gael.roualland.free.fr/ifstat/  （官网）
+wget http://gael.roualland.free.fr/ifstat/ifstat-1.1.tar.gz</pre></div>
+<h3>
+<a id="user-content-编译安装" class="anchor" href="#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>编译安装</h3>
+<div class="highlight highlight-source-shell"><pre>tar -zxvf ifstat-1.1.tar.gz
+<span class="pl-c1">cd</span> ifstat-1.1
+./configure            
+make
+make install <span class="pl-c"><span class="pl-c">#</span> 默认会安装到/usr/local/bin/目录中</span></pre></div>
+<p>注释：执行<code>which ifstat</code>输出<code>/usr/local/bin/ifstat</code></p>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-l 监测环路网络接口（lo）。缺省情况下，ifstat监测活动的所有非环路网络接口。经使用发现，加上-l参数能监测所有的网络接口的信息，而不是只监测 lo的接口信息，也就是说，加上-l参数比不加-l参数会多一个lo接口的状态信息。
+-a 监测能检测到的所有网络接口的状态信息。使用发现，比加上-l参数还多一个plip0的接口信息，搜索一下发现这是并口（网络设备中有一 个叫PLIP (Parallel Line Internet Protocol). 它提供了并口...）
+-z 隐藏流量是无的接口，例如那些接口虽然启动了但是未用的
+-i 指定要监测的接口,后面跟网络接口名
+-s 等于加-d snmp:[comm@][<span class="pl-c"><span class="pl-c">#</span>]host[/nn]] 参数，通过SNMP查询一个远程主机</span>
+<span class="pl-k">-h</span> 显示简短的帮助信息
+<span class="pl-k">-n</span> 关闭显示周期性出现的头部信息（也就是说，不加-n参数运行ifstat时最顶部会出现网络接口的名称，当一屏显示不下时，会再一次出现接口的名称，提示我们显示的流量信息具体是哪个网络接口的。加上-n参数把周期性的显示接口名称关闭，只显示一次）
+<span class="pl-k">-t</span> 在每一行的开头加一个时间 戳（能告诉我们具体的时间）
+-T 报告所有监测接口的全部带宽（最后一列有个total，显示所有的接口的in流量和所有接口的out流量，简单的把所有接口的in流量相加,out流量相 加）
+<span class="pl-k">-w</span>  用指定的列宽，而不是为了适应接口名称的长度而去自动放大列宽
+-W 如果内容比终端窗口的宽度还要宽就自动换行
+<span class="pl-k">-S</span> 在同一行保持状态更新（不滚动不换行）注：如果不喜欢屏幕滚动则此项非常方便，与bmon的显示方式类似
+<span class="pl-k">-b</span> 用kbits/s显示带宽而不是kbytes/s
+-q 安静模式，警告信息不出现
+-v 显示版本信息
+<span class="pl-k">-d</span> 指定一个驱动来收集状态信息</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>默认使用</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost ifstat-1.1] <span class="pl-c"><span class="pl-c">#</span>ifstat</span>
+       eth0                eth1       
+ KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out
+    0.07      0.20      0.00      0.00
+    0.07      0.15      0.58      0.00</pre></div>
+<p>默认ifstat不监控回环接口，显示的流量单位是KB。</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost ifstat-1.1]<span class="pl-c"><span class="pl-c">#</span> ifstat -tT</span>
+  <span class="pl-k">time</span>           eth0                eth1                eth2                eth3               Total      
+HH:MM:ss   KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out
+16:53:04      0.84      0.62   1256.27   1173.05      0.12      0.18      0.00      0.00   1257.22   1173.86
+16:53:05      0.57      0.40      0.57      0.76      0.00      0.00      0.00      0.00      1.14      1.17
+16:53:06      1.58      0.71      0.42      0.78      0.00      0.00      0.00      0.00      2.01      1.48
+16:53:07      0.57      0.40      1.91      2.61      0.00      0.00      0.00      0.00      2.48      3.01
+16:53:08      0.73      0.40    924.02   1248.91      0.00      0.00      0.00      0.00    924.76   1249.31</pre></div>
+<p>监控所有网络接口</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost ifstat-1.1] <span class="pl-c"><span class="pl-c">#</span> ifstat -a</span>
+        lo                 eth0                eth1       
+ KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out   KB/s <span class="pl-k">in</span>  KB/s out
+    0.00      0.00      0.28      0.58      0.06      0.06
+    0.00      0.00      1.41      1.13      0.00      0.00
+    0.61      0.61      0.26      0.23      0.00      0.00</pre></div>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ed" class="anchor" href="#ed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ed</h1>
+<p>单行纯文本编辑器</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ed命令</strong> 是单行纯文本编辑器，它有命令模式（command mode）和输入模式（input mode）两种工作模式。ed命令支持多个内置命令，常见内置命令如下：</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ed(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>A <span class="pl-c"><span class="pl-c">#</span> 切换到输入模式，在文件的最后一行之后输入新的内容；</span>
+C <span class="pl-c"><span class="pl-c">#</span> 切换到输入模式，用输入的内容替换掉最后一行的内容；</span>
+i <span class="pl-c"><span class="pl-c">#</span> 切换到输入模式，在当前行之前加入一个新的空行来输入内容；</span>
+d <span class="pl-c"><span class="pl-c">#</span> 用于删除最后一行文本内容；</span>
+n <span class="pl-c"><span class="pl-c">#</span> 用于显示最后一行的行号和内容；</span>
+w <span class="pl-c"><span class="pl-c">#</span> &lt;文件名&gt;：一给定的文件名保存当前正在编辑的文件；</span>
+q <span class="pl-c"><span class="pl-c">#</span> 退出ed编辑器。</span></pre></div>
+<div class="highlight highlight-source-shell"><pre>-G或——traditional：提供兼容的功能；
+-p<span class="pl-k">&lt;</span>字符串<span class="pl-k">&gt;</span>：指定ed在command mode的提示字符；
+-s，-，--quiet或——silent：不执行开启文件时的检查功能；
+--help：显示帮助；
+--version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：待编辑的文件。</p>
+
+
+</body>
+</html>

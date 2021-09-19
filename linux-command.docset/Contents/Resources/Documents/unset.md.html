@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-unset" class="anchor" href="#unset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>unset</h1>
+<p>删除指定的shell变量或函数。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">unset</span> [-f] [-v] [-n] [name ...]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>删除一到多个shell变量（不包括只读变量）。</li>
+<li>删除一到多个shell函数。</li>
+<li>删除一到多个具有引用属性的变量（如果-n选项存在）。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-f：仅删除函数。
+-v：仅删除变量（不包括只读变量）。
+-n：删除具有引用属性的变量名（如果该选项存在）。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>name（可选）：要删除的变量或函数。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回成功除非选项错误或要删除的变量或函数有只读属性。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 删除变量。</span>
+<span class="pl-k">declare</span> paper_size=<span class="pl-s"><span class="pl-pds">'</span>B5<span class="pl-pds">'</span></span>
+<span class="pl-c1">unset</span> -v paper_size</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 删除函数。</span>
+<span class="pl-k">function</span> <span class="pl-en">show_result(){</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Last Command Return: $?<span class="pl-pds">'</span></span>; }
+<span class="pl-c1">unset</span> -f show_result</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 当不指定选项时，优先删除变量，如果失败则删除函数。</span>
+<span class="pl-k">declare</span> -i aa=100
+<span class="pl-k">function</span> <span class="pl-en">aa(){</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>aa<span class="pl-pds">'</span></span>; }
+<span class="pl-c1">unset</span> aa
+<span class="pl-c"><span class="pl-c">#</span> 变量'aa'已被删除。</span>
+<span class="pl-k">declare</span> -p aa
+<span class="pl-c"><span class="pl-c">#</span> 函数'aa'存在。</span>
+<span class="pl-k">declare</span> -F<span class="pl-k">|</span>grep aa</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 演示unset使用-n选项，name指定了引用变量时的情况。</span>
+<span class="pl-k">declare</span> a=3
+<span class="pl-c"><span class="pl-c">#</span> 定义引用变量</span>
+<span class="pl-k">declare</span> -n b=a
+<span class="pl-c"><span class="pl-c">#</span> 查看属性，显示declare -n b="a"</span>
+<span class="pl-k">declare</span> -p b
+<span class="pl-c"><span class="pl-c">#</span> 显示3</span>
+<span class="pl-c1">echo</span> <span class="pl-smi">${b}</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示a</span>
+<span class="pl-c1">echo</span> <span class="pl-smi">${<span class="pl-k">!</span>b}</span>
+<span class="pl-c"><span class="pl-c">#</span> 指定-n选项时</span>
+<span class="pl-c1">unset</span> -n b
+<span class="pl-c"><span class="pl-c">#</span> 引用变量b已被删除</span>
+<span class="pl-k">declare</span> -p b
+<span class="pl-c"><span class="pl-c">#</span> 被引用的变量a未被删除</span>
+<span class="pl-k">declare</span> -p a</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 演示unset不使用-n选项，name指定了引用变量时的情况。</span>
+<span class="pl-k">declare</span> a=3
+<span class="pl-c"><span class="pl-c">#</span> 定义引用变量</span>
+<span class="pl-k">declare</span> -n b=a
+<span class="pl-c"><span class="pl-c">#</span> 查看属性，显示declare -n b="a"</span>
+<span class="pl-k">declare</span> -p b
+<span class="pl-c"><span class="pl-c">#</span> 显示3</span>
+<span class="pl-c1">echo</span> <span class="pl-smi">${b}</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示a</span>
+<span class="pl-c1">echo</span> <span class="pl-smi">${<span class="pl-k">!</span>b}</span>
+<span class="pl-c"><span class="pl-c">#</span> 不指定-n选项时</span>
+<span class="pl-c1">unset</span> b
+<span class="pl-c"><span class="pl-c">#</span> 引用变量b未被删除，显示declare -n b="a"</span>
+<span class="pl-k">declare</span> -p b
+<span class="pl-c"><span class="pl-c">#</span> 被引用的变量a被删除</span>
+<span class="pl-k">declare</span> -p a</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+
+
+</body>
+</html>

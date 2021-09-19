@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-swapon" class="anchor" href="#swapon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>swapon</h1>
+<p>激活Linux系统中交换空间</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>swapon命令</strong> 用于激活Linux系统中交换空间，Linux系统的内存管理必须使用交换区来建立虚拟内存。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>swapon(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a：将/etc/fstab文件中所有设置为swap的设备，启动为交换区；
+-h：显示帮助；
+-p<span class="pl-k">&lt;</span>优先顺序<span class="pl-k">&gt;</span>：指定交换区的优先顺序；
+-s：显示交换区的使用状况；
+-V：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>交换空间：指定需要激活的交换空间，可以是交换文件和交换分区，如果是交换分区则指定交换分区对应的设备文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>mkswap -c /dev/hdb4 （-c是检查有无坏块）
+swapon -v /dev/hdb4
+swapon -s
+Filename                                <span class="pl-c1">type</span>            Size    Used    Priority
+/dev/hda5                               partition       506008 96      -1
+/dev/hdb4                               partition       489972 0       -2</pre></div>
+
+
+</body>
+</html>

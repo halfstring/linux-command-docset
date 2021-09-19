@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-tr" class="anchor" href="#tr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tr</h1>
+<p>将字符进行替换压缩和删除</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>tr命令</strong> 可以对来自标准输入的字符进行替换、压缩和删除。它可以将一组字符变成另一组字符，经常用来编写优美的单行命令，作用很强大。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>tr(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c或——complerment：取代所有不属于第一字符集的字符；
+-d或——delete：删除所有属于第一字符集的字符；
+-s或--squeeze-repeats：把连续重复的字符以单独一个字符表示；
+-t或--truncate-set1：先删除第一字符集较第二字符集多出的字符。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<ul>
+<li>字符集1：指定要转换或删除的原字符集。当执行转换操作时，必须使用参数“字符集2”指定转换的目标字符集。但执行删除操作时，不需要参数“字符集2”；</li>
+<li>字符集2：指定要转换成的目标字符集。</li>
+</ul>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将输入字符由大写转换为小写：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>HELLO WORLD<span class="pl-pds">"</span></span> <span class="pl-k">|</span> tr <span class="pl-s"><span class="pl-pds">'</span>A-Z<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>a-z<span class="pl-pds">'</span></span>
+hello world</pre></div>
+<p>'A-Z' 和 'a-z'都是集合，集合是可以自己制定的，例如：'ABD-}'、'bB.,'、'a-de-h'、'a-c0-9'都属于集合，集合里可以使用'\n'、'\t'，可以可以使用其他ASCII字符。</p>
+<p>使用tr删除字符：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>hello 123 world 456<span class="pl-pds">"</span></span> <span class="pl-k">|</span> tr -d <span class="pl-s"><span class="pl-pds">'</span>0-9<span class="pl-pds">'</span></span>
+hello  world </pre></div>
+<p>将制表符转换为空格：</p>
+<div class="highlight highlight-source-shell"><pre>cat text <span class="pl-k">|</span> tr <span class="pl-s"><span class="pl-pds">'</span>\t<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span></pre></div>
+<p>字符集补集，从输入文本中将不在补集中的所有字符删除：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> aa.,a 1 b#<span class="pl-smi">$bb</span> 2 c<span class="pl-k">*</span>/cc 3 ddd 4 <span class="pl-k">|</span> tr -d -c <span class="pl-s"><span class="pl-pds">'</span>0-9 \n<span class="pl-pds">'</span></span>
+ 1  2  3  4</pre></div>
+<p>此例中，补集中包含了数字0~9、空格和换行符\n，所以没有被删除，其他字符全部被删除了。</p>
+<p>用tr压缩字符，可以压缩输入中重复的字符：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>thissss is      a text linnnnnnne.<span class="pl-pds">"</span></span> <span class="pl-k">|</span> tr -s <span class="pl-s"><span class="pl-pds">'</span> sn<span class="pl-pds">'</span></span>
+this is a text line.</pre></div>
+<p>巧妙使用tr做数字相加操作：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> 1 2 3 4 5 6 7 8 9 <span class="pl-k">|</span> xargs -n1 <span class="pl-k">|</span> <span class="pl-c1">echo</span> $[ <span class="pl-s"><span class="pl-pds">$(</span>tr <span class="pl-s"><span class="pl-pds">'</span>\n<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>+<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span> 0 ]</pre></div>
+<p>删除Windows文件“造成”的'^M'字符：</p>
+<div class="highlight highlight-source-shell"><pre>cat file <span class="pl-k">|</span> tr -s <span class="pl-s"><span class="pl-pds">"</span>\r<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span>\n<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> new_file
+或
+cat file <span class="pl-k">|</span> tr -d <span class="pl-s"><span class="pl-pds">"</span>\r<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> new_file</pre></div>
+<p><strong>tr可以使用的字符类：</strong></p>
+<div class="highlight highlight-source-shell"><pre>[:alnum:]：字母和数字
+[:alpha:]：字母
+[:cntrl:]：控制（非打印）字符
+[:digit:]：数字
+[:graph:]：图形字符
+[:lower:]：小写字母
+[:print:]：可打印字符
+[:punct:]：标点符号
+[:space:]：空白字符
+[:upper:]：大写字母
+[:xdigit:]：十六进制字符  </pre></div>
+<p>使用方式：</p>
+<div class="highlight highlight-source-shell"><pre>tr <span class="pl-s"><span class="pl-pds">'</span>[:lower:]<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>[:upper:]<span class="pl-pds">'</span></span></pre></div>
+
+
+</body>
+</html>

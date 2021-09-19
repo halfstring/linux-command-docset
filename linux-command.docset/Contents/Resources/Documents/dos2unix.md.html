@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dos2unix" class="anchor" href="#dos2unix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dos2unix</h1>
+<p>将DOS格式文本文件转换成Unix格式</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dos2unix命令</strong> 用来将DOS格式的文本文件转换成UNIX格式的（DOS/MAC to UNIX text file format converter）。DOS下的文本文件是以<code>\r\n</code>作为断行标志的，表示成十六进制就是0D 0A。而Unix下的文本文件是以\n作为断行标志的，表示成十六进制就是0A。DOS格式的文本文件在Linux底下，用较低版本的vi打开时行尾会显示<code>^M</code>，而且很多命令都无法很好的处理这种格式的文件，如果是个shell脚本，。而Unix格式的文本文件在Windows下用Notepad打开时会拼在一起显示。因此产生了两种格式文件相互转换的需求，对应的将UNIX格式文本文件转成成DOS格式的是unix2dos命令。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dos2unix [-hkqV] [-c convmode] [-o file ...] [-n infile outfile ...]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-k：保持输出文件的日期不变
+-q：安静模式，不提示任何警告信息。
+-V：查看版本
+-c：转换模式，模式有：ASCII, 7bit, ISO, Mac, 默认是：ASCII。
+-o：写入到源文件
+-n：写入到新文件</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>参数：需要转换到文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>最简单的用法就是dos2unix直接跟上文件名：</p>
+<div class="highlight highlight-source-shell"><pre>dos2unix file</pre></div>
+<p>如果一次转换多个文件，把这些文件名直接跟在dos2unix之后。（注：也可以加上<code>-o</code>参数，也可以不加，效果一样）</p>
+<div class="highlight highlight-source-shell"><pre>dos2unix file1 file2 file3
+dos2unix -o file1 file2 file3</pre></div>
+<p>上面在转换时，都会直接在原来的文件上修改，如果想把转换的结果保存在别的文件，而源文件不变，则可以使用<code>-n</code>参数。</p>
+<div class="highlight highlight-source-shell"><pre>dos2unix oldfile newfile</pre></div>
+<p>如果要保持文件时间戳不变，加上<code>-k</code>参数。所以上面几条命令都是可以加上<code>-k</code>参数来保持文件时间戳的。</p>
+<div class="highlight highlight-source-shell"><pre>dos2unix -k file
+dos2unix -k file1 file2 file3
+dos2unix -k -o file1 file2 file3
+dos2unix -k -n oldfile newfile</pre></div>
+<p>转换当前目录下所有文件</p>
+<div class="highlight highlight-source-shell"><pre>find -type f <span class="pl-k">|</span> xargs dos2unix</pre></div>
+
+
+</body>
+</html>

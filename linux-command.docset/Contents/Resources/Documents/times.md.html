@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-times" class="anchor" href="#times" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>times</h1>
+<p>显示进程累计时间。</p>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>打印出shell及其子进程累计使用的用户时间和系统时间。</li>
+</ul>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>总是返回成功。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 执行命令</span>
+<span class="pl-c1">times</span>
+<span class="pl-c"><span class="pl-c">#</span> 返回结果</span>
+0m0.037s 0m0.009s
+0m0.010s 0m0.024s
+<span class="pl-c"><span class="pl-c">#</span> 根据times(2)的man手册，对应关系如下：</span>
+<span class="pl-c"><span class="pl-c">#</span> 用户时间        | 系统时间</span>
+<span class="pl-c"><span class="pl-c">#</span> 子进程的用户时间 | 子进程的系统时间</span></pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+
+
+</body>
+</html>

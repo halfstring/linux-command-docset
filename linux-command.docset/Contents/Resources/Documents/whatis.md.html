@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-whatis" class="anchor" href="#whatis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>whatis</h1>
+<p>查询一个命令执行什么功能</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>whatis命令</strong> 是用于查询一个命令执行什么功能，并将查询结果打印到终端上。</p>
+<p>whatis命令在用<code>catman -w</code>命令创建的数据库中查找command参数指定的命令、系统调用、库函数或特殊文件名。whatis命令显示手册部分的页眉行。然后可以发出man命令以获取附加的信息。whatis命令等同于使用<code>man -f</code>命令。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>whatis</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> whatis ls</span>
+ls                   (1)  - list directory contents
+ls                   (1p)  - list directory contents
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> whatis cp</span>
+cp                   (1)  - copy files and directories
+cp                   (1p)  - copy files
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> whatis chown</span>
+chown                (1)  - change file owner and group
+chown                (1p)  - change the file ownership
+chown                (2)  - change ownership of a file
+chown                (3p)  - change owner and group of a file
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> whatis man</span>
+man                  (1)  - format and display the on-line manual pages
+man                  (1p)  - display system documentation
+man                  (7)  - macros to format man pages
+man                 (rpm) - A <span class="pl-c1">set</span> of documentation tools: man, apropos and whatis.
+man-pages           (rpm) - Man (manual) pages from the Linux Documentation Project.
+man.config [man]     (5)  - configuration data <span class="pl-k">for</span> man</pre></div>
+
+
+</body>
+</html>

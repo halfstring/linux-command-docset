@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-grpconv" class="anchor" href="#grpconv" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>grpconv</h1>
+<p>用来开启群组的投影密码</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>grpconv命令</strong> 用来开启群组的投影密码。Linux系统里的用户和群组密码，分别存放在<code>/etc</code>目录下的passwd和group文件中。因系统运作所需，任何人都得以读取它们，造成安全上的破绽。投影密码将文件内的密码改存在<code>/etc</code>目录下的shadow和gshadow文件内，只允许系统管理者读取，同时把原密码置换为"x"字符。投影密码的功能可随时开启或关闭，您只需执行grpconv指令就能开启群组投影密码。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>grpconv</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>设置cdy组密码</p>
+<div class="highlight highlight-source-shell"><pre>groupmod --password 123456 cdy
+cat /etc/group <span class="pl-k">|</span> grep cdy
+cdy:123456:1000:     <span class="pl-c"><span class="pl-c">#</span> 看出密码是123456</span></pre></div>
+<p>启动影子系统</p>
+<div class="highlight highlight-source-shell"><pre>grpconv
+cat /etc/group <span class="pl-k">|</span>  grep cdy
+cdy:x:1000:      <span class="pl-c"><span class="pl-c">#</span> 看出密码段已经被x替代</span>
+
+cat /etc/gshadow <span class="pl-k">|</span> grep cdy
+cdy:123456::      <span class="pl-c"><span class="pl-c">#</span> 已经移到影子文件了</span></pre></div>
+<p>注：gshadow, shadow只有root权限才可以查看。</p>
+
+
+</body>
+</html>

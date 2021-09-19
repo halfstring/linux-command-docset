@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-fdisk" class="anchor" href="#fdisk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fdisk</h1>
+<p>查看磁盘使用情况和磁盘分区</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>fdisk命令</strong> 用于观察硬盘实体使用情况，也可对硬盘分区。它采用传统的问答式界面，而非类似DOS fdisk的cfdisk互动式操作界面，因此在使用上较为不便，但功能却丝毫不打折扣。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>fdisk(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre> -b <span class="pl-k">&lt;</span>大小<span class="pl-k">&gt;</span>             扇区大小(512、1024、2048或4096)
+ -c[<span class="pl-k">=&lt;</span>模式<span class="pl-k">&gt;</span>]           兼容模式：“dos”或“nondos”(默认)
+ -h                    打印此帮助文本
+ -u[<span class="pl-k">=&lt;</span>单位<span class="pl-k">&gt;</span>]           显示单位：“cylinders”(柱面)或“sectors”(扇区，默认)
+ -v                    打印程序版本
+ -C <span class="pl-k">&lt;</span>数字<span class="pl-k">&gt;</span>             指定柱面数
+ -H <span class="pl-k">&lt;</span>数字<span class="pl-k">&gt;</span>             指定磁头数
+ -S <span class="pl-k">&lt;</span>数字<span class="pl-k">&gt;</span>             指定每个磁道的扇区数</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>设备文件：指定要进行分区或者显示分区的硬盘设备文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>首先选择要进行操作的磁盘：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> fdisk /dev/sdb</span></pre></div>
+<p>输入<code>m</code>列出可以执行的命令：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">command</span> (m <span class="pl-k">for</span> help): m
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition<span class="pl-s"><span class="pl-pds">'</span>s system id</span>
+<span class="pl-s">   u   change display/entry units</span>
+<span class="pl-s">   v   verify the partition table</span>
+<span class="pl-s">   w   write table to disk and exit</span>
+<span class="pl-s">   x   extra functionality (experts only)</span></pre></div>
+<p>输入<code>p</code>列出磁盘目前的分区情况：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): p
+
+Disk /dev/sdb: 3221 MB, 3221225472 bytes
+255 heads, 63 sectors/track, 391 cylinders
+Units = cylinders of 16065 <span class="pl-k">*</span> 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1           1        8001   8e  Linux LVM
+/dev/sdb2               2          26      200812+  83  Linux</pre></div>
+<p>输入<code>d</code>然后选择分区，删除现有分区：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): d
+Partition number (1-4): 1
+
+Command (m <span class="pl-k">for</span> help): d
+Selected partition 2</pre></div>
+<p>查看分区情况，确认分区已经删除：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): print
+
+Disk /dev/sdb: 3221 MB, 3221225472 bytes
+255 heads, 63 sectors/track, 391 cylinders
+Units = cylinders of 16065 <span class="pl-k">*</span> 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m <span class="pl-k">for</span> help):</pre></div>
+<p>输入<code>n</code>建立新的磁盘分区，首先建立两个主磁盘分区：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+p    //建立主分区
+Partition number (1-4): 1  //分区号
+First cylinder (1-391, default 1):  //分区起始位置
+Using default value 1
+last cylinder or +size or +sizeM or +sizeK (1-391, default 391): 100  //分区结束位置，单位为扇区
+
+Command (m <span class="pl-k">for</span> help): n  //再建立一个分区
+Command action
+   e   extended
+   p   primary partition (1-4)
+p 
+Partition number (1-4): 2  //分区号为2
+First cylinder (101-391, default 101):
+Using default value 101
+Last cylinder or +size or +sizeM or +sizeK (101-391, default 391): +200M  //分区结束位置，单位为M</pre></div>
+<p>确认分区建立成功：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): p
+
+Disk /dev/sdb: 3221 MB, 3221225472 bytes
+255 heads, 63 sectors/track, 391 cylinders
+Units = cylinders of 16065 <span class="pl-k">*</span> 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1         100      803218+  83  Linux
+/dev/sdb2             101         125      200812+  83  Linux</pre></div>
+<p>再建立一个逻辑分区：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+e  //选择扩展分区
+Partition number (1-4): 3
+First cylinder (126-391, default 126):
+Using default value 126
+Last cylinder or +size or +sizeM or +sizeK (126-391, default 391):
+Using default value 391</pre></div>
+<p>确认扩展分区建立成功：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): p
+
+Disk /dev/sdb: 3221 MB, 3221225472 bytes
+255 heads, 63 sectors/track, 391 cylinders
+Units = cylinders of 16065 <span class="pl-k">*</span> 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1         100      803218+  83  Linux
+/dev/sdb2             101         125      200812+  83  Linux
+/dev/sdb3             126         391     2136645    5  Extended</pre></div>
+<p>在扩展分区上建立两个逻辑分区：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): n
+Command action
+   l   logical (5 or over)
+   p   primary partition (1-4)
+l //选择逻辑分区
+First cylinder (126-391, default 126):
+Using default value 126
+Last cylinder or +size or +sizeM or +sizeK (126-391, default 391): +400M    
+
+Command (m <span class="pl-k">for</span> help): n
+Command action
+   l   logical (5 or over)
+   p   primary partition (1-4)
+l
+First cylinder (176-391, default 176):
+Using default value 176
+Last cylinder or +size or +sizeM or +sizeK (176-391, default 391):
+Using default value 391</pre></div>
+<p>确认逻辑分区建立成功：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): p
+
+Disk /dev/sdb: 3221 MB, 3221225472 bytes
+255 heads, 63 sectors/track, 391 cylinders
+Units = cylinders of 16065 <span class="pl-k">*</span> 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1         100      803218+  83  Linux
+/dev/sdb2             101         125      200812+  83  Linux
+/dev/sdb3             126         391     2136645    5  Extended
+/dev/sdb5             126         175      401593+  83  Linux
+/dev/sdb6             176         391     1734988+  83  Linux
+
+Command (m <span class="pl-k">for</span> help):</pre></div>
+<p>从上面的结果我们可以看到，在硬盘sdb我们建立了2个主分区（sdb1，sdb2），1个扩展分区（sdb3），2个逻辑分区（sdb5，sdb6）</p>
+<p>注意：主分区和扩展分区的磁盘号位1-4，也就是说最多有4个主分区或者扩展分区，逻辑分区开始的磁盘号为5，因此在这个实验中试没有sdb4的。</p>
+<p>最后对分区操作进行保存：</p>
+<div class="highlight highlight-source-shell"><pre>Command (m <span class="pl-k">for</span> help): w
+The partition table has been altered<span class="pl-k">!</span>
+
+Calling <span class="pl-en">ioctl</span>() to re-read partition table.
+Syncing disks.</pre></div>
+<p>建立好分区之后我们还需要对分区进行格式化才能在系统中使用磁盘。</p>
+<p>在sdb1上建立ext2分区：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mkfs.ext2 /dev/sdb1</span>
+mke2fs 1.39 (29-May-2006)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+100576 inodes, 200804 blocks
+10040 blocks (5.00%) reserved <span class="pl-k">for</span> the super user
+First data block=0
+Maximum filesystem blocks=209715200
+7 block groups
+32768 blocks per group, 32768 fragments per group
+14368 inodes per group
+Superblock backups stored on blocks:
+        32768, 98304, 163840
+
+Writing inode tables: <span class="pl-k">done</span>                           
+Writing superblocks and filesystem accounting information: <span class="pl-k">done</span>
+
+This filesystem will be automatically checked every 32 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.</pre></div>
+<p>在sdb6上建立ext3分区：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mkfs.ext3 /dev/sdb6</span>
+mke2fs 1.39 (29-May-2006)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+217280 inodes, 433747 blocks
+21687 blocks (5.00%) reserved <span class="pl-k">for</span> the super user
+First data block=0
+Maximum filesystem blocks=444596224
+14 block groups
+32768 blocks per group, 32768 fragments per group
+15520 inodes per group
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912
+
+Writing inode tables: <span class="pl-k">done</span>                           
+Creating journal (8192 blocks): <span class="pl-k">done</span>
+Writing superblocks and filesystem accounting information: <span class="pl-k">done</span>
+
+This filesystem will be automatically checked every 32 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span></span></pre></div>
+<p>建立两个目录<code>/oracle</code>和<code>/web</code>，将新建好的两个分区挂载到系统：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mkdir /oracle</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mkdir /web</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mount /dev/sdb1 /oracle</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mount /dev/sdb6 /web</span></pre></div>
+<p>查看分区挂载情况：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> df -h</span>
+文件系统              容量  已用 可用 已用% 挂载点
+/dev/mapper/VolGroup00-LogVol00
+                      6.7G  2.8G  3.6G  44% /
+/dev/sda1              99M   12M   82M  13% /boot
+tmpfs                 125M     0  125M   0% /dev/shm
+/dev/sdb1             773M  808K  733M   1% /oracle
+/dev/sdb6             1.7G   35M  1.6G   3% /web</pre></div>
+<p>如果需要每次开机自动挂载则需要修改<code>/etc/fstab</code>文件，加入两行配置：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> vim /etc/fstab</span>
+
+/dev/VolGroup00/LogVol00 /                       ext3    defaults        1 1
+LABEL=/boot             /boot                   ext3    defaults        1 2
+tmpfs                   /dev/shm                tmpfs   defaults        0 0
+devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+sysfs                   /sys                    sysfs   defaults        0 0
+proc                    /proc                   proc    defaults        0 0
+/dev/VolGroup00/LogVol01 swap                    swap    defaults        0 0
+/dev/sdb1               /oracle                 ext2    defaults        0 0
+/dev/sdb6               /web                    ext3    defaults        0 0</pre></div>
+
+
+</body>
+</html>

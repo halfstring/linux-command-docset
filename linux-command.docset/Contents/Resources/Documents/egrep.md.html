@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-egrep" class="anchor" href="#egrep" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>egrep</h1>
+<p>在文件内查找指定的字符串</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>egrep命令</strong> 用于在文件内查找指定的字符串。egrep执行效果与<code>grep -E</code>相似，使用的语法及参数可参照grep指令，与grep的不同点在于解读字符串的方法。egrep是用extended regular expression语法来解读的，而grep则用basic regular expression 语法解读，extended regular expression比basic regular expression的表达更规范。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>egrep(选项)(查找模式)(文件名1，文件名2，……)</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>显示文件中符合条件的字符。例如，查找当前目录下所有文件中包含字符串"Linux"的文件，可以使用如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>egrep Linux <span class="pl-k">*</span></pre></div>
+<p>结果如下所示：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 以下五行为 testfile 中包含Linux字符的行</span>
+testfile:hello Linux<span class="pl-k">!</span>
+testfile:Linux is a free Unix-type operating system.
+testfile:This is a Linux testfile<span class="pl-k">!</span>
+testfile:Linux
+testfile:Linux
+
+<span class="pl-c"><span class="pl-c">#</span> 以下两行为testfile1中含Linux字符的行</span>
+testfile1:helLinux<span class="pl-k">!</span>
+testfile1:This a Linux testfile<span class="pl-k">!</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 以下两行为 testfile_2 中包含Linux字符的行</span>
+testfile_2:Linux is a free unix-type opterating system
+testfile_2:Linux <span class="pl-c1">test</span></pre></div>
+
+
+</body>
+</html>

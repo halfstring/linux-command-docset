@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-sync" class="anchor" href="#sync" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sync</h1>
+<p>用于强制被改变的内容立刻写入磁盘</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>sync命令</strong> 用于强制被改变的内容立刻写入磁盘，更新超块信息。</p>
+<p>在Linux/Unix系统中，在文件或数据处理过程中一般先放到内存缓冲区中，等到适当的时候再写入磁盘，以提高系统的运行效率。sync命令则可用来强制将内存缓冲区中的数据立即写入磁盘中。用户通常不需执行sync命令，系统会自动执行update或bdflush操作，将缓冲区的数据写 入磁盘。只有在update或bdflush无法执行或用户需要非正常关机时，才需手动执行sync命令。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>sync(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-d, --data             只同步文件数据，不同步不必要的元数据
+-f, --file-system      同步包含这些文件的文件系统
+--help：显示帮助；
+--version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-buffer与cache" class="anchor" href="#buffer%E4%B8%8Ecache" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>buffer与cache</h3>
+<ul>
+<li>buffer：为了解决写磁盘的效率</li>
+<li>cache：为了解决读磁盘的效率</li>
+</ul>
+<p>linux系统为了提高读写磁盘的效率，会先将数据放在一块buffer中。在写磁盘时并不是立即将数据写到磁盘中，而是先写入这块buffer中了。此时如果重启系统，就可能造成数据丢失。</p>
+<p>sync命令用来flush文件系统buffer，这样数据才会真正的写到磁盘中，并且buffer才能够释放出来，flush就是用来清空buffer。sync命令会强制将数据写入磁盘中，并释放该数据对应的buffer，所以常常会在写磁盘后输入sync命令来将数据真正的写入磁盘。</p>
+<p>如果不去手动的输入sync命令来真正的去写磁盘，linux系统也会周期性的去sync数据。</p>
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-uniq" class="anchor" href="#uniq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>uniq</h1>
+<p>显示或忽略重复的行。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>uniq [OPTION]... [INPUT [OUTPUT]]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>将输入文件（或标准输入）中邻近的重复行写入到输出文件（或标准输出）中。</li>
+<li>当没有选项时，邻近的重复行将合并为一个。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-c, --count                在每行开头增加重复次数。
+-d, --repeated             所有邻近的重复行只被打印一次。
+-D                         所有邻近的重复行将全部打印。
+--all-repeated[<span class="pl-k">=</span>METHOD]    类似于 -D，但允许每组之间以空行分割。METHOD取值范围{none(默认)，prepend，separate}。
+-f, --skip-fields=N        跳过对前N个列的比较。
+--group[<span class="pl-k">=</span>METHOD]           显示所有行，允许每组之间以空行分割。METHOD取值范围：{separate(默认)，prepend，append，both}。
+-i, --ignore-case          忽略大小写的差异。
+-s, --skip-chars=N         跳过对前N个字符的比较。
+-u, --unique               只打印非邻近的重复行。
+-z, --zero-terminated      设置行终止符为NUL（空），而不是换行符。
+-w, --check-chars=N        只对每行前N个字符进行比较。
+--help                     显示帮助信息并退出。
+--version                  显示版本信息并退出。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>INPUT（可选）：输入文件，不提供时为标准输入。</p>
+<p>OUTPUT（可选）：输出文件，不提供时为标准输出。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<p>注意：命令2和命令3结果一样，命令1仅作了相邻行的去重。</p>
+<div class="highlight highlight-source-shell"><pre>uniq file.txt
+sort file.txt <span class="pl-k">|</span> uniq
+sort -u file.txt</pre></div>
+<p>只显示单一行，区别在于是否执行排序：</p>
+<div class="highlight highlight-source-shell"><pre>uniq -u file.txt
+sort file.txt <span class="pl-k">|</span> uniq -u</pre></div>
+<p>统计各行在文件中出现的次数：</p>
+<div class="highlight highlight-source-shell"><pre>sort file.txt <span class="pl-k">|</span> uniq -c</pre></div>
+<p>在文件中找出重复的行：</p>
+<div class="highlight highlight-source-shell"><pre>sort file.txt <span class="pl-k">|</span> uniq -d</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>
+<p><code>uniq</code>只检测邻近的行是否重复，<code>sort -u</code>将输入文件先排序然后再处理重复行。</p>
+</li>
+<li>
+<p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 uniq</code>，<code>info coreutils 'uniq invocation'</code>。</p>
+</li>
+</ol>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-iftop" class="anchor" href="#iftop" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>iftop</h1>
+<p>一款实时流量监控工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>iftop命令</strong> 是一款实时流量监控工具，监控TCP/IP连接等，缺点就是无报表功能。必须以root身份才能运行。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>iftop(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>iftop: display bandwidth usage on an interface by host
+
+Synopsis: iftop -h <span class="pl-k">|</span> [-npblNBP] [-i interface] [-f filter code]
+    [-F net/mask] [-G net6/mask6]
+
+   -h                  display this message
+   -n                  don<span class="pl-s"><span class="pl-pds">'</span>t do hostname lookups</span>
+<span class="pl-s">   -N                  don<span class="pl-pds">'</span></span>t convert port numbers to services
+   -p                  run <span class="pl-k">in</span> promiscuous mode (show traffic between other
+                       hosts on the same network segment)
+   -b                  don<span class="pl-s"><span class="pl-pds">'</span>t display a bar graph of traffic</span>
+<span class="pl-s">   -B                  Display bandwidth in bytes</span>
+<span class="pl-s">   -i interface        listen on named interface</span>
+<span class="pl-s">   -f filter code      use filter code to select packets to count</span>
+<span class="pl-s">                      (default: none, but only IP packets are counted)</span>
+<span class="pl-s">   -F net/mask         show traffic flows in/out of IPv4 network</span>
+<span class="pl-s">   -G net6/mask6       show traffic flows in/out of IPv6 network</span>
+<span class="pl-s">   -l                  display and count link-local IPv6 traffic (default: off)</span>
+<span class="pl-s">   -P                  show ports as well as hosts</span>
+<span class="pl-s">   -m limit            sets the upper limit for the bandwidth scale</span>
+<span class="pl-s">   -c config file      specifies an alternative configuration file</span>
+<span class="pl-s">   -t                  use text interface without ncurses</span>
+<span class="pl-s">   </span>
+<span class="pl-s">   Sorting orders:</span>
+<span class="pl-s">   -o 2s                Sort by first column (2s traffic average)</span>
+<span class="pl-s">   -o 10s               Sort by second column (10s traffic average) [default]</span>
+<span class="pl-s">   -o 40s               Sort by third column (40s traffic average)</span>
+<span class="pl-s">   -o source            Sort by source address</span>
+<span class="pl-s">   -o destination       Sort by destination address</span>
+<span class="pl-s">   </span>
+<span class="pl-s">   The following options are only available in combination with -t</span>
+<span class="pl-s">   -s num              print one single text output afer num seconds, then quit</span>
+<span class="pl-s">   -L num              number of lines to print</span></pre></div>
+<h3>
+<a id="user-content-界面说明" class="anchor" href="#%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>界面说明</h3>
+<blockquote>
+<p>第一行为带宽，这里为1Mbit,不是字节哦.
+连接列表，最后三列分别是2秒，10秒和40秒的平均流量
+<code>=&gt;</code> 代表发送<br>
+<code>&lt;=</code> 代表接收
+最后三行表示发送，接收和全部的流量，
+第二列为你运行iftop到目前流量，第三列为高峰值，第四列为平均值。</p>
+</blockquote>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>iftop           <span class="pl-c"><span class="pl-c">#</span> 默认是监控第一块网卡的流量</span>
+iftop -i eth1   <span class="pl-c"><span class="pl-c">#</span> 监控eth1</span>
+iftop -n        <span class="pl-c"><span class="pl-c">#</span> 直接显示IP, 不进行DNS反解析</span>
+iftop -N        <span class="pl-c"><span class="pl-c">#</span> 直接显示连接埠编号, 不显示服务名称</span>
+iftop -F 192.168.1.0/24 or 192.168.1.0/255.255.255.0  <span class="pl-c"><span class="pl-c">#</span> 显示某个网段进出封包流量</span></pre></div>
+
+
+</body>
+</html>

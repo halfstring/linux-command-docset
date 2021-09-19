@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-exit" class="anchor" href="#exit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>exit</h1>
+<p>退出当前的shell。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">exit</span> [n]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>执行exit可使shell以指定的状态值退出。若不设置参数，则以最后一条命令的返回值作为exit的返回值退出。</li>
+</ul>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>n（可选）：指定的shell返回值（整数）。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回值为你指定的参数n的值，如果你指定的参数大于255或小于0，那么会通过加或减256的方式使得返回值总是处于0到255之间。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<p>退出当前shell：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> exit</span>
+<span class="pl-c1">logout</span></pre></div>
+<p>也可以使用<code>ctrl+d</code>退出当前终端，下面列出了打开或关闭该功能的方法：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 打开ctrl+d退出终端</span>
+<span class="pl-c1">set</span> -o ignoreeof
+<span class="pl-c"><span class="pl-c">#</span> 关闭ctrl+d退出终端</span>
+<span class="pl-c1">set</span> +o ignoreeof</pre></div>
+<p>在脚本中，进入脚本所在目录，否则退出：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">cd</span> <span class="pl-s"><span class="pl-pds">$(</span>dirname <span class="pl-smi">$0</span><span class="pl-pds">)</span></span> <span class="pl-k">||</span> <span class="pl-c1">exit</span> 1</pre></div>
+<p>在脚本中，判断参数数量，不匹配就打印使用方式，退出：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">if</span> [ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$#</span><span class="pl-pds">"</span></span> <span class="pl-k">-ne</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span> ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>usage: <span class="pl-smi">$0</span> &lt;area&gt; &lt;hours&gt;<span class="pl-pds">"</span></span>
+    <span class="pl-c1">exit</span> 2
+<span class="pl-k">fi</span></pre></div>
+<p>在脚本中，退出时删除临时文件：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">trap</span> <span class="pl-s"><span class="pl-pds">"</span>rm -f tmpfile; echo Bye.<span class="pl-pds">"</span></span> EXIT</pre></div>
+<p>检查上一命令的退出码：</p>
+<div class="highlight highlight-source-shell"><pre>./mycommand.sh
+EXCODE=<span class="pl-smi">$?</span>
+<span class="pl-k">if</span> [ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$EXCODE</span><span class="pl-pds">"</span></span> <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>O.K<span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span></pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+
+
+</body>
+</html>

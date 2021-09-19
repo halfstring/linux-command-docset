@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-chpasswd" class="anchor" href="#chpasswd" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>chpasswd</h1>
+<p>批量更新用户口令的工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>chpasswd命令</strong> 是批量更新用户口令的工具，是把一个文件内容重新定向添加到<code>/etc/shadow</code>中。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>chpasswd(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-e：输入的密码是加密后的密文；
+-h：显示帮助信息并退出；
+-m：当被支持的密码未被加密时，使用MD5加密代替DES加密。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>先创建用户密码对应文件，格式为<code>username:password</code>，如<code>abc:abc123</code>，必须以这种格式来书写，并且不能有空行，保存成文本文件user.txt，然后执行chpasswd命令：</p>
+<div class="highlight highlight-source-shell"><pre>chpasswd <span class="pl-k">&lt;</span> user.txt</pre></div>
+<p>以上是运用chpasswd命令来批量修改密码。是linux系统管理中的捷径。</p>
+
+
+</body>
+</html>

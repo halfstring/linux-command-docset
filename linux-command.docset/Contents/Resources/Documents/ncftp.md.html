@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ncftp" class="anchor" href="#ncftp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ncftp</h1>
+<p>是增强的的FTP工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ncftp命令</strong> 是增强的的ftp工具，比传统的FTP指令更加强大。FTP让用户得以下载存放于服务器主机的文件，也能将文件上传到远端主机放置。ncftp是文字模式FTP程序的佼佼者，它具备多样特色，包括显示传输速率，下载进度，自动续传，标住书签，可通过防火墙和代理服务器等。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ncftp(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-u：指定登录FTP服务器时使用的用户名；
+-p：指定登录FTP服务器时使用的密码；
+-P：如果FTP服务器没有使用默认的TCP协议的21端口，则使用此选项指定FTP服务器的端口号。
+-m：在传之前尝试在目录位置创建目录(用于传目录的情况)
+-R：递规传子目录</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>FTP服务器：指定远程FTP服务器的ip地址或主机名。</p>
+<h3>
+<a id="user-content-安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装</h3>
+<div class="highlight highlight-source-shell"><pre>wget ftp://ftp.ncftp.com/ncftp/ncftp-3.2.3-src.tar.gz
+tar zxvf ncftp-3.2.3-src.tar.gz
+<span class="pl-c1">cd</span> ncftp-3.2.3/
+./configure --prefix=/usr/local/ncftp
+make <span class="pl-k">&amp;&amp;</span> make install</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将本地/etc/目录内的所有文件和目录，上传到FTP服务器的flv/games/目录内(如果不存在flv/games/目录则自动创建)。</p>
+<div class="highlight highlight-source-shell"><pre>/usr/local/ncftp/bin/ncftpput -u koumm -p koumm -P 21 -m -R 192.168.162.137  flv/games/ /etc/<span class="pl-k">*</span></pre></div>
+<p><strong>指令说明</strong></p>
+<p>ncftp的基本命令和普通ftp一样，可以输入help获得命令列表。对于所有的命令，都可以使用help &lt;命令&gt;的格式获得详细帮助。l开头的就是对本地执行的命令，其它的就是对登入的ftp服务目录的操作命令。</p>
+<p>增加的本地文件系统的操作命令：</p>
+<ul>
+<li>lls: 列出本地当前目录文件；</li>
+<li>lmkdir : 本地建立目录；</li>
+<li>lrename: 本地文件改名；</li>
+<li>lpwd: 显示当前本地路 径；</li>
+<li>lchmod: 改变本地文件权限；</li>
+<li>lpage: 显示本地文件内容；</li>
+<li>lrm: 删除本地文件；</li>
+<li>lrmdir: 删除本地目录。</li>
+</ul>
+
+
+</body>
+</html>

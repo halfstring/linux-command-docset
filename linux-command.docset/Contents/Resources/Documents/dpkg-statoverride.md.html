@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dpkg-statoverride" class="anchor" href="#dpkg-statoverride" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dpkg-statoverride</h1>
+<p>Debian Linux中覆盖文件的所有权和模式</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dpkg-statoverride命令</strong> 用于Debian Linux中覆盖文件的所有权和模式，让dpkg于包安装时使得文件所有权与模式失效。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dpkg-statoverride(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-add：为文件添加一个改写；
+--remove：为文件删除一个改写；
+--list：显示所有改写列表；
+--update：如果文件存在，则立刻执行改写操作。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>修改文件夹的权限属性：</p>
+<div class="highlight highlight-source-shell"><pre>sudo dpkg-statoverride --update --add nagios nagios 751 /var/lib/nagios3</pre></div>
+<p>强制修改文件夹的权限属性：</p>
+<div class="highlight highlight-source-shell"><pre>sudo dpkg-statoverride --force --update --add root sasl 755 /var/spool/postfix/var/run/saslauthd</pre></div>
+<p>将文件从数据库中删除：</p>
+<div class="highlight highlight-source-shell"><pre>sudo dpkg-statoverride --remove /usr/bin/wall</pre></div>
+
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-let" class="anchor" href="#let" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>let</h1>
+<p>简单的计算器，执行算术表达式。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">let</span> arg [arg ...]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>执行一个或多个算术表达式。</li>
+</ul>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>arg：算术表达式</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>当<code>let</code>最后一个执行的表达式的计算结果为0时返回<code>1</code>，否则返回<code>0</code>。
+当<code>let</code>执行的表达式的除数为0时，返回<code>1</code>并报错。</p>
+<h2>
+<a id="user-content-运算符优先级递减表" class="anchor" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E9%80%92%E5%87%8F%E8%A1%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>运算符优先级递减表</h2>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>运算符</strong></th>
+<th align="center"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>id++, id--</code></td>
+<td align="center"><code>变量后增量、变量后减量</code></td>
+</tr>
+<tr>
+<td align="center"><code>++id, --id</code></td>
+<td align="center"><code>变量预增量、变量预减量</code></td>
+</tr>
+<tr>
+<td align="center"><code>-, +</code></td>
+<td align="center"><code>正号、负号</code></td>
+</tr>
+<tr>
+<td align="center"><code>!, ~</code></td>
+<td align="center"><code>逻辑否、按位取反</code></td>
+</tr>
+<tr>
+<td align="center"><code>**</code></td>
+<td align="center"><code>幂运算</code></td>
+</tr>
+<tr>
+<td align="center"><code>*, /, %</code></td>
+<td align="center"><code>乘法、除法、取余</code></td>
+</tr>
+<tr>
+<td align="center"><code>+, -</code></td>
+<td align="center"><code>加法、减法</code></td>
+</tr>
+<tr>
+<td align="center"><code>&lt;&lt;, &gt;&gt;</code></td>
+<td align="center"><code>按位左移、右移</code></td>
+</tr>
+<tr>
+<td align="center"><code>&lt;=, &gt;=, &lt;, &gt;</code></td>
+<td align="center"><code>比较</code></td>
+</tr>
+<tr>
+<td align="center"><code>==, !=</code></td>
+<td align="center"><code>等于、不等于</code></td>
+</tr>
+<tr>
+<td align="center"><code>&amp;</code></td>
+<td align="center"><code>按位与</code></td>
+</tr>
+<tr>
+<td align="center"><code>^</code></td>
+<td align="center"><code>按位异或</code></td>
+</tr>
+<tr>
+<td align="center"><code>|</code></td>
+<td align="center"><code>按位或</code></td>
+</tr>
+<tr>
+<td align="center"><code>&amp;&amp;</code></td>
+<td align="center"><code>逻辑与</code></td>
+</tr>
+<tr>
+<td align="center"><code>||</code></td>
+<td align="center"><code>逻辑或</code></td>
+</tr>
+<tr>
+<td align="center"><code>expr ? expr : expr</code></td>
+<td align="center"><code>条件运算符（三元运算符）</code></td>
+</tr>
+<tr>
+<td align="center">
+<code>=, *=, /=, %=, +=, -=,</code><br><code>&lt;&lt;=, &gt;&gt;=, &amp;=, ^=, |=</code>
+</td>
+<td align="center"><code>赋值</code></td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 尝试直接在终端中执行算术表达式（就像在python的IDLE）。</span>
+3+4
+bash：3+4：command not found...
+<span class="pl-c"><span class="pl-c">#</span> 换一种方式。</span>
+3 + 4
+bash：3：command not found...
+<span class="pl-c"><span class="pl-c">#</span> 看来不行。</span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> let命令赋值。</span>
+<span class="pl-c1">let</span> a=3<span class="pl-k">**</span>4
+<span class="pl-c1">echo</span> <span class="pl-smi">${a}</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示81。</span>
+<span class="pl-c"><span class="pl-c">#</span> ((...))和let命令等效。</span>
+<span class="pl-s"><span class="pl-pds">((</span>a<span class="pl-k">=</span><span class="pl-c1">3</span><span class="pl-k">**</span><span class="pl-c1">4</span><span class="pl-pds">))</span></span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> let常用于变量赋值，而外部命令expr可直接返回表达式的值。</span>
+<span class="pl-c1">let</span> 3+4
+<span class="pl-c"><span class="pl-c">#</span> 没有显示7。</span>
+<span class="pl-c"><span class="pl-c">#</span> 执行后显示7，注意空格。</span>
+expr 3 + 4</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 条件表达式。</span>
+<span class="pl-k">if</span> <span class="pl-s"><span class="pl-pds">((</span><span class="pl-c1">8</span><span class="pl-k">&gt;</span><span class="pl-c1">4</span><span class="pl-pds">))</span></span><span class="pl-k">;</span> <span class="pl-k">then</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>8 is greater than 4.<span class="pl-pds">'</span></span>
+<span class="pl-k">else</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>
+<span class="pl-k">fi</span>
+<span class="pl-c"><span class="pl-c">#</span> 注意空格。</span>
+<span class="pl-k">if</span> [[ 12 <span class="pl-k">-le</span> 10 ]]<span class="pl-k">;</span> <span class="pl-k">then</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>
+<span class="pl-k">else</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>12 is greater than 10.<span class="pl-pds">'</span></span>
+<span class="pl-k">fi</span></pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 可以通过declare命令设置整型属性的方法来进行算术运算。</span>
+<span class="pl-c"><span class="pl-c">#</span> local命令与此类似。</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 没有指定整型属性，输出为字符串'a+b'。</span>
+<span class="pl-k">declare</span> a=3 b=4 c
+c=a+b
+<span class="pl-c1">echo</span> <span class="pl-smi">${c}</span>
+<span class="pl-c"><span class="pl-c">#</span> 不过可以使用以下方式赋值。</span>
+c=<span class="pl-s"><span class="pl-pds">$((</span>a<span class="pl-k">+</span>b<span class="pl-pds">))</span></span>
+<span class="pl-c1">echo</span> <span class="pl-smi">${c}</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示7</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 设置了整型属性就可以直接加了。</span>
+<span class="pl-k">declare</span> -i a=3 b=4 c
+c=a+b
+<span class="pl-c1">echo</span> <span class="pl-smi">${c}</span>
+<span class="pl-c"><span class="pl-c">#</span> 同上。</span>
+<span class="pl-k">declare</span> -i a
+a=2<span class="pl-k">*</span>3
+<span class="pl-c1">echo</span> <span class="pl-smi">${a}</span>
+<span class="pl-c"><span class="pl-c">#</span> 显示6。</span></pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>
+<p>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</p>
+</li>
+<li>
+<p>执行算术计算的命令除了<code>let</code>，还有外部命令<code>expr</code>、<code>bc</code>等。</p>
+</li>
+</ol>
+
+
+</body>
+</html>

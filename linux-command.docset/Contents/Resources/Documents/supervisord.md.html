@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-supervisord" class="anchor" href="#supervisord" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>supervisord</h1>
+<p>配置后台服务/常驻进程的进程管家工具</p>
+<h2>
+<a id="user-content-安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 安装 supervisord</span>
+apt-get install supervisor</pre></div>
+<h2>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h2>
+<p>生成配置文件 <code>/etc/supervisord.conf</code></p>
+<div class="highlight highlight-source-shell"><pre>[program:app]
+command=/usr/bin/gunicorn -w 1 wsgiapp:application
+directory=/srv/www
+user=www-data</pre></div>
+<p>supervisord: 启动 supervisor 服务</p>
+<div class="highlight highlight-source-shell"><pre>supervisorctl start app
+supervisorctl stop app
+supervisorctl reload <span class="pl-c"><span class="pl-c">#</span> 修改/添加配置文件需要执行这个</span></pre></div>
+<h2>
+<a id="user-content-下载地址" class="anchor" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>下载地址</h2>
+<p><a href="https://pypi.python.org/pypi/meld3" rel="nofollow">https://pypi.python.org/pypi/meld3</a><br>
+<a href="https://pypi.python.org/pypi/supervisor" rel="nofollow">https://pypi.python.org/pypi/supervisor</a></p>
+
+</body>
+</html>

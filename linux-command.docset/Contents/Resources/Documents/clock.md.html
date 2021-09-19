@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-clock" class="anchor" href="#clock" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>clock</h1>
+<p>用于调整 RTC 时间</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>clock命令</strong>用于调整 RTC 时间。 RTC 是电脑内建的硬件时间，执行这项指令可以显示现在时刻，调整硬件时钟的时间，将系统时间设成与硬件时钟之时间一致，或是把系统时间回存到硬件时钟。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>clock [--adjust][--debug][--directisa][--getepoch][--hctosys][--set --date<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>&lt;日期时间&gt;<span class="pl-pds">"</span></span>]
+[--setepoch --epoch<span class="pl-k">=&lt;</span> <span class="pl-k">&gt;</span>][--show][--systohc][--test][--utc][--version]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>--adjust 　第一次使用<span class="pl-s"><span class="pl-pds">"</span>--set<span class="pl-pds">"</span></span>或<span class="pl-s"><span class="pl-pds">"</span>--systohc<span class="pl-pds">"</span></span>参数设置硬件时钟，会在/etc目录下产生一个名称为adjtime的文件。当再次使用这两个参数调整硬件时钟，此文件便会记录两次调整间之差异，日后执行clock指令加上<span class="pl-s"><span class="pl-pds">"</span>--adjust<span class="pl-pds">"</span></span>参数时，程序会自动根 据记录文件的数值差异，计算出平均值，自动调整硬件时钟的时间。
+--debug 　详细显示指令执行过程，便于排错或了解程序执行的情形。
+--directisa 　告诉clock指令不要通过/dev/rtc设备文件，直接对硬件时钟进行存取。这个参数适用于仅有ISA总线结构的老式电脑。
+--getepoch 　把系统核心内的硬件时钟新时代数值，呈现到标准输出设备。
+--hctosys 　Hardware Clock to System Time，把系统时间设成和硬件时钟一致。由于这个动作将会造成系统全面更新文件的存取时间，所以最好在系统启动时就执行它。
+--set--date 　设置硬件时钟的日期和时间。
+--setepoch--epoch=<span class="pl-k">&lt;</span>年份<span class="pl-k">&gt;</span> 　设置系统核心之硬件时钟的新时代数值，年份以四位树字表示。
+--show 　读取硬件时钟的时间，并将其呈现至标准输出设备。
+--systohc 　System Time to Hardware Clock，将系统时间存回硬件时钟内。
+--test 　仅作测试，并不真的将时间写入硬件时钟或系统时间。
+--utc 　把硬件时钟上的时间时为CUT，有时也称为UTC或UCT。
+--version 　显示版本信息。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>获取当前的时间</p>
+<div class="highlight highlight-source-shell"><pre>clock <span class="pl-c"><span class="pl-c">#</span> 获取当前的时间</span></pre></div>
+<p>显示UTC时间</p>
+<div class="highlight highlight-source-shell"><pre>clock -utc <span class="pl-c"><span class="pl-c">#</span>显示UTC时间</span></pre></div>
+
+
+</body>
+</html>

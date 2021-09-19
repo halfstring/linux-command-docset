@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-su" class="anchor" href="#su" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>su</h1>
+<p>用于切换当前用户身份到其他用户身份</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>su命令</strong> 用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>su(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c<span class="pl-k">&lt;</span>指令<span class="pl-k">&gt;</span>或--command=<span class="pl-k">&lt;</span>指令<span class="pl-k">&gt;</span>：执行完指定的指令后，即恢复原来的身份；
+-f或——fast：适用于csh与tsch，使shell不用去读取启动文件；
+-l或——login：改变身份时，也同时变更工作目录，以及HOME,SHELL,USER,logname。此外，也会变更PATH变量；
+-m,-p或--preserve-environment：变更身份时，不要变更环境变量；
+-s<span class="pl-k">&lt;</span>shell<span class="pl-k">&gt;</span>或--shell=<span class="pl-k">&lt;</span>shell<span class="pl-k">&gt;</span>：指定要执行的shell；
+--help：显示帮助；
+--version；显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>用户：指定要切换身份的目标用户。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>变更帐号为root并在执行ls指令后退出变回原使用者：</p>
+<div class="highlight highlight-source-shell"><pre>su -c ls root</pre></div>
+<p>变更帐号为root并传入<code>-f</code>选项给新执行的shell：</p>
+<div class="highlight highlight-source-shell"><pre>su root -f</pre></div>
+<p>变更帐号为test并改变工作目录至test的家目录：</p>
+<div class="highlight highlight-source-shell"><pre>su -test</pre></div>
+
+
+</body>
+</html>

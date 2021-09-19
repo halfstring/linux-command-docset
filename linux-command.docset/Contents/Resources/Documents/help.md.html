@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-help" class="anchor" href="#help" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>help</h1>
+<p>该命令是bash内建命令，用于显示bash内建命令的帮助信息。</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>help命令</strong> help命令只能显示bash内建命令的帮助信息，而对于外部命令的帮助信息只能使用man或者info命令查看。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>help(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-d：显示内建命令的简要描述。
+-m：按照man手册的格式输出内建命令的帮助信息。
+-s：仅输出内建命令的命令格式。
+不指定选项时：输出的帮助信息类似于-m选项，但是缺少段落名称和<span class="pl-s"><span class="pl-pds">'</span>SEE ALSO<span class="pl-pds">'</span></span>，<span class="pl-s"><span class="pl-pds">'</span>IMPLEMENTATION<span class="pl-pds">'</span></span>部分。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>bash内建命令（可以为多个，请用空格分隔开）。</p>
+<h3>
+<a id="user-content-常见问题" class="anchor" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>常见问题</h3>
+<p>Q：有哪些命令是bash内建命令？我如何判断一个命令是否为bash内建命令？</p>
+<p>A：您可以在终端使用 'man builtin' 或 'man builtins' 来获取；您可以查看bash内建命令 'type' 的帮助信息。</p>
+<p>Q：那么help命令本身的帮助信息如何获取？</p>
+<p>A：把help作为参数传给help命令；）</p>
+<p>Q：为什么echo也可以用 'man echo' 来查看帮助信息？</p>
+<p>A：因为除了bash内建的echo，GNU/linux的coreutils包里也有该命令；在echo的man手册中，DESCRIPTION段落的 'NOTE' 也提示了和同名内建的不同。</p>
+<p>PS：当你在shell脚本里定义了一个叫 'echo' 的函数，那么调用的时候优先级会如何呢？</p>
+<p>请参考 'builtin' 命令</p>
+<p>Q：我需要获得更多的bash的相关帮助信息</p>
+<p>A：限于篇幅和主题，您可以在终端执行 'man bash' ， 'info bash' ，<a href="http://www.gnu.org/software/bash/" rel="nofollow">访问bash官方网站</a>，以及搜索引擎等。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>使用help命令显示shell内部shopt命令的帮助信息，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">help</span> <span class="pl-c1">shopt</span>                <span class="pl-c"><span class="pl-c">#</span>获取shopt命令的帮助信息</span>
+shopt: <span class="pl-c1">shopt</span> [-pqsu] [-o long-option] optname [optname...]
+    Toggle the values of variables controlling optional behavior.
+    The -s flag means to <span class="pl-c1">enable</span> (set) each OPTNAME<span class="pl-k">;</span> the -u flag
+    unsets each OPTNAME.  The -q flag suppresses output<span class="pl-k">;</span> the <span class="pl-c1">exit</span>
+    status indicates whether each OPTNAME is <span class="pl-c1">set</span> or unset.  The -o
+    option restricts the OPTNAMEs to those defined <span class="pl-k">for</span> use with
+    <span class="pl-s"><span class="pl-pds">`</span>set -o<span class="pl-s"><span class="pl-pds">'</span>.  With no options, or with the -p option, a list of all</span></span>
+<span class="pl-s"><span class="pl-s">    settable options is displayed, with an indication of whether or</span></span>
+<span class="pl-s"><span class="pl-s">    not each is set.</span></span></pre></div>
+
+
+</body>
+</html>

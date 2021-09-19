@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-seinfo" class="anchor" href="#seinfo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>seinfo</h1>
+<p>查询SELinux的策略提供多少相关规则</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>seinfo命令</strong> 是用来查询SELinux的策略提供多少相关规则，一个主体进程能否读取到目标文件资源的重点是在于SELinux的策略以及策略内的各项规则，然后再通过该规则的定义去处理各项目标文件的安全上下文，尤其是“类型”部分。SELinux的策略与规则管理相关命令：seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>seinfo（选项）</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-A：列出SELinux的状态、规则布尔值、身份识别、角色、类型等所有信息。
+-t：列出SELinux所有类型(type)的种类。
+-r：列出SELinux所有角色(role)的种类。
+-u：列出SELinux所有身份识别(user)的种类。
+-b：列出所有规则的种类（布尔值）。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>列出与httpd有关的规则：</p>
+<div class="highlight highlight-source-shell"><pre>seinfo -b <span class="pl-k">|</span> grep httpd</pre></div>
+
+
+</body>
+</html>

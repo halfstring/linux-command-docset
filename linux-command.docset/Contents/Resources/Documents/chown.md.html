@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-chown" class="anchor" href="#chown" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>chown</h1>
+<p>用来变更文件或目录的拥有者或所属群组</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>chown命令</strong> 改变某个文件或目录的所有者和所属的组，该命令可以向某个用户授权，使该用户变成指定文件的所有者或者改变文件所属的组。用户可以是用户或者是用户D，用户组可以是组名或组id。文件名可以使由空格分开的文件列表，在文件名中可以包含通配符。</p>
+<p>只有文件主和超级用户才可以便用该命令。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>chown(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c或——changes：效果类似“-v”参数，但仅回报更改的部分；
+-f或--quite或——silent：不显示错误信息；
+-h或--no-dereference：只对符号连接的文件作修改，而不更改其他任何相关文件；
+-R或——recursive：递归处理，将指定目录下的所有文件及子目录一并处理；
+-v或——version：显示指令执行过程；
+--dereference：效果和“-h”参数相同；
+--help：在线帮助；
+--reference=<span class="pl-k">&lt;</span>参考文件或目录<span class="pl-k">&gt;</span>：把指定文件或目录的拥有者与所属群组全部设成和参考文件或目录的拥有者与所属群组相同；
+--version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>用户：组：指定所有者和所属工作组。当省略“：组”，仅改变文件所有者；<br>
+文件：指定要改变所有者和工作组的文件列表。支持多个文件和目标，支持shell通配符。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将目录<code>/usr/meng</code>及其下面的所有文件、子目录的文件主改成 liu：</p>
+<div class="highlight highlight-source-shell"><pre>chown -R liu /usr/meng</pre></div>
+
+
+</body>
+</html>

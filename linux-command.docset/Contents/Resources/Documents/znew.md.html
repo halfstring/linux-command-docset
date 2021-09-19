@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-znew" class="anchor" href="#znew" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>znew</h1>
+<p>将.Z压缩包重新转化为gzip命令压缩的.gz压缩包</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>znew命令</strong> 用于将使用compress命令压缩的“.Z”压缩包重新转化为使用gzip命令压缩的“.gz”压缩包。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>znew(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-f：<span class="pl-c"><span class="pl-c">#</span> 强制执行转换操作，即是目标“.gz”已经存在；</span>
+-t：<span class="pl-c"><span class="pl-c">#</span> 删除原文件前测试新文件；</span>
+-v：<span class="pl-c"><span class="pl-c">#</span> 显示文件名和每个文件的压缩比；</span>
+-9：<span class="pl-c"><span class="pl-c">#</span> 食用油花的压缩比，速度较慢；</span>
+-P：<span class="pl-c"><span class="pl-c">#</span> 使用管道完成转换操作，以降低磁盘空间使用；</span>
+-K：<span class="pl-c"><span class="pl-c">#</span> 当“.Z”文件比“.gz”文件小时，保留“.Z”文件。</span></pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：指定compress指令压缩生成的“.Z”压缩包。</p>
+
+
+</body>
+</html>

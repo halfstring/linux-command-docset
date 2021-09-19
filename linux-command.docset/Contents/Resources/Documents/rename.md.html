@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-rename" class="anchor" href="#rename" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rename</h1>
+<p>用字符串替换的方式批量改变文件名</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p>rename命令存在两个版本用法上有所区别</p>
+<div class="highlight highlight-source-shell"><pre>C语言版本, 支持通配符
+[常用通配符说明]
+<span class="pl-k">?</span>    表示一个任意字符
+<span class="pl-k">*</span>    表示一个或一串任意字符
+
+Perl版本, 支持正则表达式
+[常用正则表达式符号说明]
+^    匹配输入的开始位置
+$    匹配输入的结尾
+<span class="pl-c1">.</span>    匹配除换行符外的任意字符
++    匹配前一个字符一次或多次 例如，<span class="pl-s"><span class="pl-pds">"</span>zo+<span class="pl-pds">"</span></span>可以匹配<span class="pl-s"><span class="pl-pds">"</span>zoo<span class="pl-pds">"</span></span>,但不匹配<span class="pl-s"><span class="pl-pds">"</span>z<span class="pl-pds">"</span></span>
+[a-z]    表示某个范围内的字符，例如，<span class="pl-s"><span class="pl-pds">"</span>[a-z]<span class="pl-pds">"</span></span>匹配<span class="pl-s"><span class="pl-pds">"</span>a<span class="pl-pds">"</span></span>与<span class="pl-s"><span class="pl-pds">"</span>z<span class="pl-pds">"</span></span>之间的任何一个小写字母字符。
+[^m-z]    否定的字符区间。与不在指定区间内的字符匹配。</pre></div>
+<p>区分方法: <code>rename --version</code></p>
+<p>如果返回结果中包含 <strong>util-linux</strong> , 说明是C语言版本, 反之是Perl版本</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Perl版本 | Ubuntu(18),Mint(20)默认的是Perl版本</span>
+$ rename --version
+/usr/bin/rename using File::Rename version 1.10
+
+<span class="pl-c"><span class="pl-c">#</span> C语言版本 | Centos(7)默认的是C语言版本</span>
+$ rename --version
+rename，来自 util-linux 2.23.2</pre></div>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Perl版本</span>
+rename [ <span class="pl-k">-h</span><span class="pl-k">|</span>-m<span class="pl-k">|</span>-V ] [ -v ] [ -0 ] [ <span class="pl-k">-n</span> ] [ <span class="pl-k">-f</span> ] [ <span class="pl-k">-d</span> ] [ <span class="pl-k">-e</span><span class="pl-k">|</span>-E perlexpr]<span class="pl-k">*</span><span class="pl-k">|</span>perlexpr [ files ]
+
+<span class="pl-c"><span class="pl-c">#</span> C语言版本</span>
+rename [选项] 表达式 替换的字符 文件...</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Perl版本</span>
+-v, --verbose
+        详细：成功重命名的文件的打印名称。
+
+-0, --null
+        从STDIN读取时，请使用<span class="pl-cce">\0</span>作为记录分隔符
+
+-n, --nono
+        不执行任何操作：打印要重命名的文件名，但不重命名。
+
+-f, --force
+        覆盖：允许覆盖现有文件
+
+--path, --fullpath
+        重命名完整路径：包括任何目录组件。默认
+
+-d, --filename, --nopath, --nofullpath
+        不重命名目录：仅重命名路径的文件名部分
+
+-h, --help
+        帮助：打印提要和选项。
+
+-m, --man
+        手册: 打印手册页.
+
+-V, --version
+        版本: 显示版本号.
+
+-e      表达: 作用于文件名的代码.
+
+        可以重复来构建代码（比如“perl-e”）。如果没有-e，则第一个参数用作代码。
+
+-E      语句：对文件名执行操作的代码，如-e，但终止于 <span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span>.
+
+
+<span class="pl-c"><span class="pl-c">#</span> C语言版本</span>
+-v, --verbose
+        提供视觉反馈，其中重命名了哪些文件（如果有的话）
+
+-V, --version
+        显示版本信息并退出。
+
+-s, --symlink
+        在符号链接目标上执行重命名
+
+-h, --help
+        显示帮助文本并退出</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<hr>
+<h4>
+<a id="user-content-perl版本" class="anchor" href="#perl%E7%89%88%E6%9C%AC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Perl版本</h4>
+<p>将1.txt 2.txt重命名为1.log 2.log</p>
+<div class="highlight highlight-source-shell"><pre>$ rename -v <span class="pl-s"><span class="pl-pds">"</span>s/txt/log/g<span class="pl-pds">"</span></span> 1.txt 2.txt
+1.txt renamed as 1.log
+2.txt renamed as 2.log</pre></div>
+<p>修改文件的后缀</p>
+<div class="highlight highlight-source-shell"><pre>rename <span class="pl-s"><span class="pl-pds">"</span>s//.html//.php/<span class="pl-pds">"</span></span> <span class="pl-k">*</span>     <span class="pl-c"><span class="pl-c">#</span> 把.html 后缀的改成 .php后缀</span></pre></div>
+<p>批量添加文件后缀</p>
+<div class="highlight highlight-source-shell"><pre>rename <span class="pl-s"><span class="pl-pds">"</span>s/$//.txt/<span class="pl-pds">"</span></span> <span class="pl-k">*</span>  <span class="pl-c"><span class="pl-c">#</span> 把所有的文件名都以txt结尾</span></pre></div>
+<p>批量删除文件名</p>
+<div class="highlight highlight-source-shell"><pre>rename <span class="pl-s"><span class="pl-pds">"</span>s//.txt//<span class="pl-pds">"</span></span> <span class="pl-k">*</span>   <span class="pl-c"><span class="pl-c">#</span> 把所有以.txt结尾的文件名的.txt删掉</span></pre></div>
+<hr>
+<h5>
+<a id="user-content-c语言版本" class="anchor" href="#c%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>C语言版本</h5>
+<p>将1.txt 2.txt重命名为1.log 2.log</p>
+<div class="highlight highlight-source-shell"><pre>$ rename -v txt log 1.txt 2.txt
+<span class="pl-s"><span class="pl-pds">`</span>1.txt<span class="pl-s"><span class="pl-pds">'</span> -&gt; `1.log<span class="pl-pds">'</span></span></span>
+<span class="pl-s"><span class="pl-pds">`</span></span>2.txt<span class="pl-s"><span class="pl-pds">'</span> -&gt; `2.log<span class="pl-pds">'</span></span></pre></div>
+<p>文件夹中有这些文件foo1, ..., foo9, foo10, ..., foo278</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 把foo1到foo9的文件重命名为foo01到foo09，重命名的文件只是有4个字符长度名称的文件，文件名中的foo被替换为foo0。</span>
+rename foo foo0 foo<span class="pl-k">?</span>
+
+<span class="pl-c"><span class="pl-c">#</span> foo01到foo99的所有文件都被重命名为foo001到foo099，只重命名5个字符长度名称的文件，文件名中的foo被替换为foo0。</span>
+rename foo foo0 foo<span class="pl-k">??</span>
+
+<span class="pl-c"><span class="pl-c">#</span> foo001到foo278的所有文件都被重命名为foo0001到foo0278，所有以foo开头的文件都被重命名。</span>
+rename foo foo0 foo<span class="pl-k">*</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 从foo0200到foo0278的所有文件都被重命名为foo200到foo278，文件名中的foo0被替换为foo。</span>
+rename foo0 foo foo0[2]<span class="pl-k">*</span></pre></div>
+
+
+</body>
+</html>

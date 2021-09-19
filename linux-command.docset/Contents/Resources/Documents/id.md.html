@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-id" class="anchor" href="#id" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>id</h1>
+<p>打印真实以及有效的用户和所在组的信息</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>id [OPTION]... [USER]...</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>没有选项时，打印指定用户ID信息。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-a               兼容性选项，没有实际作用。
+-Z, --context    只打印进程的安全上下文。
+-g, --group      只打印有效的组ID。
+-G, --groups     打印全部组ID。
+-u, --user       只打印有效的用户ID。
+-z, --zero       使用空字符代替默认的空格来分隔条目。
+--help           显示帮助信息并退出。
+--version        显示版本信息并退出。</pre></div>
+<p>只有在使用 <code>-u</code> <code>-g</code> <code>-G</code> 选项中一到多个时，以下选项可以使用：</p>
+<div class="highlight highlight-source-shell"><pre>-n, --name    打印名称而不是数字。
+-r, --real    打印真实ID而不是有效ID。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>user（可选）：可以为一到多个，默认为当前用户。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> id</span>
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)</pre></div>
+<p>解释：用户root的UID号码 = 0，GID号码 = 0。用户root是下面组的成员：</p>
+<ul>
+<li>root组GID号是：0</li>
+<li>bin组GID号是：1</li>
+<li>daemon组GID号是：2</li>
+<li>sys组GID号是：3</li>
+<li>adm组GID号是：4</li>
+<li>disk组GID号是：6</li>
+<li>wheel组GID号是：10</li>
+</ul>
+<p>打印用户名、UID 和该用户所属的所有组，要这么做，我们可以使用 -a 选项：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> id -a</span>
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)</pre></div>
+<p>输出所有不同的组ID ，有效的，真实的和补充的，我们可以使用 -G 选项来实现：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> id -G</span>
+0 1 2 3 4 6 10</pre></div>
+<p>结果只会显示GID号。你可以和<code>/etc/group</code>文件比较。下面是<code>/etc/group</code>文件的示例内容：</p>
+<p>只输出有效的组ID，通过使用 -g 选项来只输出有效组ID：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> id -g</span>
+0</pre></div>
+<p>输出特定用户信息，我们可以输出特定的用户信息相关的UID和GID。只需要在id命令后跟上用户名：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> id www</span>
+uid=500(www) gid=500(www) groups=500(www)</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>
+<p>该命令可以显示真实有效的用户ID(UID)和组ID(GID)。UID 是对一个用户的单一身份标识。组ID（GID）则对应多个UID；一些程序可能需要UID/GID来运行。<code>id</code> 使我们更加容易地找出用户的UID以及GID，而不必在 <code>/etc/group</code> 文件中搜寻。</p>
+</li>
+<li>
+<p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 id</code>，<code>info coreutils 'id invocation'</code>。</p>
+</li>
+</ol>
+
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-nl" class="anchor" href="#nl" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>nl</h1>
+<p>为每一个文件添加行号。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>nl [OPTION]... [FILE]...</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>将每一个输入的文件添加行号后发送到标准输出。</li>
+<li>当没有文件或文件为<code>-</code>时，读取标准输入</li>
+<li>处理逻辑页（logical page）。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-b, --body-numbering=STYLE           使用STYLE 为body部分的行附加行号。
+-d, --section-delimiter=CC           使用CC作为logical page的分隔符。
+-f, --footer-numbering=STYLE         使用STYLE 为footer部分的行附加行号。
+-h, --header-numbering=STYLE         使用STYLE 为header部分的行附加行号。
+-i, --line-increment=NUMBER          行号递增间隔为NUMBER。
+-l, --join-blank-lines=NUMBER        连续NUMBER行的空行作为一行处理。
+-n, --number-format=FORMAT           根据FORMAT插入行号。
+-p, --no-renumber                    不要在每个部分重置行号。
+-s, --number-separator=STRING        在行号后添加字符串STRING。
+-v, --starting-line-number=NUMBER    每部分的起始行号。
+-w, --number-width=NUMBER            行号宽度为NUMBER。
+--help                               显示帮助信息并退出。
+--version                            显示版本信息并退出。
+
+
+默认选项为：-bt -d<span class="pl-s"><span class="pl-pds">'</span>\:<span class="pl-pds">'</span></span> -fn -hn -i1 -l1 -nrn -sTAB -v1 -w6
+
+CC是由两个字符组成的，默认为<span class="pl-cce">\:</span> ,第二个字符如果缺失则默认为:
+
+STYLE可以为下列可用值之一：
+
+a       所有行标记行号。
+t       仅为非空行标记行号。
+n       不标记行号。
+pBRE    符合基础正则表达式（BRE）的行会标记行号。
+
+FORMAT可以为下列可用值之一：
+
+ln    左对齐，不会在开始部分补充0以满足宽度。
+rn    右对齐，不会在开始部分补充0以满足宽度。
+rz    右对齐，会在开始部分补充0以满足宽度。
+
+logical page
+三部分组成（header， body， footer）
+起始标记（header <span class="pl-cce">\:\:\:</span>， body <span class="pl-cce">\:\:</span>， footer <span class="pl-cce">\:</span>）</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>FILE（可选）：要处理的文件，可以为一或多个。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre>nl_logicalpage.txt：该文件用于说明nl命令处理逻辑页，内容如下：
+<span class="pl-cce">\:\:\:</span>
+header_1
+<span class="pl-cce">\:\:</span>
+body_1
+<span class="pl-cce">\:</span>
+footer_1
+<span class="pl-cce">\:\:\:</span>
+header_2
+<span class="pl-cce">\:\:</span>
+body_2
+<span class="pl-cce">\:</span>
+footer_2</pre></div>
+<div class="highlight highlight-source-shell"><pre>[user2@pc <span class="pl-k">~</span>]$ nl nl_logicalpage.txt
+
+       header_1
+
+     1	body_1
+
+       footer_1
+
+       header_2
+
+     1	body_2
+
+       footer_2
+
+[user2@pc <span class="pl-k">~</span>]$ nl -v0 -fa -ha nl_logicalpage.txt
+
+     0	header_1
+
+     1	body_1
+
+     2	footer_1
+
+     0	header_2
+
+     1	body_2
+
+     2	footer_2
+
+[user2@pc <span class="pl-k">~</span>]$ nl -p -fa -ha nl_logicalpage.txt
+
+     1	header_1
+
+     2	body_1
+
+     3	footer_1
+
+     4	header_2
+
+     5	body_2
+
+     6	footer_2</pre></div>
+<div class="highlight highlight-source-shell"><pre>nl_normal.txt：该文件用于说明nl命令处理普通文件，内容如下：
+ZhuangZhu-74
+2019-11-21
+127.0.0.1</pre></div>
+<div class="highlight highlight-source-shell"><pre>[user2@pc <span class="pl-k">~</span>]$ nl nl_normal.txt
+     1	ZhuangZhu-74
+     2	2019-11-21
+     3	127.0.0.1
+
+[user2@pc <span class="pl-k">~</span>]$ nl -b p<span class="pl-s"><span class="pl-pds">'</span>1$<span class="pl-pds">'</span></span> nl_normal.txt
+       ZhuangZhu-74
+     1	2019-11-21
+     2	127.0.0.1
+
+[user2@pc <span class="pl-k">~</span>]$ nl -b p<span class="pl-s"><span class="pl-pds">'</span>^[A-Z]<span class="pl-pds">'</span></span> nl_normal.txt
+     1	ZhuangZhu-74
+       2019-11-21
+       127.0.0.1</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 nl</code>，<code>info coreutils 'nl invocation'</code>。</li>
+</ol>
+
+
+</body>
+</html>

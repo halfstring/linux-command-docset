@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-cut" class="anchor" href="#cut" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>cut</h1>
+<p>连接文件并打印到标准输出设备上</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>cut 命令</strong> 用来显示行中的指定部分，删除文件中指定字段。cut 经常用来显示文件的内容，类似于 type 命令。</p>
+<p>说明：该命令有两项功能，其一是用来显示文件的内容，它依次读取由参数 file 所指 明的文件，将它们的内容输出到标准输出上；其二是连接两个或多个文件，如<code>cut fl f2 &gt; f3</code>将把文件 fl 和 f2 的内容合并起来，然后通过输出重定向符“&gt;”的作用，将它们放入文件 f3 中。</p>
+<p>当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用 more 等命令分屏显示。为了控制滚屏，可以按 Ctrl+S 键，停止滚屏；按 Ctrl+Q 键可以恢复滚屏。按 Ctrl+C（中断）键可以终止该命令的执行，并且返回 Shell 提示符状态。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>cut（选项）（参数）</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-b：仅显示行中指定直接范围的内容；
+-c：仅显示行中指定范围的字符；
+-d：指定字段的分隔符，默认的字段分隔符为“TAB”；
+-f：显示指定字段的内容；
+-n：与“-b”选项连用，不分割多字节字符；
+--complement：补足被选择的字节、字符或字段；
+--out-delimiter= 字段分隔符：指定输出内容是的字段分割符；
+--help：显示指令的帮助信息；
+--version：显示指令的版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：指定要进行内容过滤的文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>例如有一个学生报表信息，包含 No、Name、Mark、Percent：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cat test.txt</span>
+No Name Mark Percent
+01 tom 69 91
+02 jack 71 87
+03 alex 68 98
+</pre></div>
+<p>使用  <strong>-f</strong>  选项提取指定字段（这里的 f 参数可以简单记忆为 <code>--fields</code>的缩写）：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -f 1 test.txt</span>
+No
+01
+02
+03</pre></div>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -f2,3 test.txt</span>
+Name Mark
+tom 69
+jack 71
+alex 68
+</pre></div>
+<p><strong>--complement</strong>  选项提取指定字段之外的列（打印除了第二列之外的列）：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -f2 --complement test.txt</span>
+No Mark Percent
+01 69 91
+02 71 87
+03 68 98</pre></div>
+<p>使用  <strong>-d</strong>  选项指定字段分隔符：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cat test2.txt</span>
+No<span class="pl-k">;</span>Name<span class="pl-k">;</span>Mark<span class="pl-k">;</span>Percent
+01<span class="pl-k">;</span>tom<span class="pl-k">;</span>69<span class="pl-k">;</span>91
+02<span class="pl-k">;</span>jack<span class="pl-k">;</span>71<span class="pl-k">;</span>87
+03<span class="pl-k">;</span>alex<span class="pl-k">;</span>68<span class="pl-k">;</span>98</pre></div>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -f2 -d";" test2.txt</span>
+Name
+tom
+jack
+alex
+</pre></div>
+<h3>
+<a id="user-content-指定字段的字符或者字节范围" class="anchor" href="#%E6%8C%87%E5%AE%9A%E5%AD%97%E6%AE%B5%E7%9A%84%E5%AD%97%E7%AC%A6%E6%88%96%E8%80%85%E5%AD%97%E8%8A%82%E8%8C%83%E5%9B%B4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>指定字段的字符或者字节范围</h3>
+<p>cut 命令可以将一串字符作为列来显示，字符字段的记法：</p>
+<ul>
+<li>
+<strong>N-</strong> ：从第 N 个字节、字符、字段到结尾；</li>
+<li>
+<strong>N-M</strong> ：从第 N 个字节、字符、字段到第 M 个（包括 M 在内）字节、字符、字段；</li>
+<li>
+<strong>-M</strong> ：从第 1 个字节、字符、字段到第 M 个（包括 M 在内）字节、字符、字段。</li>
+</ul>
+<p>上面是记法，结合下面选项将摸个范围的字节、字符指定为字段：</p>
+<ul>
+<li>
+<strong>-b</strong>  表示字节；</li>
+<li>
+<strong>-c</strong>  表示字符；</li>
+<li>
+<strong>-f</strong>  表示定义字段。</li>
+</ul>
+<p><strong>示例</strong></p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cat test.txt</span>
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvwxyz
+</pre></div>
+<p>打印第 1 个到第 3 个字符：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -c1-3 test.txt</span>
+abc
+abc
+abc
+abc
+abc
+</pre></div>
+<p>打印前 2 个字符：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -c-2 test.txt</span>
+ab
+ab
+ab
+ab
+ab
+</pre></div>
+<p>打印从第 5 个字符开始到结尾：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> cut -c5- test.txt</span>
+efghijklmnopqrstuvwxyz
+efghijklmnopqrstuvwxyz
+efghijklmnopqrstuvwxyz
+efghijklmnopqrstuvwxyz
+efghijklmnopqrstuvwxyz</pre></div>
+
+
+</body>
+</html>

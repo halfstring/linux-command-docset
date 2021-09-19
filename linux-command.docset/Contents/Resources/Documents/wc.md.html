@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-wc" class="anchor" href="#wc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>wc</h1>
+<p>统计文件的字节数、字数、行数</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>wc命令</strong> 统计指定文件中的字节数、字数、行数，并将统计结果显示输出。利用wc指令我们可以计算文件的Byte数、字数或是列数，若不指定文件名称，或是所给予的文件名为“-”，则wc指令会从标准输入设备读取数据。wc同时也给出所指定文件的总统计数。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>wc(选项)(参数)
+wc [选项]... [文件]...
+wc [选项]... --files0-from=F</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c <span class="pl-c"><span class="pl-c">#</span> 统计字节数，或--bytes或——chars：只显示Bytes数；。</span>
+-l <span class="pl-c"><span class="pl-c">#</span> 统计行数，或——lines：只显示列数；。</span>
+-m <span class="pl-c"><span class="pl-c">#</span> 统计字符数。这个标志不能与 -c 标志一起使用。</span>
+-w <span class="pl-c"><span class="pl-c">#</span> 统计字数，或——words：只显示字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。</span>
+-L <span class="pl-c"><span class="pl-c">#</span> 打印最长行的长度。</span>
+-help     <span class="pl-c"><span class="pl-c">#</span> 显示帮助信息</span>
+--version <span class="pl-c"><span class="pl-c">#</span> 显示版本信息</span></pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：需要统计的文件列表。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre>wc -l <span class="pl-k">*</span>       <span class="pl-c"><span class="pl-c">#</span> 统计当前目录下的所有文件行数及总计行数。</span>
+wc -l <span class="pl-k">*</span>.js    <span class="pl-c"><span class="pl-c">#</span> 统计当前目录下的所有 .js 后缀的文件行数及总计行数。</span>
+find  <span class="pl-c1">.</span> <span class="pl-k">*</span> <span class="pl-k">|</span> xargs wc -l <span class="pl-c"><span class="pl-c">#</span> 当前目录以及子目录的所有文件行数及总计行数。</span></pre></div>
+<p>查看文件的字节数、字数、行数</p>
+<div class="highlight highlight-source-shell"><pre>wc test.txt
+<span class="pl-c"><span class="pl-c">#</span> 输出结果</span>
+7     8     70     test.txt
+<span class="pl-c"><span class="pl-c">#</span> 行数 单词数 字节数 文件名</span></pre></div>
+<p>用wc命令怎么做到只打印统计数字不打印文件名</p>
+<div class="highlight highlight-source-shell"><pre>wc -l <span class="pl-k">&lt;</span> test.txt
+<span class="pl-c"><span class="pl-c">#</span> 输出结果</span>
+7</pre></div>
+<p>用来统计当前目录下的文件数(不包含隐藏文件)</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 要去除TOTAL行</span>
+expr <span class="pl-s"><span class="pl-pds">$(</span>ls -l <span class="pl-k">|</span> wc -l<span class="pl-pds">)</span></span> - 1
+<span class="pl-c"><span class="pl-c">#</span> 输出结果</span>
+8</pre></div>
+<p>统计当前目录下的所有文件行数及总计行数</p>
+<div class="highlight highlight-source-shell"><pre>[root@centos7 <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> wc -l *</span>
+      21 LICENSE
+     270 README.md
+wc: example: read: Is a directory
+     785 lerna-debug.log
+      25 lerna.json
+wc: node_modules: read: Is a directory
+   23603 package-lock.json
+      79 package.json
+       3 renovate.json
+   24786 total</pre></div>
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-who" class="anchor" href="#who" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>who</h1>
+<p>显示当前所有登陆用户的信息。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>who [OPTION]... [file] [am i]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>当没有给出非选项参数时，按以下字段顺序为每个当前用户打印信息：登录用户名称，终端信息，登录时间，远程主机或X display。</li>
+<li>当用户执行 <code>who am i</code> 时，只显示运行该命令的用户的信息。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-a, --all                                等价于调用 <span class="pl-s"><span class="pl-pds">'</span>-b -d --login -p -r -t -T -u<span class="pl-pds">'</span></span>。
+-b, --boot                               上次系统启动的时间。
+-d, --dead                               打印 dead 状态的进程。
+-H, --heading                            打印列标题行。
+-l, --login                              打印系统登录进程。
+--lookup                                 尝试通过 DNS 规范主机名。
+-m                                       仅显示和标准输入关联的主机名和用户。
+-p, --process                            打印由 init 生成的活动进程。
+-q, --count                              列出所有已登录的用户的名称和数量。
+-r, --runlevel                           打印当前运行级别。
+-s, --short                              仅打印名称、行和时间（默认）。
+-t, --time                               打印上次系统时钟更改。
+-T, -w, --mesg, --message, --writable    将 <span class="pl-s"><span class="pl-pds">'</span>+、-、?<span class="pl-pds">'</span></span> 中的一个作为用户的消息状态添加到用户名称后面。
+-u, --users                              列出登录的用户。
+--help                                   显示帮助信息并退出。
+--version                                显示版本信息并退出。
+
+关于 -T 选项的 <span class="pl-s"><span class="pl-pds">'</span>+、-、?<span class="pl-pds">'</span></span>：
+<span class="pl-s"><span class="pl-pds">'</span>+<span class="pl-pds">'</span></span>  允许写入信息
+<span class="pl-s"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>  禁止写入信息
+<span class="pl-s"><span class="pl-pds">'</span>?<span class="pl-pds">'</span></span>  不能查找到终端设备</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>file（可选）：指定 <code>file</code> 代替默认的 <code>/var/run/utmp</code> 、<code>/etc/utmp</code> ；通常使用 <code>/var/log/wtmp</code> 作为参数用于查看过去登陆系统的用户。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> who</span>
+root     pts/0        2013-08-19 15:04 (192.168.0.134)
+root     pts/1        2013-12-20 10:37 (180.111.155.40)
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> who -q</span>
+root root
+<span class="pl-c"><span class="pl-c">#</span> users=2</span>
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> who -H</span>
+NAME     LINE         <span class="pl-k">time</span>             COMMENT
+root     pts/0        2013-08-19 15:04 (192.168.0.134)
+root     pts/1        2013-12-20 10:37 (180.111.155.40)
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> who -w</span>
+root     + pts/0        2013-08-19 15:04 (192.168.0.134)
+root     + pts/1        2013-12-20 10:37 (180.111.155.40)</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 who</code>，<code>info coreutils 'who invocation'</code>。</li>
+</ol>
+
+
+</body>
+</html>

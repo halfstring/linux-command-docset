@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ab" class="anchor" href="#ab" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ab</h1>
+<p>Apache服务器的性能测试工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ab命令</strong> 是一个测试你 Apache http 服务器的工具，你可以通过这个工具，指定一个单位时间内向 apache 发出的请求数量来看看你的 Apache 和机器配合的性能如何。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ab [ -A auth-username:password ] [ <span class="pl-k">-c</span> concurrency ] [ -C cookie-name<span class="pl-k">=</span>value
+] [ <span class="pl-k">-d</span> ] [ <span class="pl-k">-e</span> csv-file ] [ <span class="pl-k">-g</span> gnuplot-file ] [ <span class="pl-k">-h</span> ] [ -H custom-header ] [
+-i  ]  [  <span class="pl-k">-k</span>  ]  [  <span class="pl-k">-n</span>  requests  ] [ <span class="pl-k">-p</span> POST-file ] [ -P proxy-auth-user‐
+name:password ] [ -q ] [ <span class="pl-k">-s</span> ] [ <span class="pl-k">-S</span> ] [ <span class="pl-k">-t</span> timelimit ] [ -T content-type  ]
+[  -v verbosity] [ -V ] [ <span class="pl-k">-w</span> ] [ <span class="pl-k">-x</span> <span class="pl-k">&lt;</span>table<span class="pl-k">&gt;</span>-attributes ] [ -X proxy[:port]
+]  [  -y  <span class="pl-k">&lt;</span>tr<span class="pl-k">&gt;</span>-attributes  ]  [  <span class="pl-k">-z</span>   <span class="pl-k">&lt;</span>td<span class="pl-k">&gt;</span>-attributes   ]   [http://]host‐
+name[:port]/path</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-A auth-username:password
+      <span class="pl-c"><span class="pl-c">#</span>  支持基本的验证证书,用户名和密码之间使用"冒号"                    :</span>
+      <span class="pl-c"><span class="pl-c">#</span> 分隔开,ab将以明文方式传送过去.不管服务器是不是需要</span>
+      <span class="pl-c"><span class="pl-c">#</span> ,也就是说你的服务器需要支持401认证.</span>
+
+-c concurrency
+      <span class="pl-c"><span class="pl-c">#</span> 同时向服务器端发送的请求数目，默认状态下是一次 只执行一个http请求.</span>
+
+-C cookie-name=value
+      <span class="pl-c"><span class="pl-c">#</span> Add a Cookie: line to the request. The argument is typically in the</span>
+      <span class="pl-c"><span class="pl-c">#</span> form of a name=value pair. This field is repeatable.</span>
+
+-d    <span class="pl-c"><span class="pl-c">#</span>  Do not display  the  "percentage  served  within  XX  [ms]  table".</span>
+      <span class="pl-c"><span class="pl-c">#</span> (legacy support).</span>
+
+-e csv-file
+      <span class="pl-c"><span class="pl-c">#</span> Write  a  Comma  separated value (CSV) file which contains for each</span>
+      <span class="pl-c"><span class="pl-c">#</span> percentage (from 1% to 100%) the time (in milli seconds) it took to</span>
+      <span class="pl-c"><span class="pl-c">#</span> serve  that percentage of the requests. This is usually more useful</span>
+      <span class="pl-c"><span class="pl-c">#</span> than the 'gnuplot' file; as the results are already 'binned'.</span>
+
+-g gnuplot-file
+      <span class="pl-c"><span class="pl-c">#</span> Write all measured values out as a 'gnuplot' or TSV  (Tab  separate</span>
+      <span class="pl-c"><span class="pl-c">#</span> values)  file.  This file can easily be imported into packages like</span>
+      <span class="pl-c"><span class="pl-c">#</span> Gnuplot, IDL, Mathematica, Igor or even Excell. The labels  are  on</span>
+      <span class="pl-c"><span class="pl-c">#</span> the first line of the file.</span>
+-h    <span class="pl-c"><span class="pl-c">#</span> 显示使用说明</span>
+-H custom-header
+      <span class="pl-c"><span class="pl-c">#</span> 向请求包追加附加的标题字串.此参数应该是有效的标题         行(header</span>
+      <span class="pl-c"><span class="pl-c">#</span> line)形式,通常使用冒号":"来分隔有效配对 (valid  pair)例如  'Accept-</span>
+      <span class="pl-c"><span class="pl-c">#</span> Encoding: zip/zop;8 bit';</span>
+
+-i    <span class="pl-c"><span class="pl-c">#</span> 使用一个 http 头(HEAD) 来替换 GET方法.不可以掺入POST 方法</span>
+
+-k    <span class="pl-c"><span class="pl-c">#</span>  允许http      KeepAlive      ；也就是说执行多个请求在一个      http</span>
+      <span class="pl-c"><span class="pl-c">#</span> 会话当中，默认是不允许的也就是no KeepAlive啦;)</span>
+
+-n requests
+      <span class="pl-c"><span class="pl-c">#</span> 执行一次测试会话的时候所发出的请求数目,默认是执行一个单一的请求</span>
+      <span class="pl-c"><span class="pl-c">#</span> 当然了这样的测试结果也就没什么意义了</span>
+
+-p POST-file
+      <span class="pl-c"><span class="pl-c">#</span> 测试程序也就是ab,将向Apache server发送带有HTTP POST 的请求.</span>
+
+-P proxy-auth-username:password
+      <span class="pl-c"><span class="pl-c">#</span> 当需要通过代理测试一台 HTTP 服务器的时候而你的代理</span>
+      <span class="pl-c"><span class="pl-c">#</span> 又需要用户名密码验证,这时你可以使用这个选项,同样</span>
+      <span class="pl-c"><span class="pl-c">#</span> 用户名与密码之间使用冒号":"分隔开,ab将之以明文的方式</span>
+      <span class="pl-c"><span class="pl-c">#</span> 发送出去,当然,前提是你的代理是处于407认证状态的</span>
+
+-q    <span class="pl-c"><span class="pl-c">#</span>  When processing more than 150 requests, ab outputs a progress count</span>
+      <span class="pl-c"><span class="pl-c">#</span> on  stderr  every  10% or 100 requests or so. The -q flag will sup‐</span>
+      <span class="pl-c"><span class="pl-c">#</span> press these messages.</span>
+
+-s    <span class="pl-c"><span class="pl-c">#</span>  When compiled in (ab -h will show you) use the SSL protected  https</span>
+      <span class="pl-c"><span class="pl-c">#</span> rather  than  the  http  protocol. This feature is experimental and</span>
+      <span class="pl-c"><span class="pl-c">#</span> very rudimentary. You probably do not want to use it.</span>
+
+-S    <span class="pl-c"><span class="pl-c">#</span>  Do not display the median and standard deviation values,  nor  dis‐</span>
+      <span class="pl-c"><span class="pl-c">#</span> play  the  warning/error  messages  when the average and median are</span>
+      <span class="pl-c"><span class="pl-c">#</span> more than one or two times the standard deviation  apart.  And  de‐</span>
+      <span class="pl-c"><span class="pl-c">#</span> fault to the min/avg/max values. (legacy support).</span>
+
+-t timelimit
+      <span class="pl-c"><span class="pl-c">#</span>  设置测试的时间的长短，使用这个选项ab将自动设置</span>
+      <span class="pl-c"><span class="pl-c">#</span> 测试请求会话数目为50000，然后以你设置的时间为</span>
+      <span class="pl-c"><span class="pl-c">#</span> 固定周期.默认状态下是没有时限的，也就是直到完成</span>
+      <span class="pl-c"><span class="pl-c">#</span> 你所设置的请求数目为止.</span>
+
+-T content-type
+      <span class="pl-c"><span class="pl-c">#</span> 内容类型标头,使用在POST数据的时候.</span>
+
+-v verbosity
+      <span class="pl-c"><span class="pl-c">#</span> 设置冗余级别,4级打印出每个请求标头的详细信息,</span>
+      <span class="pl-c"><span class="pl-c">#</span> 3级打印出回应代码(例如,404,200),2级打印出警告 信息和指示消息</span>
+
+-V    <span class="pl-c"><span class="pl-c">#</span> 显示版本号并且退出</span>
+-w    <span class="pl-c"><span class="pl-c">#</span> 打印输出结果到HTML表中. 默认的表是两列n行白底黑框</span>
+
+-x <span class="pl-k">&lt;</span>table<span class="pl-k">&gt;</span>-attributes
+      <span class="pl-c"><span class="pl-c">#</span> 使用字串来描述表的属性,该属性字串应该插入到&lt;table 这里 &gt;</span>
+
+-X proxy[:port]
+      <span class="pl-c"><span class="pl-c">#</span> Use a proxy server for the requests.</span>
+
+-y <span class="pl-k">&lt;</span>tr<span class="pl-k">&gt;</span>-attributes
+      <span class="pl-c"><span class="pl-c">#</span> 用于生成html表格每行的属性名 (&lt;tr&gt;)</span>
+
+-z <span class="pl-k">&lt;</span>td<span class="pl-k">&gt;</span>-attributes
+      <span class="pl-c"><span class="pl-c">#</span> 用于生成html表格每列的属性名 (&lt;td&gt;)</span></pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>主机：被测试主机。</p>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-updatedb" class="anchor" href="#updatedb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>updatedb</h1>
+<p>创建或更新slocate命令所必需的数据库文件</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>updatedb命令</strong> 用来创建或更新slocate命令所必需的数据库文件。updatedb命令的执行过程较长，因为在执行时它会遍历整个系统的目录树，并将所有的文件信息写入slocate数据库文件中。</p>
+<p>补充说明：slocate本身具有一个数据库，里面存放了系统中文件与目录的相关信息。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>updatedb(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-o<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>：忽略默认的数据库文件，使用指定的slocate数据库文件；
+-U<span class="pl-k">&lt;</span>目录<span class="pl-k">&gt;</span>：更新指定目录的slocate数据库；
+-v：显示执行的详细过程。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>实用updatedb命令的<code>-U</code>选项可以指定要更新slocate数据库的目录。</p>
+<div class="highlight highlight-source-shell"><pre>updatedb -U /usr/local/  更新指定命令的slocate数据库</pre></div>
+
+
+</body>
+</html>

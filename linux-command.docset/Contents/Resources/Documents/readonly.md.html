@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-readonly" class="anchor" href="#readonly" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>readonly</h1>
+<p>标记shell变量或函数为只读</p>
+<h2>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">readonly</span> [-aAf] [name[<span class="pl-k">=</span>value] ...]
+<span class="pl-k">readonly</span> -p</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>定义一到多个变量并设置只读属性。</li>
+<li>为已定义的一到多个变量设置只读属性。</li>
+<li>显示全部包含只读属性的变量。</li>
+<li>为已定义的一到多个函数设置只读属性。</li>
+<li>显示全部包含只读属性的函数。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-a：指向数组。
+-A：指向关联数组。
+-f：指向函数。
+-p：显示全部只读变量。
+--：在它之后的选项无效。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<div class="highlight highlight-source-shell"><pre>name（可选）：变量名或函数名
+value（可选）：变量的值</pre></div>
+<h3>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h3>
+<p>readonly返回true除非你提供了非法选项或非法名称。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 定义变量并增加只读属性</span>
+<span class="pl-k">readonly</span> var1=13 var2
+<span class="pl-k">readonly</span> -a arr1=(1 2 3 4 5) arr2=(<span class="pl-s"><span class="pl-pds">'</span>z<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>x<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>c<span class="pl-pds">'</span></span>)
+<span class="pl-c"><span class="pl-c">#</span> 必须有 '-A' 选项</span>
+<span class="pl-k">readonly</span> -A dict1=([<span class="pl-s"><span class="pl-pds">'</span>key1<span class="pl-pds">'</span></span>]=<span class="pl-s"><span class="pl-pds">'</span>value1<span class="pl-pds">'</span></span>)</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 先定义变量、函数，然后再为它们添加只读属性</span>
+max=3
+<span class="pl-k">readonly</span> max
+
+<span class="pl-c"><span class="pl-c">#</span> 数组定义时可以不加 `declare -a`</span>
+seasons=(<span class="pl-s"><span class="pl-pds">'</span>spring<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>summer<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>autumn<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>winter<span class="pl-pds">'</span></span>)
+<span class="pl-c"><span class="pl-c">#</span> 为数组添加只读属性时可以不加 `-a` 选项</span>
+<span class="pl-k">readonly</span> seasons
+
+<span class="pl-k">declare</span> -A man=([<span class="pl-s"><span class="pl-pds">'</span>age<span class="pl-pds">'</span></span>]=23 [<span class="pl-s"><span class="pl-pds">'</span>height<span class="pl-pds">'</span></span>]=<span class="pl-s"><span class="pl-pds">'</span>190cm<span class="pl-pds">'</span></span>)
+<span class="pl-c"><span class="pl-c">#</span> 为关联数组添加只读属性时可以不加 `-A` 选项</span>
+<span class="pl-k">readonly</span> man
+
+<span class="pl-k">function</span> <span class="pl-en">foo(){</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>; }
+<span class="pl-c"><span class="pl-c">#</span> 为函数添加只读属性时必须加 `-f` 选项</span>
+<span class="pl-k">readonly</span> -f foo</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 显示全部只读变量，以下两个命令的显示结果一样</span>
+<span class="pl-k">readonly</span>
+<span class="pl-k">readonly</span> -p
+<span class="pl-c"><span class="pl-c">#</span> 显示全部拥有只读属性的数组</span>
+<span class="pl-k">readonly</span> -a
+<span class="pl-c"><span class="pl-c">#</span> 显示全部拥有只读属性的关联数组</span>
+<span class="pl-k">readonly</span> -A
+<span class="pl-c"><span class="pl-c">#</span> 显示全部拥有只读属性的函数</span>
+<span class="pl-k">readonly</span> -f</pre></div>
+<h2>
+<a id="user-content-常见错误" class="anchor" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>常见错误</h2>
+<p>对于只读变量而言，若用户对其值进行修改，则会立即报错。例如，使用该指令定义一个只读变量"test"，并且将其值初始化为"ok"，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> readonly test='ok'        #定义只读变量并初始化 </span></pre></div>
+<p>那么当用户直接修改该只读变量时就会报错，如下所示：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> test='my'                 #试图修改只读变量的值</span>
+-bash: test: <span class="pl-k">readonly</span> variable</pre></div>
+<p>当用户试图修改只读变量的值时，会被提示该变量为只读变量。</p>
+<h2>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h2>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+<li>
+<code>declare +r</code>不能去除只读属性， <code>unset</code>不能删除只读变量。</li>
+</ol>
+
+
+</body>
+</html>

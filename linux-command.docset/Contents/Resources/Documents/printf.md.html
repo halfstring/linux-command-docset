@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-printf" class="anchor" href="#printf" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>printf</h1>
+<p>格式化并输出结果。</p>
+<h2>
+<a id="user-content-目录" class="anchor" href="#%E7%9B%AE%E5%BD%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>目录</h2>
+<ul>
+<li><a href="#%E5%86%85%E5%BB%BA%E5%91%BD%E4%BB%A4">bash内建命令</a></li>
+<li><a href="#%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4">GNU coreutils中的命令</a></li>
+</ul>
+<h2>
+<a id="user-content-内建命令" class="anchor" href="#%E5%86%85%E5%BB%BA%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>内建命令</h2>
+<h4>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h4>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">printf</span> [-v var] format [arguments]</pre></div>
+<h4>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h4>
+<ul>
+<li>格式化参数并输出。</li>
+</ul>
+<h4>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h4>
+<div class="highlight highlight-source-shell"><pre>-v var：将结果输出到变量var中而不是输出到标准输出。</pre></div>
+<h4>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h4>
+<p>format：输出格式。</p>
+<p>arguments：一到多个参数。</p>
+<div class="highlight highlight-source-shell"><pre>转义序列：除了支持printf(1)和printf(3)的转义序列，内建printf还支持以下转义序列：
+
+%b       展开参数中的反斜杠转义字符。
+%q       将参数扩起以用作shell输入。
+%(fmt)T  根据strftime(3)中的转义字符来输出日期时间字符串。</pre></div>
+<h4>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h4>
+<p>返回状态为成功除非给出了非法选项、写错误、赋值错误。</p>
+<h4>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h4>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> %-5s 格式为左对齐且宽度为5的字符串代替（'-'表示左对齐），不使用则默认右对齐。</span>
+<span class="pl-c"><span class="pl-c">#</span> %-4.2f 格式为左对齐宽度为4，保留两位小数。</span>
+
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%-5s %-10s %-4s\n<span class="pl-pds">"</span></span> NO Name Mark
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%-5s %-10s %-4.2f\n<span class="pl-pds">"</span></span> 01 Tom 90.3456
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%-5s %-10s %-4.2f\n<span class="pl-pds">"</span></span> 02 Jack 89.2345
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%-5s %-10s %-4.2f\n<span class="pl-pds">"</span></span> 03 Jeff 98.4323
+
+<span class="pl-c"><span class="pl-c">#</span> 输出</span>
+NO    Name       Mark
+01    Tom        90.35
+02    Jack       89.23
+03    Jeff       98.43
+
+
+<span class="pl-c"><span class="pl-c">#</span> %b %q %(fmt)T 的例子。</span>
+<span class="pl-c"><span class="pl-c">#</span> see it again with a newline.</span>
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%s\n<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">'</span>hello world<span class="pl-pds">'</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 展开换行符，和上面的结果一样。</span>
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%b<span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">'</span>hello world\n<span class="pl-pds">'</span></span>
+
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">'</span>%q\n<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>a b c<span class="pl-pds">'</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 输出</span>
+a<span class="pl-cce">\ </span>b<span class="pl-cce">\ </span>c
+
+<span class="pl-c"><span class="pl-c">#</span> %z为时区，%n为换行符。</span>
+<span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>%(%F %T %z%n)T<span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 输出</span>
+2019-09-10 01:48:07 +0000</pre></div>
+<h4>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h4>
+<ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h2>
+<a id="user-content-外部命令" class="anchor" href="#%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>外部命令</h2>
+<h4>
+<a id="user-content-概要-1" class="anchor" href="#%E6%A6%82%E8%A6%81-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h4>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">printf</span> FORMAT [ARGUMENT]...
+<span class="pl-c1">printf</span> OPTION</pre></div>
+<h4>
+<a id="user-content-主要用途-1" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h4>
+<ul>
+<li>格式化参数并输出。</li>
+</ul>
+<h4>
+<a id="user-content-选项-1" class="anchor" href="#%E9%80%89%E9%A1%B9-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h4>
+<div class="highlight highlight-source-shell"><pre>--help 显示帮助信息并退出。
+--version 显示版本信息并退出。</pre></div>
+<h4>
+<a id="user-content-参数-1" class="anchor" href="#%E5%8F%82%E6%95%B0-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h4>
+<p>format：输出格式。</p>
+<p>arguments：一到多个参数。</p>
+<div class="highlight highlight-source-shell"><pre>在这里忽略了（%b %q），如果你安装的coreutils版本支持它们，那么请参考上面的例子。
+支持的转义序列：
+
+<span class="pl-cce">\"</span>          双引号
+<span class="pl-cce">\\</span>          反斜杠
+<span class="pl-cce">\a</span>          响铃
+<span class="pl-cce">\b</span>          退格
+<span class="pl-cce">\c</span>          截断输出
+<span class="pl-cce">\e</span>          退出
+<span class="pl-cce">\f</span>          翻页
+<span class="pl-cce">\n</span>          换行
+<span class="pl-cce">\r</span>          回车
+<span class="pl-cce">\t</span>          水平制表符
+<span class="pl-cce">\v</span>          竖直制表符
+<span class="pl-cce">\N</span>NN        八进制数 (1到3位数字)
+<span class="pl-cce">\x</span>HH        十六进制数 (1到2位数字)
+<span class="pl-cce">\u</span>HHHH      Unicode字符附加4位十六进制数字
+<span class="pl-cce">\U</span>HHHHHHHH  Unicode字符附加8位十六进制数字
+%%          百分号
+
+以及<span class="pl-s"><span class="pl-pds">'</span>diouxXfeEgGcs<span class="pl-pds">'</span></span>中的一个结尾的C格式规范，将被转换为正确的类型并处理可变宽度。</pre></div>
+<h4>
+<a id="user-content-例子-1" class="anchor" href="#%E4%BE%8B%E5%AD%90-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h4>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 使用 /usr/bin/printf 确保调用的不是内建命令。</span>
+<span class="pl-c"><span class="pl-c">#</span> 当然，在你关闭内建printf以及确认当前环境没有printf函数的情况下，可直接使用printf，详见末尾"注意"的链接。</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 按行打印数组和关联数组的下标及值。</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 声明数组可以不加'declare -a'或'local -a'（在函数内声明的局部变量）。</span>
+arr=(<span class="pl-s"><span class="pl-pds">'</span>line1<span class="pl-pds">'</span></span> <span class="pl-s"><span class="pl-pds">'</span>line2<span class="pl-pds">'</span></span>)
+/usr/bin/printf <span class="pl-s"><span class="pl-pds">"</span>%s\n<span class="pl-pds">"</span></span> <span class="pl-smi">${<span class="pl-k">!</span>arr[@]}</span>
+<span class="pl-c"><span class="pl-c">#</span> 输出下标</span>
+0
+1
+/usr/bin/printf <span class="pl-s"><span class="pl-pds">"</span>%s\n<span class="pl-pds">"</span></span> <span class="pl-smi">${arr[@]}</span>
+<span class="pl-c"><span class="pl-c">#</span> 输出值</span>
+line1
+line2
+
+<span class="pl-c"><span class="pl-c">#</span>声明关联数组（也就是字典）必须加'declare -A'或'local -A'（在函数内声明的局部变量）。</span>
+<span class="pl-k">declare</span> -A assoc_arr=([<span class="pl-s"><span class="pl-pds">'</span>key1<span class="pl-pds">'</span></span>]=<span class="pl-s"><span class="pl-pds">'</span>value1<span class="pl-pds">'</span></span> [<span class="pl-s"><span class="pl-pds">'</span>key2<span class="pl-pds">'</span></span>]=<span class="pl-s"><span class="pl-pds">'</span>value2<span class="pl-pds">'</span></span>)
+/usr/bin/printf <span class="pl-s"><span class="pl-pds">"</span>%s\n<span class="pl-pds">"</span></span> <span class="pl-smi">${<span class="pl-k">!</span>assoc_arr[@]}</span>
+<span class="pl-c"><span class="pl-c">#</span> 输出键。</span>
+key2
+key1
+/usr/bin/printf <span class="pl-s"><span class="pl-pds">"</span>%s\n<span class="pl-pds">"</span></span> <span class="pl-smi">${assoc_arr[@]}</span>
+<span class="pl-c"><span class="pl-c">#</span> 输出值。</span>
+value2
+value1</pre></div>
+<h4>
+<a id="user-content-返回值-1" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h4>
+<p>返回状态为成功除非给出了非法选项等。</p>
+<h4>
+<a id="user-content-注意-1" class="anchor" href="#%E6%B3%A8%E6%84%8F-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h4>
+<ol>
+<li>
+<p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 printf</code>或<code>info coreutils 'pwd invocation'</code>。</p>
+</li>
+<li>
+<p>启动或关闭内建命令请查看<code>enable</code>命令，关于同名优先级的问题请查看<code>builtin</code>命令的例子部分的相关讨论。</p>
+</li>
+<li>
+<p>我通过和<code>bug-bash@gnu.org</code>的交流，得到了关于这几个格式说明符<code>%b %q %(fmt)T</code>的解释：</p>
+<blockquote>
+<p>printf(1)中的%b格式说明符是printf(3)支持的格式之外增加的一个POSIX特性。</p>
+<p>%q和%T说明符是非标准的，并且不受所有独立实现的printf的支持。</p>
+</blockquote>
+<p>更多细节请参考链接：</p>
+<ul>
+<li>
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/printf.html" rel="nofollow">POSIX printf</a>
+<code>APPLICATION USAGE</code>段落的第五节。</li>
+<li>
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html" rel="nofollow">POSIX printf格式说明符</a>
+的<code>Description</code>段落。</li>
+</ul>
+</li>
+</ol>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-logger" class="anchor" href="#logger" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>logger</h1>
+<p>在系统日志中记录相应条目</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>logger命令</strong> 是用于往系统中写入日志，他提供一个shell命令接口到syslog系统模块</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>logger [options] [message]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre> -T, --tcp             使用流连接(TCP)
+ -d, --udp             使用数据报(UDP)
+ -i, --id              逐行记录每一次logger的进程ID
+ -f, --file <span class="pl-k">&lt;</span>file<span class="pl-k">&gt;</span>     记录特定的文件
+ -h, --help            显示帮助文本并退出
+ -n, --server <span class="pl-k">&lt;</span>name<span class="pl-k">&gt;</span>   写入指定的远程syslog服务器，使用UDP代替内装式syslog的例程
+ -P, --port <span class="pl-k">&lt;</span>port<span class="pl-k">&gt;</span>     使用指定的UDP端口。默认的端口号是514
+ -p, --priority <span class="pl-k">&lt;</span>prio<span class="pl-k">&gt;</span> 指定输入消息的优先级，优先级可以是数字或者指定为 <span class="pl-s"><span class="pl-pds">"</span> facility.level<span class="pl-pds">"</span></span> 的格式。
+                       比如：<span class="pl-s"><span class="pl-pds">"</span> -p local3.info <span class="pl-pds">"</span></span> local3 这个设备的消息级别为 info。
+                       默认级别是 <span class="pl-s"><span class="pl-pds">"</span>user.notice<span class="pl-pds">"</span></span>
+ -s, --stderr          输出标准错误到系统日志。
+ -t, --tag <span class="pl-k">&lt;</span>tag<span class="pl-k">&gt;</span>       指定标记记录
+ -u, --socket <span class="pl-k">&lt;</span>socket<span class="pl-k">&gt;</span> 写入指定的socket，而不是到内置系统日志例程。
+ -V, --version         输出版本信息并退出</pre></div>
+<h3>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h3>
+<div class="highlight highlight-source-shell"><pre>logger -p syslog.info <span class="pl-s"><span class="pl-pds">"</span>backup.sh is starting<span class="pl-pds">"</span></span></pre></div>
+
+
+</body>
+</html>

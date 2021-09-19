@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-nmcli" class="anchor" href="#nmcli" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>nmcli</h1>
+<p>地址配置工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>nmcli命令</strong> 是 NetworkManager client 网络管理客户端。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>nmcli [OPTIONS] OBJECT { COMMAND <span class="pl-k">|</span> <span class="pl-c1">help</span> }</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>OPTIONS
+  -t[erse]                                  <span class="pl-c"><span class="pl-c">#</span> terse output 简洁的输出</span>
+  -p[retty]                                 <span class="pl-c"><span class="pl-c">#</span> pretty output 漂亮的输出</span>
+  -m[ode] tabular<span class="pl-k">|</span>multiline                 <span class="pl-c"><span class="pl-c">#</span> output mode  输出模式</span>
+  -f[ields] <span class="pl-k">&lt;</span>field1,field2,...<span class="pl-k">&gt;</span><span class="pl-k">|</span>all<span class="pl-k">|</span>common  <span class="pl-c"><span class="pl-c">#</span> specify fields to output 指定要输出的字段</span>
+  -e[scape] yes<span class="pl-k">|</span>no                          <span class="pl-c"><span class="pl-c">#</span> escape columns separators in values 在值中转义列分隔符</span>
+  -n[ocheck]                                <span class="pl-c"><span class="pl-c">#</span> 不要检查nmcli和NetworkManager版本</span>
+  -a[sk]                                    <span class="pl-c"><span class="pl-c">#</span> 要求缺少参数</span>
+  -w[ait] <span class="pl-k">&lt;</span>seconds<span class="pl-k">&gt;</span>                         <span class="pl-c"><span class="pl-c">#</span> 设置超时等待整理操作</span>
+  -v[ersion]                                <span class="pl-c"><span class="pl-c">#</span> 显示程序版本</span>
+  -h[elp]                                   <span class="pl-c"><span class="pl-c">#</span> 打印此帮助</span>
+
+OBJECT
+  g[eneral]       NetworkManager的一般状态和操作
+  n[etworking]    整体组网控制
+  r[adio]         NetworkManager切换开关
+  c[onnection]    NetworkManager的连接
+  d[evice]        由NetworkManager管理的设备
+  a[gent]         NetworkManager秘密代理或polkit代理</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>nmcli connection show           <span class="pl-c"><span class="pl-c">#</span> 查看当前连接状态</span>
+nmcli connection reload         <span class="pl-c"><span class="pl-c">#</span> 重启服务</span>
+nmcli connection show -active   <span class="pl-c"><span class="pl-c">#</span> 显示活动的连接</span>
+nmcli connection show <span class="pl-s"><span class="pl-pds">"</span>lan eth0<span class="pl-pds">"</span></span><span class="pl-c"><span class="pl-c">#</span> 显示指定一个网络连接配置</span>
+nmcli device status             <span class="pl-c"><span class="pl-c">#</span> 显示设备状态</span>
+nmcli device show eno16777736   <span class="pl-c"><span class="pl-c">#</span> 显示指定接口属性</span>
+nmcli device show               <span class="pl-c"><span class="pl-c">#</span> 显示全部接口属性</span>
+nmcli con up static             <span class="pl-c"><span class="pl-c">#</span> 启用static连接配置</span>
+nmcli con up default            <span class="pl-c"><span class="pl-c">#</span> 启用default连接配置 </span>
+nmcli con add <span class="pl-c1">help</span>              <span class="pl-c"><span class="pl-c">#</span> 查看帮助</span>
+</pre></div>
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-fsck" class="anchor" href="#fsck" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>fsck</h1>
+<p>检查并且试图修复文件系统中的错误</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>fsck命令</strong> 被用于检查并且试图修复文件系统中的错误。当文件系统发生错误四化，可用fsck指令尝试加以修复。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>fsck(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a：自动修复文件系统，不询问任何问题；
+-A：依照/etc/fstab配置文件的内容，检查文件内所列的全部文件系统；
+-N：不执行指令，仅列出实际执行会进行的动作；
+-P：当搭配<span class="pl-s"><span class="pl-pds">"</span>-A<span class="pl-pds">"</span></span>参数使用时，则会同时检查所有的文件系统；
+-r：采用互动模式，在执行修复时询问问题，让用户得以确认并决定处理方式；
+-R：当搭配<span class="pl-s"><span class="pl-pds">"</span>-A<span class="pl-pds">"</span></span>参数使用时，则会略过/目录的文件系统不予检查；
+-s：依序执行检查作业，而非同时执行；
+-t<span class="pl-k">&lt;</span>文件系统类型<span class="pl-k">&gt;</span>：指定要检查的文件系统类型；
+-T：执行fsck指令时，不显示标题信息；
+-V：显示指令执行过程。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件系统：指定要查看信息的文件系统。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>linux的文件系统损坏会导致linux不正常关机，出错的时候如果系统告诉你是哪一块硬盘的分区有问题，比如是<code>/dev/hda2</code>，接着用如下的命令去对付它：</p>
+<div class="highlight highlight-source-shell"><pre>fsck -y /dev/hda2</pre></div>
+<p>结束后使用reboot命令重启系统这样就好了！</p>
+<p>如果不知道时哪个地方出了问题，可以直接：</p>
+<div class="highlight highlight-source-shell"><pre>fsck</pre></div>
+<p>在随后的多个确认对话框中输入<code>:y</code></p>
+<p>结束后同样使用reboot命令重启系统这样就好了！</p>
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-usermod" class="anchor" href="#usermod" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>usermod</h1>
+<p>用于修改用户的基本信息</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>usermod命令</strong> 用于修改用户的基本信息。usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变user id，必须确认这名user没在电脑上执行任何程序。你需手动更改使用者的 crontab 档。也需手动更改使用者的 at 工作档。采用 NIS server 须在server上更动相关的NIS设定。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>usermod(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c<span class="pl-k">&lt;</span>备注<span class="pl-k">&gt;</span>：修改用户帐号的备注文字；
+-d<span class="pl-k">&lt;</span>登入目录<span class="pl-k">&gt;</span>：修改用户登入时的目录，只是修改/etc/passwd中用户的家目录配置信息，不会自动创建新的家目录，通常和-m一起使用；
+-m<span class="pl-k">&lt;</span>移动用户家目录<span class="pl-k">&gt;</span>:移动用户家目录到新的位置，不能单独使用，一般与-d一起使用。
+-e<span class="pl-k">&lt;</span>有效期限<span class="pl-k">&gt;</span>：修改帐号的有效期限；
+-f<span class="pl-k">&lt;</span>缓冲天数<span class="pl-k">&gt;</span>：修改在密码过期后多少天即关闭该帐号；
+-g<span class="pl-k">&lt;</span>群组<span class="pl-k">&gt;</span>：修改用户所属的群组；
+-G<span class="pl-k">&lt;</span>群组<span class="pl-k">&gt;</span>；修改用户所属的附加群组；
+-l<span class="pl-k">&lt;</span>帐号名称<span class="pl-k">&gt;</span>：修改用户帐号名称；
+-L：锁定用户密码，使密码无效；
+-s<span class="pl-k">&lt;</span>shell<span class="pl-k">&gt;</span>：修改用户登入后所使用的shell；
+-u<span class="pl-k">&lt;</span>uid<span class="pl-k">&gt;</span>：修改用户ID；
+-U:解除密码锁定。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>登录名：指定要修改信息的用户登录名。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将 newuser2 添加到组 staff 中：</p>
+<div class="highlight highlight-source-shell"><pre>usermod -G staff newuser2</pre></div>
+<p>修改newuser的用户名为newuser1：</p>
+<div class="highlight highlight-source-shell"><pre>usermod -l newuser1 newuser</pre></div>
+<p>锁定账号newuser1：</p>
+<div class="highlight highlight-source-shell"><pre>usermod -L newuser1</pre></div>
+<p>解除对newuser1的锁定：</p>
+<div class="highlight highlight-source-shell"><pre>usermod -U newuser1</pre></div>
+<p>增加用户到用户组中:</p>
+<div class="highlight highlight-source-shell"><pre>apk add shadow <span class="pl-c"><span class="pl-c">#</span> 安装 shadow 包, usermod 命令包含在 usermod 中</span>
+usermod -aG group user <span class="pl-c"><span class="pl-c">#</span> 添加用户到用户组中</span></pre></div>
+<p><code>-a</code> 参数表示附加，只和 <code>-G</code> 参数一同使用，表示将用户增加到组中。</p>
+<p>修改用户家目录：</p>
+<pre><code>[root@node-1 ~]# useradd lutixiaya
+[root@node-1 ~]# ls /home
+lutixiaya
+[root@node-1 ~]# usermod -md /data/new_home lutixiaya
+[root@node-1 ~]# ls /home/
+[root@node-1 ~]# ls /data/
+new_home
+</code></pre>
+
+
+</body>
+</html>

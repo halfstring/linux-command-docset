@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-mkinitrd" class="anchor" href="#mkinitrd" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>mkinitrd</h1>
+<p>建立要载入ramdisk的映像文件</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>mkinitrd命令</strong> 建立要载入ramdisk的映像文件，以供Linux开机时载入ramdisk。</p>
+<p>这个是重新封包核心的命令，例如你自己修改了一个设备的驱动，如果这个驱动要加入核心级别的话，就需要对核心进行重新封包，把新加的配置编译到核心内部去！</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>mkinitrd(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-f：若指定的映像问家名称与现有文件重复，则覆盖现有的文件；
+-v：执行时显示详细的信息；
+--omit-scsi-modules：不要载入SCSI模块；
+--preload=<span class="pl-k">&lt;</span>模块名称<span class="pl-k">&gt;</span>：指定要载入的模块；
+--with=<span class="pl-k">&lt;</span>模块名称<span class="pl-k">&gt;</span>：指定要载入的模块；
+--version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<ul>
+<li>映像文件：指定要创建的映像文件；</li>
+<li>内核版本：指定内核版本。</li>
+</ul>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>[root@localhost tmp]<span class="pl-c"><span class="pl-c">#</span> mkinitrd -v -f myinitrd.img $(uname -r)</span>
+Creating initramfs
+WARNING: using /tmp <span class="pl-k">for</span> temporary files
+Looking <span class="pl-k">for</span> deps of module ide-disk
+Looking <span class="pl-k">for</span> deps of module ext3  jbd
+Looking <span class="pl-k">for</span> deps of module jbd
+Using modules:  ./kernel/fs/jbd/jbd.ko ./kernel/fs/ext3/ext3.ko
+/sbin/nash -<span class="pl-k">&gt;</span> /tmp/initrd.Vz3928/bin/nash
+/sbin/insmod.static -<span class="pl-k">&gt;</span> /tmp/initrd.Vz3928/bin/insmod
+/sbin/udev.static -<span class="pl-k">&gt;</span> /tmp/initrd.Vz3928/sbin/udev
+/etc/udev/udev.conf -<span class="pl-k">&gt;</span> /tmp/initrd.Vz3928/etc/udev/udev.conf
+copy from /lib/modules/2.6.9-5.EL/./kernel/fs/jbd/jbd.ko(elf32-i386) to /tmp/initrd.Vz3928/lib/jbd.ko(elf32-i386)
+copy from /lib/modules/2.6.9-5.EL/./kernel/fs/ext3/ext3.ko(elf32-i386) to /tmp/initrd.Vz3928/lib/ext3.ko(elf32-i386)
+Loading module jbd
+Loading module ext3
+
+[root@localhost tmp]<span class="pl-c"><span class="pl-c">#</span> file myinitrd.img</span>
+myinitrd.img: gzip compressed data, from Unix, max compression
+
+[root@localhost tmp]<span class="pl-c"><span class="pl-c">#</span> mv myinitrd.img  myinitrd.img.gz</span>
+[root@localhost tmp]<span class="pl-c"><span class="pl-c">#</span> gzip -d myinitrd.img.gz</span>
+[root@localhost tmp]<span class="pl-c"><span class="pl-c">#</span> file myinitrd.img</span>
+myinitrd.img: ASCII cpio archive (SVR4 with no CRC)</pre></div>
+
+
+</body>
+</html>

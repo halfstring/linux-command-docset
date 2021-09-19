@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-jobs" class="anchor" href="#jobs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>jobs</h1>
+<p>显示作业的状态。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">jobs</span> [-lnprs] [jobspec ...]
+<span class="pl-c1">jobs</span> -x <span class="pl-c1">command</span> [args]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>显示作业的状态。</li>
+<li>列出活动的作业。</li>
+<li>列出停止的作业。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-l	在作业信息中额外的列出PID。
+-n	只列出最近一次通知以来状态变更的作业。
+-p	只列出PID。
+-r	只输出处于运行状态的作业。
+-s	只输出处于停止状态的作业。</pre></div>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回状态为成功除非给出了非法选项、执行出现错误。</p>
+<p>如果使用<code>jobs -x command [args]</code>形式执行，那么返回值为<code>command</code>的退出状态。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre>[user2@pc] ssh 192.168.1.4
+pc@192.168.1.4<span class="pl-s"><span class="pl-pds">'</span>s password:</span>
+<span class="pl-s"># 此时按下ctrl+z使得交互停止。</span>
+<span class="pl-s">[1]+  Stopped                 ssh 192.168.1.4</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] sleep 60 &amp;</span>
+<span class="pl-s">[2] 13338</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs</span>
+<span class="pl-s">[1]-  Stopped                 ssh 192.168.1.4</span>
+<span class="pl-s">[2]   Running                 sleep 60 &amp;</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs -l</span>
+<span class="pl-s">[1]- 12927 Stopped                 ssh 192.168.1.4</span>
+<span class="pl-s">[2]  13338 Running                 sleep 60 &amp;</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs -p</span>
+<span class="pl-s">12927</span>
+<span class="pl-s">13338</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs -s</span>
+<span class="pl-s">[1]-  Stopped                 ssh 192.168.1.4</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs -r</span>
+<span class="pl-s">[2]   Running                 sleep 60 &amp;</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] kill -9 12927</span>
+<span class="pl-s">[2]   Done                    sleep 60</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs -n -l</span>
+<span class="pl-s">[1]+ 12927 Killed             ssh 192.168.1.4</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] jobs -n -l</span></pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>
+<code>bash</code>的作业控制命令包括<code>bg fg kill wait disown suspend</code>。</li>
+<li>该命令需要<code>set</code>选项<code>monitor</code>处于开启状态时才能执行；查看作业控制状态：输入<code>set -o</code>查看<code>monitor</code>行；执行<code>set -o monitor</code>或<code>set -m</code>开启该选项。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+
+
+</body>
+</html>

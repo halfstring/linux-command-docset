@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dpkg-query" class="anchor" href="#dpkg-query" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dpkg-query</h1>
+<p>Debian Linux中软件包的查询工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dpkg-query命令</strong> 是Debian Linux中软件包的查询工具，它从dpkg软件包数据库中查询并辨识软件包的信息。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dpkg-query(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-l：列出符合匹配模式的软件包；
+-s：查询软件包的状态信息；
+-L：显示软件包所安装的文件列表；
+-S：从安装的软件包中查询文件；
+-w：显示软件包信息；
+-c：显示软件包的控制文件路径；
+-p：显示软件包的细节。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>软件包名称：指定需要查询的软件包。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>查找文件file1在哪个包里安装：</p>
+<div class="highlight highlight-source-shell"><pre>dpkg-query -S file1</pre></div>
+<p>列出ubuntu下所安装软件列表：</p>
+<div class="highlight highlight-source-shell"><pre>dpkg-query -W --showformat=<span class="pl-s"><span class="pl-pds">'</span>${Package} ${Version}\n<span class="pl-pds">'</span></span> <span class="pl-k">&gt;</span> filename</pre></div>
+<p>查看软件包详细信息：</p>
+<div class="highlight highlight-source-shell"><pre>dpkg-query -s capistrano</pre></div>
+<p>查看软件包安装时安装到系统的文件列表：</p>
+<div class="highlight highlight-source-shell"><pre>dpkg-query -L capistrano</pre></div>
+<p>列出所有安装的包：</p>
+<div class="highlight highlight-source-shell"><pre>dpkg-query -l</pre></div>
+<p>查看软件包的确切状态（是否安装）以及版本号：</p>
+<div class="highlight highlight-source-shell"><pre>dpkg-query -W -f=<span class="pl-s"><span class="pl-pds">'</span>${Status} ${Version}\n<span class="pl-pds">'</span></span> apache-perl</pre></div>
+
+
+</body>
+</html>

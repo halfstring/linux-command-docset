@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-axel" class="anchor" href="#axel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>axel</h1>
+<p>多线程下载工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>axel</strong> 是Linux下一个不错的HTTP/ftp高速下载工具。支持多线程下载、断点续传，且可以从多个地址或者从一个地址的多个连接来下载同一个文件。适合网速不给力时多线程下载提高下载速度。比如在国内VPS或服务器上下载lnmp一键安装包用Axel就比wget快。</p>
+<h3>
+<a id="user-content-安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装</h3>
+<p>CentOS安装Axel：</p>
+<p>目前yum源上没有Axel，我们可以到 <a href="http://pkgs.repoforge.org/axel/" rel="nofollow">http://pkgs.repoforge.org/axel/</a> 下载rpm包安装。</p>
+<p>32位CentOS执行下面命令：</p>
+<div class="highlight highlight-source-shell"><pre>wget -c http://pkgs.repoforge.org/axel/axel-2.4-1.el5.rf.i386.rpm
+rpm -ivh axel-2.4-1.el5.rf.i386.rpm</pre></div>
+<p>64位CentOS执行下面命令：</p>
+<div class="highlight highlight-source-shell"><pre>wget -c http://pkgs.repoforge.org/axel/axel-2.4-1.el5.rf.x86_64.rpm
+rpm -ivh axel-2.4-1.el5.rf.x86_64.rpm</pre></div>
+<p>Debian/Ubuntu安装Axel：</p>
+<div class="highlight highlight-source-shell"><pre>apt-get install axel</pre></div>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>axel [options] url1 [url2] [url...]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>--max-speed=x , -s x         <span class="pl-c"><span class="pl-c">#</span> 最高速度x</span>
+--num-connections=x , -n x   <span class="pl-c"><span class="pl-c">#</span> 连接数x</span>
+--output=f , -o f            <span class="pl-c"><span class="pl-c">#</span> 下载为本地文件f</span>
+--search[<span class="pl-k">=</span>x] , -S [x]        <span class="pl-c"><span class="pl-c">#</span> 搜索镜像</span>
+--header=x , -H x            <span class="pl-c"><span class="pl-c">#</span> 添加头文件字符串x（指定 HTTP header）</span>
+--user-agent=x , -U x        <span class="pl-c"><span class="pl-c">#</span> 设置用户代理（指定 HTTP user agent）</span>
+--no-proxy ， -N             <span class="pl-c"><span class="pl-c">#</span> 不使用代理服务器</span>
+--quiet ， -q                <span class="pl-c"><span class="pl-c">#</span> 静默模式</span>
+--verbose ，-v               <span class="pl-c"><span class="pl-c">#</span> 更多状态信息</span>
+--alternate ， -a            <span class="pl-c"><span class="pl-c">#</span> Alternate progress indicator</span>
+--help ，-h                  <span class="pl-c"><span class="pl-c">#</span> 帮助</span>
+--version ，-V               <span class="pl-c"><span class="pl-c">#</span> 版本信息</span></pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>如下载lnmp安装包指定10个线程，存到 <code>/tmp/</code>：</p>
+<div class="highlight highlight-source-shell"><pre>axel -n 10 -o /tmp/ http://www.jsdig.com/lnmp.tar.gz</pre></div>
+<p>如果下载过程中下载中断可以再执行下载命令即可恢复上次的下载进度。</p>
+
+
+</body>
+</html>

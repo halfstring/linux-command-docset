@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-quotacheck" class="anchor" href="#quotacheck" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>quotacheck</h1>
+<p>检查磁盘的使用空间与限制</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>quotacheck命令</strong> 通过扫描指定的文件系统，获取磁盘的使用情况，创建、检查和修复磁盘配额（quota）文件。执行quotacheck指令，扫描挂入系统的分区，并在各分区的文件系统根目录下产生quota.user和quota.group文件，设置用户和群组的磁盘空间限制。</p>
+<p>如果在执行quotacheck命令时出现了以下信息：</p>
+<div class="highlight highlight-source-shell"><pre>quotacheck: Your kernel probably supports journaled quota but you are not using it. Consider switching to journaled quota to avoid running quotacheck after an unclean shutdown. </pre></div>
+<p>可以考虑将之前在文件系统的配置文件中添加的quota相关字段修改为：<code>usrjquota=aquota.user,grpjquota=aquota.group,jqfmt=vfsv1</code>，然后重新挂载文件系统：<code>mount -vo remount 挂载目录</code>（注意，如果这一步操作出现了任何问题，千万不要试图通过重启解决！将配置文件恢复原状是一个好的选择）</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>quotacheck(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a：扫描在/etc/fstab文件里，有加入quota设置的分区；
+-c：对目标文件系统进行一次新的扫描，并创建新的quota文件；
+-d：详细显示指令执行过程，便于排错或了解程序执行的情形；
+-g：扫描磁盘空间时，计算每个群组识别码所占用的目录和文件数目；
+-R：排除根目录所在的分区；
+-u：扫描磁盘空间时，计算每个用户识别码所占用的目录和文件数目；
+-v：显示指令执行过程。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件系统：指定要扫描的文件系统。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将所有的在<code>/etc/mtab</code>内，含有quota支持的partition进行扫描：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> quotacheck -avug</span>
+quotacheck: Scanning /dev/hdb1 [/disk2] <span class="pl-k">done</span>
+quotacheck: Checked 3 directories and 4 files</pre></div>
+<p>强制扫描已挂载的filesystem：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> quotacheck -avug -m</span></pre></div>
+<p>扫描指定的filesystem：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> quotacheck -cvug /disk2</span></pre></div>
+
+
+</body>
+</html>

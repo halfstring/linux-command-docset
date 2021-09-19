@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-restorecon" class="anchor" href="#restorecon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>restorecon</h1>
+<p>恢复文件的安全上下文</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>restorecon命令</strong> 用来恢复SELinux文件属性即恢复文件的安全上下文。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>restorecon [-iFnrRv] [-e excludedir ] [-o filename ] [-f filename <span class="pl-k">|</span> pathname...]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-i：忽略不存在的文件。
+-f：infilename 文件 infilename 中记录要处理的文件。
+-e：directory 排除目录。
+-R/-r：递归处理目录。
+-n：不改变文件标签。
+-o/outfilename：保存文件列表到 outfilename，在文件不正确情况下。
+-v：将过程显示到屏幕上。
+-F：强制恢复文件安全语境。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>假设CentOS安装了apache，网页默认的主目录是<code>/var/www/html</code>，我们经常遇到这样的问题，在其他目录中创建了一个网页文件，然后用mv移动到网页默认目录<code>/var/www/html</code>中，但是在浏览器中却打不开这个文件，这很可能是因为这个文件的SELinux配置信息是继承原来那个目录的，与<code>/var/www/html</code>目录不同，使用mv移动的时候，这个SELinux配置信息也一起移动过来了，从而导致无法打开页面，具体请看下面的实例：</p>
+<p>使用CentOS举例,如果默认没有安装apache，确保网络连接，使用下面的命令安装</p>
+<div class="highlight highlight-source-shell"><pre>[root@jsdig.com <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> yum install httpd</span>
+ <span class="pl-c"><span class="pl-c">#</span> 我们在root的家目录新建一个html文件 </span>
+[root@jsdig.com <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> pwd</span>
+/root
+
+[root@jsdig.com <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> vi index.html</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 随便输入一段文字，保存退出 </span>
+welcome to www.jsdig.com
+
+<span class="pl-c"><span class="pl-c">#</span> 将这个文件mv到网页默认目录下 </span>
+[root@jsdig.com <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mv index.html /var/www/html/</span>
+
+<span class="pl-c"><span class="pl-c">#</span> </span>
+<span class="pl-c"><span class="pl-c">#</span> 这个时候我们使用firefox浏览器输入127.0.0.1/index.html发现打不开，</span>
+<span class="pl-c"><span class="pl-c">#</span> 查看一下SELinux的日志文件，发现了下面这一段报错信息，从这个报错信息不难看出，</span>
+<span class="pl-c"><span class="pl-c">#</span> 进程httpd访问网页主目录中的index.html时被SELinux阻止，原因是因为，SELinux配置信息不正确,</span>
+<span class="pl-c"><span class="pl-c">#</span> 正确的SELinux配置信息应该是scontext=后面的部分，</span>
+<span class="pl-c"><span class="pl-c">#</span> 而index.html文件的SELinux配置信息却是tcontext=后面的部分，</span>
+<span class="pl-c"><span class="pl-c">#</span> 从tcontext=的第三段“admin_home_t”不难看出，这个文件的SELinux配置信息是root用户家目录的。</span>
+<span class="pl-c"><span class="pl-c">#</span> </span>
+type=AVC msg=audit(1378974214.610:465): avc:  denied  { open } <span class="pl-k">for</span>  pid=2359 comm=<span class="pl-s"><span class="pl-pds">"</span>httpd<span class="pl-pds">"</span></span> path=<span class="pl-s"><span class="pl-pds">"</span>/var/www/html/index.html<span class="pl-pds">"</span></span> dev=<span class="pl-s"><span class="pl-pds">"</span>sda1<span class="pl-pds">"</span></span> ino=1317685 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:admin_home_t:s0 tclass=file</pre></div>
+<p>使用ls -Z也可以看出,文件和目录的SELinux信息不匹配</p>
+<div class="highlight highlight-source-shell"><pre>[root@jsdig.com html]<span class="pl-c"><span class="pl-c">#</span> ls -Z /var/www/html/</span>
+.... unconfined_u:object_r:admin_home_t:s0 index.html
+
+[root@jsdig.com html]<span class="pl-c"><span class="pl-c">#</span> ls -Zd /var/www/html/</span>
+.... system_u:object_r:httpd_sys_content_t:s0 /var/www/html/</pre></div>
+<p>使用restorecon来恢复网页主目录中所有文件的SELinux配置信息(如果目标为一个目录，可以添加-R参数递归)</p>
+<div class="highlight highlight-source-shell"><pre>[root@jsdig.com html]<span class="pl-c"><span class="pl-c">#</span> restorecon -R /var/www/html/</span></pre></div>
+
+
+</body>
+</html>

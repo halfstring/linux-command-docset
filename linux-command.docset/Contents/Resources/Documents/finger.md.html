@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-finger" class="anchor" href="#finger" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>finger</h1>
+<p>用于查找并显示用户信息</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>finger命令</strong> 用于查找并显示用户信息。包括本地与远端主机的用户皆可，帐号名称没有大小写的差别。单独执行finger指令，它会显示本地主机现在所有的用户的登陆信息，包括帐号名称，真实姓名，登入终端机，闲置时间，登入时间以及地址和电话。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>finger(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-l：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状态，还有计划文件和方案文件内容；
+-m：排除查找用户的真实姓名；
+-s：列出该用户的帐号名称，真实姓名，登入终端机，闲置时间，登入时间以及地址和电话；
+-p：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状态，但不显示该用户的计划文件和方案文件内容。</pre></div>
+<p>不指定finger的选项如果提供操作者的话，缺省设为<code>-l</code>输出风格，否则为<code>-s</code>风格，注意在两种格式中，如果信息不足，都有一些域可能丢失，如果没有指定参数finger会为当前登录的每个用户打印一个条目。</p>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>用户名：指定要查询信息的用户。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>在计算机上使用finger：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost root]<span class="pl-c"><span class="pl-c">#</span> finger</span>
+login Name Tty Idle Login <span class="pl-k">time</span> Office Office Phone
+root root tty1 2 Dec 18 13
+root root pts/0 1 Dec 18 13
+root root <span class="pl-k">*</span>pts/1 Dec 18 13</pre></div>
+<p>如果要查询远程机上的用户信息，需要在用户名后面接<code>@主机名</code>，采用<code>用户名@主机名</code>的格式，不过要查询的网络主机需要运行finger守护进程的支持。</p>
+
+
+</body>
+</html>

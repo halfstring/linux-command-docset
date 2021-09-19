@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-getsebool" class="anchor" href="#getsebool" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getsebool</h1>
+<p>查询SElinux策略内各项规则的布尔值</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>getsebool命令</strong> 是用来查询SElinux策略内各项规则的布尔值。SELinux的策略与规则管理相关命令：seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>getsebool [-a] [布尔值条款]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a：列出目前系统上面的所有布尔值条款设置为开启或关闭值。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>查询本系统内所有的布尔值设置状况：</p>
+<div class="highlight highlight-source-shell"><pre>getsebool -a
+NetworkManager_disable_trans --<span class="pl-k">&gt;</span> off
+allow_console_login --<span class="pl-k">&gt;</span> off
+allow_cvs_read_shadow --<span class="pl-k">&gt;</span> off
+allow_daemons_dump_core --<span class="pl-k">&gt;</span> on
+....(底下省略)....</pre></div>
+<p>查询httpd_enable_homedirs是否为关闭，若没关闭，请关闭它：</p>
+<div class="highlight highlight-source-shell"><pre>getsebool httpd_enable_homedirs
+setsebool -P httpd_enable_homedirs=0    <span class="pl-c"><span class="pl-c">#</span> 0是关闭  1是开启</span></pre></div>
+
+
+</body>
+</html>

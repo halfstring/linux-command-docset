@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-lsusb" class="anchor" href="#lsusb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lsusb</h1>
+<p>显示本机的USB设备列表信息</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>lsusb命令</strong> 用于显示本机的USB设备列表，以及USB设备的详细信息。</p>
+<p>lsusb命令是一个学习USB驱动开发，认识USB设备的助手，推荐大家使用，如果您的开发板中或者产品中没有lsusb命令可以自己移植一个，放到文件系统里面。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>lsusb(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-v：显示USB设备的详细信息；
+-s<span class="pl-k">&lt;</span>总线：设备号<span class="pl-k">&gt;</span>仅显示指定的总线和（或）设备号的设备；
+-d<span class="pl-k">&lt;</span>厂商：产品<span class="pl-k">&gt;</span>：仅显示指定厂商和产品编号的设备；
+-t：以树状结构显示无理USB设备的层次；
+-V：显示命令的版本信息。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>插入usb鼠标后执行lsusb的输出内容如下:</p>
+<div class="highlight highlight-source-shell"><pre>Bus 005 Device 001: id 0000:0000 
+Bus 001 Device 001: ID 0000:0000 
+Bus 004 Device 001: ID 0000:0000 
+Bus 003 Device 001: ID 0000:0000 
+Bus 002 Device 006: ID 15d9:0a37 
+Bus 002 Device 001: ID 0000:0000 </pre></div>
+<p>解释：</p>
+<p><strong>Bus 005</strong></p>
+<p>表示第五个usb主控制器(机器上总共有5个usb主控制器 -- 可以通过命令lspci | grep USB查看)</p>
+<p><strong>Device 006</strong></p>
+<p>表示系统给usb鼠标分配的设备号(devnum)，同时也可以看到该鼠标是插入到了第二个usb主控制器</p>
+<div class="highlight highlight-source-shell"><pre>006        usb_device.devnum
+/sys/devices/pci0000:00/0000:00:1d.1/usb2/2-2/devnum</pre></div>
+<p><strong>ID 15d9:0a37</strong></p>
+<p>表示usb设备的ID（这个ID由芯片制造商设置，可以唯一表示该设备）</p>
+<div class="highlight highlight-source-shell"><pre>15d9    usb_device_descriptor.idVendor
+0a37    usb_device_descriptor.idProduct
+/sys/devices/pci0000:00/0000:00:1d.1/usb2/2-2/idVendor</pre></div>
+<p><strong>Bus 002 Device 006: ID 15d9:0a37<br>
+Bus 002 Device 001: ID 0000:0000</strong></p>
+<p>表示002号usb主控制器上接入了两个设备:</p>
+<ul>
+<li>一个是usb根Hub -- 001 </li>
+<li>一个是usb鼠标  -- 006</li>
+</ul>
+
+
+</body>
+</html>

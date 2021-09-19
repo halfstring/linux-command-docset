@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-mesg" class="anchor" href="#mesg" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>mesg</h1>
+<p>设置当前终端的写权限</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>mesg命令</strong> 用于设置当前终端的写权限，即是否让其他用户向本终端发信息。将mesg设置y时，其他用户可利用write命令将信息直接显示在您的屏幕上。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>mesg(参数)</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>y/n：y表示运行向当前终端写信息，n表示禁止向当前终端写信息。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mesg y    #允许系统用户将信息直接显示在你的屏幕上。</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> mesg n    #不允许系统用户将信息直接显示在你的屏幕上。</span></pre></div>
+
+
+</body>
+</html>

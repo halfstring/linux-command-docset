@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-file" class="anchor" href="#file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>file</h1>
+<p>用来探测给定文件的类型</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>file命令</strong> 用来探测给定文件的类型。file命令对文件的检查分为文件系统、魔法幻数检查和语言检查3个过程。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>file(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-b：列出辨识结果时，不显示文件名称；
+-c：详细显示指令执行过程，便于排错或分析程序执行的情形；
+-f<span class="pl-k">&lt;</span>名称文件<span class="pl-k">&gt;</span>：指定名称文件，其内容有一个或多个文件名称时，让file依序辨识这些文件，格式为每列一个文件名称；
+-L：直接显示符号连接所指向的文件类别；
+-m<span class="pl-k">&lt;</span>魔法数字文件<span class="pl-k">&gt;</span>：指定魔法数字文件；
+-v：显示版本信息；
+-z：尝试去解读压缩文件的内容。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件：要确定类型的文件列表，多个文件之间使用空格分开，可以使用shell通配符匹配多个文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>显示文件类型</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> file install.log</span>
+install.log: UTF-8 Unicode text
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> file -b install.log      &lt;== 不显示文件名称</span>
+UTF-8 Unicode text
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> file -i install.log      &lt;== 显示MIME类别。</span>
+install.log: text/plain<span class="pl-k">;</span> charset=utf-8
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> file -b -i install.log</span>
+text/plain<span class="pl-k">;</span> charset=utf-8</pre></div>
+<p>显示符号链接的文件类型</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> ls -l /var/mail</span>
+lrwxrwxrwx 1 root root 10 08-13 00:11 /var/mail -<span class="pl-k">&gt;</span> spool/mail
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> file /var/mail</span>
+/var/mail: symbolic link to <span class="pl-s"><span class="pl-pds">`</span>spool/mail<span class="pl-s"><span class="pl-pds">'</span></span></span>
+<span class="pl-s"><span class="pl-s"></span></span>
+<span class="pl-s"><span class="pl-s">[root@localhost ~]# file -L /var/mail</span></span>
+<span class="pl-s"><span class="pl-s">/var/mail: directory</span></span>
+<span class="pl-s"><span class="pl-s"></span></span>
+<span class="pl-s"><span class="pl-s">[root@localhost ~]# file /var/spool/mail</span></span>
+<span class="pl-s"><span class="pl-s">/var/spool/mail: directory</span></span>
+<span class="pl-s"><span class="pl-s"></span></span>
+<span class="pl-s"><span class="pl-s">[root@localhost ~]# file -L /var/spool/mail</span></span>
+<span class="pl-s"><span class="pl-s">/var/spool/mail: directory</span></span></pre></div>
+
+
+</body>
+</html>

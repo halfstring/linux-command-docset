@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-rmdir" class="anchor" href="#rmdir" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rmdir</h1>
+<p>用来删除空目录</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>rmdir命令</strong> 用来删除空目录。当目录不再被使用时，或者磁盘空间已到达使用限定值，就需要删除失去使用价值的目录。利用rmdir命令可以从一个目录中删除一个或多个空的子目录。该命令从一个目录中删除一个或多个子目录，其中dirname佬表示目录名。如果dirname中没有指定路径，则删除当前目录下由dirname指定的目录；如dirname中包含路径，则删除指定位置的目录。删除目录时，必须具有对其父目录的写权限。</p>
+<p>注意：子目录被删除之前应该是空目录。就是说，该目录中的所有文件必须用rm命令全部，另外，当前工作目录必须在被删除目录之上，不能是被删除目录本身，也不能是被删除目录的子目录。</p>
+<p>虽然还可以用带有<code>-r</code>选项的rm命令递归删除一个目录中的所有文件和该目录本身，但是这样做存在很大的危险性。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>rmdir(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-p或--parents：删除指定目录后，若该目录的上层目录已变成空目录，则将其一并删除；
+--ignore-fail-on-non-empty：此选项使rmdir命令忽略由于删除非空目录时导致的错误信息；
+-v或-verboes：显示命令的详细执行过程；
+--help：显示命令的帮助信息；
+--version：显示命令的版本信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>目录列表：要删除的空目录列表。当删除多个空目录时，目录名之间使用空格隔开。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将工作目录下，名为 <code>www</code> 的子目录删除 :</p>
+<div class="highlight highlight-source-shell"><pre>rmdir www</pre></div>
+<p>在工作目录下的 www 目录中，删除名为 Test 的子目录。若 Test 删除后，www 目录成为空目录，则 www 亦予删除。</p>
+<div class="highlight highlight-source-shell"><pre>rmdir -p www/Test</pre></div>
+<p>下面命令等价于 <code>rmdir a/b/c</code>, <code>rmdir a/b</code>, <code>rmdir a</code></p>
+<div class="highlight highlight-source-shell"><pre>rmdir -p a/b/c</pre></div>
+
+
+</body>
+</html>

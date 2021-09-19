@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dmesg" class="anchor" href="#dmesg" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dmesg</h1>
+<p>显示Linux系统启动信息</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dmesg命令</strong> 被用于检查和控制内核的环形缓冲区。kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息保存在<code>/var/log/dmesg</code>文件里。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dmesg(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c：显示信息后，清除ring buffer中的内容；
+-s<span class="pl-k">&lt;</span>缓冲区大小<span class="pl-k">&gt;</span>：预设置为8196，刚好等于ring buffer的大小；
+-n：设置记录信息的层级。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> dmesg | head</span>
+Linux version 2.6.18-348.6.1.el5 (mockbuild@builder17.centos.org) (gcc version 4.1.2 20080704 (Red Hat 4.1.2-54)) <span class="pl-c"><span class="pl-c">#</span>1 SMP Tue May 21 15:34:22 EDT 2013</span>
+BIOS-provided physical RAM map:
+ BIOS-e820: 0000000000010000 - 000000000009f400 (usable)
+ BIOS-e820: 000000000009f400 - 00000000000a0000 (reserved)
+ BIOS-e820: 00000000000f0000 - 0000000000100000 (reserved)
+ BIOS-e820: 0000000000100000 - 000000007f590000 (usable)
+ BIOS-e820: 000000007f590000 - 000000007f5e3000 (ACPI NVS)
+ BIOS-e820: 000000007f5e3000 - 000000007f5f0000 (ACPI data)
+ BIOS-e820: 000000007f5f0000 - 000000007f600000 (reserved)
+ BIOS-e820: 00000000e0000000 - 00000000e8000000 (reserved)</pre></div>
+<p>查看硬盘基础信息</p>
+<div class="highlight highlight-source-shell"><pre>dmesg <span class="pl-k">|</span> grep sda
+
+[    2.442555] sd 0:0:0:0: [sda] 488281250 512-byte logical blocks: (250 GB/232 GiB)
+[    2.442590] sd 0:0:0:0: [sda] Write Protect is off
+[    2.442592] sd 0:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[    2.442607] sd 0:0:0:0: [sda] Write cache: enabled, <span class="pl-c1">read</span> cache: enabled, doesn<span class="pl-s"><span class="pl-pds">'</span>t support DPO or FUA</span>
+<span class="pl-s">[    2.447533]  sda: sda1</span>
+<span class="pl-s">[    2.448503] sd 0:0:0:0: [sda] Attached SCSI disk</span></pre></div>
+
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-tree" class="anchor" href="#tree" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tree</h1>
+<p>树状图列出目录的内容</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>tree命令</strong> 以树状图列出目录的内容。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>tree(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>------- 列表选项 -------
+-a            <span class="pl-c"><span class="pl-c">#</span> 显示所有文件和目录。</span>
+-d            <span class="pl-c"><span class="pl-c">#</span> 显示目录名称而非文件。</span>
+-l            <span class="pl-c"><span class="pl-c">#</span> 如遇到性质为符号连接的目录，直接列出该连接所指向的原始目录。</span>
+-f            <span class="pl-c"><span class="pl-c">#</span> 在每个文件或目录之前，显示完整的相对路径名称。</span>
+-x            <span class="pl-c"><span class="pl-c">#</span> 将范围局限在现行的文件系统中，若指定目录下的某些子目录，其存放于另一个文件系统上，则将该目录予以排除在寻找范围外。</span>
+-L level      <span class="pl-c"><span class="pl-c">#</span> 限制目录显示层级。</span>
+-R            <span class="pl-c"><span class="pl-c">#</span> Rerun tree when max dir level reached.</span>
+-P pattern    <span class="pl-c"><span class="pl-c">#</span> &lt;范本样式&gt; 只显示符合范本样式的文件和目录名称。</span>
+-I pattern    <span class="pl-c"><span class="pl-c">#</span> Do not list files that match the given pattern.</span>
+--ignore-case <span class="pl-c"><span class="pl-c">#</span> Ignore case when pattern matching.</span>
+--matchdirs   <span class="pl-c"><span class="pl-c">#</span> Include directory names in -P pattern matching.</span>
+--noreport    <span class="pl-c"><span class="pl-c">#</span> Turn off file/directory count at end of tree listing.</span>
+--charset X   <span class="pl-c"><span class="pl-c">#</span> Use charset X for terminal/HTML and indentation line output.</span>
+--filelimit <span class="pl-c"><span class="pl-c">#</span> # Do not descend dirs with more than # files in them.</span>
+--timefmt <span class="pl-k">&lt;</span>f<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> Print and format time according to the format &lt;f&gt;.</span>
+-o filename   <span class="pl-c"><span class="pl-c">#</span> Output to file instead of stdout.</span>
+-------- 文件选项 ---------
+-q            <span class="pl-c"><span class="pl-c">#</span> 用“？”号取代控制字符，列出文件和目录名称。</span>
+-N            <span class="pl-c"><span class="pl-c">#</span> 直接列出文件和目录名称，包括控制字符。</span>
+-Q            <span class="pl-c"><span class="pl-c">#</span> Quote filenames with double quotes.</span>
+-p            <span class="pl-c"><span class="pl-c">#</span> 列出权限标示。</span>
+-u            <span class="pl-c"><span class="pl-c">#</span> 列出文件或目录的拥有者名称，没有对应的名称时，则显示用户识别码。</span>
+-g            <span class="pl-c"><span class="pl-c">#</span> 列出文件或目录的所属群组名称，没有对应的名称时，则显示群组识别码。</span>
+-s            <span class="pl-c"><span class="pl-c">#</span> 列出文件和目录大小。</span>
+-h            <span class="pl-c"><span class="pl-c">#</span> Print the size in a more human readable way.</span>
+--si          <span class="pl-c"><span class="pl-c">#</span> Like -h, but use in SI units (powers of 1000).</span>
+-D            <span class="pl-c"><span class="pl-c">#</span> 列出文件或目录的更改时间。</span>
+-F            <span class="pl-c"><span class="pl-c">#</span> 在执行文件，目录，Socket，符号连接，管道名称名称，各自加上"*"，"/"，"@"，"|"号。</span>
+--inodes      <span class="pl-c"><span class="pl-c">#</span> Print inode number of each file.</span>
+--device      <span class="pl-c"><span class="pl-c">#</span> Print device ID number to which each file belongs.</span>
+------- 排序选项 -------
+-v            <span class="pl-c"><span class="pl-c">#</span> Sort files alphanumerically by version.</span>
+-t            <span class="pl-c"><span class="pl-c">#</span> 用文件和目录的更改时间排序。</span>
+-c            <span class="pl-c"><span class="pl-c">#</span> Sort files by last status change time.</span>
+-U            <span class="pl-c"><span class="pl-c">#</span> Leave files unsorted.</span>
+-r            <span class="pl-c"><span class="pl-c">#</span> Reverse the order of the sort.</span>
+--dirsfirst   <span class="pl-c"><span class="pl-c">#</span> List directories before files (-U disables).</span>
+--sort X      <span class="pl-c"><span class="pl-c">#</span> Select sort: name,version,size,mtime,ctime.</span>
+------- 图形选项 ------
+-i            <span class="pl-c"><span class="pl-c">#</span> 不以阶梯状列出文件和目录名称。</span>
+-A            <span class="pl-c"><span class="pl-c">#</span> 使用ASNI绘图字符显示树状图而非以ASCII字符组合。</span>
+-S            <span class="pl-c"><span class="pl-c">#</span> Print with CP437 (console) graphics indentation lines.</span>
+-n            <span class="pl-c"><span class="pl-c">#</span> Turn colorization off always (-C overrides).</span>
+-C            <span class="pl-c"><span class="pl-c">#</span> 在文件和目录清单加上色彩，便于区分各种类型。</span>
+------- XML / HTML / JSON选项 -------
+-X            <span class="pl-c"><span class="pl-c">#</span> Prints out an XML representation of the tree.</span>
+-J            <span class="pl-c"><span class="pl-c">#</span> Prints out an JSON representation of the tree.</span>
+-H baseHREF   <span class="pl-c"><span class="pl-c">#</span> Prints out HTML format with baseHREF as top directory.</span>
+-T string     <span class="pl-c"><span class="pl-c">#</span> Replace the default HTML title and H1 header with string.</span>
+--nolinks     <span class="pl-c"><span class="pl-c">#</span> Turn off hyperlinks in HTML output.</span>
+---- 杂项选项 ----
+--version     <span class="pl-c"><span class="pl-c">#</span> 输入版本信息。</span>
+--help        <span class="pl-c"><span class="pl-c">#</span> 打印使用帮助信息。</span>
+--            <span class="pl-c"><span class="pl-c">#</span> Options processing terminator.</span></pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>目录：执行tree指令，它会列出指定目录下的所有文件，包括子目录里的文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>列出目录<code>/private/</code> 第一级文件名</p>
+<div class="highlight highlight-source-shell"><pre>tree  /private/ -L 1
+/private/
+├── etc
+├── tftpboot
+├── tmp
+└── var</pre></div>
+<p>忽略文件夹</p>
+<div class="highlight highlight-source-shell"><pre>tree -I node_modules <span class="pl-c"><span class="pl-c">#</span> 忽略当前目录文件夹node_modules</span>
+tree -P node_modules <span class="pl-c"><span class="pl-c">#</span> 列出当前目录文件夹node_modules的目录结构</span>
+tree -P node_modules -L 2 <span class="pl-c"><span class="pl-c">#</span> 显示目录node_modules两层的目录树结构</span>
+tree -L 2 <span class="pl-k">&gt;</span> /home/www/tree.txt <span class="pl-c"><span class="pl-c">#</span> 当前目录结果存到 tree.txt 文件中</span></pre></div>
+<p>忽略多个文件夹</p>
+<div class="highlight highlight-source-shell"><pre>tree -I <span class="pl-s"><span class="pl-pds">'</span>node_modules|icon|font<span class="pl-pds">'</span></span> -L 2</pre></div>
+<p>非树状结构列出目录<code>/private/</code>下的所有文件</p>
+<pre><code>tree -if /private/
+/private
+/private/a1
+/private/a2
+/private/etc
+/private/etc/b1
+/private/etc/b2
+/private/tftpboot
+</code></pre>
+
+
+</body>
+</html>

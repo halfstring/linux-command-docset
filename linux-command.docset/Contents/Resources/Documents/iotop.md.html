@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-iotop" class="anchor" href="#iotop" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>iotop</h1>
+<p>用来监视磁盘I/O使用状况的工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>iotop命令</strong> 是一个用来监视磁盘I/O使用状况的top类工具。iotop具有与top相似的UI，其中包括PID、用户、I/O、进程等相关信息。Linux下的IO统计工具如iostat，nmon等大多数是只能统计到per设备的读写情况，如果你想知道每个进程是如何使用IO的就比较麻烦，使用iotop命令可以很方便的查看。</p>
+<p>iotop使用Python语言编写而成，要求Python2.5（及以上版本）和Linux kernel2.6.20（及以上版本）。iotop提供有源代码及rpm包，可从其官方主页下载。</p>
+<h3>
+<a id="user-content-安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装</h3>
+<p><strong>Ubuntu</strong></p>
+<div class="highlight highlight-source-shell"><pre>apt-get install iotop</pre></div>
+<p><strong>CentOS</strong></p>
+<div class="highlight highlight-source-shell"><pre>yum install iotop</pre></div>
+<p><strong>编译安装</strong></p>
+<div class="highlight highlight-source-shell"><pre>wget http://guichaz.free.fr/iotop/files/iotop-0.4.4.tar.gz    
+tar zxf iotop-0.4.4.tar.gz    
+python setup.py build    
+python setup.py install</pre></div>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>iotop（选项）</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-o：只显示有io操作的进程
+-b：批量显示，无交互，主要用作记录到文件。
+-n NUM：显示NUM次，主要用于非交互式模式。
+-d SEC：间隔SEC秒显示一次。
+-p PID：监控的进程pid。
+-u USER：监控的进程用户。</pre></div>
+<p><strong>iotop常用快捷键：</strong></p>
+<ol>
+<li>左右箭头：改变排序方式，默认是按IO排序。</li>
+<li>r：改变排序顺序。</li>
+<li>o：只显示有IO输出的进程。</li>
+<li>p：进程/线程的显示方式的切换。</li>
+<li>a：显示累积使用量。</li>
+<li>q：退出。</li>
+</ol>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>直接执行iotop就可以看到效果了：</p>
+<div class="highlight highlight-source-shell"><pre>Total DISK read:       0.00 B/s <span class="pl-k">|</span> Total DISK write:       0.00 B/s
+  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO<span class="pl-k">&gt;</span>    <span class="pl-c1">command</span>
+    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]
+    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]
+    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]
+    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]
+    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]
+    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]
+    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]
+    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]
+    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]
+   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]
+   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]
+2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</pre></div>
+
+
+</body>
+</html>

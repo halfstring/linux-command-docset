@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-read" class="anchor" href="#read" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>read</h1>
+<p>从键盘读取变量值</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>read命令</strong> 从键盘读取变量的值，通常用在shell脚本中与用户进行交互的场合。该命令可以一次读取多个变量的值，变量和输入的值都需要使用空格隔开。在read命令后面，如果没有指定变量名，读取的数据将被自动赋值给特定的变量REPLY</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>read(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-p：指定读取值时的提示符；
+-t：指定读取值时等待的时间（秒）。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>变量：指定读取值的变量名。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>下面的列表给出了read命令的常用方式：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> 1987name
+从标准输入读取输入并赋值给变量1987name。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> first last
+从标准输入读取输入到第一个空格或者回车，将输入的第一个单词放到变量first中，并将该行其他的输入放在变量last中。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span>
+从标准输入读取一行并赋值给特定变量REPLY。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> -a arrayname
+把单词清单读入arrayname的数组里。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>
+打印提示（text），等待输入，并将输入存储在REPLY中。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> -r line
+允许输入包含反斜杠。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> -t 3
+指定读取等待时间为3秒。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> -n 2 var
+从输入中读取两个字符并存入变量var，不需要按回车读取。</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> -d <span class="pl-s"><span class="pl-pds">"</span>:<span class="pl-pds">"</span></span> var
+用定界符“:”结束输入行。</pre></div>
+<h2>
+<a id="user-content-read命令示例" class="anchor" href="#read%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>read命令示例</h2>
+<p>从标准输入读取输入并赋值给变量1987name。</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span>read 1987name        #等待读取输入，直到回车后表示输入完毕，并将输入赋值给变量answer</span>
+HelloWorld            <span class="pl-c"><span class="pl-c">#</span>控制台输入Hello</span>
+
+<span class="pl-c"><span class="pl-c">#</span>echo $1987name       #打印变量</span>
+HelloWorld</pre></div>
+<p>等待一组输入，每个单词之间使用空格隔开，直到回车结束，并分别将单词依次赋值给这三个读入变量。</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span>read one two three</span>
+1 2 3                   <span class="pl-c"><span class="pl-c">#</span>在控制台输入1 2 3，它们之间用空格隔开。</span>
+
+<span class="pl-c"><span class="pl-c">#</span>echo "one = $one, two = $two, three = $three"</span>
+one = 1, two = 2, three = 3</pre></div>
+<p>REPLY示例</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span>read                  #等待控制台输入，并将结果赋值给特定内置变量REPLY。</span>
+This is REPLY          <span class="pl-c"><span class="pl-c">#</span>在控制台输入该行。 </span>
+
+<span class="pl-c"><span class="pl-c">#</span>echo $REPLY           #打印输出特定内置变量REPLY，以确认是否被正确赋值。</span>
+
+This is REPLY</pre></div>
+<p>-p选项示例</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span>read -p "Enter your name: "            #输出文本提示，同时等待输入，并将结果赋值给REPLY。</span>
+Enter you name: stephen                 <span class="pl-c"><span class="pl-c">#</span>在提示文本之后输入stephen</span>
+
+<span class="pl-c"><span class="pl-c">#</span>echo $REPLY</span>
+stephen</pre></div>
+<p>等待控制台输入，并将输入信息视为数组，赋值给数组变量friends，输入信息用空格隔开数组的每个元素。</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span>read -a friends</span>
+Tim Tom Helen
+
+<span class="pl-c"><span class="pl-c">#</span>echo "They are ${friends[0]}, ${friends[1]} and ${friends[2]}."</span>
+They are Tim, Tom and Helen.</pre></div>
+<p><strong>补充一个终端输入密码时候，不让密码显示出来的例子。</strong></p>
+<p>方法1：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
+<span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>输入密码：<span class="pl-pds">"</span></span> -s <span class="pl-c1">pwd</span>
+<span class="pl-c1">echo</span>
+<span class="pl-c1">echo</span> password read, is <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$pwd</span><span class="pl-pds">"</span></span></pre></div>
+<p>方法2：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
+stty -echo
+<span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>输入密码：<span class="pl-pds">"</span></span> <span class="pl-c1">pwd</span>
+stty <span class="pl-c1">echo</span>
+<span class="pl-c1">echo</span>
+<span class="pl-c1">echo</span> 输入完毕。</pre></div>
+<p>其中，选项<code>-echo</code>禁止将输出发送到终端，而选项<code>echo</code>则允许发送输出。</p>
+<p>使用read命令从键盘读取变量值，并且将值赋给指定的变量，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">read</span> v1 v3          <span class="pl-c"><span class="pl-c">#</span>读取变量值</span></pre></div>
+<p>执行上面的指令以后，要求键入两个数据，如下所示：</p>
+<div class="highlight highlight-source-shell"><pre>Linux c+            <span class="pl-c"><span class="pl-c">#</span>输入数据</span></pre></div>
+<p>完成之后，可以使用echo命令将指定的变量值输出查看，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-smi">$v1</span> <span class="pl-smi">$v3</span>       <span class="pl-c"><span class="pl-c">#</span>输出变量的值</span></pre></div>
+<p>执行输出变量值的命令以后，将显示用户所输入的数据值，如下所示：</p>
+<div class="highlight highlight-source-shell"><pre>Linux c+           <span class="pl-c"><span class="pl-c">#</span>输出变量值</span></pre></div>
+<p>注意：使用echo命令输出变量值时，必须在变量名前添加符号<code>$</code>。否则，echo将直接输出变量名。</p>
+
+
+</body>
+</html>

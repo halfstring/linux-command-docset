@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-rmmod" class="anchor" href="#rmmod" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>rmmod</h1>
+<p>从运行的内核中移除指定的内核模块</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>rmmod命令</strong> 用于从当前运行的内核中移除指定的内核模块。执行rmmod指令，可删除不需要的模块。Linux操作系统的核心具有模块化的特性，应此在编译核心时，务须把全部的功能都放如核心。你可以将这些功能编译成一个个单独的模块，待有需要时再分别载入它们。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>rmmod(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-v：显示指令执行的详细信息；
+-f：强制移除模块，使用此选项比较危险；
+-w：等待着，直到模块能够被除时在移除模块；
+-s：向系统日志（syslog）发送错误信息。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>模块名：要移除的模块名称。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>用rmmod命令主要用于卸载正在使用的Linux内核模块，与<code>modprobe -r</code>命令相似，如下所示：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost boot]<span class="pl-c"><span class="pl-c">#</span> lsmod | grep raid1</span>
+raid1                  25153  0
+
+[root@localhost boot]<span class="pl-c"><span class="pl-c">#</span> rmmod raid1</span>
+[root@localhost boot]<span class="pl-c"><span class="pl-c">#</span> lsmod | grep raid1</span></pre></div>
+
+
+</body>
+</html>

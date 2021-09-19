@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-dd" class="anchor" href="#dd" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dd</h1>
+<p>复制文件并对原文件的内容进行转换和格式化处理</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>dd命令</strong> 用于复制文件并对原文件的内容进行转换和格式化处理。dd命令功能很强大的，对于一些比较底层的问题，使用dd命令往往可以得到出人意料的效果。用的比较多的还是用dd来备份裸设备。但是不推荐，如果需要备份oracle裸设备，可以使用rman备份，或使用第三方软件备份，使用dd的话，管理起来不太方便。</p>
+<p>建议在有需要的时候使用dd 对物理磁盘操作，如果是文件系统的话还是使用tar backup cpio等其他命令更加方便。另外，使用dd对磁盘操作时，最好使用块设备文件。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>dd(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>bs=<span class="pl-k">&lt;</span>字节数<span class="pl-k">&gt;</span>：将ibs（输入）与obs（输出）设成指定的字节数；
+cbs=<span class="pl-k">&lt;</span>字节数<span class="pl-k">&gt;</span>：转换时，每次只转换指定的字节数；
+conv=<span class="pl-k">&lt;</span>关键字<span class="pl-k">&gt;</span>：指定文件转换的方式；
+count=<span class="pl-k">&lt;</span>区块数<span class="pl-k">&gt;</span>：仅读取指定的区块数；
+ibs=<span class="pl-k">&lt;</span>字节数<span class="pl-k">&gt;</span>：每次读取的字节数；
+obs=<span class="pl-k">&lt;</span>字节数<span class="pl-k">&gt;</span>：每次输出的字节数；
+of=<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>：输出到文件；
+seek=<span class="pl-k">&lt;</span>区块数<span class="pl-k">&gt;</span>：一开始输出时，跳过指定的区块数；
+skip=<span class="pl-k">&lt;</span>区块数<span class="pl-k">&gt;</span>：一开始读取时，跳过指定的区块数；
+--help：帮助；
+--version：显示版本信息。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> dd if=/dev/zero of=sun.txt bs=1M count=1</span>
+1+0 records <span class="pl-k">in</span>
+1+0 records out
+1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s
+
+[root@localhost text]<span class="pl-c"><span class="pl-c">#</span> du -sh sun.txt </span>
+1.1M    sun.txt</pre></div>
+<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：</p>
+<ul>
+<li>
+<strong>if</strong>  代表输入文件。如果不指定if，默认就会从stdin中读取输入。</li>
+<li>
+<strong>of</strong>  代表输出文件。如果不指定of，默认就会将stdout作为默认输出。</li>
+<li>
+<strong>bs</strong>  代表字节为单位的块大小。</li>
+<li>
+<strong>count</strong>  代表被复制的块数。</li>
+<li>
+<strong>/dev/zero</strong>  是一个字符设备，会不断返回0值字节（\0）。</li>
+</ul>
+<p>块大小可以使用的计量单位表</p>
+<table>
+<thead>
+<tr>
+<th>单元大小</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字节（1B）</td>
+<td>c</td>
+</tr>
+<tr>
+<td>字节（2B）</td>
+<td>w</td>
+</tr>
+<tr>
+<td>块（512B）</td>
+<td>b</td>
+</tr>
+<tr>
+<td>千字节（1024B）</td>
+<td>k</td>
+</tr>
+<tr>
+<td>兆字节（1024KB）</td>
+<td>M</td>
+</tr>
+<tr>
+<td>吉字节（1024MB）</td>
+<td>G</td>
+</tr>
+</tbody>
+</table>
+<p>以上命令可以看出dd命令来测试内存操作速度：</p>
+<div class="highlight highlight-source-shell"><pre>1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s</pre></div>
+<p><strong>生成随机字符串</strong></p>
+<p>我们甚至可以使用 /dev/urandom 设备配合 dd 命令 来获取随机字符串。</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> dd if=/dev/urandom bs=1 count=15|base64 -w 0</span>
+15+0 records <span class="pl-k">in</span>
+15+0 records out
+15 bytes (15 B) copied, 0.000111993 s, 134 kB/s
+wFRAnlkXeBXmWs1MyGEs</pre></div>
+
+
+</body>
+</html>

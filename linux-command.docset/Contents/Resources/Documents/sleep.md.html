@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-sleep" class="anchor" href="#sleep" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sleep</h1>
+<p>将目前动作延迟一段时间</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>sleep命令</strong> 暂停指定的时间。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>sleep(参数)</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>时间：指定要暂停时间的长度。</p>
+<p>时间长度，后面可接 s、m、h 或 d，其中 s 为秒，m 为 分钟，h 为小时，d 为日数。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>有时在写一些以循环方式运行的监控脚本，设置时间间隔是必不可少的，下面是一个Shell进度条的脚本演示在脚本中生成延时。</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
+
+b=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+<span class="pl-k">for</span> <span class="pl-s"><span class="pl-pds">((</span>i<span class="pl-k">=</span><span class="pl-c1">0</span>;<span class="pl-smi">$i</span><span class="pl-k">&lt;=</span><span class="pl-c1">100</span>;i<span class="pl-k">++</span><span class="pl-pds">))</span></span>
+ <span class="pl-k">do</span>
+ <span class="pl-c1">printf</span> <span class="pl-s"><span class="pl-pds">"</span>Progress:[%-100s]%d%%\r<span class="pl-pds">"</span></span> <span class="pl-smi">$b</span> <span class="pl-smi">$i</span>
+ sleep 0.1
+ b=<span class="pl-c"><span class="pl-c">#</span>$b</span>
+ <span class="pl-k">done</span>
+<span class="pl-c1">echo</span></pre></div>
+
+
+</body>
+</html>

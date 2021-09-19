@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-shuf" class="anchor" href="#shuf" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>shuf</h1>
+<p>产生随机的排列。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre>shuf [OPTION]... [FILE]
+shuf -e [OPTION]... [ARG]...
+shuf -i LO-HI [OPTION]...</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>将输入的内容随机排列并输出。</li>
+<li>当没有文件或文件为<code>-</code>时，读取标准输入。</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-e, --echo                  将每个ARG视为输入行。
+-i, --input-range=LO-HI     将数字范围LO（最低）到HI（最高）之间的作为输入行。
+-n, --head-count=COUNT      只输出前COUNT行。
+-o, --output=FILE           将结果写入到文件而不是标准输出。
+    --random-source=FILE    将FILE中内容作为随机数据源。
+-r, --repeat                输出行可以重复。
+-z, --zero-terminated       行终止符为NUL（空字符）而不是默认的换行符。
+--help                      显示帮助信息并退出。
+--version                   显示版本信息并退出。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>FILE（可选）：要处理的文件，可以为任意数量。</p>
+<p>ARG（可选）：作为输入行的字符串，可以为任意数量。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 模拟硬币抛掷，获取前10个结果：</span>
+[user2@pc <span class="pl-k">~</span>]$ head -r -n 10 -e <span class="pl-s"><span class="pl-pds">"</span>正面<span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>反面<span class="pl-pds">"</span></span>
+反面
+正面
+正面
+正面
+反面
+反面
+反面
+正面
+正面
+正面</pre></div>
+<div class="highlight highlight-source-shell"><pre>[user2@pc <span class="pl-k">~</span>]$ shuf -i 1-35 -n 5<span class="pl-k">|</span>sort -n <span class="pl-k">&amp;&amp;</span> shuf -i 1-12 -n 2<span class="pl-k">|</span>sort -n
+4
+17
+20
+29
+31
+6
+11</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，更多详细的帮助信息请查看<code>man -s 1 shuf</code>，<code>info coreutils 'shuf invocation'</code>。</li>
+</ol>
+
+
+</body>
+</html>

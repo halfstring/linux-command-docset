@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-convertquota" class="anchor" href="#convertquota" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>convertquota</h1>
+<p>把老的配额文件转换为新的格式</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>convertquota命令</strong> 用于将老的磁盘额数据文件（“quota.user”和“quota.group”）转换为新格式的文件（“quota.user”和“quota.group”）。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>convertquota(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-u：仅转换用户磁盘配额数据文件；
+-g：仅转换组磁盘配额数据文件；
+-f：将老的磁盘配额文件转换为新的格式；
+-e：将新的文件格式从大字节序换为小字节序。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>文件系统：指定要转换磁盘配额数据文件格式的文件系统（硬盘分区）。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>使用convertquota指令转换指定文件系统<code>/data</code>的磁盘配额数据文件。在命令行中输入下面的命令：</p>
+<div class="highlight highlight-source-shell"><pre>convertquota -u /data     //转换文件系统<span class="pl-s"><span class="pl-pds">"</span>/data<span class="pl-pds">"</span></span>上的用户磁盘配额文件</pre></div>
+
+
+</body>
+</html>

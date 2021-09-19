@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-xargs" class="anchor" href="#xargs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>xargs</h1>
+<p>给其他命令传递参数的一个过滤器</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>xargs 命令</strong> 是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。它擅长将标准输入数据转换成命令行参数，xargs 能够处理管道或者 stdin 并将其转换成特定命令的命令参数。xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。xargs 的默认命令是 echo，空格是默认定界符。这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。xargs 是构建单行命令的重要组件之一。</p>
+<h3>
+<a id="user-content-xargs-命令用法" class="anchor" href="#xargs-%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>xargs 命令用法</h3>
+<p>xargs 用作替换工具，读取输入数据重新格式化后输出。</p>
+<p>定义一个测试文件，内有多行文本数据：</p>
+<div class="highlight highlight-source-shell"><pre>cat test.txt
+
+a b c d e f g
+h i j k l m n
+o p q
+r s t
+u v w x y z</pre></div>
+<p>多行输入单行输出：</p>
+<div class="highlight highlight-source-shell"><pre>cat test.txt <span class="pl-k">|</span> xargs
+
+a b c d e f g h i j k l m n o p q r s t u v w x y z</pre></div>
+<h4>
+<a id="user-content-使用--n-进行多行输出" class="anchor" href="#%E4%BD%BF%E7%94%A8--n-%E8%BF%9B%E8%A1%8C%E5%A4%9A%E8%A1%8C%E8%BE%93%E5%87%BA" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>使用 -n 进行多行输出</h4>
+<p><strong>-n 选项</strong> 多行输出：</p>
+<div class="highlight highlight-source-shell"><pre>cat test.txt <span class="pl-k">|</span> xargs -n3
+
+a b c
+d e f
+g h i
+j k l
+m n o
+p q r
+s t u
+v w x
+y z</pre></div>
+<h4>
+<a id="user-content-使用--d-分割输入" class="anchor" href="#%E4%BD%BF%E7%94%A8--d-%E5%88%86%E5%89%B2%E8%BE%93%E5%85%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>使用 -d 分割输入</h4>
+<p><strong>-d 选项</strong> 可以自定义一个定界符：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>nameXnameXnameXname<span class="pl-pds">"</span></span> <span class="pl-k">|</span> xargs -dX
+
+name name name name</pre></div>
+<p>结合 <strong>-n 选项</strong> 使用：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>nameXnameXnameXname<span class="pl-pds">"</span></span> <span class="pl-k">|</span> xargs -dX -n2
+
+name name
+name name</pre></div>
+<h4>
+<a id="user-content-读取-stdin" class="anchor" href="#%E8%AF%BB%E5%8F%96-stdin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>读取 stdin</h4>
+<p><strong>读取 stdin，将格式化后的参数传递给命令</strong></p>
+<p>假设一个命令为 sk.sh 和一个保存参数的文件 arg.txt：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
+<span class="pl-c"><span class="pl-c">#</span>sk.sh 命令内容，打印出所有参数。</span>
+
+<span class="pl-c1">echo</span> <span class="pl-smi">$*</span></pre></div>
+<p>arg.txt 文件内容：</p>
+<div class="highlight highlight-source-shell"><pre>cat arg.txt
+
+aaa
+bbb
+ccc</pre></div>
+<h4>
+<a id="user-content-结合--i-选项" class="anchor" href="#%E7%BB%93%E5%90%88--i-%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>结合 -I 选项</h4>
+<p>xargs 的一个 <strong>选项 -I</strong> ，使用 -I 指定一个替换字符串{}，这个字符串在 xargs 扩展时会被替换掉，当 -I 与 xargs 结合使用，每一个参数命令都会被执行一次：</p>
+<div class="highlight highlight-source-shell"><pre>cat arg.txt <span class="pl-k">|</span> xargs -I {} ./sk.sh -p {} -l
+
+-p aaa -l
+-p bbb -l
+-p ccc -l</pre></div>
+<p>复制所有图片文件到 /data/images 目录下：</p>
+<div class="highlight highlight-source-shell"><pre>ls <span class="pl-k">*</span>.jpg <span class="pl-k">|</span> xargs -n1 -I cp {} /data/images</pre></div>
+<h4>
+<a id="user-content-结合-find-命令使用" class="anchor" href="#%E7%BB%93%E5%90%88-find-%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>结合 find 命令使用</h4>
+<p><strong>xargs 结合 find 使用</strong></p>
+<p>用 rm 删除太多的文件时候，可能得到一个错误信息：<code>/bin/rm Argument list too long</code>. 用 <code>xargs</code> 去避免这个问题：</p>
+<div class="highlight highlight-source-shell"><pre>find <span class="pl-c1">.</span> -type f -name <span class="pl-s"><span class="pl-pds">"</span>*.log<span class="pl-pds">"</span></span> -print0 <span class="pl-k">|</span> xargs -0 rm -f</pre></div>
+<p>xargs -0 将 <code>\0</code> 作为定界符。</p>
+<p>统计一个源代码目录中所有 php 文件的行数：</p>
+<div class="highlight highlight-source-shell"><pre>find <span class="pl-c1">.</span> -type f -name <span class="pl-s"><span class="pl-pds">"</span>*.php<span class="pl-pds">"</span></span> -print0 <span class="pl-k">|</span> xargs -0 wc -l</pre></div>
+<p>查找所有的 jpg 文件，并且压缩它们：</p>
+<div class="highlight highlight-source-shell"><pre>find <span class="pl-c1">.</span> -type f -name <span class="pl-s"><span class="pl-pds">"</span>*.jpg<span class="pl-pds">"</span></span> -print <span class="pl-k">|</span> xargs tar -czvf images.tar.gz</pre></div>
+<h4>
+<a id="user-content-打印出执行的命令" class="anchor" href="#%E6%89%93%E5%8D%B0%E5%87%BA%E6%89%A7%E8%A1%8C%E7%9A%84%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>打印出执行的命令</h4>
+<p>结合 <code>-t</code> 选项可以打印出 <code>xargs</code> 执行的命令</p>
+<pre><code>ls | xargs -t -I{} echo {}
+</code></pre>
+<p>会输出当前目录下的文件列表和执行的 echo 命令</p>
+<h4>
+<a id="user-content-使用--p-选项确认执行的命令" class="anchor" href="#%E4%BD%BF%E7%94%A8--p-%E9%80%89%E9%A1%B9%E7%A1%AE%E8%AE%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>使用 -p 选项确认执行的命令</h4>
+<p><code>-p</code> 选项会在执行每一个命令时弹出确认，当你需要非常准确的确认每一次操作时可以使用 <code>-p</code> 参数，比如，查找当前目录下 <code>.log</code> 文件，每一次删除都需要确认：</p>
+<pre><code>find . -maxdepth 1 -name "*.log" | xargs -p -I{} rm {}
+</code></pre>
+<h4>
+<a id="user-content-执行多个命令" class="anchor" href="#%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>执行多个命令</h4>
+<p>使用 <code>-I</code> 选项可以让 <code>xargs</code> 执行多个命令</p>
+<pre><code>cat foo.txt
+one
+two
+three
+
+cat foo.txt | xargs -I % sh -c 'echo %; mkdir %'
+one
+two
+three
+
+ls
+one two three
+</code></pre>
+<h4>
+<a id="user-content-其他应用" class="anchor" href="#%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>其他应用</h4>
+<p><strong>xargs 其他应用</strong></p>
+<p>假如你有一个文件包含了很多你希望下载的 URL，你能够使用 xargs 下载所有链接：</p>
+<div class="highlight highlight-source-shell"><pre>cat url-list.txt <span class="pl-k">|</span> xargs wget -c</pre></div>
+<h3>
+<a id="user-content-子-shellsubshells" class="anchor" href="#%E5%AD%90-shellsubshells" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>子 Shell（Subshells）</h3>
+<p>运行一个 shell 脚本时会启动另一个命令解释器.，就好像你的命令是在命令行提示下被解释的一样，类似于批处理文件里的一系列命令。每个 shell 脚本有效地运行在父 shell(parent shell) 的一个子进程里。这个父 shell 是指在一个控制终端或在一个 xterm 窗口中给你命令指示符的进程。</p>
+<div class="highlight highlight-source-shell"><pre>cmd1 <span class="pl-k">|</span> ( cmd2<span class="pl-k">;</span> cmd3<span class="pl-k">;</span> cmd4 ) <span class="pl-k">|</span> cmd5</pre></div>
+<p>如果 cmd2 是 cd /，那么就会改变子 Shell 的工作目录，这种改变只是局限于子 shell 内部，cmd5 则完全不知道工作目录发生的变化。子 shell 是嵌在圆括号 () 内部的命令序列，子 Shell 内部定义的变量为局部变量。</p>
+<p>子 shell 可用于为一组命令设定临时的环境变量：</p>
+<div class="highlight highlight-source-shell"><pre>COMMAND1
+COMMAND2
+COMMAND3
+(
+  IFS=:
+  PATH=/bin
+  <span class="pl-c1">unset</span> TERMINFO
+  <span class="pl-c1">set</span> -C
+  <span class="pl-c1">shift</span> 5
+  COMMAND4
+  COMMAND5
+  <span class="pl-c1">exit</span> 3 <span class="pl-c"><span class="pl-c">#</span> 只是从子 shell 退出。</span>
+)
+<span class="pl-c"><span class="pl-c">#</span> 父 shell 不受影响，变量值没有更改。</span>
+COMMAND6
+COMMAND7</pre></div>
+<h2>
+<a id="user-content-reference" class="anchor" href="#reference" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>reference</h2>
+<ul>
+<li><a href="https://shapeshed.com/unix-xargs/" rel="nofollow">https://shapeshed.com/unix-xargs/</a></li>
+</ul>
+
+
+</body>
+</html>

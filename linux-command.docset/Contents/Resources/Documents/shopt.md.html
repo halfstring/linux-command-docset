@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-shopt" class="anchor" href="#shopt" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>shopt</h1>
+<p>显示和设置shell操作选项</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>shopt命令</strong> 用于显示和设置shell中的行为选项，通过这些选项以增强shell易用性。shopt命令若不带任何参数选项，则可以显示所有可以设置的shell操作选项。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>shopt(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-s：激活指定的shell行为选项；
+-u：关闭指定的shell行为选项。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>shell选项：指定要操作的shell选项。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>使用shopt命令显示当前所有可以设置的shell操作选项，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">shopt</span>           <span class="pl-c"><span class="pl-c">#</span>输出所有可以设置的shell操作选项</span>
+cdable_vars     off
+cdspell         off
+checkhash       off
+checkwinsize    on
+cmdhist         on
+dotglob         off
+execfail        off
+expand_aliases  on
+extdebug        off
+...</pre></div>
+<p>如图上所示，选项"cdspell"的状态为"off"，即关闭cd拼写检查选项。现在，可以使用shopt命令将其开启，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">shopt</span> -s cdspell          <span class="pl-c"><span class="pl-c">#</span>开启cd拼写检查</span></pre></div>
+<p>执行上面的命令后，该选项的状态将变为"on"，即开启状态。可以再次通过该命令显示一下shell操作选项即可，输出信息如下：</p>
+<div class="highlight highlight-source-shell"><pre>cdspell on                <span class="pl-c"><span class="pl-c">#</span>开启cdspell选项</span></pre></div>
+<p>用户可以通过实际执行cd命令检查该选项是否被成功开启。</p>
+
+
+</body>
+</html>

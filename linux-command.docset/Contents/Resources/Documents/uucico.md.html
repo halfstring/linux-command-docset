@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-uucico" class="anchor" href="#uucico" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>uucico</h1>
+<p>UUCP文件传输服务程序</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>uucico命令</strong> 命令UUCP文件传输服务程序。 uucico是用来处理uucp或uux送到队列的文件传输工具。uucico有两种工作模式：主动模式和附属模式。当在主动模式下时，uucico会调用远端主机；在附属模式下时，uucico则接受远端主机的调用。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>uucico [-cCDefqvwz][-i<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span>][-I<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>][-p<span class="pl-k">&lt;</span>连接端口号码<span class="pl-k">&gt;</span>][-][-rl][-s<span class="pl-k">&lt;</span>主机<span class="pl-k">&gt;</span>][-S<span class="pl-k">&lt;</span>主机<span class="pl-k">&gt;</span>][-u<span class="pl-k">&lt;</span>用户<span class="pl-k">&gt;</span>][-x<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span>][--help]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c或--quiet 当不执行任何工作时，不要更改记录文件的内容及更新目前的状态。
+-C或--ifwork 当有工作要执行时，才调用-s或-S参数所指定主机。
+-D或--nodetach 不要与控制终端机离线。
+-e或--loop 在附属模式下执行，并且出现要求登入的提示画面。
+-f或--force 当执行错误时，不等待任何时间即重新调用主机。
+-i<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span>或--stdin<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span> 当使用到标准输入设备时，指定连接端口的类型。
+-I<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>--config<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span> 指定使用的配置文件。
+-l或--prompt 出现要求登入的提示画面。
+-p<span class="pl-k">&lt;</span>连接端口号码<span class="pl-k">&gt;</span>或-port<span class="pl-k">&lt;</span>连接端口号码<span class="pl-k">&gt;</span> 指定连接端口号码。
+-q或--quiet 不要启动uuxqt服务程序。
+-r0或--slave 以附属模式启动。
+-s<span class="pl-k">&lt;</span>主机<span class="pl-k">&gt;</span>或--system<span class="pl-k">&lt;</span>主机<span class="pl-k">&gt;</span> 调用指定的主机。
+-u<span class="pl-k">&lt;</span>用户<span class="pl-k">&gt;</span>或--login<span class="pl-k">&lt;</span>用户<span class="pl-k">&gt;</span> 指定登入的用户帐号，而不允许输入任意的登入帐号。
+-v或--version 显示版本信息，并且结束程序。
+-w或--wait 在主动模式下，当执行调用动作时，则出现要求登入的提示画面。
+-x<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span>或-X<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span>或outgoing-debug<span class="pl-k">&lt;</span>类型<span class="pl-k">&gt;</span> 启动指定的排错模式。
+-z或--try-next 当执行不成功时，尝试下一个选择而不结束程序。
+--help 显示帮助，并且结束程序。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>使用主动模式启动uucico服务。在命令提示符下直接输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>uucico-r1</pre></div>
+<p>提示：该命令一般没有输出。</p>
+
+
+</body>
+</html>

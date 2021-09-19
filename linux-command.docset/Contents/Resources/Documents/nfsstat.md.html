@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-nfsstat" class="anchor" href="#nfsstat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>nfsstat</h1>
+<p>列出NFS客户端和服务器的工作状态</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>nfsstat命令</strong> 用于列出NFS客户端和服务器的工作状态。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>nfsstat(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-s：仅列出NFS服务器端状态；
+-c：仅列出NFS客户端状态；
+-n：仅列出NFS状态，默认显示nfs客户端和服务器的状态；
+-2：仅列出NFS版本2的状态；
+-3：仅列出NFS版本3的状态；
+-4：仅列出NFS版本4的状态；
+-m：打印以加载的nfs文件系统状态；
+-r：仅打印rpc状态。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>要显示关于客户机发送和拒绝的RPC和NFS调用数目的信息，输入：</p>
+<div class="highlight highlight-source-shell"><pre>nfsstat -c</pre></div>
+<p>要显示和打印与客户机NFS调用相关的信息，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>nfsstat -cn</pre></div>
+<p>要显示和打印客户机和服务器的与RPC调用相关的信息，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>nfsstat -r</pre></div>
+<p>要显示关于服务器接收和拒绝的RPC和NFS调用数目的信息，输入如下命令：</p>
+<div class="highlight highlight-source-shell"><pre>nfsstat –s</pre></div>
+
+
+</body>
+</html>

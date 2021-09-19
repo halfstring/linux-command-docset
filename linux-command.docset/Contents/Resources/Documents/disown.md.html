@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-disown" class="anchor" href="#disown" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>disown</h1>
+<p>从当前的shell中移除作业。</p>
+<h2>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">disown</span> [-h] [-ar] [jobspec ... <span class="pl-k">|</span> pid ...]</pre></div>
+<h2>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h2>
+<ul>
+<li>
+<p>从当前shell的作业列表中移除全部作业。</p>
+</li>
+<li>
+<p>从当前shell的作业列表中移除指定的一到多个作业。</p>
+</li>
+<li>
+<p>从当前shell的作业列表中移除正在运行的作业。</p>
+</li>
+<li>
+<p>标记作业，使得它们在当前shell退出后也不会结束。</p>
+</li>
+</ul>
+<h2>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h2>
+<div class="highlight highlight-source-shell"><pre>-h    标记每个作业标识符，这些作业将不会在shell接收到sighup信号时接收到sighup信号。
+-a    移除所有的作业。
+-r    移除运行的作业。</pre></div>
+<h2>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h2>
+<p>jobspec（可选）：要移除的作业标识符，可以是一到多个。</p>
+<p>pid（可选）：要移除的作业对应的进程ID，可以是一到多个。</p>
+<h2>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h2>
+<p>返回成功除非未开启作业控制或执行出现错误。</p>
+<h2>
+<a id="user-content-例子" class="anchor" href="#%E4%BE%8B%E5%AD%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子</h2>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 演示。</span>
+[user2@pc] ssh 192.168.1.4
+user2@192.168.1.4<span class="pl-s"><span class="pl-pds">'</span>s password:</span>
+<span class="pl-s"># 此时按下ctrl+z使得交互停止。</span>
+<span class="pl-s">[1]+  Stopped                 ssh 192.168.1.4</span>
+<span class="pl-s"></span>
+<span class="pl-s">[user2@pc] ssh 192.168.1.7</span>
+<span class="pl-s">user2@192.168.1.7<span class="pl-pds">'</span></span>s password:
+<span class="pl-c"><span class="pl-c">#</span> 此时按下ctrl+z使得交互停止。</span>
+[1]+  Stopped                 ssh 192.168.1.7
+
+[user2@pc] sleep 120 <span class="pl-k">&amp;</span>
+[3] 28986
+
+<span class="pl-c"><span class="pl-c">#</span> 列出作业及pid信息。</span>
+[user2@pc] <span class="pl-c1">jobs</span> -l
+[1]- 28756 Stopped                 ssh 192.168.1.4
+[2]+ 28833 Stopped                 ssh 192.168.1.7
+[3]  28986 Running                 sleep 120 <span class="pl-k">&amp;</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 删除运行状态的作业。</span>
+[user2@pc] <span class="pl-c1">disown</span> -r
+
+[user2@pc] <span class="pl-c1">jobs</span> -l
+[1]- 28756 Stopped                 ssh 192.168.1.4
+[2]+ 28833 Stopped                 ssh 192.168.1.7
+
+<span class="pl-c"><span class="pl-c">#</span> 注意disown只是移除作业，并没有停止。</span>
+[user2@pc] pgrep -a -u user2 -f <span class="pl-s"><span class="pl-pds">'</span>sleep 120<span class="pl-pds">'</span></span>
+28986 sleep 120
+
+<span class="pl-c"><span class="pl-c">#</span> 删除指定的作业。</span>
+[user2@pc] <span class="pl-c1">disown</span> %2
+bash: warning: deleting stopped job 2 with process group 28833
+
+[user2@pc] <span class="pl-c1">jobs</span> -l
+[1]- 28756 Stopped                 ssh 192.168.1.4
+
+<span class="pl-c"><span class="pl-c">#</span> 注意disown只是移除作业，并没有停止。</span>
+[user2@pc] pgrep -a -u user2 -f <span class="pl-s"><span class="pl-pds">'</span>ssh 192.168.1.7<span class="pl-pds">'</span></span>
+28833 ssh 192.168.1.7
+
+<span class="pl-c"><span class="pl-c">#</span> 删除全部作业。</span>
+[user2@pc] <span class="pl-c1">disown</span> -a
+bash: warning: deleting stopped job 1 with process group 28756
+
+[user2@pc] <span class="pl-c1">jobs</span> -l
+
+<span class="pl-c"><span class="pl-c">#</span> 注意disown只是移除作业，并没有停止。</span>
+[user2@pc] pgrep -a -u user2 -f <span class="pl-s"><span class="pl-pds">'</span>ssh 192.168.1.4<span class="pl-pds">'</span></span>
+28756 ssh 192.168.1.4</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 演示-h选项的作用。</span>
+[user2@pc] sleep 90 <span class="pl-k">&amp;</span>
+[1] 109080
+
+[user2@pc] <span class="pl-c1">jobs</span> -l
+[1]+ 109080 Running                 sleep 90 <span class="pl-k">&amp;</span>
+
+[user2@pc] <span class="pl-c1">disown</span> -h %1
+
+[user2@pc] <span class="pl-c1">exit</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 此时前一个终端已经关闭，现在打开新终端查找该作业。</span>
+[user2@pc] pgrep -a -u user2 -f <span class="pl-s"><span class="pl-pds">'</span>sleep 90<span class="pl-pds">'</span></span>
+109080 sleep 90</pre></div>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<ol>
+<li>
+<code>bash</code>的作业控制命令包括<code>bg fg kill wait disown suspend</code>。</li>
+<li>该命令需要<code>set</code>选项<code>monitor</code>处于开启状态时才能执行；查看作业控制状态：输入<code>set -o</code>查看<code>monitor</code>行；执行<code>set -o monitor</code>或<code>set -m</code>开启该选项。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3>
+<a id="user-content-参考链接" class="anchor" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参考链接</h3>
+<ul>
+<li><a href="https://www.cyberciti.biz/faq/unix-linux-disown-command-examples-usage-syntax/" rel="nofollow">disown的用法</a></li>
+</ul>
+
+
+</body>
+</html>

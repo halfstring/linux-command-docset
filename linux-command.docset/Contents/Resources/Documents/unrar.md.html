@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-unrar" class="anchor" href="#unrar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>unrar</h1>
+<p>解压rar文件命令，从 rar 压缩包中提取文件</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>unrar [选项][switch 命令] [文件名...][路径]
+unrar <span class="pl-k">&lt;</span>command<span class="pl-k">&gt;</span> [-<span class="pl-k">&lt;</span>switch <span class="pl-k">1&gt;</span> -<span class="pl-k">&lt;</span>switch N<span class="pl-k">&gt;</span>] archive [files...] [path...]</pre></div>
+<h3>
+<a id="user-content-安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装</h3>
+<p>在 Linux 中输入以下命令下载安装包</p>
+<div class="highlight highlight-source-shell"><pre>wget https://www.rarlab.com/rar/rarlinux-6.0.2.tar.gz
+
+<span class="pl-c1">cd</span> <span class="pl-k">~</span>/Downloads/
+tar -zxvf rarlinux-6.0.2.tar.gz</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>e             <span class="pl-c"><span class="pl-c">#</span> 解压压缩文件到当前目录</span>
+l[t,b]        <span class="pl-c"><span class="pl-c">#</span> 列出压缩文件[技术信息,简洁]</span>
+p             <span class="pl-c"><span class="pl-c">#</span> 将文件打印到标准输出。</span>
+t             <span class="pl-c"><span class="pl-c">#</span> 测试压缩文件</span>
+v[t,b]        <span class="pl-c"><span class="pl-c">#</span> 详细列出压缩文件[技术信息,简洁]</span>
+x             <span class="pl-c"><span class="pl-c">#</span> 用绝对路径解压文件</span></pre></div>
+<h3>
+<a id="user-content-switches--开关设置" class="anchor" href="#switches--%E5%BC%80%E5%85%B3%E8%AE%BE%E7%BD%AE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SWITCHES  开关设置</h3>
+<p>注意：每个开关必须用空格分隔。你不能把它们放在一起。</p>
+<div class="highlight highlight-source-shell"><pre>-av-       <span class="pl-c"><span class="pl-c">#</span> 禁用，真实性验证检查。</span>
+-c-        <span class="pl-c"><span class="pl-c">#</span> 禁用，评论显示</span>
+-f         <span class="pl-c"><span class="pl-c">#</span> 刷新文件</span>
+-kb        <span class="pl-c"><span class="pl-c">#</span> 保留破碎的提取文件</span>
+-ierr      <span class="pl-c"><span class="pl-c">#</span> 将所有消息发送给stderr。</span>
+-inul      <span class="pl-c"><span class="pl-c">#</span> 禁用，所有消息。</span>
+-o+        <span class="pl-c"><span class="pl-c">#</span> 覆盖现有文件。</span>
+-o-        <span class="pl-c"><span class="pl-c">#</span> 不要覆盖现有文件</span>
+-p<span class="pl-k">&lt;</span>password<span class="pl-k">&gt;</span>
+     	    <span class="pl-c"><span class="pl-c">#</span> 设置密码。</span>
+-p-        <span class="pl-c"><span class="pl-c">#</span> 不查询密码</span>
+-r         <span class="pl-c"><span class="pl-c">#</span> 递归子目录。</span>
+-u         <span class="pl-c"><span class="pl-c">#</span> 更新文件。</span>
+-v         <span class="pl-c"><span class="pl-c">#</span> 列出所有卷。</span>
+-x<span class="pl-k">&lt;</span>file<span class="pl-k">&gt;</span>
+     	    <span class="pl-c"><span class="pl-c">#</span> 排除指定的文件。</span>
+-x@<span class="pl-k">&lt;</span>list<span class="pl-k">&gt;</span>
+     	    <span class="pl-c"><span class="pl-c">#</span> 排除指定列表文件中的文件。</span>
+-x@        <span class="pl-c"><span class="pl-c">#</span> 读取要从 stdin 中排除的文件名。</span>
+-y         <span class="pl-c"><span class="pl-c">#</span> 对所有查询都假设为是。</span></pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>目录：指定要显示列表的目录，也可以是具体的文件。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将压缩文件 <code>text.rar</code> 在当前目录下解压缩,并解压完整路径。</p>
+<div class="highlight highlight-source-shell"><pre>unrar x test.rar</pre></div>
+<p>将压缩文件 text.rar 在当前目录下解压缩,并解压完整路径：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> unrar x test.rar</span></pre></div>
+<p>查看rar包中的内容：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> unrar l test.rar</span></pre></div>
+<p>测试rar包是否能解压成功：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> unrar t test.rar</span></pre></div>
+<p>解压到当前文件夹：</p>
+<div class="highlight highlight-source-shell"><pre>[root@linux <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> unrar e test.rar</span></pre></div>
+
+</body>
+</html>

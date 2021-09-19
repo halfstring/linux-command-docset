@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-depmod" class="anchor" href="#depmod" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>depmod</h1>
+<p>分析可载入模块的相依性</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>depmod命令</strong> 可产生模块依赖的映射文件，在构建嵌入式系统时，需要由这个命令来生成相应的文件，由modprobe使用。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>depmod(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a或--all：分析所有可用的模块；
+-d或debug：执行排错模式；
+-e：输出无法参照的符号；
+-i：不检查符号表的版本；
+-m<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>或system-map<span class="pl-k">&lt;</span>文件<span class="pl-k">&gt;</span>：使用指定的符号表文件；
+-s或--system-log：在系统记录中记录错误；
+-v或--verbose：执行时显示详细的信息；
+-V或--version：显示版本信息；
+--help：显示帮助。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>depmod -b /home/windsome/EMMA3PF-KernelSource-20080626/install_pos -e -F ./boot/System.map -v 2.6.18_pro500-bcm91250-mips2_fp_be -A -a</pre></div>
+<ul>
+<li>
+<code>/home/windsome/EMMA3PF-KernelSource-20080626/install_pos</code>是我<code>make mod_install</code>后，所有模块的存放路径。</li>
+<li>
+<code>./boot/System.map</code>是<code>make linux</code>后生成，我拷贝到此目录的。</li>
+<li>
+<code>2.6.18_pro500-bcm91250-mips2_fp_be</code>是我build的linux的版本。</li>
+</ul>
+<p>编译linux过程及执行depmod的例子：</p>
+<div class="highlight highlight-source-shell"><pre>genkernel.sh (at linux-2.6.18_pro500)
+<span class="pl-c"><span class="pl-c">#</span>######</span>
+<span class="pl-k">export</span> INSTALL_ROOT_EMMA3PF=<span class="pl-s"><span class="pl-pds">"</span>/home/windsome/EMMA3PF-KernelSource-20080626/install_pos<span class="pl-pds">"</span></span>
+<span class="pl-k">export</span> INSTALL_MOD_EMMA3PF=<span class="pl-s"><span class="pl-pds">"</span>/home/windsome/EMMA3PF-KernelSource-20080626/install_pos<span class="pl-pds">"</span></span>
+rm /home/windsome/EMMA3PF-KernelSource-20080626/install_pos/lib -rf
+rm /home/windsome/EMMA3PF-KernelSource-20080626/install_pos/boot/<span class="pl-k">*</span> -rf
+<span class="pl-c1">cd</span> <span class="pl-k">&lt;</span>linux_src_dir<span class="pl-k">&gt;</span>
+make
+make modules_install
+cp vmlinux System.map /home/windsome/EMMA3PF-KernelSource-20080626/install_pos/boot/ -p
+<span class="pl-c1">cd</span> /home/windsome/EMMA3PF-KernelSource-20080626/install_pos
+depmod -b /home/windsome/EMMA3PF-KernelSource-20080626/install_pos -e -F ./boot/System.map -v 2.6.18_pro500-bcm91250-mips2_fp_be -A -a</pre></div>
+<p>其他用法：</p>
+<p>在linux桌面系统中，当你编译了新的驱动，为了能够用<code>modprobe ***</code>加载模块, 你需要先将模块拷贝到<code>/lib/modules /2.6.31-20-generic</code>目录下，然后运行<code>sudo depmod -a</code>将模块信息写入modules.dep、modules.dep.bin、modules.alias.bin、modules.alias和modules.pcimap文件中。</p>
+<p>如，我编译了一个新的wifi驱动r8192se_pci.ko，将其拷贝到<code>/lib/modules/2.6.31-20-generic/wireless</code>下，然后到<code>/lib/modules/2.6.31-20-generic</code>运行<code>depmod -a</code>，之后可以在任意目录运行modprobe r8192se_pci。</p>
+
+
+</body>
+</html>

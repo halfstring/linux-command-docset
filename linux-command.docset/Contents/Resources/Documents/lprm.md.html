@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-lprm" class="anchor" href="#lprm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lprm</h1>
+<p>删除打印队列中的打印任务</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>lprm命令</strong> 用于删除打印队列中的打印任务。尚未完成的打印机任务会被放在打印机贮列之中，这个命令可用来将常未送到打印机的任务取消。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>lprm(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-E：与打印服务器连接时强制使用加密；
+-P：指定接受打印任务的目标打印机；
+-U：指定可选的用户名。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>打印任务：指定需删除的打印任务号。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>将打印机hpprint中的第102号任务移除：</p>
+<div class="highlight highlight-source-shell"><pre>lprm -Phpprint 102</pre></div>
+<p>将第101号任务由预设打印机中移除：</p>
+<div class="highlight highlight-source-shell"><pre>lprm 101</pre></div>
+
+
+</body>
+</html>

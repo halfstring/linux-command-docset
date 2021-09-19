@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-lvcreate" class="anchor" href="#lvcreate" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lvcreate</h1>
+<p>用于创建LVM的逻辑卷</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>lvcreate命令</strong> 用于创建LVM的逻辑卷。逻辑卷是创建在卷组之上的。逻辑卷对应的设备文件保存在卷组目录下，例如：在卷组"vg1000"上创建一个逻辑卷"lvol0"，则此逻辑卷对应的设备文件为"/dev/vg1000/lvol0"。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>lvcreate(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-L：指定逻辑卷的大小，单位为“kKmMgGtT”字节；
+-l：指定逻辑卷的大小（LE数）。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>逻辑卷：指定要创建的逻辑卷名称。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>使用lvcreate命令在卷组"vg1000"上创建一个200MB的逻辑卷。在命令行中输入下面的命令：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> lvcreate -L 200M vg1000    #创建大小为200M的逻辑卷</span></pre></div>
+<p>输出信息如下：</p>
+<div class="highlight highlight-source-shell"><pre>Logical volume <span class="pl-s"><span class="pl-pds">"</span>lvol0<span class="pl-pds">"</span></span> created</pre></div>
+<p>说明：创建成功后，新的逻辑卷"lvol0"，将通过设备文件<code>/dev/vg1000/lvol0</code>进行访问。</p>
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-blkid" class="anchor" href="#blkid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>blkid</h1>
+<p>查看块设备的文件系统类型、LABEL、UUID等信息</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p>在Linux下可以使用 <strong>blkid命令</strong> 对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>blkid -L <span class="pl-k">|</span> -U
+blkid [-c ] [-ghlLv] [-o] [-s ][-t ] -[w ] [ ...]
+blkid -p [-s ] [-O ] [-S ][-o] ...
+blkid -i [-s ] [-o] ...</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-c <span class="pl-k">&lt;</span>file<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> 指定cache文件(default: /etc/blkid.tab, /dev/null = none)</span>
+-d          <span class="pl-c"><span class="pl-c">#</span> don't encode non-printing characters</span>
+-h          <span class="pl-c"><span class="pl-c">#</span> 显示帮助信息</span>
+-g          <span class="pl-c"><span class="pl-c">#</span> garbage collect the blkid cache</span>
+-o <span class="pl-k">&lt;</span>format<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 指定输出格式</span>
+-k          <span class="pl-c"><span class="pl-c">#</span> list all known filesystems/RAIDs and exit</span>
+-s <span class="pl-k">&lt;</span>tag<span class="pl-k">&gt;</span>    <span class="pl-c"><span class="pl-c">#</span> 显示指定信息，默认显示所有信息</span>
+-t <span class="pl-k">&lt;</span>token<span class="pl-k">&gt;</span>  <span class="pl-c"><span class="pl-c">#</span> find device with a specific token (NAME=value pair)</span>
+-l          <span class="pl-c"><span class="pl-c">#</span> look up only first device with token specified by -t</span>
+-L <span class="pl-k">&lt;</span>label<span class="pl-k">&gt;</span>  <span class="pl-c"><span class="pl-c">#</span> convert LABEL to device name</span>
+-U <span class="pl-k">&lt;</span>uuid<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> convert UUID to device name</span>
+-v          <span class="pl-c"><span class="pl-c">#</span> 显示版本信息</span>
+-w <span class="pl-k">&lt;</span>file<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> write cache to different file (/dev/null = no write)</span>
+<span class="pl-k">&lt;</span>dev<span class="pl-k">&gt;</span>       <span class="pl-c"><span class="pl-c">#</span> specify device(s) to probe (default: all devices)</span>
+Low-level probing options:
+-p          <span class="pl-c"><span class="pl-c">#</span> low-level superblocks probing (bypass cache)</span>
+-i          <span class="pl-c"><span class="pl-c">#</span> gather information about I/O limits</span>
+-S <span class="pl-k">&lt;</span>size<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> overwrite device size</span>
+-O <span class="pl-k">&lt;</span>offset<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> probe at the given offset</span>
+-u <span class="pl-k">&lt;</span>list<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> filter by "usage" (e.g. -u filesystem,raid)</span>
+-n <span class="pl-k">&lt;</span>list<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> filter by filesystem type (e.g. -n vfat,ext3)</span></pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>1、列出当前系统中所有已挂载文件系统的类型：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid</pre></div>
+<p>2、显示指定设备 UUID：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -s UUID /dev/sda5</pre></div>
+<p>3、显示所有设备 UUID：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -s UUID</pre></div>
+<p>4、显示指定设备 LABEL：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -s LABEL /dev/sda5</pre></div>
+<p>5、显示所有设备 LABEL：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -s LABEL</pre></div>
+<p>6、显示所有设备文件系统：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -s TYPE</pre></div>
+<p>7、显示所有设备：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -o device</pre></div>
+<p>8、以列表方式查看详细信息：</p>
+<div class="highlight highlight-source-shell"><pre>sudo blkid -o list</pre></div>
+
+
+</body>
+</html>

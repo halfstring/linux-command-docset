@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-grep" class="anchor" href="#grep" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>grep</h1>
+<p>强大的文本搜索工具</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>grep</strong> （global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。用于过滤/搜索的特定字符。可使用正则表达式能配合多种命令使用，使用上十分灵活。</p>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a --text  <span class="pl-c"><span class="pl-c">#</span> 不要忽略二进制数据。</span>
+-A <span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span>   --after-context=<span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</span>
+-b --byte-offset                           <span class="pl-c"><span class="pl-c">#</span> 在显示符合范本样式的那一行之外，并显示该行之前的内容。</span>
+-B<span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span>   --before-context=<span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> 除了显示符合样式的那一行之外，并显示该行之前的内容。</span>
+-c --count    <span class="pl-c"><span class="pl-c">#</span> 计算符合范本样式的列数。</span>
+-C<span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span> --context=<span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span>或-<span class="pl-k">&lt;</span>显示行数<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</span>
+-d<span class="pl-k">&lt;</span>进行动作<span class="pl-k">&gt;</span> --directories=<span class="pl-k">&lt;</span>动作<span class="pl-k">&gt;</span>  <span class="pl-c"><span class="pl-c">#</span> 当指定要查找的是目录而非文件时，必须使用这项参数，否则grep命令将回报信息并停止动作。</span>
+-e<span class="pl-k">&lt;</span>范本样式<span class="pl-k">&gt;</span> --regexp=<span class="pl-k">&lt;</span>范本样式<span class="pl-k">&gt;</span>   <span class="pl-c"><span class="pl-c">#</span> 指定字符串作为查找文件内容的范本样式。</span>
+-E --extended-regexp             <span class="pl-c"><span class="pl-c">#</span> 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</span>
+-f<span class="pl-k">&lt;</span>范本文件<span class="pl-k">&gt;</span> --file=<span class="pl-k">&lt;</span>规则文件<span class="pl-k">&gt;</span>     <span class="pl-c"><span class="pl-c">#</span> 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一列的范本样式。</span>
+-F --fixed-regexp   <span class="pl-c"><span class="pl-c">#</span> 将范本样式视为固定字符串的列表。</span>
+-G --basic-regexp   <span class="pl-c"><span class="pl-c">#</span> 将范本样式视为普通的表示法来使用。</span>
+-h --no-filename    <span class="pl-c"><span class="pl-c">#</span> 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</span>
+-H --with-filename  <span class="pl-c"><span class="pl-c">#</span> 在显示符合范本样式的那一列之前，标示该列的文件名称。</span>
+-i --ignore-case    <span class="pl-c"><span class="pl-c">#</span> 忽略字符大小写的差别。</span>
+-l --file-with-matches   <span class="pl-c"><span class="pl-c">#</span> 列出文件内容符合指定的范本样式的文件名称。</span>
+-L --files-without-match <span class="pl-c"><span class="pl-c">#</span> 列出文件内容不符合指定的范本样式的文件名称。</span>
+-n --line-number         <span class="pl-c"><span class="pl-c">#</span> 在显示符合范本样式的那一列之前，标示出该列的编号。</span>
+-P --perl-regexp         <span class="pl-c"><span class="pl-c">#</span> PATTERN 是一个 Perl 正则表达式</span>
+-q --quiet或--silent     <span class="pl-c"><span class="pl-c">#</span> 不显示任何信息。</span>
+-R/-r  --recursive       <span class="pl-c"><span class="pl-c">#</span> 此参数的效果和指定“-d recurse”参数相同。</span>
+-s --no-messages  <span class="pl-c"><span class="pl-c">#</span> 不显示错误信息。</span>
+-v --revert-match <span class="pl-c"><span class="pl-c">#</span> 反转查找。</span>
+-V --version      <span class="pl-c"><span class="pl-c">#</span> 显示版本信息。   </span>
+-w --word-regexp  <span class="pl-c"><span class="pl-c">#</span> 只显示全字符合的列。</span>
+-x --line-regexp  <span class="pl-c"><span class="pl-c">#</span> 只显示全列符合的列。</span>
+-y <span class="pl-c"><span class="pl-c">#</span> 此参数效果跟“-i”相同。</span>
+-o <span class="pl-c"><span class="pl-c">#</span> 只输出文件中匹配到的部分。</span>
+-m <span class="pl-k">&lt;</span>num<span class="pl-k">&gt;</span> --max-count=<span class="pl-k">&lt;</span>num<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 找到num行结果后停止查找，用来限制匹配行数</span></pre></div>
+<h3>
+<a id="user-content-规则表达式" class="anchor" href="#%E8%A7%84%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>规则表达式</h3>
+<div class="highlight highlight-source-shell"><pre>^    <span class="pl-c"><span class="pl-c">#</span> 锚定行的开始 如：'^grep'匹配所有以grep开头的行。    </span>
+$    <span class="pl-c"><span class="pl-c">#</span> 锚定行的结束 如：'grep$' 匹配所有以grep结尾的行。</span>
+<span class="pl-c1">.</span>    <span class="pl-c"><span class="pl-c">#</span> 匹配一个非换行符的字符 如：'gr.p'匹配gr后接一个任意字符，然后是p。    </span>
+<span class="pl-k">*</span>    <span class="pl-c"><span class="pl-c">#</span> 匹配零个或多个先前字符 如：'*grep'匹配所有一个或多个空格后紧跟grep的行。    </span>
+.<span class="pl-k">*</span>   <span class="pl-c"><span class="pl-c">#</span> 一起用代表任意字符。   </span>
+[]   <span class="pl-c"><span class="pl-c">#</span> 匹配一个指定范围内的字符，如'[Gg]rep'匹配Grep和grep。    </span>
+[^]  <span class="pl-c"><span class="pl-c">#</span> 匹配一个不在指定范围内的字符，如：'[^A-FH-Z]rep'匹配不包含A-R和T-Z的一个字母开头，紧跟rep的行。    </span>
+<span class="pl-cce">\(</span>..<span class="pl-cce">\)</span>  <span class="pl-c"><span class="pl-c">#</span> 标记匹配字符，如'\(love\)'，love被标记为1。    </span>
+<span class="pl-cce">\&lt;</span>      <span class="pl-c"><span class="pl-c">#</span> 锚定单词的开始，如:'\&lt;grep'匹配包含以grep开头的单词的行。    </span>
+<span class="pl-cce">\&gt;</span>      <span class="pl-c"><span class="pl-c">#</span> 锚定单词的结束，如'grep\&gt;'匹配包含以grep结尾的单词的行。    </span>
+x<span class="pl-cce">\{</span>m<span class="pl-cce">\}</span>  <span class="pl-c"><span class="pl-c">#</span> 重复字符x，m次，如：'0\{5\}'匹配包含5个o的行。    </span>
+x<span class="pl-cce">\{</span>m,<span class="pl-cce">\}</span>   <span class="pl-c"><span class="pl-c">#</span> 重复字符x,至少m次，如：'o\{5,\}'匹配至少有5个o的行。    </span>
+x<span class="pl-cce">\{</span>m,n<span class="pl-cce">\}</span>  <span class="pl-c"><span class="pl-c">#</span> 重复字符x，至少m次，不多于n次，如：'o\{5,10\}'匹配5--10个o的行。   </span>
+<span class="pl-cce">\w</span>    <span class="pl-c"><span class="pl-c">#</span> 匹配文字和数字字符，也就是[A-Za-z0-9]，如：'G\w*p'匹配以G后跟零个或多个文字或数字字符，然后是p。   </span>
+<span class="pl-cce">\W</span>    <span class="pl-c"><span class="pl-c">#</span> \w的反置形式，匹配一个或多个非单词字符，如点号句号等。   </span>
+<span class="pl-cce">\b</span>    <span class="pl-c"><span class="pl-c">#</span> 单词锁定符，如: '\bgrep\b'只匹配grep。  </span></pre></div>
+<h2>
+<a id="user-content-grep命令常见用法" class="anchor" href="#grep%E5%91%BD%E4%BB%A4%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>grep命令常见用法</h2>
+<p>在文件中搜索一个单词，命令会返回一个包含 <strong>“match_pattern”</strong> 的文本行：</p>
+<div class="highlight highlight-source-shell"><pre>grep match_pattern file_name
+grep <span class="pl-s"><span class="pl-pds">"</span>match_pattern<span class="pl-pds">"</span></span> file_name</pre></div>
+<p>在多个文件中查找：</p>
+<div class="highlight highlight-source-shell"><pre>grep <span class="pl-s"><span class="pl-pds">"</span>match_pattern<span class="pl-pds">"</span></span> file_1 file_2 file_3 ...</pre></div>
+<p>输出除之外的所有行  <strong>-v</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre>grep -v <span class="pl-s"><span class="pl-pds">"</span>match_pattern<span class="pl-pds">"</span></span> file_name</pre></div>
+<p>标记匹配颜色  <strong>--color=auto</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre>grep <span class="pl-s"><span class="pl-pds">"</span>match_pattern<span class="pl-pds">"</span></span> file_name --color=auto</pre></div>
+<p>使用正则表达式  <strong>-E</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre>grep -E <span class="pl-s"><span class="pl-pds">"</span>[1-9]+<span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 或</span>
+egrep <span class="pl-s"><span class="pl-pds">"</span>[1-9]+<span class="pl-pds">"</span></span></pre></div>
+<p>使用正则表达式  <strong>-P</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre>grep -P <span class="pl-s"><span class="pl-pds">"</span>(\d{3}\-){2}\d{4}<span class="pl-pds">"</span></span> file_name</pre></div>
+<p>只输出文件中匹配到的部分  <strong>-o</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> this is a <span class="pl-c1">test</span> line. <span class="pl-k">|</span> grep -o -E <span class="pl-s"><span class="pl-pds">"</span>[a-z]+\.<span class="pl-pds">"</span></span>
+line.
+
+<span class="pl-c1">echo</span> this is a <span class="pl-c1">test</span> line. <span class="pl-k">|</span> egrep -o <span class="pl-s"><span class="pl-pds">"</span>[a-z]+\.<span class="pl-pds">"</span></span>
+line.</pre></div>
+<p>统计文件或者文本中包含匹配字符串的行数  <strong>-c</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre>grep -c <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> file_name</pre></div>
+<p>输出包含匹配字符串的行数  <strong>-n</strong>  选项：</p>
+<div class="highlight highlight-source-shell"><pre>grep <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> -n file_name
+<span class="pl-c"><span class="pl-c">#</span> 或</span>
+cat file_name <span class="pl-k">|</span> grep <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> -n
+
+<span class="pl-c"><span class="pl-c">#</span>多个文件</span>
+grep <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> -n file_1 file_2</pre></div>
+<p>打印样式匹配所位于的字符或字节偏移：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> gun is not unix <span class="pl-k">|</span> grep -b -o <span class="pl-s"><span class="pl-pds">"</span>not<span class="pl-pds">"</span></span>
+7:not
+<span class="pl-c"><span class="pl-c">#</span>一行中字符串的字符便宜是从该行的第一个字符开始计算，起始值为0。选项  **-b -o**  一般总是配合使用。</span></pre></div>
+<p>搜索多个文件并查找匹配文本在哪些文件中：</p>
+<div class="highlight highlight-source-shell"><pre>grep -l <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> file1 file2 file3...</pre></div>
+<h3>
+<a id="user-content-grep递归搜索文件" class="anchor" href="#grep%E9%80%92%E5%BD%92%E6%90%9C%E7%B4%A2%E6%96%87%E4%BB%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>grep递归搜索文件</h3>
+<p>在多级目录中对文本进行递归搜索：</p>
+<div class="highlight highlight-source-shell"><pre>grep <span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-c1">.</span> -r -n
+<span class="pl-c"><span class="pl-c">#</span> .表示当前目录。</span></pre></div>
+<p>忽略匹配样式中的字符大小写：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>hello world<span class="pl-pds">"</span></span> <span class="pl-k">|</span> grep -i <span class="pl-s"><span class="pl-pds">"</span>HELLO<span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-c">#</span> hello</span></pre></div>
+<p>选项  <strong>-e</strong>  制动多个匹配样式：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">echo</span> this is a text line <span class="pl-k">|</span> grep -e <span class="pl-s"><span class="pl-pds">"</span>is<span class="pl-pds">"</span></span> -e <span class="pl-s"><span class="pl-pds">"</span>line<span class="pl-pds">"</span></span> -o
+is
+line
+
+<span class="pl-c"><span class="pl-c">#</span>也可以使用 **-f** 选项来匹配多个样式，在样式文件中逐行写出需要匹配的字符。</span>
+cat patfile
+aaa
+bbb
+
+<span class="pl-c1">echo</span> aaa bbb ccc ddd eee <span class="pl-k">|</span> grep -f patfile -o</pre></div>
+<p>在grep搜索结果中包括或者排除指定文件：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 只在目录中所有的.php和.html文件中递归搜索字符"main()"</span>
+grep <span class="pl-s"><span class="pl-pds">"</span>main()<span class="pl-pds">"</span></span> <span class="pl-c1">.</span> -r --include <span class="pl-k">*</span>.{php,html}
+
+<span class="pl-c"><span class="pl-c">#</span> 在搜索结果中排除所有README文件</span>
+grep <span class="pl-s"><span class="pl-pds">"</span>main()<span class="pl-pds">"</span></span> <span class="pl-c1">.</span> -r --exclude <span class="pl-s"><span class="pl-pds">"</span>README<span class="pl-pds">"</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> 在搜索结果中排除filelist文件列表里的文件</span>
+grep <span class="pl-s"><span class="pl-pds">"</span>main()<span class="pl-pds">"</span></span> <span class="pl-c1">.</span> -r --exclude-from filelist
+</pre></div>
+<p>使用0值字节后缀的grep与xargs：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 测试文件：</span>
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>aaa<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> file1
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>bbb<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> file2
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>aaa<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> file3
+
+grep <span class="pl-s"><span class="pl-pds">"</span>aaa<span class="pl-pds">"</span></span> file<span class="pl-k">*</span> -lZ <span class="pl-k">|</span> xargs -0 rm
+
+<span class="pl-c"><span class="pl-c">#</span> 执行后会删除file1和file3，grep输出用-Z选项来指定以0值字节作为终结符文件名（\0），xargs -0 读取输入并用0值字节终结符分隔文件名，然后删除匹配文件，-Z通常和-l结合使用。</span></pre></div>
+<p>grep静默输出：</p>
+<div class="highlight highlight-source-shell"><pre>grep -q <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> filename
+<span class="pl-c"><span class="pl-c">#</span> 不会输出任何信息，如果命令运行成功返回0，失败则返回非0值。一般用于条件测试。</span></pre></div>
+<p>打印出匹配文本之前或者之后的行：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 显示匹配某个结果之后的3行，使用 -A 选项：</span>
+seq 10 <span class="pl-k">|</span> grep <span class="pl-s"><span class="pl-pds">"</span>5<span class="pl-pds">"</span></span> -A 3
+5
+6
+7
+8
+
+<span class="pl-c"><span class="pl-c">#</span> 显示匹配某个结果之前的3行，使用 -B 选项：</span>
+seq 10 <span class="pl-k">|</span> grep <span class="pl-s"><span class="pl-pds">"</span>5<span class="pl-pds">"</span></span> -B 3
+2
+3
+4
+5
+
+<span class="pl-c"><span class="pl-c">#</span> 显示匹配某个结果的前三行和后三行，使用 -C 选项：</span>
+seq 10 <span class="pl-k">|</span> grep <span class="pl-s"><span class="pl-pds">"</span>5<span class="pl-pds">"</span></span> -C 3
+2
+3
+4
+5
+6
+7
+8
+
+<span class="pl-c"><span class="pl-c">#</span> 如果匹配结果有多个，会用“--”作为各匹配结果之间的分隔符：</span>
+<span class="pl-c1">echo</span> -e <span class="pl-s"><span class="pl-pds">"</span>a\nb\nc\na\nb\nc<span class="pl-pds">"</span></span> <span class="pl-k">|</span> grep a -A 1
+a
+b
+--
+a
+b</pre></div>
+
+
+</body>
+</html>

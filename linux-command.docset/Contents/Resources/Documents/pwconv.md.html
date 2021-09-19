@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-pwconv" class="anchor" href="#pwconv" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>pwconv</h1>
+<p>用来开启用户的投影密码</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>pwconv命令</strong> 用来开启用户的投影密码。Linux系统里的用户和群组密码，分别存放在名称为passwd和group的文件中， 这两个文件位于<code>/etc</code>目录下。因系统运作所需，任何人都得以读取它们，造成安全上的破绽。投影密码将文件内的密码改存在<code>/etc</code>目录下的shadow和gshadow文件内，只允许系统管理者读取，同时把原密码置换为"x"字符，有效的强化了系统的安全性。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>pwconv</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>cat /etc/passwd <span class="pl-k">|</span> grep <span class="pl-c1">test</span>
+test:x:3001:3001::/home/test:/bin/sh</pre></div>
+<p>此时可以发现密码段是x</p>
+<div class="highlight highlight-source-shell"><pre>cat /etc/shadow <span class="pl-k">|</span> grep <span class="pl-c1">test</span>
+test:<span class="pl-smi">$6</span><span class="pl-smi">$nYOEWamm$bz07nlv</span>/.RgJufb3FAqJJeULfwybzgxmrWqbk7O4vI0KsT6N.ujrh6dDIUcAJdfjksyuyAFDPIngZeD3cgcf.0:15022:0:99999:7:::</pre></div>
+
+
+</body>
+</html>

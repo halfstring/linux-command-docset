@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ipcalc" class="anchor" href="#ipcalc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ipcalc</h1>
+<p>简单的IP地址计算器</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ipcalc命令</strong> 是一个简单的ip地址计算器，可以完成简单的IP地址计算任务。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ipcalc(选项)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-b：由给定的IP地址和网络掩码计算出广播地址；
+-h：显示给定UP地址所对应的主机名；
+-m：由给定的IP地址计算器网络掩码；
+-p：显示给定的掩码或IP地址的前缀；
+-n：由给定的IP地址和网络掩码计算网络地址；
+-s：安静模式；
+--help：显示帮助信息。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> ipcalc -p 192.168.2.1 255.255.255.0</span>
+PREFIX=24
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> ipcalc -n 192.168.2.1 255.255.255.0</span>
+NETWORK=192.168.2.0
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> ipcalc -h 127.0.0.1</span>
+hostname=localhost.localdomain
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> ipcalc -m 192.168.2.1</span>
+NETMASK=255.255.255.0
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> ipcalc -pnbm 192.168.2.1 255.255.255.0</span>
+NETMASK=255.255.255.0
+PREFIX=24
+BROADCAST=192.168.2.255
+NETWORK=192.168.2.0</pre></div>
+
+
+</body>
+</html>

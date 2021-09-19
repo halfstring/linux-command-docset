@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-enable" class="anchor" href="#enable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>enable</h1>
+<p>启动或禁用shell内建命令</p>
+<h3>
+<a id="user-content-概要" class="anchor" href="#%E6%A6%82%E8%A6%81" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>概要</h3>
+<p>enable [-a] [-dnps] [-f filename] [name ...]</p>
+<h3>
+<a id="user-content-主要用途" class="anchor" href="#%E4%B8%BB%E8%A6%81%E7%94%A8%E9%80%94" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>主要用途</h3>
+<ul>
+<li>
+<p>禁用一到多个内建命令。</p>
+</li>
+<li>
+<p>启用一到多个内建命令。</p>
+</li>
+<li>
+<p>直接调用与禁用的内建命令同名且在<code>$PATH</code>路径下找到的外部命令。</p>
+</li>
+<li>
+<p>打印所有内建命令，无论是否禁用。</p>
+</li>
+<li>
+<p>打印处于启用状态的内建命令。</p>
+</li>
+<li>
+<p>打印处于禁用状态的内建命令。</p>
+</li>
+<li>
+<p>打印处于启用状态的posix标准内建命令。</p>
+</li>
+<li>
+<p>打印处于禁用状态的posix标准内建命令。</p>
+</li>
+<li>
+<p>打印posix标准内建命令，无论是否禁用。</p>
+</li>
+<li>
+<p>从动态库中加载内建命令。</p>
+</li>
+<li>
+<p>移除从动态库中加载的内建命令。</p>
+</li>
+</ul>
+<h4>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h4>
+<div class="highlight highlight-source-shell"><pre>-a 打印所有内建命令，无论是否禁用。
+-d 移除从动态库中加载的内建命令。
+-n 禁用内建命令或显示已禁用的内建命令。
+-p 以可复用格式打印。
+-s 只显示处于启动状态的posix标准内建命令。
+-f 动态库中加载内建命令。
+-ns 打印处于禁用状态的posix标准内建命令。
+-as 打印posix标准内建命令，无论是否禁用。</pre></div>
+<h4>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h4>
+<p>filename：动态库文件名。</p>
+<p>name（可选）：内建命令，可以为多个。</p>
+<h4>
+<a id="user-content-返回值" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%80%BC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>返回值</h4>
+<p>enable返回成功，除非name不是内建命令或有错误发生。</p>
+<h3>
+<a id="user-content-例子以下内容限于篇幅不再列出返回值部分" class="anchor" href="#%E4%BE%8B%E5%AD%90%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9%E9%99%90%E4%BA%8E%E7%AF%87%E5%B9%85%E4%B8%8D%E5%86%8D%E5%88%97%E5%87%BA%E8%BF%94%E5%9B%9E%E5%80%BC%E9%83%A8%E5%88%86" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>例子（以下内容限于篇幅不再列出返回值部分）</h3>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> posix special builtin</span>
+<span class="pl-c"><span class="pl-c">#</span> 假设没有任何内建命令被禁用</span>
+<span class="pl-c"><span class="pl-c">#</span> 禁用两个posix标准内建命令</span>
+<span class="pl-c1">enable</span> -n <span class="pl-c1">set</span> <span class="pl-c1">source</span>
+<span class="pl-c"><span class="pl-c">#</span> 打印处于禁用状态的posix标准内建命令</span>
+<span class="pl-c1">enable</span> -ns
+<span class="pl-c"><span class="pl-c">#</span> 打印posix标准内建命令，无论是否禁用。</span>
+<span class="pl-c1">enable</span> -as
+<span class="pl-c"><span class="pl-c">#</span> 打印处于启用状态的posix标准内建命令</span>
+<span class="pl-c1">enable</span> -s</pre></div>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> 假设没有任何内建命令被禁用</span>
+<span class="pl-c"><span class="pl-c">#</span> 禁用一到多个内建命令</span>
+<span class="pl-c1">enable</span> -n <span class="pl-c1">echo</span> <span class="pl-c1">pwd</span>
+<span class="pl-c"><span class="pl-c">#</span> 打印所有内建命令，无论是否禁用。</span>
+<span class="pl-c1">enable</span> -a
+<span class="pl-c"><span class="pl-c">#</span> 打印处于启用状态的内建命令</span>
+<span class="pl-c1">enable</span>
+<span class="pl-c"><span class="pl-c">#</span> 打印处于禁用状态的内建命令</span>
+<span class="pl-c1">enable</span> -n
+<span class="pl-c"><span class="pl-c">#</span> 启用一到多个内建命令</span>
+<span class="pl-c1">enable</span> <span class="pl-c1">pwd</span></pre></div>
+<h3>
+<a id="user-content-qa" class="anchor" href="#qa" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q&amp;A</h3>
+<p>Q：请问<code>-f</code>，<code>-d</code>，<code>-p</code>的演示呢？</p>
+<p>A：说明一下，<code>-f</code>与<code>-d</code>限于个人能力没有找到合适的例子，如果您有更好的例子欢迎提pr；
+经过我验证<code>-p</code>选项是否使用好像没有区别，可以比较<code>enable -p|cat -A</code>和<code>enable|cat -A</code> 有什么区别。（注：<code>cat -A</code>用于显示不可见字符）</p>
+<p>Q：是否可以禁用<code>enable</code>自己？之后还能禁用或启用内建命令吗？</p>
+<p>A：可以；不能。</p>
+<h3>
+<a id="user-content-注意" class="anchor" href="#%E6%B3%A8%E6%84%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注意</h3>
+<blockquote>
+<p>linux shell命令执行时，shell总是先在自己的shell builtin中查找该命令，如果找到则执行该命令；如果找不到该命令，则会从环境变量<code>$PATH</code>指定的路径中依次去查找待执行的命令。看起来好像没有办法编写用户自己的命令来替代shell builtin命令。幸运的是，有了<code>enable</code>命令我们就能做到了。</p>
+</blockquote>
+<ol>
+<li>关于同名命令调用的优先级的知识，请先参考<code>builtin</code>命令的<em>提示</em>部分，然后继续阅读下面部分；</li>
+</ol>
+<p>当内建命令<code>echo</code>没有禁用时，如果要调用外部命令<code>echo</code>，只能这样写<code>/usr/bin/echo</code>；</p>
+<p>当我们禁用了<code>echo</code>后，优先级顺序变成了这样：</p>
+<p>函数 &gt; 外部命令</p>
+<p>如果执行命令的环境没有<code>echo</code>函数，那么调用的<code>echo</code>就是外部命令。</p>
+<ol start="2">
+<li>该命令是bash内建命令，相关的帮助信息请查看 <code>help</code> 命令。</li>
+</ol>
+
+
+</body>
+</html>

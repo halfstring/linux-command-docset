@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-at" class="anchor" href="#at" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>at</h1>
+<p>在指定时间执行一个任务</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>at命令</strong> 用于在指定时间执行命令。at允许使用一套相当复杂的指定时间的方法。它能够接受在当天的hh:mm（小时:分钟）式的时间指定。假如该时间已过去，那么就放在第二天执行。当然也能够使用midnight（深夜），noon（中午），teatime（饮茶时间，一般是下午4点）等比较模糊的 词语来指定时间。用户还能够采用12小时计时制，即在时间后面加上AM（上午）或PM（下午）来说明是上午还是下午。 也能够指定命令执行的具体日期，指定格式为month day（月 日）或mm/dd/yy（月/日/年）或dd.mm.yy（日.月.年）。指定的日期必须跟在指定时间的后面。</p>
+<p>上面介绍的都是绝对计时法，其实还能够使用相对计时法，这对于安排不久就要执行的命令是很有好处的。指定格式为：<code>now + count time-units</code>，now就是当前时间，time-units是时间单位，这里能够是minutes（分钟）、hours（小时）、days（天）、weeks（星期）。count是时间的数量，究竟是几天，还是几小时，等等。 更有一种计时方法就是直接使用today（今天）、tomorrow（明天）来指定完成命令的时间。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>at [-V] [-q 队列] [-f 文件] [-mldbv] 时间 at -c 作业 [作业...]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-f：指定包含具体指令的任务文件；
+-q：指定新任务的队列名称；
+-l：显示待执行任务的列表；
+-d：删除指定的待执行任务；
+-m：任务执行完成后向用户发送E-mail。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>日期时间：指定任务执行的日期时间。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>三天后的下午 5 点锺执行<code>/bin/ls</code>：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> at 5pm+3 days</span>
+at<span class="pl-k">&gt;</span> /bin/ls
+at<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>EOT<span class="pl-k">&gt;</span>
+job 7 at 2013-01-08 17:00</pre></div>
+<p>明天17点钟，输出时间到指定文件内：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> at 17:20 tomorrow</span>
+at<span class="pl-k">&gt;</span> date <span class="pl-k">&gt;</span>/root/2013.log
+at<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>EOT<span class="pl-k">&gt;</span>
+job 8 at 2013-01-06 17:20</pre></div>
+<p>计划任务设定后，在没有执行之前我们可以用atq命令来查看系统没有执行工作任务：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> atq</span>
+8       2013-01-06 17:20 a root
+7       2013-01-08 17:00 a root</pre></div>
+<p>删除已经设置的任务：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> atq</span>
+8       2013-01-06 17:20 a root
+7       2013-01-08 17:00 a root
+
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> atrm 7</span>
+[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> atq</span>
+8       2013-01-06 17:20 a root</pre></div>
+<p>显示已经设置的任务内容：</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> at -c 8</span>
+<span class="pl-c"><span class="pl-c">#!</span>/bin/sh</span>
+<span class="pl-c"><span class="pl-c">#</span> atrun uid=0 gid=0</span>
+<span class="pl-c"><span class="pl-c">#</span> mail     root 0</span>
+<span class="pl-c1">umask</span> 22此处省略n个字符
+date <span class="pl-k">&gt;</span>/root/2013.log</pre></div>
+
+
+</body>
+</html>

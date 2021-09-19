@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-script" class="anchor" href="#script" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>script</h1>
+<p>记录终端会话的所有操作</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>script</strong> 用于在终端会话中，记录用户的所有操作和命令的输出信息。简而言之，记录终端会话发生的一切信息，如同一台终端录像机。例如，用户在输入某条命令时，字符的键入和删除也都会被记录。用户在终端的所有操作、终端的回显等信息会被以 <code>raw</code> 格式存储在日志文件，称为终端数据文件。命令的时间信息会被单独以另一种结构储存为日志文件，称为时间日志文件。使用命令<code>exit</code>或者快捷键<code>Ctrl + D</code>停止记录。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>script(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a, --append              <span class="pl-c"><span class="pl-c">#</span> 对终端会话的操作信息，以追加方式写入文件（保留原文件内容）</span>
+-c, --command <span class="pl-c1">command</span>     <span class="pl-c"><span class="pl-c">#</span> 只运行 command 命令而不打开交互终端。相当于开启 script ，执行 command ，再退出 script</span>
+                          <span class="pl-c"><span class="pl-c">#</span> command 可以是任意能够在终端会话执行的命令</span>
+-e, --return              <span class="pl-c"><span class="pl-c">#</span> 返回子进程的退出状态码</span>
+-f, --flush               <span class="pl-c"><span class="pl-c">#</span> 每次终端的内容发生变动，立马写入日志文件</span>
+--force                   <span class="pl-c"><span class="pl-c">#</span> 允许默认输出终端数据文件为符号链接</span>
+-o, --output-limit size   <span class="pl-c"><span class="pl-c">#</span> 限制终端数据文件和时间日志文件的大小，当文件大小达到此限制就会退出子进程</span>
+                          <span class="pl-c"><span class="pl-c">#</span> size 的单位可以设置为：KiB(=1024)、KB(=1000)、MiB(1024*1024)、MB(=1000*1000)</span>
+                          <span class="pl-c"><span class="pl-c">#</span> 同理还支持 GiB TiB PiB EiB ZiB YiB GB TB PB EB ZB YB</span>
+-q, --quiet               <span class="pl-c"><span class="pl-c">#</span> 安静模式。启动和退出script命令不显示任何提示</span>
+-t[file], --timing[<span class="pl-k">=</span>file] <span class="pl-c"><span class="pl-c">#</span> 输出时间日志信息到标准错误(stderr)或者文件</span>
+-V, --version             <span class="pl-c"><span class="pl-c">#</span> 显示版本信息并退出</span>
+-h, --help                <span class="pl-c"><span class="pl-c">#</span> 显示帮助文本并退出</span></pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<ul>
+<li>终端数据文件：设置存储终端数据信息的文件名称</li>
+</ul>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>script                             <span class="pl-c"><span class="pl-c">#</span> 开启记录，默认会在当前目录创建名称为 typescript 的文件来保存终端数据文件</span>
+script command.log                 <span class="pl-c"><span class="pl-c">#</span> 开启记录，在当前目录创建名称为 command.log 的文件来保存终端数据文件</span>
+script -t <span class="pl-k">2&gt;</span>time.file command.log  <span class="pl-c"><span class="pl-c">#</span> 开启记录，在当前目录创建名称为 command.log 的文件来保存终端数据文件</span>
+                                   <span class="pl-c"><span class="pl-c">#</span> 在当前目录创建名称为 time.file 的文件来保存时间日志文件</span></pre></div>
+<p><strong>以追加模式记录终端信息</strong></p>
+<div class="highlight highlight-source-shell"><pre>zfb@localhost:<span class="pl-k">~</span>$ script -t <span class="pl-k">2&gt;</span>time.file -a -f command.log
+Script started, file is command.log
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>hello, world<span class="pl-pds">"</span></span>
+hello, world
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">$(</span>date <span class="pl-s"><span class="pl-pds">"</span>+%Y-%m-%d %H:%M:%S<span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+2020-12-23 20:48:46
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Bye<span class="pl-pds">"</span></span>
+Bye
+zfb@localhost:<span class="pl-k">~</span>$ ls -al
+total 20
+drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 <span class="pl-c1">.</span>
+drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..
+-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt
+-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt
+-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log
+-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">exit</span>
+Script done, file is command.log
+zfb@localhost:<span class="pl-k">~</span>$</pre></div>
+<p>然后，用户可以查看终端数据文件，使用方法如下</p>
+<div class="highlight highlight-source-shell"><pre>zfb@localhost:<span class="pl-k">~</span>$ cat command.log
+Script started on 2020-12-23 20:48:25+08:00 [TERM<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>xterm-256color<span class="pl-pds">"</span></span> TTY<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>/dev/pts/0<span class="pl-pds">"</span></span> COLUMNS<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>75<span class="pl-pds">"</span></span> LINES<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>30<span class="pl-pds">"</span></span>]
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>hello, world<span class="pl-pds">"</span></span>
+hello, world
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">$(</span>date <span class="pl-s"><span class="pl-pds">"</span>+%Y-%m-%d %H:%M:%S<span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+2020-12-23 20:48:46
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Bye<span class="pl-pds">"</span></span>
+Bye
+zfb@localhost:<span class="pl-k">~</span>$ ls -al
+total 20
+drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 <span class="pl-c1">.</span>
+drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..
+-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt
+-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt
+-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log
+-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file
+zfb@localhost:<span class="pl-k">~</span>$ <span class="pl-c1">exit</span>
+
+Script <span class="pl-k">done</span> on 2020-12-23 20:49:04+08:00 [COMMAND_EXIT_CODE<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>]
+zfb@localhost:<span class="pl-k">~</span>$</pre></div>
+<p>其中，只有命令<code>cat command.log</code>是用户输入，其他均为自动呈现。通过查看上面输出的时间<code>2020-12-23 20:48:46</code>，可以证明，这是重现的记录，而非重新执行一遍命令。也就是说，可以把<code>time.file</code>和<code>command.log</code>文件移动到任意一台机器上，都可以重现命令输入与终端回显。</p>
+<p><strong>记录服务器用户会话操作</strong></p>
+<p>以<code>root</code>身份编辑文件<code>/etc/profile</code>，在文件末尾追加以下内容</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">if</span> [ <span class="pl-smi">$UID</span> <span class="pl-k">-ge</span> 0 ]
+<span class="pl-k">then</span>
+    <span class="pl-c1">exec</span> /usr/bin/script -t <span class="pl-k">2&gt;</span>/var/log/script-records/<span class="pl-smi">$USER</span>-<span class="pl-smi">$UID</span>-<span class="pl-s"><span class="pl-pds">`</span>date +%Y%m%d<span class="pl-pds">`</span></span>.time -a -f -q /var/log/script-records/<span class="pl-smi">$USER</span>-<span class="pl-smi">$UID</span>-<span class="pl-s"><span class="pl-pds">`</span>date +%Y%m%d<span class="pl-pds">`</span></span>.log
+<span class="pl-k">fi</span></pre></div>
+<p>然后再以<code>root</code>身份创建文件夹用于存储服务器上的各个用户在终端的所有操作信息</p>
+<div class="highlight highlight-source-shell"><pre>sudo mkdir -p /var/log/script-records/
+sudo chmod 733 /var/log/script-records/</pre></div>
+<p>最后，执行命令<code>source /etc/profile</code>即可。任意用户（<code>UID ≥ 0</code>）在终端执行的所有操作都会被安静地记录下来，以天为单位存储。</p>
+
+
+</body>
+</html>

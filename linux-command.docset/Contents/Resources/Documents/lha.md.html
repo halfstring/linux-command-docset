@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-lha" class="anchor" href="#lha" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>lha</h1>
+<p>压缩或解压缩lzh格式文件</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>lha命令</strong> 是从lharc演变而来的压缩程序，文件经它压缩后，会另外产生具有<code>.lzh</code>扩展名的压缩文件。</p>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-a或a：压缩文件，并加入到压缩文件内。
+-a<span class="pl-k">&lt;</span>0/1/<span class="pl-k">2&gt;</span>/u<span class="pl-k">&lt;</span>/0/1/<span class="pl-k">2&gt;</span>   压缩文件时，采用不同的文件头。
+-c或c：压缩文件，重新建构新的压缩文件后，再将其加入。
+-d或d：从压缩文件内删除指定的文件。
+-<span class="pl-k">&lt;</span>a/c/u<span class="pl-k">&gt;</span>d或<span class="pl-k">&lt;</span>a/c/u<span class="pl-k">&gt;</span>d：压缩文件，然后将其加入，重新建构，更新压缩文件或，删除原始文件，也就是把文件移到压缩文件中。
+-e或e：解开压缩文件。
+-f或f：强制执行lha命令，在解压时会直接覆盖已有的文件而不加以询问。
+-g或g：使用通用的压缩格式，便于解决兼容性的问题。
+-<span class="pl-k">&lt;</span>e/x<span class="pl-k">&gt;</span>i或<span class="pl-k">&lt;</span>e/x<span class="pl-k">&gt;</span>i：解开压缩文件时，忽略保存在压缩文件内的文件路径，直接将其解压后存放在现行目录下或是指定的目录中。
+-l或l：列出压缩文件的相关信息。
+-m或m：此选项的效果和同时指定<span class="pl-s"><span class="pl-pds">"</span>-ad<span class="pl-pds">"</span></span>选项相同。
+-n或n：不执行指令，仅列出实际执行会进行的动作。
+-<span class="pl-k">&lt;</span>a/u<span class="pl-k">&gt;</span>o或<span class="pl-k">&lt;</span>a/u<span class="pl-k">&gt;</span>o：采用lharc兼容格式，将压缩后的文件加入，更新压缩文件。
+-p或p：从压缩文件内输出到标准输出设备。
+-q或q：不显示指令执行过程。
+-t或t：检查备份文件内的每个文件是否正确无误。
+-u或u：更换较新的文件到压缩文件内。
+-u<span class="pl-k">&lt;</span>/0/1/<span class="pl-k">2&gt;</span>或u<span class="pl-k">&lt;</span>/0/1/<span class="pl-k">2&gt;</span>：在文件压缩时采用不同的文件头，然后更新到压缩文件内。
+-v或v：详细列出压缩文件的相关信息。
+-<span class="pl-k">&lt;</span>e/x<span class="pl-k">&gt;</span>w=<span class="pl-k">&lt;</span>目的目录<span class="pl-k">&gt;</span>或<span class="pl-k">&lt;</span>e/x<span class="pl-k">&gt;</span>w=<span class="pl-k">&lt;</span>目的目录<span class="pl-k">&gt;</span>：指定解压缩的目录。
+-x或x：解开压缩文件。
+-<span class="pl-k">&lt;</span>a/u<span class="pl-k">&gt;</span>z或<span class="pl-k">&lt;</span>a/u<span class="pl-k">&gt;</span>z：不压缩文件，直接把它加入，更新压缩文件。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>lha -a abc.lhz a.b         <span class="pl-c"><span class="pl-c">#</span>压缩a.b文件，压缩后生成 abc.lhz 文件</span>
+lha -a abc2 /home/hnlinux  <span class="pl-c"><span class="pl-c">#</span>压缩目录</span>
+lha -xiw=agis abc          <span class="pl-c"><span class="pl-c">#</span>解压文件abc，到当前目录</span></pre></div>
+
+
+</body>
+</html>

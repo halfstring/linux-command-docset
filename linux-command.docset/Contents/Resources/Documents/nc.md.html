@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-nc" class="anchor" href="#nc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>nc</h1>
+<p>用于设置路由器，是网络工具中的瑞士军刀。</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>nc命令</strong> 全称<strong>netcat</strong>，用于设置路由器。它能通过 TCP 和 UDP 在网络中读写数据。通过与其他工具结合和重定向，你可以在脚本中以多种方式使用它。使用 netcat 命令所能完成的事情令人惊讶。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>nc [-hlnruz][-g<span class="pl-k">&lt;</span>网关...<span class="pl-k">&gt;</span>][-G<span class="pl-k">&lt;</span>指向器数目<span class="pl-k">&gt;</span>][-i<span class="pl-k">&lt;</span>延迟秒数<span class="pl-k">&gt;</span>][-o<span class="pl-k">&lt;</span>输出文件<span class="pl-k">&gt;</span>][-p<span class="pl-k">&lt;</span>通信端口<span class="pl-k">&gt;</span>]
+[-s<span class="pl-k">&lt;</span>来源位址<span class="pl-k">&gt;</span>][-v...][-w<span class="pl-k">&lt;</span>超时秒数<span class="pl-k">&gt;</span>][主机名称][通信端口...]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-g <span class="pl-k">&lt;</span>网关<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 设置路由器跃程通信网关，最多可设置8个。</span>
+-G<span class="pl-k">&lt;</span>指向器数目<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 设置来源路由指向器，其数值为4的倍数。</span>
+-h 在线帮助。
+-i<span class="pl-k">&lt;</span>延迟秒数<span class="pl-k">&gt;</span> 设置时间间隔，以便传送信息及扫描通信端口。
+-l 使用监听模式，管控传入的资料。
+-n 直接使用IP地址，而不通过域名服务器。
+-o<span class="pl-k">&lt;</span>输出文件<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</span>
+-p<span class="pl-k">&lt;</span>通信端口<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 设置本地主机使用的通信端口。</span>
+-r 乱数指定本地与远端主机的通信端口。
+-s<span class="pl-k">&lt;</span>来源位址<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 设置本地主机送出数据包的IP地址。</span>
+-u 使用UDP传输协议。
+-v 显示指令执行过程。
+-w<span class="pl-k">&lt;</span>超时秒数<span class="pl-k">&gt;</span> <span class="pl-c"><span class="pl-c">#</span> 设置等待连线的时间。</span>
+-z 使用0输入/输出模式，只在扫描通信端口时使用。</pre></div>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>TCP端口扫描</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> nc -v -z -w2 192.168.0.3 1-100 </span>
+192.168.0.3: inverse host lookup failed: Unknown host
+(UNKNOWN) [192.168.0.3] 80 (http) open
+(UNKNOWN) [192.168.0.3] 23 (telnet) open
+(UNKNOWN) [192.168.0.3] 22 (ssh) open</pre></div>
+<p>扫描192.168.0.3 的端口 范围是 1-100
+扫描UDP端口</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> nc -u -z -w2 192.168.0.1 1-1000  # 扫描192.168.0.3 的端口 范围是 1-1000</span></pre></div>
+<p>扫描指定端口</p>
+<div class="highlight highlight-source-shell"><pre>[root@localhost <span class="pl-k">~</span>]<span class="pl-c"><span class="pl-c">#</span> nc -nvv 192.168.0.1 80 # 扫描 80端口</span>
+(UNKNOWN) [192.168.0.1] 80 (<span class="pl-k">?</span>) open
+y  //用户输入</pre></div>
+<p>查看从服务器到目的地的出站端口 443 是否被防火墙阻止</p>
+<div class="highlight highlight-source-shell"><pre>nc -vz acme-v02.api.letsencrypt.org 443 -w2
+<span class="pl-c"><span class="pl-c">#</span> Ncat: Version 7.50 ( https://nmap.org/ncat )</span>
+<span class="pl-c"><span class="pl-c">#</span> Ncat: Connected to 23.77.214.183:443.</span>
+<span class="pl-c"><span class="pl-c">#</span> Ncat: 0 bytes sent, 0 bytes received in 0.07 seconds.</span></pre></div>
+
+
+</body>
+</html>

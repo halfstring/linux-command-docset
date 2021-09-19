@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ipcrm" class="anchor" href="#ipcrm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ipcrm</h1>
+<p>删除消息队列、信号集、或者共享内存标识</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ipcrm命令</strong> 用来删除一个或更多的消息队列、信号量集或者共享内存标识。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ipcrm [ -m SharedMemoryID ] [ -M SharedMemoryKey ] [ -q MessageID ] [ -Q MessageKey ] [ <span class="pl-k">-s</span> SemaphoreID ] [ <span class="pl-k">-S</span> SemaphoreKey ]</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-m SharedMemory id 删除共享内存标识 SharedMemoryID。与 SharedMemoryID 有关联的共享内存段以及数据结构都会在最后一次拆离操作后删除。
+-M SharedMemoryKey 删除用关键字 SharedMemoryKey 创建的共享内存标识。与其相关的共享内存段和数据结构段都将在最后一次拆离操作后删除。
+-q MessageID 删除消息队列标识 MessageID 和与其相关的消息队列和数据结构。
+-Q MessageKey 删除由关键字 MessageKey 创建的消息队列标识和与其相关的消息队列和数据结构。
+-s SemaphoreID 删除信号量标识 SemaphoreID 和与其相关的信号量集及数据结构。
+-S SemaphoreKey 删除由关键字 SemaphoreKey 创建的信号标识和与其相关的信号量集和数据结构。</pre></div>
+<p>msgctl、shmctl 和 semctl 子例程提供了删除操作的细节。标识和关键字可以用 ipcs 命令找到。</p>
+<h3>
+<a id="user-content-示例" class="anchor" href="#%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>示例</h3>
+<p>如果要删除和 SharedMemoryID 18602 相关的共享内存段，请输入：</p>
+<div class="highlight highlight-source-shell"><pre>ipcrm -m 18602</pre></div>
+
+
+</body>
+</html>

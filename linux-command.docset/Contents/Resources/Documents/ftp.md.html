@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-ftp" class="anchor" href="#ftp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ftp</h1>
+<p>用来设置文件系统相关功能</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>ftp命令</strong> 用来设置文件系统相关功能。ftp服务器在网上较为常见，Linux ftp命令的功能是用命令的方式来控制在本地机和远程机之间传送文件，这里详细介绍Linux ftp命令的一些经常使用的命令，相信掌握了这些使用Linux进行ftp操作将会非常容易。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>ftp(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-d：详细显示指令执行过程，便于排错或分析程序执行的情况；
+-i：关闭互动模式，不询问任何问题；
+-g：关闭本地主机文件名称支持特殊字符的扩充特性；
+-n：不使用自动登录；
+-v：显示指令执行过程。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>主机：指定要连接的FTP服务器的主机名或ip地址。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<div class="highlight highlight-source-shell"><pre>ftp<span class="pl-k">&gt;</span> ascii  <span class="pl-c"><span class="pl-c">#</span> 设定以ASCII方式传送文件(缺省值) </span>
+ftp<span class="pl-k">&gt;</span> bell   <span class="pl-c"><span class="pl-c">#</span> 每完成一次文件传送,报警提示. </span>
+ftp<span class="pl-k">&gt;</span> binary <span class="pl-c"><span class="pl-c">#</span> 设定以二进制方式传送文件. </span>
+ftp<span class="pl-k">&gt;</span> bye    <span class="pl-c"><span class="pl-c">#</span> 终止主机FTP进程,并退出FTP管理方式. </span>
+ftp<span class="pl-k">&gt;</span> <span class="pl-k">case</span>   <span class="pl-c"><span class="pl-c">#</span> 当为ON时,用MGET命令拷贝的文件名到本地机器中,全部转换为小写字母. </span>
+ftp<span class="pl-k">&gt;</span> <span class="pl-c1">cd</span>     <span class="pl-c"><span class="pl-c">#</span> 同UNIX的CD命令. </span>
+ftp<span class="pl-k">&gt;</span> cdup   <span class="pl-c"><span class="pl-c">#</span> 返回上一级目录. </span>
+ftp<span class="pl-k">&gt;</span> chmod  <span class="pl-c"><span class="pl-c">#</span> 改变远端主机的文件权限. </span>
+ftp<span class="pl-k">&gt;</span> close  <span class="pl-c"><span class="pl-c">#</span> 终止远端的FTP进程,返回到FTP命令状态, 所有的宏定义都被删除. </span>
+ftp<span class="pl-k">&gt;</span> delete <span class="pl-c"><span class="pl-c">#</span> 删除远端主机中的文件. </span>
+ftp<span class="pl-k">&gt;</span> dir [remote-directory] [local-file] <span class="pl-c"><span class="pl-c">#</span> 列出当前远端主机目录中的文件.如果有本地文件,就将结果写至本地文件. </span>
+ftp<span class="pl-k">&gt;</span> get [remote-file] [local-file] <span class="pl-c"><span class="pl-c">#</span> 从远端主机中传送至本地主机中. </span>
+ftp<span class="pl-k">&gt;</span> <span class="pl-c1">help</span> [command] <span class="pl-c"><span class="pl-c">#</span> 输出命令的解释. </span>
+ftp<span class="pl-k">&gt;</span> lcd <span class="pl-c"><span class="pl-c">#</span> 改变当前本地主机的工作目录,如果缺省,就转到当前用户的HOME目录. </span>
+ftp<span class="pl-k">&gt;</span> ls [remote-directory] [local-file] <span class="pl-c"><span class="pl-c">#</span> 同DIR. </span>
+ftp<span class="pl-k">&gt;</span> macdef                 <span class="pl-c"><span class="pl-c">#</span> 定义宏命令. </span>
+ftp<span class="pl-k">&gt;</span> mdelete [remote-files] <span class="pl-c"><span class="pl-c">#</span> 删除一批文件. </span>
+ftp<span class="pl-k">&gt;</span> mget [remote-files]    <span class="pl-c"><span class="pl-c">#</span> 从远端主机接收一批文件至本地主机. </span>
+ftp<span class="pl-k">&gt;</span> mkdir directory-name   <span class="pl-c"><span class="pl-c">#</span> 在远端主机中建立目录. </span>
+ftp<span class="pl-k">&gt;</span> mput local-files <span class="pl-c"><span class="pl-c">#</span> 将本地主机中一批文件传送至远端主机. </span>
+ftp<span class="pl-k">&gt;</span> open host [port] <span class="pl-c"><span class="pl-c">#</span> 重新建立一个新的连接. </span>
+ftp<span class="pl-k">&gt;</span> prompt           <span class="pl-c"><span class="pl-c">#</span> 交互提示模式. </span>
+ftp<span class="pl-k">&gt;</span> put local-file [remote-file] <span class="pl-c"><span class="pl-c">#</span> 将本地一个文件传送至远端主机中. </span>
+ftp<span class="pl-k">&gt;</span> <span class="pl-c1">pwd</span>  <span class="pl-c"><span class="pl-c">#</span> 列出当前远端主机目录. </span>
+ftp<span class="pl-k">&gt;</span> quit <span class="pl-c"><span class="pl-c">#</span> 同BYE. </span>
+ftp<span class="pl-k">&gt;</span> recv remote-file [local-file] <span class="pl-c"><span class="pl-c">#</span> 同GET. </span>
+ftp<span class="pl-k">&gt;</span> rename [from] [to]     <span class="pl-c"><span class="pl-c">#</span> 改变远端主机中的文件名. </span>
+ftp<span class="pl-k">&gt;</span> rmdir directory-name   <span class="pl-c"><span class="pl-c">#</span> 删除远端主机中的目录. </span>
+ftp<span class="pl-k">&gt;</span> send local-file [remote-file] <span class="pl-c"><span class="pl-c">#</span> 同PUT. </span>
+ftp<span class="pl-k">&gt;</span> status   <span class="pl-c"><span class="pl-c">#</span> 显示当前FTP的状态. </span>
+ftp<span class="pl-k">&gt;</span> system   <span class="pl-c"><span class="pl-c">#</span> 显示远端主机系统类型. </span>
+ftp<span class="pl-k">&gt;</span> user user-name [password] [account] <span class="pl-c"><span class="pl-c">#</span> 重新以别的用户名登录远端主机. </span>
+ftp<span class="pl-k">&gt;</span> <span class="pl-k">?</span> [command] <span class="pl-c"><span class="pl-c">#</span> 同HELP. [command]指定需要帮助的命令名称。如果没有指定 command，ftp 将显示全部命令的列表。</span>
+ftp<span class="pl-k">&gt;</span> <span class="pl-k">!</span> <span class="pl-c"><span class="pl-c">#</span> 从 ftp 子系统退出到外壳。</span></pre></div>
+<p>FTP 匿名登录账号密码</p>
+<div class="highlight highlight-source-shell"><pre>账号：anonymous
+密码: anonymous@</pre></div>
+<p>关闭FTP连接</p>
+<div class="highlight highlight-source-shell"><pre>bye
+<span class="pl-c1">exit</span>
+quit</pre></div>
+<p>下载文件</p>
+<div class="highlight highlight-source-shell"><pre>ftp<span class="pl-k">&gt;</span> get readme.txt <span class="pl-c"><span class="pl-c">#</span> 下载 readme.txt 文件</span>
+ftp<span class="pl-k">&gt;</span> mget <span class="pl-k">*</span>.txt     <span class="pl-c"><span class="pl-c">#</span> 下载 </span></pre></div>
+<p>上传文件</p>
+<div class="highlight highlight-source-shell"><pre>ftp<span class="pl-k">&gt;</span> put /path/readme.txt <span class="pl-c"><span class="pl-c">#</span> 上传 readme.txt 文件</span>
+ftp<span class="pl-k">&gt;</span> mput <span class="pl-k">*</span>.txt           <span class="pl-c"><span class="pl-c">#</span> 可以上传多个文件</span></pre></div>
+
+
+</body>
+</html>

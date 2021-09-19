@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-tempfile" class="anchor" href="#tempfile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tempfile</h1>
+<p>shell中给临时文件命名</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p>有时候在写Shell脚本的时候需要一些临时存储数据的才做，最适合存储临时文件数据的位置就是<code>/tmp</code>，因为该目录中所有的内容在系统重启后就会被清空。下面是两种方法为临时数据生成标准的文件名。</p>
+<h3>
+<a id="user-content-tempfile命令" class="anchor" href="#tempfile%E5%91%BD%E4%BB%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tempfile命令</h3>
+<p><code>tempfile命令</code>只有在基于Debian的发行版中才默认自带，比如Ubuntu，其他发行版没有这个命令。</p>
+<p>用tempfile命令为一个临时文件命名：</p>
+<div class="highlight highlight-source-shell"><pre>temp_file_name=<span class="pl-s"><span class="pl-pds">$(</span>tempfile<span class="pl-pds">)</span></span></pre></div>
+<p>用一个加带了随机数的文件名作为临时文件命名：</p>
+<div class="highlight highlight-source-shell"><pre>temp_file_name=<span class="pl-s"><span class="pl-pds">"</span>/tmp/file_<span class="pl-smi">$RANDOM</span><span class="pl-pds">"</span></span></pre></div>
+<p>$RANDOM是一个返回随机数的环境变量。</p>
+<h3>
+<a id="user-content-变量" class="anchor" href="#%E5%8F%98%E9%87%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>$$变量</h3>
+<p>如果没有tempfile命令的Linux发行版，也可以使用自己的临时文件名：</p>
+<div class="highlight highlight-source-shell"><pre>temp_file_name=<span class="pl-s"><span class="pl-pds">"</span>/tmp/file.$<span class="pl-pds">"</span></span></pre></div>
+<p><code>$$</code>是系统预定义变量，显示当前所在进程的进程号，用<code>.$$</code>作为添加的后缀会被扩展成当前运行脚本的进程id。</p>
+
+
+</body>
+</html>

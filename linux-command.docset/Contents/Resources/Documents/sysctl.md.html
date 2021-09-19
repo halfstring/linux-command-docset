@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/markdown-github.css">
+  
+</head>
+<body>
+<h1>
+<a id="user-content-sysctl" class="anchor" href="#sysctl" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sysctl</h1>
+<p>时动态地修改内核的运行参数</p>
+<h2>
+<a id="user-content-补充说明" class="anchor" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>补充说明</h2>
+<p><strong>sysctl命令</strong> 被用于在内核运行时动态地修改内核的运行参数，可用的内核参数在目录<code>/proc/sys</code>中。它包含一些TCP/ip堆栈和虚拟内存系统的高级选项， 这可以让有经验的管理员提高引人注目的系统性能。用sysctl可以读取设置超过五百个系统变量。</p>
+<h3>
+<a id="user-content-语法" class="anchor" href="#%E8%AF%AD%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>语法</h3>
+<div class="highlight highlight-source-shell"><pre>sysctl(选项)(参数)</pre></div>
+<h3>
+<a id="user-content-选项" class="anchor" href="#%E9%80%89%E9%A1%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>选项</h3>
+<div class="highlight highlight-source-shell"><pre>-n：打印值时不打印关键字；
+-e：忽略未知关键字错误；
+-N：仅打印名称；
+-w：当改变sysctl设置时使用此项；
+-p：从配置文件“/etc/sysctl.conf”加载内核参数设置；
+-a：打印当前所有可用的内核参数变量和值；
+-A：以表格方式打印当前所有可用的内核参数变量和值。</pre></div>
+<h3>
+<a id="user-content-参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>参数</h3>
+<p>变量=值：设置内核参数对应的变量值。</p>
+<h3>
+<a id="user-content-实例" class="anchor" href="#%E5%AE%9E%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>实例</h3>
+<p>查看所有可读变量：</p>
+<p>sysctl -a</p>
+<p>读一个指定的变量，例如<code>kern.maxproc</code>：</p>
+<p>sysctl kern.maxproc kern.maxproc: 1044</p>
+<p>要设置一个指定的变量，直接用<code>variable=value</code>这样的语法：</p>
+<div class="highlight highlight-source-shell"><pre>sysctl kern.maxfiles=5000
+kern.maxfiles: 2088 -<span class="pl-k">&gt;</span> 5000</pre></div>
+<p>您可以使用sysctl修改系统变量，也可以通过编辑sysctl.conf文件来修改系统变量。sysctl.conf看起来很像rc.conf。它用<code>variable=value</code>的形式来设定值。指定的值在系统进入多用户模式之后被设定。并不是所有的变量都可以在这个模式下设定。</p>
+<p>sysctl变量的设置通常是字符串、数字或者布尔型。（布尔型用 1 来表示'yes'，用 0 来表示'no'）。</p>
+<div class="highlight highlight-source-shell"><pre>sysctl -w kernel.sysrq=0
+sysctl -w kernel.core_uses_pid=1
+sysctl -w net.ipv4.conf.default.accept_redirects=0
+sysctl -w net.ipv4.conf.default.accept_source_route=0
+sysctl -w net.ipv4.conf.default.rp_filter=1
+sysctl -w net.ipv4.tcp_syncookies=1
+sysctl -w net.ipv4.tcp_max_syn_backlog=2048
+sysctl -w net.ipv4.tcp_fin_timeout=30
+sysctl -w net.ipv4.tcp_synack_retries=2
+sysctl -w net.ipv4.tcp_keepalive_time=3600
+sysctl -w net.ipv4.tcp_window_scaling=1
+sysctl -w net.ipv4.tcp_sack=1</pre></div>
+<h3>
+<a id="user-content-配置sysctl" class="anchor" href="#%E9%85%8D%E7%BD%AEsysctl" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>配置sysctl</h3>
+<p>编辑此文件：<code>/etc/sysctl.conf</code></p>
+<p>如果该文件为空，则输入以下内容，否则请根据情况自己做调整：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Controls source route verification</span>
+<span class="pl-c"><span class="pl-c">#</span> Default should work for all interfaces</span>
+net.ipv4.conf.default.rp_filter = 1
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.all.rp_filter = 1</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.lo.rp_filter = 1</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.eth0.rp_filter = 1</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Disables IP source routing</span>
+<span class="pl-c"><span class="pl-c">#</span> Default should work for all interfaces</span>
+net.ipv4.conf.default.accept_source_route = 0
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.all.accept_source_route = 0</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.lo.accept_source_route = 0</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.eth0.accept_source_route = 0</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Controls the System Request debugging functionality of the kernel</span>
+kernel.sysrq = 0
+
+<span class="pl-c"><span class="pl-c">#</span> Controls whether core dumps will append the PID to the core filename.</span>
+<span class="pl-c"><span class="pl-c">#</span> Useful for debugging multi-threaded applications.</span>
+kernel.core_uses_pid = 1
+
+<span class="pl-c"><span class="pl-c">#</span> Increase maximum amount of memory allocated to shm</span>
+<span class="pl-c"><span class="pl-c">#</span> Only uncomment if needed!</span>
+<span class="pl-c"><span class="pl-c">#</span> kernel.shmmax = 67108864</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Disable ICMP Redirect Acceptance</span>
+<span class="pl-c"><span class="pl-c">#</span> Default should work for all interfaces</span>
+net.ipv4.conf.default.accept_redirects = 0
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.all.accept_redirects = 0</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.lo.accept_redirects = 0</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.eth0.accept_redirects = 0</span>
+
+<span class="pl-c"><span class="pl-c">#</span> enable Log Spoofed Packets, Source Routed Packets, Redirect Packets</span>
+<span class="pl-c"><span class="pl-c">#</span> Default should work for all interfaces</span>
+net.ipv4.conf.default.log_martians = 1
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.all.log_martians = 1</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.lo.log_martians = 1</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.conf.eth0.log_martians = 1</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Decrease the time default value for tcp_fin_timeout connection</span>
+net.ipv4.tcp_fin_timeout = 25
+
+<span class="pl-c"><span class="pl-c">#</span> Decrease the time default value for tcp_keepalive_time connection</span>
+net.ipv4.tcp_keepalive_time = 1200
+
+<span class="pl-c"><span class="pl-c">#</span> Turn on the tcp_window_scaling</span>
+net.ipv4.tcp_window_scaling = 1
+
+<span class="pl-c"><span class="pl-c">#</span> Turn on the tcp_sack</span>
+net.ipv4.tcp_sack = 1
+
+<span class="pl-c"><span class="pl-c">#</span> tcp_fack should be on because of sack</span>
+net.ipv4.tcp_fack = 1
+
+<span class="pl-c"><span class="pl-c">#</span> Turn on the tcp_timestamps</span>
+net.ipv4.tcp_timestamps = 1
+
+<span class="pl-c"><span class="pl-c">#</span> Enable TCP SYN Cookie Protection</span>
+net.ipv4.tcp_syncookies = 1
+
+<span class="pl-c"><span class="pl-c">#</span> Enable ignoring broadcasts request</span>
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+<span class="pl-c"><span class="pl-c">#</span> Enable bad error message Protection</span>
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+<span class="pl-c"><span class="pl-c">#</span> make more local ports available</span>
+<span class="pl-c"><span class="pl-c">#</span> net.ipv4.ip_local_port_range = 1024 65000</span>
+
+<span class="pl-c"><span class="pl-c">#</span> set TCP Re-Ordering value in kernel to ‘5′</span>
+net.ipv4.tcp_reordering = 5
+
+<span class="pl-c"><span class="pl-c">#</span> Lower syn retry rates</span>
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syn_retries = 3
+
+<span class="pl-c"><span class="pl-c">#</span> Set Max SYN Backlog to ‘2048′</span>
+net.ipv4.tcp_max_syn_backlog = 2048
+
+<span class="pl-c"><span class="pl-c">#</span> Various Settings</span>
+net.core.netdev_max_backlog = 1024
+
+<span class="pl-c"><span class="pl-c">#</span> Increase the maximum number of skb-heads to be cached</span>
+net.core.hot_list_length = 256
+
+<span class="pl-c"><span class="pl-c">#</span> Increase the tcp-time-wait buckets pool size</span>
+net.ipv4.tcp_max_tw_buckets = 360000
+
+<span class="pl-c"><span class="pl-c">#</span> This will increase the amount of memory available for socket input/output queues</span>
+net.core.rmem_default = 65535
+net.core.rmem_max = 8388608
+net.ipv4.tcp_rmem = 4096 87380 8388608
+net.core.wmem_default = 65535
+net.core.wmem_max = 8388608
+net.ipv4.tcp_wmem = 4096 65535 8388608
+net.ipv4.tcp_mem = 8388608 8388608 8388608
+net.core.optmem_max = 40960</pre></div>
+<p>如果希望屏蔽别人 ping 你的主机，则加入以下代码：</p>
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"><span class="pl-c">#</span> Disable ping requests</span>
+net.ipv4.icmp_echo_ignore_all = 1</pre></div>
+<p>编辑完成后，请执行以下命令使变动立即生效：</p>
+<div class="highlight highlight-source-shell"><pre>/sbin/sysctl -p
+/sbin/sysctl -w net.ipv4.route.flush=1</pre></div>
+
+
+</body>
+</html>
