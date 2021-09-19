@@ -1,0 +1,5 @@
+.idea
+src/source/
+src/html/*.md.html
+src/*.zip
+src/vendor
