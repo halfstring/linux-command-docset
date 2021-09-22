@@ -1,17 +1,24 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
+use Dotenv\Dotenv;
+
 
 class GenLinuxCommandDocset
 {
     private $sourceDir, $htmlDir;
-    private             $allMD = [];
-    private $tags = [];
+    private             $allMD       = [];
+    private             $tags        = [];
+    private             $githubToken = '';
 
     public function __construct($sourceDir, $htmlDir)
     {
         $this->sourceDir = $sourceDir;
         $this->htmlDir   = $htmlDir;
+
+        Dotenv::load(__DIR__);
+
+        $this->githubToken = getenv("GITHUB_TOKEN", true);
     }
 
     private function _readMD()
@@ -32,11 +39,15 @@ class GenLinuxCommandDocset
 
     private function _genHtmlByGithub($md)
     {
+        if (!$this->githubToken) {
+            die("token can be empty. (.env); /Users/{USER}/.composer/auth.json");
+        }
+
         $file    = $this->sourceDir . $md;
         $content = file_get_contents($file);
 
-        $this->tags[str_replace('.md','',$md)] = $md . '.html';
-        $htmlFile = $this->htmlDir . $md . '.html';
+        $this->tags[str_replace('.md', '', $md)] = $md . '.html';
+        $htmlFile                                = $this->htmlDir . $md . '.html';
 
         $url  = "https://api.github.com/markdown";
         $data = json_encode(["text" => $content], JSON_UNESCAPED_UNICODE);
@@ -46,7 +57,7 @@ class GenLinuxCommandDocset
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             "Accept: application/vnd.github.v3+json",
-            'Authorization: token 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',
+            'Authorization: token ' . $this->githubToken,
             'User-Agent: GitHub-username'
         ));
         curl_setopt($curl, CURLOPT_POST, true);
@@ -146,8 +157,8 @@ HTMLCONTENT;
 
         $sqls = [];
 
-        foreach ($this->tags as $tag => $html){
-            $sqls[]   = strtr($sqlTpl, [
+        foreach ($this->tags as $tag => $html) {
+            $sqls[] = strtr($sqlTpl, [
                 "{KEYWORD}"  => $tag,
                 "{HTML-TPL}" => $html
             ]);
