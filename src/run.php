@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
 
-use Dotenv\Dotenv;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 
 class GenLinuxCommandDocset
@@ -16,7 +16,11 @@ class GenLinuxCommandDocset
         $this->sourceDir = $sourceDir;
         $this->htmlDir   = $htmlDir;
 
-        Dotenv::load(__DIR__);
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+
+        //Dotenv::load(__DIR__);
+        
 
         $this->githubToken = getenv("GITHUB_TOKEN", true);
     }
