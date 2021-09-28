@@ -8,6 +8,6 @@ mkdir ./source/ && cd ./source && wget https://github.com/jaywcjlove/linux-comma
 
 rm -rf ./html/*.md.html
 
-composer install
+#composer install
 
 cd ../ && php ./run.php
